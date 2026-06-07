@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bharat Index — India State Intelligence Dashboard 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0c0d10;--surface:#13151a;--surface2:#1a1d24;--surface3:#20232c;
+  --border:#252830;--border2:#2e323d;--text:#e6e8ef;--text2:#9ba3b8;--text3:#4e5568;
+  --saffron:#FF9933;--white-col:#f0f0f0;--green:#22c55e;--green-dim:#138808;
+  --blue:#4f8ef7;--red:#ef4444;--gold:#f0c040;--purple:#a78bfa;--teal:#2dd4bf;
+  --r:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Karla',sans-serif;font-size:14px;min-height:100vh;}
+
+/* ── TOP STRIPE ── */
+.stripe{height:3px;background:linear-gradient(90deg,var(--saffron) 33.3%,#e8e8e8 33.3% 66.6%,var(--green-dim) 66.6%);}
+
+/* ── NEWS TICKER ── */
+.ticker-row{background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0;}
+.ticker-label{flex-shrink:0;padding:0 12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);border-right:1px solid var(--border2);height:100%;display:flex;align-items:center;}
+.ticker-label .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.ticker-scroll{flex:1;overflow:hidden;white-space:nowrap;padding:6px 0;}
+.ticker-inner{display:inline-block;animation:tick 70s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+.ticker-item{display:inline-block;padding:0 40px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);}
+.ticker-item .tag{color:var(--saffron);margin-right:6px;font-weight:500;}
+.ticker-item .tag.world{color:var(--red);}
+.ticker-item .tag.rbi{color:var(--green);}
+.ticker-item .tag.cji{color:var(--purple);}
+.ticker-item .tag.sport{color:var(--teal);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.refresh-btn{flex-shrink:0;border:none;background:none;border-left:1px solid var(--border2);padding:0 14px;height:100%;cursor:pointer;font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);display:flex;align-items:center;gap:5px;transition:all .2s;white-space:nowrap;}
+.refresh-btn:hover{color:var(--saffron);background:rgba(255,153,51,.06);}
+.refresh-btn:disabled{color:var(--text3);cursor:not-allowed;opacity:.5;}
+.refresh-btn .spin{display:inline-block;}
+.refresh-btn.loading .spin{animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── HEADER ── */
+header{padding:36px 48px 0;}
+.header-inner{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:28px;border-bottom:1px solid var(--border);}
+.header-left h1{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;letter-spacing:-0.02em;line-height:1.1;background:linear-gradient(135deg,var(--saffron),var(--white-col) 50%,var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.header-left .subtitle{margin-top:6px;color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+.hdr-stats{display:flex;gap:20px;align-items:flex-end;}
+.stat-pill{text-align:right;}
+.stat-pill .val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;color:var(--saffron);}
+.stat-pill .lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;font-family:'DM Mono',monospace;}
+
+/* ── INSTITUTIONAL PANEL ── */
+.inst-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-top:none;border-bottom:1px solid var(--border);}
+.inst-card{background:var(--surface);padding:16px 20px;position:relative;overflow:hidden;}
+.inst-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.inst-card.cji::before{background:var(--purple);}
+.inst-card.rbi::before{background:var(--green);}
+.inst-card.cabinet::before{background:var(--saffron);}
+.inst-card .ic-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.inst-card .ic-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);line-height:1.2;}
+.inst-card .ic-sub{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5;}
+.inst-card .ic-badge{display:inline-block;padding:2px 8px;border-radius:3px;font-family:'DM Mono',monospace;font-size:10px;margin-top:6px;}
+.inst-card.cji .ic-badge{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.25);}
+.inst-card.rbi .ic-badge{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.25);}
+.inst-card.cabinet .ic-badge{background:rgba(255,153,51,.12);color:var(--saffron);border:1px solid rgba(255,153,51,.25);}
+
+/* ── CABINET EXPAND ── */
+.cabinet-list{display:none;padding:12px 20px 16px;background:var(--surface2);border-top:1px solid var(--border);max-height:260px;overflow-y:auto;}
+.cabinet-list.open{display:block;}
+.cab-toggle{cursor:pointer;font-size:11px;color:var(--blue);font-family:'DM Mono',monospace;margin-top:8px;display:inline-block;}
+.cab-row{display:grid;grid-template-columns:1fr 1.5fr;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.cab-row:last-child{border-bottom:none;}
+.cab-row .cn{color:var(--text);font-weight:500;}
+.cab-row .cp{color:var(--text2);}
+
+/* ── CONTROLS ── */
+.controls{padding:16px 48px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--border);background:var(--surface);}
+.search-wrap{position:relative;flex:1;min-width:180px;max-width:300px;}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none;}
+input[type="search"]{width:100%;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 10px 7px 32px;border-radius:var(--r);font-family:'Karla',sans-serif;font-size:13px;outline:none;transition:border-color .2s;}
+input[type="search"]:focus{border-color:var(--saffron);}
+input[type="search"]::placeholder{color:var(--text3);}
+select{background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:7px 10px;border-radius:var(--r);font-family:'Karla',sans-serif;font-size:13px;outline:none;cursor:pointer;}
+select:focus{border-color:var(--saffron);}
+.filter-btn{padding:7px 12px;background:var(--surface2);border:1px solid var(--border2);color:var(--text2);border-radius:var(--r);cursor:pointer;font-family:'Karla',sans-serif;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:all .2s;}
+.filter-btn:hover,.filter-btn.active{background:var(--saffron);border-color:var(--saffron);color:#000;}
+.ctrl-right{margin-left:auto;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);}
+.ctrl-right span{color:var(--saffron);}
+
+/* ── TABLE ── */
+.table-wrap{padding:0 48px 48px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead{position:sticky;top:0;z-index:10;}
+th{background:var(--surface);color:var(--text3);font-family:'DM Mono',monospace;font-size:10px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;padding:12px 10px;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s;}
+th:hover{color:var(--text);}
+th.sorted{color:var(--saffron);}
+tr{border-bottom:1px solid var(--border);transition:background .1s;}
+tr:hover td{background:var(--surface2);}
+td{padding:11px 10px;vertical-align:middle;white-space:nowrap;}
+.td-idx{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);width:32px;}
+.td-state{font-weight:600;font-size:13px;min-width:180px;white-space:normal;}
+.badge-ut{display:inline-block;margin-left:5px;font-size:9px;padding:1px 4px;background:rgba(79,142,247,.15);border:1px solid rgba(79,142,247,.3);color:var(--blue);border-radius:3px;vertical-align:middle;font-family:'DM Mono',monospace;text-transform:uppercase;font-weight:400;}
+.td-person{color:var(--text2);font-size:12px;max-width:160px;white-space:normal;line-height:1.4;}
+.td-num{font-family:'DM Mono',monospace;font-size:12px;text-align:right;}
+.gsdp-wrap{display:flex;align-items:center;gap:6px;min-width:150px;}
+.gsdp-bar{flex:1;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;min-width:50px;}
+.gsdp-fill{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:2px;}
+.gsdp-val{font-family:'DM Mono',monospace;font-size:11px;min-width:55px;text-align:right;}
+.infl-chip{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;}
+.infl-low{background:rgba(34,197,94,.12);color:var(--green);}
+.infl-mid{background:rgba(240,192,64,.12);color:var(--gold);}
+.infl-high{background:rgba(239,68,68,.12);color:var(--red);}
+.sr-wrap{display:flex;align-items:center;gap:5px;}
+.sr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sr-low{background:var(--red);}
+.sr-mid{background:var(--gold);}
+.sr-good{background:var(--green);}
+.sr-high{background:var(--blue);}
+.nd{color:var(--text3);font-family:'DM Mono',monospace;font-size:11px;}
+.expand-btn{cursor:pointer;background:none;border:1px solid var(--border2);color:var(--text3);padding:3px 8px;border-radius:3px;font-family:'DM Mono',monospace;font-size:10px;transition:all .15s;white-space:nowrap;}
+.expand-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+.expand-btn.open{border-color:var(--saffron);color:var(--saffron);background:rgba(255,153,51,.08);}
+
+/* ── DETAIL PANEL ── */
+.detail-row{display:none;}
+.detail-row.open{display:table-row;}
+.detail-cell{padding:0 !important;background:var(--surface) !important;}
+.detail-inner{padding:20px 24px 24px;border-bottom:2px solid var(--saffron);display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.detail-section{background:var(--surface2);border-radius:var(--r);padding:14px 16px;border:1px solid var(--border);}
+.detail-section h4{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.detail-section h4 .ds-icon{margin-right:5px;}
+.tag-list{display:flex;flex-wrap:wrap;gap:5px;}
+.tag-pill{padding:3px 8px;border-radius:3px;font-size:11px;font-family:'Karla',sans-serif;line-height:1.4;white-space:normal;}
+.tag-food{background:rgba(240,192,64,.1);color:var(--gold);border:1px solid rgba(240,192,64,.2);}
+.tag-craft{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2);}
+.tag-geo{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.river-item{font-size:12px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);line-height:1.4;}
+.river-item:last-child{border-bottom:none;}
+.river-item .rn{color:var(--teal);font-weight:500;}
+.tour-item{font-size:12px;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:6px;}
+.tour-item:last-child{border-bottom:none;}
+.tour-icon{font-size:13px;}
+.tour-name{color:var(--text);font-weight:500;}
+.empty-row td{text-align:center;padding:48px;color:var(--text3);font-family:'DM Mono',monospace;font-size:12px;}
+
+/* ── FOOTER ── */
+.footer{padding:18px 48px;border-top:1px solid var(--border);background:var(--surface);display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.footer .src-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;}
+.footer a{font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-decoration:none;opacity:.7;}
+.footer a:hover{opacity:1;}
+.footer .sep{color:var(--border2);}
+.updated{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);}
+
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+
+<!-- NEWS TICKER -->
+<div class="ticker-row" style="height:34px;">
+  <div class="ticker-label"><span class="live-dot"></span>NEWS</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner" id="tickerInner"></div>
+  </div>
+  <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()" title="Fetch latest headlines now">
+    <span class="spin">↻</span> Refresh News
+  </button>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <h1>Bharat Index — 2026</h1>
+      <p class="subtitle">India State Intelligence Dashboard &nbsp;·&nbsp; 36 States & UTs &nbsp;·&nbsp; Political · Economic · Cultural · Geographic</p>
+    </div>
+    <div class="hdr-stats">
+      <div class="stat-pill"><div class="val">36</div><div class="lbl">Units</div></div>
+      <div class="stat-pill"><div class="val">543</div><div class="lbl">Lok Sabha</div></div>
+      <div class="stat-pill"><div class="val">245</div><div class="lbl">Rajya Sabha</div></div>
+      <div class="stat-pill"><div class="val" style="color:var(--green)">5.25%</div><div class="lbl">Repo Rate</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- INSTITUTIONAL PANEL -->
+<div class="inst-panel">
+  <div class="inst-card cji">
+    <div class="ic-label">⚖️ Chief Justice of India</div>
+    <div class="ic-name">Justice Surya Kant</div>
+    <div class="ic-sub">53rd CJI · Assumed office 24 Nov 2025 · Tenure until 9 Feb 2027<br>5 new SC judges sworn in on 2 Jun 2026 · CJI heckled at Birkbeck London over "cockroach" remark (4 Jun 2026)</div>
+    <span class="ic-badge">SC Strength: ~30 judges</span>
+  </div>
+  <div class="inst-card rbi">
+    <div class="ic-label">🏦 Reserve Bank of India</div>
+    <div class="ic-name">Governor: Sanjay Malhotra</div>
+    <div class="ic-sub">MPC met 3–5 Jun 2026 · Repo rate held at <strong style="color:var(--green)">5.25%</strong> · Neutral stance maintained · Down 125 bps since Feb 2025 · Geopolitical tensions (West Asia war) cited for pause</div>
+    <span class="ic-badge">CPI Combined Jan 2026 · FY27 Q2</span>
+  </div>
+  <div class="inst-card cabinet">
+    <div class="ic-label">🏛️ Union Cabinet — Modi 3.0</div>
+    <div class="ic-name">PM: Narendra Modi (BJP)</div>
+    <div class="ic-sub">72 ministers total · 30 Cabinet · 5 MoS(IC) · 36 MoS · NDA coalition government · Sworn in 9 Jun 2024</div>
+    <span class="ic-badge cab-toggle" onclick="toggleCabinet()">▼ View Key Cabinet Ministers</span>
+    <div class="cabinet-list" id="cabinetList">
+      <div class="cab-row"><span class="cn">Narendra Modi</span><span class="cp">PM · Personnel · Space · Atomic Energy</span></div>
+      <div class="cab-row"><span class="cn">Rajnath Singh</span><span class="cp">Defence</span></div>
+      <div class="cab-row"><span class="cn">Amit Shah</span><span class="cp">Home Affairs · Cooperation</span></div>
+      <div class="cab-row"><span class="cn">Nirmala Sitharaman</span><span class="cp">Finance · Corporate Affairs</span></div>
+      <div class="cab-row"><span class="cn">S. Jaishankar</span><span class="cp">External Affairs</span></div>
+      <div class="cab-row"><span class="cn">Nitin Gadkari</span><span class="cp">Road Transport & Highways</span></div>
+      <div class="cab-row"><span class="cn">Jagat Prakash Nadda</span><span class="cp">Health & Family Welfare · Chemicals & Fertilisers</span></div>
+      <div class="cab-row"><span class="cn">Shivraj Singh Chouhan</span><span class="cp">Agriculture & Farmers Welfare</span></div>
+      <div class="cab-row"><span class="cn">Manohar Lal Khattar</span><span class="cp">Housing & Urban Affairs · Power</span></div>
+      <div class="cab-row"><span class="cn">Piyush Goyal</span><span class="cp">Commerce & Industry</span></div>
+      <div class="cab-row"><span class="cn">Dharmendra Pradhan</span><span class="cp">Education</span></div>
+      <div class="cab-row"><span class="cn">Ashwini Vaishnaw</span><span class="cp">Railways · Electronics & IT · I&B</span></div>
+      <div class="cab-row"><span class="cn">Jitam Ram Manjhi</span><span class="cp">MSME (HAM)</span></div>
+      <div class="cab-row"><span class="cn">Rajiv Ranjan Singh (Lalan)</span><span class="cp">Fisheries · Animal Husbandry (JD-U)</span></div>
+      <div class="cab-row"><span class="cn">Sarbananda Sonowal</span><span class="cp">Ports · Shipping · Waterways</span></div>
+      <div class="cab-row"><span class="cn">Virendra Kumar</span><span class="cp">Social Justice & Empowerment</span></div>
+      <div class="cab-row"><span class="cn">Ram Mohan Naidu</span><span class="cp">Civil Aviation (TDP)</span></div>
+      <div class="cab-row"><span class="cn">Pralhad Joshi</span><span class="cp">New & Renewable Energy · Energy (TDP)</span></div>
+      <div class="cab-row"><span class="cn">Jual Oram</span><span class="cp">Tribal Affairs</span></div>
+      <div class="cab-row"><span class="cn">G. Kishan Reddy</span><span class="cp">Coal · Mines</span></div>
+      <div class="cab-row"><span class="cn">Chirag Paswan</span><span class="cp">Food Processing Industries (LJP-RP)</span></div>
+      <div class="cab-row"><span class="cn">H.D. Kumaraswamy</span><span class="cp">Heavy Industries · Steel (JD-S)</span></div>
+      <div class="cab-row"><span class="cn">Kiren Rijiju</span><span class="cp">Parliamentary Affairs · Minority Affairs</span></div>
+      <div class="cab-row"><span class="cn">Giriraj Singh</span><span class="cp">Textiles</span></div>
+      <div class="cab-row"><span class="cn">Jyotiraditya Scindia</span><span class="cp">Communications · Development of NE Region</span></div>
+      <div class="cab-row"><span class="cn">Mansukh Mandaviya</span><span class="cp">Labour & Employment · Youth Affairs & Sports</span></div>
+      <div class="cab-row"><span class="cn">Hardeep Singh Puri</span><span class="cp">Petroleum & Natural Gas</span></div>
+      <div class="cab-row"><span class="cn">Dr. L. Murugan</span><span class="cp">Fisheries · I&B (MoS)</span></div>
+      <div class="cab-row"><span class="cn">Annapurna Devi</span><span class="cp">Women & Child Development</span></div>
+      <div class="cab-row"><span class="cn">C.R. Patil</span><span class="cp">Jal Shakti</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" id="search" placeholder="Search state, CM, Governor…">
+  </div>
+  <select id="sortCol">
+    <option value="state">Sort: Name A–Z</option>
+    <option value="gsdp">Sort: GSDP ↓</option>
+    <option value="inflation">Sort: Inflation ↓</option>
+    <option value="sex_ratio">Sort: Sex Ratio ↓</option>
+    <option value="ls">Sort: Lok Sabha ↓</option>
+    <option value="cpi">Sort: CPI ↓</option>
+  </select>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="state">States</button>
+  <button class="filter-btn" data-filter="ut">UTs</button>
+  <div class="ctrl-right">Showing <span id="rowCount">36</span> of 36</div>
+</div>
+
+<!-- TABLE -->
+<div class="table-wrap">
+<table id="mainTable">
+  <thead>
+    <tr>
+      <th class="td-idx">#</th>
+      <th data-key="state">State / UT</th>
+      <th data-key="cm">Chief Minister</th>
+      <th data-key="gov">Governor / LG</th>
+      <th data-key="ls" title="Lok Sabha">LS</th>
+      <th data-key="rs" title="Rajya Sabha">RS</th>
+      <th data-key="gsdp">GSDP (₹ Cr)</th>
+      <th data-key="cpi">CPI</th>
+      <th data-key="inflation">Inflation</th>
+      <th data-key="sex_ratio">Sex Ratio</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span class="src-label">Sources:</span>
+  <a href="https://en.wikipedia.org/wiki/List_of_current_Indian_chief_ministers" target="_blank">Wikipedia CMs</a>
+  <span class="sep">·</span>
+  <a href="https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_GDP" target="_blank">GSDP</a>
+  <span class="sep">·</span>
+  <a href="https://www.mospi.gov.in" target="_blank">MoSPI CPI Jan 2026</a>
+  <span class="sep">·</span>
+  <a href="https://en.wikipedia.org/wiki/List_of_states_and_union_territories_of_India_by_sex_ratio" target="_blank">Sex Ratio NFHS-5</a>
+  <span class="sep">·</span>
+  <a href="https://sci.gov.in" target="_blank">Supreme Court of India</a>
+  <span class="sep">·</span>
+  <a href="https://rbi.org.in" target="_blank">RBI MPC Jun 2026</a>
+  <div class="updated">🔴 LIVE · Loading news…</div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// LIVE NEWS TICKER — Google News RSS, zero cost
+// Smart filtering: scores & ranks headlines by
+// newsworthiness, deduplicates, removes noise
+// ═══════════════════════════════════════════════
+
+const TICKER_EL = document.getElementById('tickerInner');
+const RSS2JSON   = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+// ── Curated queries: tight, specific, high signal ──
+const RSS_SOURCES = [
+  // Tier 1 — highest signal, named entities only
+  { url:'https://news.google.com/rss/search?q=%22Supreme+Court%22+OR+%22CJI%22+OR+%22Chief+Justice%22+site:thehindu.com+OR+site:indianexpress.com+when:3d&hl=en-IN&gl=IN&ceid=IN:en', tag:'SC/CJI', cls:'cji' },
+  { url:'https://news.google.com/rss/search?q=%22RBI%22+OR+%22Reserve+Bank%22+OR+%22repo+rate%22+OR+%22monetary+policy%22+site:thehindu.com+OR+site:indianexpress.com+OR+site:livemint.com+when:3d&hl=en-IN&gl=IN&ceid=IN:en', tag:'RBI/ECO', cls:'rbi' },
+  { url:'https://news.google.com/rss/search?q=%22Parliament%22+OR+%22Lok+Sabha%22+OR+%22Modi%22+OR+%22Union+Cabinet%22+site:thehindu.com+OR+site:indianexpress.com+when:2d&hl=en-IN&gl=IN&ceid=IN:en', tag:'POLITICS', cls:'' },
+  { url:'https://news.google.com/rss/search?q=%22Iran%22+OR+%22Gaza%22+OR+%22Ukraine%22+OR+%22G7%22+OR+%22United+Nations%22+site:thehindu.com+OR+site:bbc.com+OR+site:reuters.com+when:2d&hl=en-IN&gl=IN&ceid=IN:en', tag:'WORLD', cls:'world' },
+  { url:'https://news.google.com/rss/search?q=India+%22Test%22+OR+%22ODI%22+OR+%22FIFA%22+OR+%22Olympics%22+site:espncricinfo.com+OR+site:thehindu.com+OR+site:indianexpress.com+when:2d&hl=en-IN&gl=IN&ceid=IN:en', tag:'SPORT', cls:'sport' },
+  { url:'https://news.google.com/rss/search?q=India+%22GDP%22+OR+%22inflation%22+OR+%22budget%22+OR+%22Sensex%22+OR+%22Nifty%22+site:livemint.com+OR+site:thehindu.com+when:2d&hl=en-IN&gl=IN&ceid=IN:en', tag:'MARKETS', cls:'rbi' },
+];
+
+// ── Quality trusted publishers (boost score) ──
+const QUALITY_SOURCES = new Set([
+  'the hindu','indian express','hindustan times','livemint','mint',
+  'bbc','reuters','ndtv','the wire','scroll','economic times',
+  'espncricinfo','pti','press trust'
+]);
+
+// ── Noise patterns to hard-filter out ──
+const NOISE_PATTERNS = [
+  /horoscope|astrology|zodiac/i,
+  /\bads?\b|sponsored|promoted/i,
+  /recipe|cooking|kitchen/i,
+  /\bviral\b.{0,20}video/i,
+  /click here|read more|watch now/i,
+  /\d+ things you (didn't|should|must)/i,
+  /whatsapp|instagram|tiktok|twitter trend/i,
+  /weather forecast|temperature today/i,
+  /lottery|lucky draw|prize/i,
+  /\bsale\b|\bdeal\b|\bdiscount\b/i,
+];
+
+// ── Signal keywords that boost score ──
+const HIGH_SIGNAL = [
+  'supreme court','cji','rbi','parliament','lok sabha','rajya sabha',
+  'prime minister','president','cabinet','minister','policy','verdict',
+  'treaty','agreement','ceasefire','election','constitution','act',
+  'war','attack','crisis','sanctions','nuclear','diplomatic',
+  'gdp','inflation','repo rate','budget','fiscal','deficit',
+  'india-china','india-pakistan','india-us','bilateral',
+  'test match','world cup','olympic','championship',
+];
+
+// ── Parse Google News RSS item → clean headline ──
+function parseItem(item, defaultTag, defaultCls) {
+  const raw = item.title || '';
+  // Google format: "Headline text - Publisher Name"
+  const dashIdx = raw.lastIndexOf(' - ');
+  const headline  = dashIdx > 0 ? raw.slice(0, dashIdx).trim() : raw.trim();
+  const publisher = dashIdx > 0 ? raw.slice(dashIdx + 3).trim() : '';
+
+  // Classify tag by content
+  const t = headline.toLowerCase();
+  let tag = defaultTag, cls = defaultCls;
+  if (/supreme court|cji|chief justice|high court/.test(t))          { tag='SC/CJI';  cls='cji';   }
+  else if (/\brbi\b|reserve bank|repo rate|monetary policy/.test(t)) { tag='RBI/ECO'; cls='rbi';   }
+  else if (/iran|ukraine|russia|gaza|israel|g7|nato|un |united nations|china|pakistan/.test(t)) { tag='WORLD'; cls='world'; }
+  else if (/cricket|ipl|test match|odi|t20|fifa|olympic|football|tennis|chess/.test(t))         { tag='SPORT'; cls='sport'; }
+  else if (/parliament|lok sabha|rajya sabha|modi|cabinet|minister|bjp|congress|election/.test(t)) { tag='POLITICS'; cls=''; }
+  else if (/gdp|sensex|nifty|inflation|budget|fiscal|deficit|rupee|stock market/.test(t))        { tag='MARKETS'; cls='rbi'; }
+
+  // Score for newsworthiness
+  let score = 0;
+  const tl = (headline + ' ' + publisher).toLowerCase();
+
+  // +2 for each high-signal keyword
+  HIGH_SIGNAL.forEach(kw => { if (tl.includes(kw)) score += 2; });
+
+  // +3 for trusted publisher
+  const pubLower = publisher.toLowerCase();
+  QUALITY_SOURCES.forEach(src => { if (pubLower.includes(src)) score += 3; });
+
+  // +1 for having a named person (rough heuristic: capitalized words)
+  const namedEntities = (headline.match(/\b[A-Z][a-z]+\s[A-Z][a-z]+/g) || []).length;
+  score += Math.min(namedEntities, 3);
+
+  // Penalise short vague headlines
+  if (headline.split(' ').length < 5) score -= 3;
+
+  // Hard kill switch
+  const isNoise = NOISE_PATTERNS.some(p => p.test(headline));
+
+  const short = headline.length > 105 ? headline.slice(0, 103) + '…' : headline;
+  const text  = publisher ? `${short} — ${publisher}` : short;
+
+  return { tag, cls, text, score, isNoise, pubLower };
+}
+
+// ── Deduplicate: drop near-identical headlines ──
+function deduplicate(items) {
+  const seen = [];
+  return items.filter(item => {
+    // Take first 6 words as fingerprint
+    const fp = item.text.toLowerCase().split(/\s+/).slice(0, 6).join(' ');
+    if (seen.some(s => s.includes(fp) || fp.includes(s))) return false;
+    seen.push(fp);
+    return true;
+  });
+}
+
+function renderTicker(items) {
+  const doubled = [...items, ...items];
+  TICKER_EL.innerHTML = doubled.map(n =>
+    `<span class="ticker-item"><span class="tag ${n.cls}">[${n.tag}]</span>${n.text}</span>`
+  ).join('');
+  TICKER_EL.style.animation = 'none';
+  TICKER_EL.offsetHeight; // force reflow
+  TICKER_EL.style.animation = '';
+}
+
+function showTickerLoading() {
+  renderTicker([
+    {tag:'LIVE',cls:'',text:'Fetching curated headlines from Google News…'},
+    {tag:'LIVE',cls:'',text:'Filtering & ranking for newsworthiness…'},
+  ]);
+}
+
+const FALLBACK_NEWS = [
+  {tag:'SC/CJI', cls:'cji',   text:'CJI Surya Kant — 53rd Chief Justice · Tenure until Feb 2027 · 5 new SC judges sworn Jun 2026'},
+  {tag:'RBI/ECO',cls:'rbi',   text:'RBI repo rate 5.25% · Neutral stance · Governor Sanjay Malhotra · MPC Jun 5, 2026'},
+  {tag:'WORLD',  cls:'world', text:'US-Iran conflict ongoing · Strait of Hormuz tensions · IAEA nuclear framework talks'},
+  {tag:'POLITICS',cls:'',     text:'Modi Cabinet 3.0 · 72 ministers · NDA coalition · BJP-led government'},
+  {tag:'SPORT',  cls:'sport', text:'Afghanistan cricket tour India · 1 Test + 3 ODIs · Jun 6–20, 2026'},
+  {tag:'MARKETS',cls:'rbi',   text:'India GDP outlook stable · Rupee watch amid West Asia geopolitical risk'},
+];
+
+async function fetchOneFeed({ url, tag, cls }) {
+  const apiUrl = RSS2JSON + encodeURIComponent(url) + '&count=10';
+  const res = await fetch(apiUrl, { signal: AbortSignal.timeout(7000) });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.status !== 'ok' || !data.items?.length) throw new Error('No items');
+  return data.items.map(item => parseItem(item, tag, cls));
+}
+
+async function fetchLiveNews() {
+  showTickerLoading();
+
+  const results = await Promise.allSettled(RSS_SOURCES.map(s => fetchOneFeed(s)));
+
+  // Flatten all items from successful feeds
+  let all = [];
+  results.forEach(r => { if (r.status === 'fulfilled') all.push(...r.value); });
+
+  // Filter noise → deduplicate → sort by score → top 18
+  const curated = deduplicate(
+    all
+      .filter(i => !i.isNoise && i.score >= 0)
+      .sort((a, b) => b.score - a.score)
+  ).slice(0, 18);
+
+  const updatedEl = document.querySelector('.updated');
+  if (curated.length > 0) {
+    const t = new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+    if (updatedEl) updatedEl.textContent = `🔴 LIVE · Google News · ${curated.length} headlines · ${t}`;
+    renderTicker(curated);
+  } else {
+    if (updatedEl) updatedEl.textContent = `Feed unavailable · ${new Date().toLocaleDateString('en-IN')}`;
+    renderTicker(FALLBACK_NEWS);
+  }
+}
+
+function manualRefresh() {
+  const btn = document.getElementById('refreshBtn');
+  if (btn) { btn.disabled=true; btn.classList.add('loading'); btn.innerHTML='<span class="spin">↻</span> Fetching…'; }
+  fetchLiveNews().finally(() => {
+    if (btn) { btn.disabled=false; btn.classList.remove('loading'); btn.innerHTML='<span class="spin">↻</span> Refresh News'; }
+  });
+}
+
+// Fetch on load — Google News RSS is free, no key, no cost
+fetchLiveNews();
+
+// ═══════════════════════════════════════════════
+// CABINET TOGGLE
+// ═══════════════════════════════════════════════
+function toggleCabinet() {
+  const el = document.getElementById('cabinetList');
+  el.classList.toggle('open');
+}
+
+// ═══════════════════════════════════════════════
+// STATE DATA (embedded — no fetch needed)
+// ═══════════════════════════════════════════════
+const UT_NAMES = new Set([
+  "Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"
+]);
+
+// Per-state detail data: rivers, GI tags, tourism
+const STATE_DETAILS = {
+  "Andhra Pradesh": {
+    rivers:[{n:"Krishna",d:"Major river; Nagarjuna Sagar dam"},{n:"Godavari",d:"Largest in peninsular India; Papikondalu gorge"},{n:"Tungabhadra",d:"Tributary of Krishna; Hampi region"}],
+    gi:[{n:"Tirupati Laddu",t:"food"},{n:"Bandar Laddu",t:"food"},{n:"Guntur Sannam Chilli",t:"food"},{n:"Etikoppaka Toys",t:"craft"},{n:"Kondapalli Toys",t:"craft"},{n:"Nirmal Paintings",t:"craft"},{n:"Dharmavaram Silk",t:"craft"}],
+    tourism:[{icon:"🛕",n:"Tirupati Balaji Temple",d:"Richest temple in world"},{icon:"🏛️",n:"Amaravati",d:"Ancient Buddhist stupa"},{icon:"🌊",n:"Araku Valley",d:"Coffee belt & tribal culture"},{icon:"🏖️",n:"Vizag Beach & INS Kursura",d:"Submarine museum"}]
+  },
+  "Arunachal Pradesh": {
+    rivers:[{n:"Brahmaputra (Siang)",d:"Enters India here; originates as Tsangpo in Tibet"},{n:"Lohit",d:"Eastern tributary; Parsuram Kund"},{n:"Subansiri",d:"'Gold River'; major hydropower potential"}],
+    gi:[{n:"Arunachal Orange",t:"food"},{n:"Adi Gallong Weave",t:"craft"},{n:"Apatani Textile",t:"craft"}],
+    tourism:[{icon:"🏔️",n:"Tawang Monastery",d:"Largest Buddhist monastery in India"},{icon:"🌿",n:"Namdapha NP",d:"Only park with 4 big cats"},{icon:"🏞️",n:"Ziro Valley",d:"UNESCO tentative WHS — Apatani cultural landscape"}]
+  },
+  "Assam": {
+    rivers:[{n:"Brahmaputra",d:"Central lifeline; one of world's largest rivers; prone to flooding"},{n:"Barak",d:"South Assam; joins Meghna in Bangladesh"},{n:"Subansiri & Manas",d:"Key tributaries; seasonal flood dynamics"}],
+    gi:[{n:"Assam Orthodox Tea",t:"food"},{n:"Joha Rice",t:"food"},{n:"Muga Silk",t:"craft"},{n:"Assam Pat Silk",t:"craft"},{n:"Sualkuchi Silk",t:"craft"},{n:"Bihu Dhol",t:"craft"}],
+    tourism:[{icon:"🦏",n:"Kaziranga NP",d:"UNESCO WHS — One-horned rhino"},{icon:"🐅",n:"Manas NP",d:"UNESCO WHS — Tiger reserve"},{icon:"⛪",n:"Kamakhya Temple",d:"Shakti Peetha, Guwahati"},{icon:"🌊",n:"Majuli Island",d:"World's largest river island"}]
+  },
+  "Bihar": {
+    rivers:[
+      {n:"Ganga",d:"Central lifeline — flows W to E across the state; Patna sits on its southern bank"},
+      {n:"Gandak (N-bank)",d:"Joins Ganga near Hajipur; originates in Nepal"},
+      {n:"Koshi (N-bank)",d:"'Sorrow of Bihar' — high flood risk; shifts course unpredictably"},
+      {n:"Bagmati (N-bank)",d:"Originates in Nepal; joins Koshi system"},
+      {n:"Sone (S-bank)",d:"Major south-bank tributary; Arwal district"},
+      {n:"Punpun (S-bank)",d:"Joins Ganga near Fatuha; significant in Patna region"}
+    ],
+    gi:[
+      {n:"Mithila Makhana",t:"food"},{n:"Shahi Litchi (Muzaffarpur)",t:"food"},
+      {n:"Bhagalpuri Zardalu Mango",t:"food"},{n:"Katarni Rice",t:"food"},
+      {n:"Magahi Paan",t:"food"},{n:"Marcha Rice (W. Champaran)",t:"food"},
+      {n:"Silao Khaja",t:"food"},
+      {n:"Madhubani Painting",t:"craft"},{n:"Bhagalpur Silk (Tussar)",t:"craft"},
+      {n:"Sujini Embroidery",t:"craft"},{n:"Sikki Grass Products",t:"craft"},
+      {n:"Manjusha Art",t:"craft"}
+    ],
+    tourism:[
+      {icon:"☸️",n:"Bodh Gaya — Mahabodhi Temple",d:"UNESCO WHS; site of Buddha's enlightenment"},
+      {icon:"🏛️",n:"Nalanda University Ruins",d:"UNESCO WHS; ancient seat of learning"},
+      {icon:"🗺️",n:"Rajgir",d:"Magadha capital; Gridhrakuta Hill; hot springs"},
+      {icon:"🕊️",n:"Vaishali",d:"World's first republic; Ashoka pillar"},
+      {icon:"🏙️",n:"Patna — Kumhrar",d:"Mauryan palace excavations; Pataliputra ruins"},
+      {icon:"🙏",n:"Takht Sri Patna Sahib",d:"Birthplace of Guru Gobind Singh Ji"},
+      {icon:"🌿",n:"Valmiki National Park",d:"West Champaran; tiger reserve; eco-tourism"}
+    ]
+  },
+  "Chhattisgarh": {
+    rivers:[{n:"Mahanadi",d:"Originates here; Barnawapara WLS nearby"},{n:"Indravati",d:"Flows through Bastar; Chitrakote Falls"},{n:"Sheonath & Arpa",d:"Tributaries of Mahanadi"}],
+    gi:[{n:"Chhattisgarh Jeeraphool Rice",t:"food"},{n:"Bastar Iron Craft",t:"craft"},{n:"Dhokra Casting",t:"craft"},{n:"Bastar Tribal Painting",t:"craft"}],
+    tourism:[{icon:"💧",n:"Chitrakote Falls",d:"'Niagara of India'"},{icon:"🏛️",n:"Sirpur Heritage",d:"Buddhist-Hindu complex 5th–12th c."},{icon:"🌿",n:"Kanger Valley NP",d:"Kotumsar cave; biodiversity hotspot"}]
+  },
+  "Goa": {
+    rivers:[{n:"Mandovi",d:"Flows through Panaji; cruise boats"},{n:"Zuari",d:"Southern Goa; merges near Mormugao"},{n:"Chapora",d:"North Goa; historic fort"}],
+    gi:[{n:"Goa Feni",t:"food"},{n:"Khola Chilli",t:"food"},{n:"Goa Cashew",t:"food"}],
+    tourism:[{icon:"⛪",n:"Basilica of Bom Jesus",d:"UNESCO WHS; St. Francis Xavier"},{icon:"🏖️",n:"Calangute & Palolem",d:"North & South Goa beaches"},{icon:"🏛️",n:"Old Goa Churches",d:"Portuguese colonial architecture"}]
+  },
+  "Gujarat": {
+    rivers:[{n:"Narmada",d:"Sardar Sarovar Dam; largest by flow in Gujarat"},{n:"Sabarmati",d:"Flows through Ahmedabad; Gandhi Ashram"},{n:"Tapi",d:"Southern Gujarat; Surat"}],
+    gi:[{n:"Gir Kesar Mango",t:"food"},{n:"Gir Somnath Groundnut",t:"food"},{n:"Kutch Embroidery",t:"craft"},{n:"Patola Silk (Patan)",t:"craft"},{n:"Suf Embroidery",t:"craft"},{n:"Rogan Art",t:"craft"}],
+    tourism:[{icon:"🦁",n:"Gir Forest NP",d:"Only wild Asiatic Lions"},{icon:"🛕",n:"Somnath Temple",d:"Jyotirlinga; rebuilt 1951"},{icon:"🧂",n:"Rann of Kutch",d:"White salt desert; Rann Utsav"},{icon:"🏛️",n:"Rani ki Vav (Patan)",d:"UNESCO WHS stepwell"}]
+  },
+  "Haryana": {
+    rivers:[{n:"Yamuna",d:"Eastern border; Yamunanagar district"},{n:"Ghaggar",d:"Seasonal river; 'Saraswati' association; Hisar"},{n:"Markanda",d:"Originates Shivaliks; flows to Ghaggar"}],
+    gi:[{n:"Basmati Rice",t:"food"},{n:"Phulkari Embroidery",t:"craft"},{n:"Haryana Handloom",t:"craft"}],
+    tourism:[{icon:"⚔️",n:"Kurukshetra",d:"Mahabharata battlefield; Brahma Sarovar"},{icon:"🏛️",n:"Pinjore Gardens",d:"Yadavindra Gardens; Mughal style"},{icon:"🌿",n:"Sultanpur Bird Sanctuary",d:"Migratory birds; wetland"}]
+  },
+  "Himachal Pradesh": {
+    rivers:[{n:"Beas",d:"Kullu-Manali valley; joins Sutlej at Harike"},{n:"Sutlej",d:"Largest; Bhakra Nangal dam"},{n:"Chenab",d:"Lahaul-Spiti; upper reaches"},{n:"Ravi",d:"Chamba valley"}],
+    gi:[{n:"Kangra Tea",t:"food"},{n:"Kullu Shawl",t:"craft"},{n:"Chamba Rumal",t:"craft"},{n:"Kinnauri Shawl",t:"craft"},{n:"Himachali Topi",t:"craft"}],
+    tourism:[{icon:"🏔️",n:"Rohtang Pass & Spiti",d:"High-altitude desert valley"},{icon:"🛕",n:"Shimla & Kufri",d:"Colonial hill station"},{icon:"🙏",n:"Manali & Hadimba Temple",d:"Kullu Dussehra; adventure tourism"}]
+  },
+  "Jharkhand": {
+    rivers:[{n:"Damodar",d:"'River of Sorrow'; coal belt; DVC dams"},{n:"Subarnarekha",d:"Flows SE; Hundru Falls"},{n:"North Koel & South Koel",d:"Join to form Sankh; plateau rivers"},{n:"Barakar",d:"Tributary of Damodar"}],
+    gi:[{n:"Sohrai & Khovar Painting",t:"craft"},{n:"Dokra Metal Craft",t:"craft"},{n:"Paitkar Painting",t:"craft"}],
+    tourism:[{icon:"💧",n:"Hundru & Jonha Falls",d:"Subarnarekha & Raru rivers"},{icon:"🛕",n:"Deoghar — Baidyanath",d:"Jyotirlinga; major pilgrimage"},{icon:"🌿",n:"Betla NP",d:"First tiger reserve; Palamu fort ruins"}]
+  },
+  "Karnataka": {
+    rivers:[{n:"Kaveri",d:"'Ganga of the South'; KRS Dam; Mysuru"},{n:"Krishna",d:"Northern Karnataka; Almatti dam"},{n:"Tungabhadra",d:"Hampi; historical importance"},{n:"Sharavathi",d:"Jog Falls — highest plunge waterfall in India"}],
+    gi:[{n:"Coorg Orange",t:"food"},{n:"Mysore Jasmine",t:"food"},{n:"Udupi Mattu Gulla Brinjal",t:"food"},{n:"Mysore Silk",t:"craft"},{n:"Bidriware",t:"craft"},{n:"Channapatna Toys",t:"craft"},{n:"Kasuti Embroidery",t:"craft"}],
+    tourism:[{icon:"🏛️",n:"Hampi",d:"UNESCO WHS — Vijayanagara ruins"},{icon:"🐅",n:"Bandipur & Nagarhole",d:"Tiger reserves; Project Tiger"},{icon:"🛕",n:"Mysuru Palace",d:"Wadiyar dynasty; Dasara"},{icon:"⛪",n:"Badami Cave Temples",d:"Chalukya rock-cut temples"}]
+  },
+  "Kerala": {
+    rivers:[{n:"Periyar",d:"Longest; Idukki dam; Wildlife Sanctuary"},{n:"Bharathapuzha (Nila)",d:"Second longest; cultural river"},{n:"Pamba",d:"Sabrimala pilgrimage; backwaters source"},{n:"Chaliyar",d:"Calicut region"}],
+    gi:[{n:"Kerala Matta Rice",t:"food"},{n:"Malabar Pepper",t:"food"},{n:"Alleppey Coir",t:"craft"},{n:"Aranmula Kannadi",t:"craft"},{n:"Kasaragod Sarees",t:"craft"},{n:"Palakkadan Matta Rice",t:"food"}],
+    tourism:[{icon:"🚤",n:"Alleppey Backwaters",d:"Houseboat network; paddy fields"},{icon:"🐘",n:"Periyar Tiger Reserve",d:"Boating among elephants"},{icon:"🛕",n:"Padmanabhaswamy Temple",d:"Thiruvananthapuram; richest temple"},{icon:"🌴",n:"Kovalam & Varkala",d:"Beaches; cliff-side cafes"}]
+  },
+  "Madhya Pradesh": {
+    rivers:[{n:"Narmada",d:"Flows W–E; Marble Rocks at Jabalpur; Omkareshwar"},{n:"Tapti (Tapi)",d:"Parallel to Narmada; flows west"},{n:"Chambal",d:"Ravines; Ken-Betwa link project"},{n:"Betwa",d:"Joins Yamuna; Orchha on its banks"}],
+    gi:[{n:"Chanderi Fabric",t:"craft"},{n:"Maheshwari Saree",t:"craft"},{n:"Bagh Print",t:"craft"},{n:"Gond Painting",t:"craft"}],
+    tourism:[{icon:"🐅",n:"Kanha & Bandhavgarh",d:"Tiger reserves; Sal forests"},{icon:"🛕",n:"Khajuraho Temples",d:"UNESCO WHS — medieval sculptures"},{icon:"🗿",n:"Bhimbetka Rock Shelters",d:"UNESCO WHS — prehistoric cave art"},{icon:"🌊",n:"Marble Rocks (Bhedaghat)",d:"Narmada gorge; boating"}]
+  },
+  "Maharashtra": {
+    rivers:[{n:"Godavari",d:"Nashik (source) to Bay of Bengal; Kumbh Mela"},{n:"Krishna",d:"Mahabaleshwar source; Warna, Koyna tributaries"},{n:"Bhima",d:"Joins Krishna; Pune region"},{n:"Tapi",d:"Jalgaon; flows west to Arabian Sea"}],
+    gi:[{n:"Nashik Valley Wine",t:"food"},{n:"Alphonso Mango (Ratnagiri)",t:"food"},{n:"Pune Grapes",t:"food"},{n:"Kolhapuri Chappal",t:"craft"},{n:"Paithani Silk",t:"craft"},{n:"Wardha Khadi",t:"craft"},{n:"Bidri Work",t:"craft"}],
+    tourism:[{icon:"🏔️",n:"Ajanta & Ellora Caves",d:"UNESCO WHS — Buddhist/Jain/Hindu"},{icon:"🛕",n:"Shirdi Sai Baba",d:"Major pilgrimage; Ahmednagar"},{icon:"🏙️",n:"Mumbai — Gateway of India",d:"Colaba; Elephanta Island"},{icon:"🌿",n:"Tadoba Tiger Reserve",d:"Vidarbha; highest tiger density"}]
+  },
+  "Manipur": {
+    rivers:[{n:"Barak",d:"Originates here; flows to Assam"},{n:"Imphal River",d:"Flows through Imphal valley"},{n:"Iril",d:"Tributary of Imphal"}],
+    gi:[{n:"Manipur Black Rice (Chakhao)",t:"food"},{n:"Kachai Lemon",t:"food"},{n:"Moirang Phee Weave",t:"craft"},{n:"Wangkhei Phee",t:"craft"}],
+    tourism:[{icon:"🌊",n:"Loktak Lake",d:"Largest freshwater lake in NE; phumdis"},{icon:"🏟️",n:"Kangla Fort",d:"Historical capital; Imphal"},{icon:"🕊️",n:"WWII Imphal-Kohima Battlefields",d:"1944 battle site"}]
+  },
+  "Meghalaya": {
+    rivers:[{n:"Umngot (Dawki)",d:"Crystal-clear; India-Bangladesh border"},{n:"Kynshi",d:"Flows south through Jaintia Hills"},{n:"Simsang",d:"Garo Hills; Baghmara"}],
+    gi:[{n:"Lakadong Turmeric",t:"food"},{n:"Meghalaya Garo Dakmanda",t:"craft"},{n:"Ryndia Handloom",t:"craft"}],
+    tourism:[{icon:"💧",n:"Cherrapunji & Mawsynram",d:"Wettest places on Earth"},{icon:"🌿",n:"Living Root Bridges",d:"Khasi bioengineering; Nongriat"},{icon:"🌊",n:"Dawki River",d:"Transparent water; Bangladesh border"}]
+  },
+  "Mizoram": {
+    rivers:[{n:"Tlawng (Chhimtuipui)",d:"Longest in Mizoram"},{n:"Tuivai",d:"Indo-Bangladesh border river"},{n:"Mat",d:"Central Mizoram"}],
+    gi:[{n:"Mizo Chhangban",t:"craft"},{n:"Puanchei Weave",t:"craft"}],
+    tourism:[{icon:"🌿",n:"Phawngpui (Blue Mountain)",d:"Highest peak in Mizoram"},{icon:"🦌",n:"Dampa Tiger Reserve",d:"Clouded leopard habitat"},{icon:"🌊",n:"Palak Lake",d:"Natural lake; biodiversity"}]
+  },
+  "Nagaland": {
+    rivers:[{n:"Dhansiri",d:"Joins Brahmaputra in Assam"},{n:"Doyang",d:"Hydropower project"},{n:"Tizu",d:"Flows to Myanmar"}],
+    gi:[{n:"Naga Mircha (Bhoot Jolokia)",t:"food"},{n:"Naga Tree Tomato",t:"food"},{n:"Naga Shawl",t:"craft"},{n:"Naga Dao",t:"craft"}],
+    tourism:[{icon:"🎉",n:"Hornbill Festival",d:"Kohima; 'Festival of Festivals'"},{icon:"🏔️",n:"Dzükou Valley",d:"Seasonal flowers; trekking"},{icon:"🗿",n:"Khonoma Village",d:"First green village; Angami heritage"}]
+  },
+  "Odisha": {
+    rivers:[{n:"Mahanadi",d:"Hirakud Dam (longest earthen dam); Cuttack"},{n:"Brahmani",d:"Joins Mahanadi delta"},{n:"Baitarani",d:"Flows to Bay of Bengal; Jajpur district"},{n:"Rushikulya",d:"Olive Ridley turtle nesting"}],
+    gi:[{n:"Odisha Rasagola",t:"food"},{n:"Koraput Kalajeera Rice",t:"food"},{n:"Pattachitra",t:"craft"},{n:"Dhokra Craft",t:"craft"},{n:"Sambalpuri Saree",t:"craft"},{n:"Pipili Applique",t:"craft"}],
+    tourism:[{icon:"🛕",n:"Konark Sun Temple",d:"UNESCO WHS — 13th c. chariot temple"},{icon:"🛕",n:"Puri Jagannath Temple",d:"Char Dham; Rath Yatra"},{icon:"🐢",n:"Bhitarkanika NP",d:"Olive Ridley turtles; mangroves"},{icon:"🏛️",n:"Bhubaneswar Temple Trail",d:"City of temples"}]
+  },
+  "Punjab": {
+    rivers:[{n:"Sutlej",d:"Ludhiana; Bhakra-Nangal"},{n:"Beas",d:"Amritsar-Gurdaspur region; joins Sutlej"},{n:"Ravi",d:"Western Punjab; Pathankot"},{n:"Ghaggar",d:"South Punjab; seasonal"}],
+    gi:[{n:"Phulkari Embroidery",t:"craft"},{n:"Punjab Basmati",t:"food"},{n:"Amritsar Punjabi Wari",t:"food"}],
+    tourism:[{icon:"🙏",n:"Golden Temple (Harmandir Sahib)",d:"Amritsar; holiest Sikh shrine"},{icon:"🕊️",n:"Jallianwala Bagh",d:"1919 massacre site; memorial"},{icon:"🚩",n:"Wagah Border",d:"Beating Retreat ceremony"},{icon:"🏰",n:"Anandpur Sahib",d:"Hola Mohalla; Khalsa birthplace"}]
+  },
+  "Rajasthan": {
+    rivers:[{n:"Chambal",d:"Only perennial river; ravines; crocodiles"},{n:"Luni",d:"Flows into Rann of Kutch; Jodhpur"},{n:"Banas",d:"Tributary of Chambal; Udaipur"},{n:"Ghaggar",d:"'Saraswati'; disappears in Thar Desert"}],
+    gi:[{n:"Sanganer Printed Textile",t:"craft"},{n:"Blue Pottery of Jaipur",t:"craft"},{n:"Kota Doria",t:"craft"},{n:"Jodhpur Handicrafts",t:"craft"},{n:"Molela Terracotta",t:"craft"}],
+    tourism:[{icon:"🏯",n:"Amber & Jaipur",d:"Pink City; UNESCO WHS hill forts"},{icon:"🌅",n:"Jaisalmer Fort",d:"'Golden City'; living fort"},{icon:"🌊",n:"Pushkar Lake",d:"Brahma Temple; Camel Fair"},{icon:"🐆",n:"Ranthambore Tiger Reserve",d:"Tigers in fort ruins"}]
+  },
+  "Sikkim": {
+    rivers:[{n:"Teesta",d:"Major river; flows S to Ganga; hydropower"},{n:"Rangit",d:"Tributary of Teesta; West Sikkim"},{n:"Lachung & Lachen",d:"North Sikkim; glacial origin"}],
+    gi:[{n:"Sikkim Organic Cardamom",t:"food"},{n:"Temi Tea",t:"food"},{n:"Sikkim Churpi",t:"food"}],
+    tourism:[{icon:"🏔️",n:"Kangchenjunga NP",d:"UNESCO WHS; 3rd highest peak"},{icon:"🙏",n:"Rumtek Monastery",d:"Karma Kagyu headquarters"},{icon:"🌸",n:"Yumthang Valley",d:"Valley of Flowers — rhododendrons"}]
+  },
+  "Tamil Nadu": {
+    rivers:[{n:"Kaveri",d:"Cauvery; major dispute; Mettur Dam; delta"},{n:"Palar",d:"North Tamil Nadu; tanning industry"},{n:"Vaigai",d:"Madurai; Periyar-Vaigai link"},{n:"Tamiraparani",d:"Tirunelveli; perennial; clean water"}],
+    gi:[{n:"Mahabalipuram Stone Sculpture",t:"craft"},{n:"Kancheepuram Silk",t:"craft"},{n:"Thanjavur Painting",t:"craft"},{n:"Madurai Malli Jasmine",t:"food"},{n:"Coimbatore Wet Grinder",t:"craft"},{n:"Salem Fabric",t:"craft"}],
+    tourism:[{icon:"🛕",n:"Meenakshi Temple (Madurai)",d:"Dravidian architecture masterpiece"},{icon:"🏛️",n:"Mahabalipuram",d:"UNESCO WHS — Shore Temple"},{icon:"🛕",n:"Brihadeeswara Temple (Thanjavur)",d:"UNESCO WHS — Chola architecture"},{icon:"🌿",n:"Nilgiri Biosphere & Ooty",d:"UNESCO WHS; tea gardens"}]
+  },
+  "Telangana": {
+    rivers:[{n:"Godavari",d:"Upper Godavari flows through; Kaleshwaram Lift Irrigation"},{n:"Krishna",d:"Nagarjuna Sagar dam; southern border"},{n:"Manjira",d:"Tributary of Godavari; Hyderabad water supply"}],
+    gi:[{n:"Hyderabad Haleem",t:"food"},{n:"Pochampally Ikat",t:"craft"},{n:"Nirmal Paintings",t:"craft"},{n:"Pembarthi Metal Craft",t:"craft"},{n:"Gabbalam Carpet",t:"craft"}],
+    tourism:[{icon:"🏰",n:"Golconda Fort",d:"Qutb Shahi; acoustic marvel"},{icon:"🕌",n:"Charminar",d:"1591 mosque; Hyderabad icon"},{icon:"🛕",n:"Ramappa Temple",d:"UNESCO WHS — Kakatiya architecture"},{icon:"🌊",n:"Nagarjuna Sagar",d:"Largest masonry dam"}]
+  },
+  "Tripura": {
+    rivers:[{n:"Gumti",d:"Flows through Agartala; Maharani reservoir"},{n:"Haora",d:"Urban river; Agartala city"},{n:"Manu",d:"Flows to Bangladesh"}],
+    gi:[{n:"Tripura Queen Pineapple",t:"food"},{n:"Rignai Weave",t:"craft"},{n:"Pachra Weave",t:"craft"}],
+    tourism:[{icon:"🛕",n:"Ujjayanta Palace",d:"Royal palace museum; Agartala"},{icon:"🛕",n:"Tripura Sundari Temple",d:"Shakti Peetha; Udaipur"},{icon:"🌿",n:"Sepahijala WLS",d:"Cloud Leopard; primates"}]
+  },
+  "Uttar Pradesh": {
+    rivers:[{n:"Ganga",d:"Flows from Haridwar to Varanasi-Allahabad; spiritual heart"},{n:"Yamuna",d:"Western UP; Agra; Mathura; joins Ganga at Prayagraj"},{n:"Saryu (Ghaghra)",d:"Ayodhya; joins Ganga at Chhapra (Bihar)"},{n:"Gomti",d:"Lucknow; joins Ganga at Ghazipur"},{n:"Ken & Betwa",d:"Bundelkhand; Ken-Betwa interlinking project"}],
+    gi:[{n:"Mathura Peda",t:"food"},{n:"Agra Petha",t:"food"},{n:"Banaras Thandai",t:"food"},{n:"Banaras Silk (Banarasi)",t:"craft"},{n:"Chikankari Lucknow",t:"craft"},{n:"Varanasi Glass Beads",t:"craft"},{n:"Muradabad Brassware",t:"craft"},{n:"Lucknow Zardozi",t:"craft"}],
+    tourism:[{icon:"🕌",n:"Taj Mahal (Agra)",d:"UNESCO WHS — wonder of world"},{icon:"🛕",n:"Varanasi Ghats",d:"Oldest living city; Kashi Vishwanath"},{icon:"🛕",n:"Ram Mandir (Ayodhya)",d:"Consecrated Jan 2024; major pilgrimage"},{icon:"🙏",n:"Prayagraj — Triveni Sangam",d:"Kumbh Mela; Ganga-Yamuna-Saraswati"},{icon:"☸️",n:"Sarnath",d:"Buddha's first sermon; Dhamek Stupa"}]
+  },
+  "Uttarakhand": {
+    rivers:[{n:"Ganga (Bhagirathi + Alaknanda)",d:"Originates at Gangotri; formed at Devprayag"},{n:"Yamuna",d:"Originates at Yamunotri glacier"},{n:"Kosi",d:"Kumaon; flows to Ramganga"},{n:"Tons",d:"Garhwal; joins Yamuna"}],
+    gi:[{n:"Himalayan Tejpat",t:"food"},{n:"Uttarakhand Timru",t:"food"},{n:"Aipan Art",t:"craft"},{n:"Ringal Craft",t:"craft"}],
+    tourism:[{icon:"🛕",n:"Char Dham — Badrinath, Kedarnath, Gangotri, Yamunotri",d:"Supreme Hindu pilgrimage circuit"},{icon:"🐅",n:"Jim Corbett NP",d:"Oldest national park in India"},{icon:"🏔️",n:"Valley of Flowers",d:"UNESCO WHS — alpine meadows"},{icon:"🧘",n:"Rishikesh & Haridwar",d:"Yoga capital; Ganga Aarti"}]
+  },
+  "West Bengal": {
+    rivers:[{n:"Ganga / Hooghly",d:"Divides at Farakka; Hooghly channel; Kolkata port"},{n:"Damodar",d:"'Sorrow of Bengal'; DVC; coal belt"},{n:"Teesta",d:"North Bengal; Darjeeling; flood-prone"},{n:"Torsa & Jaldhaka",d:"Dooars; Bhutan foothills"}],
+    gi:[{n:"Darjeeling Tea",t:"food"},{n:"Murshidabad Silk",t:"craft"},{n:"Baluchari Saree",t:"craft"},{n:"Shantiniketan Leather Goods",t:"craft"},{n:"Dokra Craft (WB)",t:"craft"},{n:"Dhaniakhali Saree",t:"craft"}],
+    tourism:[{icon:"🐅",n:"Sundarbans NP",d:"UNESCO WHS — world's largest mangrove; Bengal tigers"},{icon:"🏔️",n:"Darjeeling",d:"Tea gardens; toy train UNESCO WHS"},{icon:"🏛️",n:"Victoria Memorial (Kolkata)",d:"Colonial marvel; Howrah Bridge"},{icon:"🙏",n:"Bishnupur Temple Trail",d:"Terracotta temples; Malla kingdom"}]
+  },
+  "Andaman and Nicobar Islands": {
+    rivers:[{n:"No major perennial rivers",d:"Small streams only; heavy rainfall recharge"}],
+    gi:[{n:"Andaman Red Hornbill",t:"craft"},{n:"Andaman Jackfruit Products",t:"food"}],
+    tourism:[{icon:"🏖️",n:"Radhanagar Beach (Havelock)",d:"Asia's best beach"},{icon:"🏛️",n:"Cellular Jail (Kaala Pani)",d:"Colonial prison; freedom fighters"},{icon:"🤿",n:"Barren Island",d:"India's only active volcano"},{icon:"🌊",n:"North Bay & Neil Island",d:"Coral reef snorkelling"}]
+  },
+  "Chandigarh": {
+    rivers:[{n:"Sukhna Choe",d:"Seasonal stream; Sukhna Lake fed by it"},{n:"Ghaggar",d:"Flows south of Chandigarh; Punjab-Haryana"}],
+    gi:[],
+    tourism:[{icon:"🌹",n:"Rock Garden (Nek Chand)",d:"Recycled art installation — unique in world"},{icon:"🌿",n:"Sukhna Lake",d:"Rowing; migratory birds"},{icon:"🏛️",n:"Capitol Complex",d:"Le Corbusier UNESCO WHS — Assembly, HC, Secretariat"}]
+  },
+  "Dadra and Nagar Haveli and Daman and Diu": {
+    rivers:[{n:"Damanganga",d:"Flows through DNH; joins Arabian Sea"},{n:"Kolak",d:"Vapi region; small"}],
+    gi:[],
+    tourism:[{icon:"🌿",n:"Vanganga Lake Garden",d:"Silvassa; nature park"},{icon:"🏰",n:"Diu Fort",d:"Portuguese fortification; sea-facing"},{icon:"🏖️",n:"Nagoa Beach (Diu)",d:"Horseshoe-shaped; calm waters"}]
+  },
+  "Delhi": {
+    rivers:[{n:"Yamuna",d:"Flows through Delhi; severely polluted urban stretch; Yamuna Action Plan"},{n:"Hindon",d:"Eastern Delhi; tributary of Yamuna"}],
+    gi:[{n:"Delhi Karhai Shisha Work",t:"craft"}],
+    tourism:[{icon:"🕌",n:"Red Fort & Jama Masjid",d:"UNESCO WHS — Mughal architecture"},{icon:"🛕",n:"Qutb Minar",d:"UNESCO WHS — 12th c. minaret"},{icon:"🏛️",n:"Humayun's Tomb",d:"UNESCO WHS — Mughal garden tomb"},{icon:"🛤️",n:"India Gate & Kartavya Path",d:"War memorial; Central Vista"}]
+  },
+  "Jammu and Kashmir": {
+    rivers:[{n:"Jhelum",d:"Dal Lake drains to Jhelum; Srinagar"},{n:"Chenab",d:"Jammu region; Baglihar Dam"},{n:"Indus",d:"Flows through Ladakh-J&K; Kargil"},{n:"Tawi",d:"Jammu city river"}],
+    gi:[{n:"Kashmiri Pashmina",t:"craft"},{n:"Kashmiri Kesar (Saffron)",t:"food"},{n:"Kashmiri Walnut Wood Craft",t:"craft"},{n:"Kashmiri Sozni Embroidery",t:"craft"},{n:"Kashmiri Carpet",t:"craft"},{n:"Kashmiri Paper Machie",t:"craft"}],
+    tourism:[{icon:"🏔️",n:"Dal Lake & Srinagar",d:"Houseboats; floating gardens; Mughal gardens"},{icon:"⛷️",n:"Gulmarg",d:"Asia's highest gondola; ski resort"},{icon:"🌸",n:"Pahalgam & Sonmarg",d:"Amarnath base; glaciers"},{icon:"🏛️",n:"Martand Sun Temple",d:"8th c. ruins; Anantnag"}]
+  },
+  "Ladakh": {
+    rivers:[{n:"Indus",d:"Flows W through Leh; originates Tibet"},{n:"Shyok",d:"Tributary of Indus; Nubra Valley"},{n:"Zanskar",d:"Chadar Trek in winter; joins Indus"}],
+    gi:[{n:"Ladakh Pashmina",t:"craft"},{n:"Ladakhi Thangka Painting",t:"craft"}],
+    tourism:[{icon:"🏔️",n:"Pangong Tso Lake",d:"High-altitude salt lake; India-China border"},{icon:"🙏",n:"Hemis Monastery",d:"Largest gompa in Ladakh"},{icon:"🏜️",n:"Nubra Valley",d:"Double-humped Bactrian camels; sand dunes"},{icon:"❄️",n:"Chadar Trek",d:"Frozen Zanskar River winter trek"}]
+  },
+  "Lakshadweep": {
+    rivers:[{n:"No rivers",d:"Coral atolls; groundwater lenses only"}],
+    gi:[{n:"Lakshadweep Coconut Products",t:"food"}],
+    tourism:[{icon:"🤿",n:"Agatti Island",d:"Lagoon diving; entry point"},{icon:"🐠",n:"Bangaram Atoll",d:"Uninhabited; pristine reef"},{icon:"🌴",n:"Kavaratti",d:"Capital; water sports; marine museum"}]
+  },
+  "Puducherry": {
+    rivers:[{n:"Gingee (Cheyyar)",d:"Flows through Villupuram district"},{n:"Pennaiyar",d:"South Arcot; Puducherry outskirts"}],
+    gi:[{n:"Puducherry Agarbathi",t:"craft"},{n:"Puducherry Pottery",t:"craft"}],
+    tourism:[{icon:"🙏",n:"Auroville",d:"Experimental township; Matrimandir"},{icon:"⛪",n:"French Quarter (White Town)",d:"Colonial boulevards; Pondicherry"},{icon:"🧘",n:"Sri Aurobindo Ashram",d:"Major spiritual center"},{icon:"🏖️",n:"Promenade Beach",d:"Beachside boulevard; French-era architecture"}]
+  }
+};
+
+const STATES = [
+  {state:"Andhra Pradesh",chief_minister:"Nara Chandrababu Naidu",governor:"Syed Abdul Nazeer",parliamentary_metrics:{lok_sabha_seats:25,rajya_sabha_seats:11},economic_metrics:{gsdp_crore_inr:1641000,consumer_price_index:104.23,inflation_yoy_percent:2.83},demographics:{sex_ratio_females_per_1000_males:934}},
+  {state:"Arunachal Pradesh",chief_minister:"Pema Khandu",governor:"Kaiwalya Trivikram Parnaik",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:47800,consumer_price_index:102.73,inflation_yoy_percent:1.29},demographics:{sex_ratio_females_per_1000_males:979}},
+  {state:"Assam",chief_minister:"Himanta Biswa Sarma",governor:"Lakshman Acharya",parliamentary_metrics:{lok_sabha_seats:14,rajya_sabha_seats:7},economic_metrics:{gsdp_crore_inr:643100,consumer_price_index:102.95,inflation_yoy_percent:0.78},demographics:{sex_ratio_females_per_1000_males:964}},
+  {state:"Bihar",chief_minister:"Samrat Choudhary",governor:"Syed Ata Hasnain",parliamentary_metrics:{lok_sabha_seats:40,rajya_sabha_seats:16},economic_metrics:{gsdp_crore_inr:976000,consumer_price_index:104.09,inflation_yoy_percent:2.48},demographics:{sex_ratio_females_per_1000_males:908}},
+  {state:"Chhattisgarh",chief_minister:"Vishnu Deo Sai",governor:"Ramen Deka",parliamentary_metrics:{lok_sabha_seats:11,rajya_sabha_seats:5},economic_metrics:{gsdp_crore_inr:561700,consumer_price_index:102.89,inflation_yoy_percent:1.67},demographics:{sex_ratio_females_per_1000_males:960}},
+  {state:"Goa",chief_minister:"Pramod Pandurang Sawant",governor:"Ashok Gajapati Raju",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:121300,consumer_price_index:103.53,inflation_yoy_percent:1.92},demographics:{sex_ratio_females_per_1000_males:838}},
+  {state:"Gujarat",chief_minister:"Bhupendrabhai Rajnikant Patel",governor:"Acharya Devvrat",parliamentary_metrics:{lok_sabha_seats:26,rajya_sabha_seats:11},economic_metrics:{gsdp_crore_inr:2790000,consumer_price_index:103.29,inflation_yoy_percent:2.23},demographics:{sex_ratio_females_per_1000_males:955}},
+  {state:"Haryana",chief_minister:"Nayab Singh Saini",governor:"Ashim Kumar Ghosh",parliamentary_metrics:{lok_sabha_seats:10,rajya_sabha_seats:5},economic_metrics:{gsdp_crore_inr:1216000,consumer_price_index:104.4,inflation_yoy_percent:2.55},demographics:{sex_ratio_females_per_1000_males:893}},
+  {state:"Himachal Pradesh",chief_minister:"Sukhvinder Singh Sukhu",governor:"Kavinder Gupta",parliamentary_metrics:{lok_sabha_seats:4,rajya_sabha_seats:3},economic_metrics:{gsdp_crore_inr:227100,consumer_price_index:104.77,inflation_yoy_percent:2.92},demographics:{sex_ratio_females_per_1000_males:875}},
+  {state:"Jharkhand",chief_minister:"Hemant Soren",governor:"Santosh Kumar Gangwar",parliamentary_metrics:{lok_sabha_seats:14,rajya_sabha_seats:6},economic_metrics:{gsdp_crore_inr:470100,consumer_price_index:103.81,inflation_yoy_percent:2.02},demographics:{sex_ratio_females_per_1000_males:899}},
+  {state:"Karnataka",chief_minister:"Doddalahalli Kempegowda Shivakumar",governor:"Thawar Chand Gehlot",parliamentary_metrics:{lok_sabha_seats:28,rajya_sabha_seats:12},economic_metrics:{gsdp_crore_inr:2809100,consumer_price_index:105.09,inflation_yoy_percent:2.99},demographics:{sex_ratio_females_per_1000_males:978}},
+  {state:"Kerala",chief_minister:"Vadasseri Damodara Menon Satheesan",governor:"Rajendra Arlekar",parliamentary_metrics:{lok_sabha_seats:20,rajya_sabha_seats:9},economic_metrics:{gsdp_crore_inr:1311400,consumer_price_index:105.68,inflation_yoy_percent:3.67},demographics:{sex_ratio_females_per_1000_males:951}},
+  {state:"Madhya Pradesh",chief_minister:"Mohan Yadav",governor:"Mangubhai C. Patel",parliamentary_metrics:{lok_sabha_seats:29,rajya_sabha_seats:11},economic_metrics:{gsdp_crore_inr:1522100,consumer_price_index:104.15,inflation_yoy_percent:2.72},demographics:{sex_ratio_females_per_1000_males:956}},
+  {state:"Maharashtra",chief_minister:"Devendra Gangadharrao Fadnavis",governor:"Jishnu Dev Varma",parliamentary_metrics:{lok_sabha_seats:48,rajya_sabha_seats:19},economic_metrics:{gsdp_crore_inr:4267800,consumer_price_index:104.27,inflation_yoy_percent:2.6},demographics:{sex_ratio_females_per_1000_males:913}},
+  {state:"Manipur",chief_minister:"Yumnam Khemchand Singh",governor:"Ajay Kumar Bhalla",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:49900,consumer_price_index:102.3,inflation_yoy_percent:0.12},demographics:{sex_ratio_females_per_1000_males:967}},
+  {state:"Meghalaya",chief_minister:"Conrad Kongkal Sangma",governor:"C. H. Vijayashankar",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:53000,consumer_price_index:104.23,inflation_yoy_percent:1.66},demographics:{sex_ratio_females_per_1000_males:989}},
+  {state:"Mizoram",chief_minister:"Lalduhoma",governor:"V. K. Singh",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:36000,consumer_price_index:102.52,inflation_yoy_percent:0.25},demographics:{sex_ratio_females_per_1000_males:969}},
+  {state:"Nagaland",chief_minister:"Neiphiu Rio",governor:"Nand Kishore Yadav",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:47400,consumer_price_index:104.65,inflation_yoy_percent:2.36},demographics:{sex_ratio_females_per_1000_males:945}},
+  {state:"Odisha",chief_minister:"Mohan Charan Majhi",governor:"Kambhampati Hari Babu",parliamentary_metrics:{lok_sabha_seats:21,rajya_sabha_seats:10},economic_metrics:{gsdp_crore_inr:926000,consumer_price_index:103.58,inflation_yoy_percent:1.87},demographics:{sex_ratio_females_per_1000_males:894}},
+  {state:"Punjab",chief_minister:"Bhagwant Singh Mann",governor:"Gulab Chand Kataria",parliamentary_metrics:{lok_sabha_seats:13,rajya_sabha_seats:7},economic_metrics:{gsdp_crore_inr:802700,consumer_price_index:104.55,inflation_yoy_percent:2.71},demographics:{sex_ratio_females_per_1000_males:904}},
+  {state:"Rajasthan",chief_minister:"Bhajan Lal Sharma",governor:"Haribhau Bagade",parliamentary_metrics:{lok_sabha_seats:25,rajya_sabha_seats:10},economic_metrics:{gsdp_crore_inr:1781100,consumer_price_index:104.84,inflation_yoy_percent:3.17},demographics:{sex_ratio_females_per_1000_males:891}},
+  {state:"Sikkim",chief_minister:"Prem Singh Tamang",governor:"Om Prakash Mathur",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:52600,consumer_price_index:105.38,inflation_yoy_percent:3.04},demographics:{sex_ratio_females_per_1000_males:969}},
+  {state:"Tamil Nadu",chief_minister:"Chandrasekaran Joseph Vijay",governor:"Rajendra Arlekar",parliamentary_metrics:{lok_sabha_seats:39,rajya_sabha_seats:18},economic_metrics:{gsdp_crore_inr:3155100,consumer_price_index:105.58,inflation_yoy_percent:3.36},demographics:{sex_ratio_females_per_1000_males:878}},
+  {state:"Telangana",chief_minister:"Anumula Revanth Reddy",governor:"Shiv Pratap Shukla",parliamentary_metrics:{lok_sabha_seats:17,rajya_sabha_seats:7},economic_metrics:{gsdp_crore_inr:1649000,consumer_price_index:106.59,inflation_yoy_percent:4.92},demographics:{sex_ratio_females_per_1000_males:894}},
+  {state:"Tripura",chief_minister:"Manik Saha",governor:"N. Indrasena Reddy",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:100800,consumer_price_index:102.03,inflation_yoy_percent:1.29},demographics:{sex_ratio_females_per_1000_males:1028}},
+  {state:"Uttar Pradesh",chief_minister:"Yogi Adityanath",governor:"Anandiben Patel",parliamentary_metrics:{lok_sabha_seats:80,rajya_sabha_seats:31},economic_metrics:{gsdp_crore_inr:2699100,consumer_price_index:104.54,inflation_yoy_percent:2.67},demographics:{sex_ratio_females_per_1000_males:941}},
+  {state:"Uttarakhand",chief_minister:"Pushkar Singh Dhami",governor:"Gurmit Singh",parliamentary_metrics:{lok_sabha_seats:5,rajya_sabha_seats:3},economic_metrics:{gsdp_crore_inr:394700,consumer_price_index:104.49,inflation_yoy_percent:2.15},demographics:{sex_ratio_females_per_1000_males:984}},
+  {state:"West Bengal",chief_minister:"Suvendu Adhikari",governor:"R. N. Ravi",parliamentary_metrics:{lok_sabha_seats:42,rajya_sabha_seats:16},economic_metrics:{gsdp_crore_inr:1880000,consumer_price_index:104.0,inflation_yoy_percent:2.79},demographics:{sex_ratio_females_per_1000_males:973}},
+  {state:"Andaman and Nicobar Islands",chief_minister:null,governor:"Devendra Kumar Joshi",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:0},economic_metrics:{gsdp_crore_inr:11700,consumer_price_index:106.88,inflation_yoy_percent:4.27},demographics:{sex_ratio_females_per_1000_males:914}},
+  {state:"Chandigarh",chief_minister:null,governor:"Gulab Chand Kataria",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:0},economic_metrics:{gsdp_crore_inr:55000,consumer_price_index:103.7,inflation_yoy_percent:2.33},demographics:{sex_ratio_females_per_1000_males:838}},
+  {state:"Dadra and Nagar Haveli and Daman and Diu",chief_minister:null,governor:"Praful Khoda Patel",parliamentary_metrics:{lok_sabha_seats:2,rajya_sabha_seats:0},economic_metrics:{gsdp_crore_inr:null,consumer_price_index:103.96,inflation_yoy_percent:2.58},demographics:{sex_ratio_females_per_1000_males:817}},
+  {state:"Delhi",chief_minister:"Rekha Gupta",governor:"Taranjit Singh Sandhu",parliamentary_metrics:{lok_sabha_seats:7,rajya_sabha_seats:3},economic_metrics:{gsdp_crore_inr:1327000,consumer_price_index:103.01,inflation_yoy_percent:2.15},demographics:{sex_ratio_females_per_1000_males:923}},
+  {state:"Jammu and Kashmir",chief_minister:"Omar Abdullah",governor:"Manoj Sinha",parliamentary_metrics:{lok_sabha_seats:5,rajya_sabha_seats:4},economic_metrics:{gsdp_crore_inr:288400,consumer_price_index:104.21,inflation_yoy_percent:1.34},demographics:{sex_ratio_females_per_1000_males:976}},
+  {state:"Ladakh",chief_minister:null,governor:"Vinai Kumar Saxena",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:0},economic_metrics:{gsdp_crore_inr:8304,consumer_price_index:105.1,inflation_yoy_percent:1.76},demographics:{sex_ratio_females_per_1000_males:1125}},
+  {state:"Lakshadweep",chief_minister:null,governor:"Praful Khoda Patel",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:0},economic_metrics:{gsdp_crore_inr:324,consumer_price_index:105.04,inflation_yoy_percent:3.02},demographics:{sex_ratio_females_per_1000_males:1051}},
+  {state:"Puducherry",chief_minister:"Natesan Krishnasamy Gounder Rangaswamy",governor:"Kuniyil Kailashnathan",parliamentary_metrics:{lok_sabha_seats:1,rajya_sabha_seats:1},economic_metrics:{gsdp_crore_inr:52700,consumer_price_index:105.28,inflation_yoy_percent:3.39},demographics:{sex_ratio_females_per_1000_males:959}}
+];
+
+const maxGsdp = Math.max(...STATES.filter(s=>s.economic_metrics.gsdp_crore_inr).map(s=>s.economic_metrics.gsdp_crore_inr));
+
+function fmtGsdp(v){
+  if(!v) return '<span class="nd">N/A</span>';
+  if(v>=100000) return (v/100000).toFixed(2)+'L';
+  return (v/1000).toFixed(1)+'K';
+}
+function inflClass(v){return v<=1.5?'infl-low':v<=3.0?'infl-mid':'infl-high';}
+function srDotClass(sr){return sr>=1000?'sr-high':sr>=950?'sr-good':sr>=900?'sr-mid':'sr-low';}
+
+let sortKey='state', sortDir=1, filterMode='all', searchQ='';
+const openRows = new Set();
+
+function buildDetail(stateName){
+  const d = STATE_DETAILS[stateName];
+  if(!d) return '<td class="detail-cell" colspan="11"><div class="detail-inner" style="grid-template-columns:1fr"><div class="detail-section"><h4>No detail data available</h4></div></div></td>';
+
+  const rivers = d.rivers.map(r=>`<div class="river-item"><span class="rn">🌊 ${r.n}</span> — ${r.d}</div>`).join('') || '<div class="river-item nd">No major rivers</div>';
+  const gi = d.gi.length ? d.gi.map(g=>`<span class="tag-pill ${g.t==='food'?'tag-food':'tag-craft'}">${g.t==='food'?'🌾':'🎨'} ${g.n}</span>`).join('') : '<span class="nd" style="font-size:12px">No GI tags recorded</span>';
+  const tour = d.tourism.map(t=>`<div class="tour-item"><span class="tour-icon">${t.icon}</span><span class="tour-name">${t.n}</span><span style="color:var(--text3);font-size:11px"> — ${t.d}</span></div>`).join('');
+
+  return `<td class="detail-cell" colspan="11">
+    <div class="detail-inner">
+      <div class="detail-section">
+        <h4><span class="ds-icon">🌊</span>River Systems & Hydrology</h4>
+        ${rivers}
+      </div>
+      <div class="detail-section">
+        <h4><span class="ds-icon">🏷️</span>GI Tags — Agriculture, Food & Craft</h4>
+        <div class="tag-list">${gi}</div>
+      </div>
+      <div class="detail-section">
+        <h4><span class="ds-icon">🗺️</span>Tourism & Heritage</h4>
+        ${tour}
+      </div>
+    </div>
+  </td>`;
+}
+
+function toggleRow(stateName){
+  const btn = document.getElementById('btn-'+stateName.replace(/\s+/g,'_'));
+  const row = document.getElementById('det-'+stateName.replace(/\s+/g,'_'));
+  if(!row) return;
+  const isOpen = row.classList.contains('open');
+  if(isOpen){
+    row.classList.remove('open');
+    btn && btn.classList.remove('open');
+    btn && (btn.textContent='▶ Details');
+  } else {
+    row.innerHTML = buildDetail(stateName);
+    row.classList.add('open');
+    btn && btn.classList.add('open');
+    btn && (btn.textContent='▼ Details');
+  }
+}
+
+function render(){
+  let data = [...STATES];
+  if(filterMode==='state') data=data.filter(s=>!UT_NAMES.has(s.state));
+  if(filterMode==='ut') data=data.filter(s=>UT_NAMES.has(s.state));
+  if(searchQ){
+    const q=searchQ.toLowerCase();
+    data=data.filter(s=>s.state.toLowerCase().includes(q)||(s.chief_minister||'').toLowerCase().includes(q)||s.governor.toLowerCase().includes(q));
+  }
+  data.sort((a,b)=>{
+    let av,bv;
+    switch(sortKey){
+      case 'state': av=a.state; bv=b.state; break;
+      case 'cm': av=a.chief_minister||''; bv=b.chief_minister||''; break;
+      case 'gov': av=a.governor; bv=b.governor; break;
+      case 'ls': av=a.parliamentary_metrics.lok_sabha_seats; bv=b.parliamentary_metrics.lok_sabha_seats; break;
+      case 'rs': av=a.parliamentary_metrics.rajya_sabha_seats; bv=b.parliamentary_metrics.rajya_sabha_seats; break;
+      case 'gsdp': av=a.economic_metrics.gsdp_crore_inr||0; bv=b.economic_metrics.gsdp_crore_inr||0; break;
+      case 'cpi': av=a.economic_metrics.consumer_price_index; bv=b.economic_metrics.consumer_price_index; break;
+      case 'inflation': av=a.economic_metrics.inflation_yoy_percent; bv=b.economic_metrics.inflation_yoy_percent; break;
+      case 'sex_ratio': av=a.demographics.sex_ratio_females_per_1000_males; bv=b.demographics.sex_ratio_females_per_1000_males; break;
+      default: av=a.state; bv=b.state;
+    }
+    return typeof av==='string'? av.localeCompare(bv)*sortDir : (av-bv)*sortDir;
+  });
+
+  document.getElementById('rowCount').textContent=data.length;
+  const tbody=document.getElementById('tbody');
+  if(!data.length){tbody.innerHTML='<tr class="empty-row"><td colspan="11">No results found.</td></tr>';return;}
+
+  tbody.innerHTML=data.map((s,i)=>{
+    const isUT=UT_NAMES.has(s.state);
+    const em=s.economic_metrics, dm=s.demographics, pm=s.parliamentary_metrics;
+    const gPct=em.gsdp_crore_inr?(em.gsdp_crore_inr/maxGsdp*100).toFixed(1):0;
+    const sr=dm.sex_ratio_females_per_1000_males;
+    const sid=s.state.replace(/\s+/g,'_');
+    return `<tr>
+      <td class="td-idx td-num">${String(i+1).padStart(2,'0')}</td>
+      <td class="td-state">${s.state}${isUT?'<span class="badge-ut">UT</span>':''}</td>
+      <td class="td-person">${s.chief_minister||'<span class="nd">—</span>'}</td>
+      <td class="td-person">${s.governor}</td>
+      <td class="td-num">${pm.lok_sabha_seats}</td>
+      <td class="td-num">${pm.rajya_sabha_seats}</td>
+      <td><div class="gsdp-wrap"><div class="gsdp-bar"><div class="gsdp-fill" style="width:${gPct}%"></div></div><span class="gsdp-val">${fmtGsdp(em.gsdp_crore_inr)}</span></div></td>
+      <td class="td-num">${em.consumer_price_index.toFixed(2)}</td>
+      <td><span class="infl-chip ${inflClass(em.inflation_yoy_percent)}">${em.inflation_yoy_percent>3?'▲':em.inflation_yoy_percent<1?'▼':'●'} ${em.inflation_yoy_percent.toFixed(2)}%</span></td>
+      <td><div class="sr-wrap"><div class="sr-dot ${srDotClass(sr)}"></div><span class="td-num">${sr}</span></div></td>
+      <td><button class="expand-btn" id="btn-${sid}" onclick="toggleRow('${s.state.replace(/'/g,"\\'")}')">▶ Details</button></td>
+    </tr>
+    <tr class="detail-row" id="det-${sid}"></tr>`;
+  }).join('');
+}
+
+document.querySelectorAll('th[data-key]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const k=th.dataset.key;
+    if(sortKey===k) sortDir*=-1; else {sortKey=k;sortDir=-1;}
+    document.querySelectorAll('th').forEach(t=>t.classList.remove('sorted'));
+    th.classList.add('sorted');
+    render();
+  });
+});
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    filterMode=btn.dataset.filter;
+    render();
+  });
+});
+document.getElementById('search').addEventListener('input',e=>{searchQ=e.target.value.trim();render();});
+document.getElementById('sortCol').addEventListener('change',e=>{
+  const m={state:'state',gsdp:'gsdp',inflation:'inflation',sex_ratio:'sex_ratio',lok_sabha:'ls',cpi:'cpi'};
+  sortKey=m[e.target.value]||'state';
+  sortDir=(e.target.value==='state')?1:-1;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
