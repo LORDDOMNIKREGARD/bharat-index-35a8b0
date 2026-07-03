@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finance Bible for IPM Interviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #faf8f3;
+    --gold: #c8951a;
+    --gold-light: #f0c84a;
+    --red: #c0392b;
+    --green: #1a7a4a;
+    --blue: #1a3a6b;
+    --accent: #e8d5a3;
+    --muted: #6b6b5a;
+    --border: #d4c9a8;
+    --highlight: #fff9e6;
+    --code-bg: #1a1a2e;
+    --tag-bg: #1a3a6b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* === COVER === */
+  .cover {
+    background: var(--ink);
+    color: var(--paper);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(200,149,26,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 70%, rgba(26,58,107,0.3) 0%, transparent 60%);
+  }
+
+  .cover-ornament {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--gold-light);
+    position: relative;
+    z-index: 1;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .cover-sub {
+    font-size: 1.2rem;
+    color: #c8c0a8;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+  }
+
+  .cover-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 3rem;
+  }
+
+  .cover-tag {
+    background: rgba(200,149,26,0.2);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cover-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1.5rem auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+    color: #a0987a;
+  }
+
+  .cover-section-item {
+    padding: 0.4rem 0.8rem;
+    border-left: 2px solid rgba(200,149,26,0.3);
+    text-align: left;
+  }
+
+  /* === NAVIGATION === */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 2px solid var(--gold);
+    padding: 0;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    gap: 0;
+    padding: 0 1rem;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem 0.8rem 0;
+    white-space: nowrap;
+    border-right: 1px solid rgba(200,149,26,0.3);
+    margin-right: 0.5rem;
+  }
+
+  nav a {
+    color: #a0987a;
+    text-decoration: none;
+    font-size: 0.78rem;
+    padding: 0.8rem 0.7rem;
+    white-space: nowrap;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  nav a:hover { color: var(--gold-light); }
+
+  /* === MAIN LAYOUT === */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* === SECTION HEADERS === */
+  .section-header {
+    margin: 4rem 0 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--gold);
+    position: relative;
+  }
+
+  .section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* === TOPIC BLOCKS === */
+  .topic {
+    margin: 2.5rem 0;
+    padding: 0;
+  }
+
+  .topic h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 1rem;
+    padding-left: 0.8rem;
+    border-left: 4px solid var(--gold);
+  }
+
+  .topic h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 1.2rem 0 0.5rem;
+  }
+
+  .topic p { margin-bottom: 0.8rem; color: #2a2a1e; }
+
+  /* === EXAMPLE BOXES === */
+  .example-box {
+    background: #f0ebe0;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .example-box .ex-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+
+  /* === INTERVIEW Q&A === */
+  .interview-qa {
+    background: var(--highlight);
+    border: 1px solid #e8d5a3;
+    border-radius: 4px;
+    margin: 1.2rem 0;
+    overflow: hidden;
+  }
+
+  .iq-question {
+    background: var(--tag-bg);
+    color: #e8d5a3;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .iq-question::before {
+    content: 'Q: ';
+    color: var(--gold-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .iq-answer {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.92rem;
+    color: #2a2a1e;
+    border-top: 1px solid #e8d5a3;
+  }
+
+  .iq-answer::before {
+    content: '▶ ';
+    color: var(--green);
+    font-size: 0.7rem;
+  }
+
+  /* === FORMULA BOXES === */
+  .formula {
+    background: var(--code-bg);
+    color: var(--gold-light);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    margin: 0.8rem 0;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* === RATIO CARDS === */
+  .ratio-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .ratio-header {
+    background: var(--blue);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ratio-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .ratio-body {
+    padding: 1rem 1.2rem;
+    background: white;
+  }
+
+  .ratio-body .formula { margin: 0.5rem 0; }
+
+  /* === KEY FACTS === */
+  .key-fact {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .key-fact:last-child { border-bottom: none; }
+
+  .fact-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 600;
+    min-width: 2rem;
+    padding-top: 0.1rem;
+  }
+
+  .fact-text { font-size: 0.9rem; color: #2a2a1e; }
+
+  /* === TRAPS === */
+  .trap {
+    background: #fff0f0;
+    border: 1px solid #f0c0c0;
+    border-left: 4px solid var(--red);
+    padding: 0.8rem 1.2rem;
+    margin: 0.8rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .trap-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.3rem;
+  }
+
+  .trap-fix {
+    background: #f0fff0;
+    border: 1px solid #b0e0b0;
+    border-left: 4px solid var(--green);
+    padding: 0.6rem 1.2rem;
+    margin-top: 0.4rem;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.88rem;
+  }
+
+  /* === TRANSCRIPT ANALYSIS === */
+  .transcript-q {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 1rem 0;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .tq-source {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .tq-q {
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .tq-why {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    border-top: 1px dashed var(--border);
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tq-mistake {
+    font-size: 0.85rem;
+    color: var(--red);
+    margin-top: 0.3rem;
+  }
+
+  /* === REVISION GRID === */
+  .revision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .rev-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .rev-item strong {
+    color: var(--blue);
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  /* === TABLE === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+  }
+
+  td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) td { background: #f8f5ee; }
+
+  /* === INFO CALLOUTS === */
+  .callout {
+    background: #f0f5ff;
+    border: 1px solid #b0c4de;
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+  }
+
+  .callout.gold {
+    background: #fffbef;
+    border-color: var(--border);
+  }
+
+  .callout strong { color: var(--blue); }
+
+  /* === ANALOGY BOXES === */
+  .analogy {
+    background: #f5f0ff;
+    border: 1px solid #c8b8e8;
+    border-left: 4px solid #7c5cbf;
+    padding: 0.8rem 1.2rem;
+    margin: 0.8rem 0;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: #3a2a5a;
+  }
+
+  .analogy::before {
+    content: '💡 Analogy: ';
+    font-style: normal;
+    font-weight: 600;
+    color: #7c5cbf;
+  }
+
+  /* === SECTION INDEX === */
+  .toc {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .toc h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.3rem;
+  }
+
+  .toc-item a {
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+
+  .toc-item a:hover { color: var(--gold); }
+
+  .toc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-weight: 600;
+    min-width: 1.8rem;
+  }
+
+  /* === TAGS === */
+  .tag {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    margin: 0.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* === MEGA QA LIST === */
+  .qa-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .qa-item:last-child { border-bottom: none; }
+
+  .qa-q {
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+
+  .qa-q span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    margin-right: 0.5rem;
+    font-weight: 400;
+  }
+
+  .qa-a {
+    font-size: 0.9rem;
+    color: #2a2a1e;
+    padding-left: 0.8rem;
+    border-left: 2px solid var(--border);
+  }
+
+  /* === TERM GLOSSARY === */
+  .glossary-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: start;
+  }
+
+  .glossary-item:last-child { border-bottom: none; }
+
+  .glossary-term {
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 0.9rem;
+  }
+
+  .glossary-def {
+    font-size: 0.88rem;
+    color: #2a2a1e;
+  }
+
+  /* === MINI INCOME STATEMENT === */
+  .financial-statement {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+
+  .fs-header {
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .fs-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 1rem;
+    border-bottom: 1px solid #f0ebe0;
+  }
+
+  .fs-row.subtotal {
+    background: #f8f5ee;
+    border-top: 1px solid var(--border);
+    font-weight: 600;
+  }
+
+  .fs-row.total {
+    background: var(--blue);
+    color: white;
+    font-weight: 700;
+    border-top: 2px solid var(--gold);
+  }
+
+  .fs-row.indent { padding-left: 2rem; color: var(--muted); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .glossary-item { grid-template-columns: 1fr; gap: 0.2rem; }
+    nav a { font-size: 0.7rem; padding: 0.8rem 0.5rem; }
+    main { padding: 1.5rem 1rem 3rem; }
+  }
+
+  /* === PRINT === */
+  @media print {
+    nav { display: none; }
+    .cover { min-height: auto; padding: 2rem; }
+    main { max-width: 100%; padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-ornament">◆</div>
+  <h1>Finance Bible<br>for IPM Interviews</h1>
+  <p class="cover-sub">From Absolute Basics to Advanced Cross-Questions — A Complete Preparation Guide for IIM IPM, NMIMS, Christ, SSCBS & All Management Entrance Interviews</p>
+  <div class="cover-tags">
+    <span class="cover-tag">IIM Indore IPM</span>
+    <span class="cover-tag">IIM Rohtak</span>
+    <span class="cover-tag">IIM Ranchi</span>
+    <span class="cover-tag">IIM Shillong</span>
+    <span class="cover-tag">IIM Sirmaur</span>
+    <span class="cover-tag">IIM Kozhikode</span>
+    <span class="cover-tag">NMIMS BBA</span>
+    <span class="cover-tag">Christ University</span>
+    <span class="cover-tag">SSCBS</span>
+    <span class="cover-tag">IIFT</span>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="cover-sections">
+    <div class="cover-section-item">15 Comprehensive Sections</div>
+    <div class="cover-section-item">100+ Interview Q&A</div>
+    <div class="cover-section-item">Real Transcript Analysis</div>
+    <div class="cover-section-item">50 Interview Traps</div>
+    <div class="cover-section-item">50 Essential Finance Terms</div>
+    <div class="cover-section-item">Rapid Revision Sheets</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">Finance Bible</span>
+    <a href="#s1">Stock Market</a>
+    <a href="#s2">Sensex &amp; Nifty</a>
+    <a href="#s3">Exchanges</a>
+    <a href="#s4">Participants</a>
+    <a href="#s5">Demat</a>
+    <a href="#s6">Bonds</a>
+    <a href="#s7">Banking</a>
+    <a href="#s8">Mutual Funds</a>
+    <a href="#s9">Financials</a>
+    <a href="#s10">Ratios</a>
+    <a href="#s11">Macro Impact</a>
+    <a href="#s12">100 Questions</a>
+    <a href="#s13">Advanced</a>
+    <a href="#s14">Transcripts</a>
+    <a href="#s15">Revision</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h3>Table of Contents</h3>
+  <div class="toc-grid">
+    <div class="toc-item"><a href="#s1"><span class="toc-num">01</span> Stock Market Basics</a></div>
+    <div class="toc-item"><a href="#s2"><span class="toc-num">02</span> Sensex &amp; Nifty</a></div>
+    <div class="toc-item"><a href="#s3"><span class="toc-num">03</span> Stock Exchanges</a></div>
+    <div class="toc-item"><a href="#s4"><span class="toc-num">04</span> Market Participants</a></div>
+    <div class="toc-item"><a href="#s5"><span class="toc-num">05</span> Demat &amp; Trading</a></div>
+    <div class="toc-item"><a href="#s6"><span class="toc-num">06</span> Bonds &amp; Fixed Income</a></div>
+    <div class="toc-item"><a href="#s7"><span class="toc-num">07</span> Banking Basics</a></div>
+    <div class="toc-item"><a href="#s8"><span class="toc-num">08</span> Mutual Funds</a></div>
+    <div class="toc-item"><a href="#s9"><span class="toc-num">09</span> Company Financials</a></div>
+    <div class="toc-item"><a href="#s10"><span class="toc-num">10</span> Important Ratios</a></div>
+    <div class="toc-item"><a href="#s11"><span class="toc-num">11</span> Macro &amp; Current Affairs</a></div>
+    <div class="toc-item"><a href="#s12"><span class="toc-num">12</span> 100 IPM Finance Questions</a></div>
+    <div class="toc-item"><a href="#s13"><span class="toc-num">13</span> Advanced Topics</a></div>
+    <div class="toc-item"><a href="#s14"><span class="toc-num">14</span> Transcript-Based Analysis</a></div>
+    <div class="toc-item"><a href="#s15"><span class="toc-num">15</span> Rapid Revision Sheets</a></div>
+  </div>
+</div>
+
+<!-- ==============================
+     SECTION 1: STOCK MARKET BASICS
+     ============================== -->
+<div id="s1" class="section-header">
+  <div class="section-number">Section 01</div>
+  <h2>Stock Market Basics</h2>
+</div>
+
+<div class="topic">
+  <h3>What is a Stock Market?</h3>
+  <p>A stock market is a <strong>marketplace where buyers and sellers trade ownership stakes in companies</strong>. Think of it like a giant auction house — but instead of paintings or antiques, people are buying and selling small pieces of businesses.</p>
+  <div class="analogy">A stock market is like a mandi (vegetable market) — but instead of vegetables, companies are the "products," and instead of farmers, it's businesses selling slices of themselves to the public.</div>
+  <div class="interview-qa">
+    <div class="iq-question">What is a stock market?</div>
+    <div class="iq-answer">A stock market is an organised platform where publicly listed companies' shares are bought and sold. It helps companies raise capital from the public and provides investors a chance to participate in corporate growth. In India, the primary stock markets are the Bombay Stock Exchange (BSE) and the National Stock Exchange (NSE).</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Why Do Stock Markets Exist?</h3>
+  <p>Stock markets exist to solve a fundamental problem: <em>companies need money to grow, but individuals have idle savings that need to work harder than a bank FD</em>. The market brings these two needs together.</p>
+  <p><strong>For companies:</strong> Raise large sums without taking loans. Tata Motors doesn't need to beg a bank — it can sell shares to millions of people.<br>
+  <strong>For investors:</strong> Grow wealth by sharing in corporate profits. Rather than putting ₹1 lakh in a fixed deposit at 6%, an investor can buy shares of a growing company and potentially earn 15–20% annually.</p>
+</div>
+
+<div class="topic">
+  <h3>Primary Market vs Secondary Market</h3>
+  <table>
+    <tr><th>Feature</th><th>Primary Market</th><th>Secondary Market</th></tr>
+    <tr><td>Definition</td><td>Where new securities are issued for the first time</td><td>Where already-issued securities are traded between investors</td></tr>
+    <tr><td>Who benefits</td><td>The company receives the money</td><td>Investor-to-investor; company doesn't receive money</td></tr>
+    <tr><td>Example</td><td>An IPO — Zomato first selling shares in 2021</td><td>You buying Zomato shares on NSE today</td></tr>
+    <tr><td>Price</td><td>Fixed (issue price set by company)</td><td>Market-driven (changes every second)</td></tr>
+  </table>
+  <div class="interview-qa">
+    <div class="iq-question">What is the difference between primary and secondary markets?</div>
+    <div class="iq-answer">The primary market is where a company first sells its securities to the public (like an IPO), directly raising capital. The secondary market is the stock exchange where investors trade these securities amongst themselves — the company doesn't receive this money. Think of it as: primary market is a brand-new car dealership, secondary market is the used-car market.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>IPO and FPO</h3>
+  <p><strong>IPO (Initial Public Offering):</strong> The first time a private company sells its shares to the public. This is how a company "goes public."</p>
+  <div class="example-box">
+    <div class="ex-label">Real Example</div>
+    Zomato's IPO in July 2021 raised ₹9,375 crore. The issue price was ₹76 per share. Millions of retail investors applied, and the IPO was subscribed 38 times — meaning people wanted 38x more shares than were available.
+  </div>
+  <p><strong>FPO (Follow-on Public Offering):</strong> When an already-listed company issues more shares to the public. The company already has shares in the market but needs more capital.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is an IPO? Why would a company do an IPO?</div>
+    <div class="iq-answer">An IPO, or Initial Public Offering, is when a private company sells its shares to the general public for the first time, listing itself on a stock exchange. Companies do IPOs to: (1) raise large capital without debt, (2) provide an exit route for early investors and promoters, (3) increase brand credibility and visibility, and (4) use shares as currency for future acquisitions. After an IPO, the company's shares trade freely on the stock exchange.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>What is a Share?</h3>
+  <p>A share is a <strong>unit of ownership in a company</strong>. If a company has issued 100 shares and you own 10, you own 10% of the company. You are entitled to 10% of all profits distributed (dividends) and 10% of the assets if the company is wound up.</p>
+  <div class="analogy">Imagine a pizza cut into 8 slices. Each slice is a share. If you own 2 slices, you own 2/8 = 25% of the pizza. The bigger the pizza gets, the more valuable your 2 slices.</div>
+</div>
+
+<div class="topic">
+  <h3>Market Capitalisation</h3>
+  <p>Market capitalisation (market cap) is the <strong>total market value of a company</strong>.</p>
+  <div class="formula">Market Cap = Current Share Price × Total Number of Shares Outstanding</div>
+  <div class="example-box">
+    <div class="ex-label">Example</div>
+    If Reliance has 676 crore shares outstanding, and each share trades at ₹2,800:<br>
+    Market Cap = 676 crore × ₹2,800 = ₹18,92,800 crore ≈ ₹19 lakh crore (approximately $230 billion)
+  </div>
+  <table>
+    <tr><th>Category</th><th>Market Cap</th><th>Examples</th><th>Characteristics</th></tr>
+    <tr><td>Large-cap</td><td>Above ₹20,000 crore</td><td>Reliance, TCS, HDFC Bank, Infosys</td><td>Stable, less risky, lower returns</td></tr>
+    <tr><td>Mid-cap</td><td>₹5,000–₹20,000 crore</td><td>Trent, Mphasis, Crompton</td><td>Moderate risk and return</td></tr>
+    <tr><td>Small-cap</td><td>Below ₹5,000 crore</td><td>Smaller regional companies</td><td>High risk, high potential return</td></tr>
+  </table>
+  <div class="interview-qa">
+    <div class="iq-question">What is market capitalisation? What is the difference between large-cap and small-cap?</div>
+    <div class="iq-answer">Market capitalisation is the total market value of all outstanding shares of a company, calculated as share price multiplied by number of shares. Large-cap companies (like Reliance, TCS) have market caps above ₹20,000 crore — they are established, stable, and less volatile. Small-cap companies are smaller, more volatile, riskier, but may offer higher growth potential. SEBI classifies the top 100 companies by market cap as large-cap, 101–250 as mid-cap, and the rest as small-cap.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Bull Market vs Bear Market</h3>
+  <p><strong>Bull Market:</strong> A period of rising stock prices, typically 20%+ rise from recent lows, accompanied by economic optimism. A bull "charges forward and upward."<br>
+  <strong>Bear Market:</strong> A period of falling stock prices, typically 20%+ decline from recent highs, accompanied by pessimism. A bear "swipes downward with its paw."</p>
+  <div class="example-box">
+    <div class="ex-label">Real Example</div>
+    India experienced a massive bull market from 2020 lows (Sensex at ~25,000) to the 2024 highs (~85,000). The COVID crash of March 2020 was a bear market — Sensex fell ~40% in weeks.
+  </div>
+  <div class="interview-qa">
+    <div class="iq-question">What is the difference between a bull market and a bear market?</div>
+    <div class="iq-answer">A bull market is a period of sustained price increases — generally defined as a 20%+ rise — driven by economic optimism, strong corporate earnings, and investor confidence. A bear market is the opposite: a 20%+ sustained decline, driven by economic slowdowns, poor earnings, or external shocks. The terms come from how each animal attacks — a bull thrusts upward, a bear swipes downward.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Trading vs Investing</h3>
+  <table>
+    <tr><th>Aspect</th><th>Trading</th><th>Investing</th></tr>
+    <tr><td>Time horizon</td><td>Minutes to months</td><td>Years to decades</td></tr>
+    <tr><td>Basis</td><td>Technical charts, price patterns</td><td>Company fundamentals, business quality</td></tr>
+    <tr><td>Goal</td><td>Profit from short-term price movements</td><td>Wealth creation through company growth</td></tr>
+    <tr><td>Risk</td><td>Higher (more frequency = more chances for loss)</td><td>Lower over long term</td></tr>
+    <tr><td>Famous practitioners</td><td>Day traders, swing traders</td><td>Warren Buffett, Rakesh Jhunjhunwala</td></tr>
+  </table>
+</div>
+
+<div class="topic">
+  <h3>Dividends, Bonus Shares, Stock Splits, Rights Issue, Buybacks</h3>
+  <p><strong>Dividend:</strong> A share of profits paid to shareholders, usually as a fixed amount per share. Example: "Infosys declares ₹20 dividend per share."</p>
+  <p><strong>Bonus Shares:</strong> Free additional shares given to existing shareholders. Example: "1:1 bonus" means for every share you hold, you get one more free. Your total shares double but share price halves — so net value stays same.</p>
+  <p><strong>Stock Split:</strong> Dividing each share into multiple shares. Example: A 2:1 split of a ₹1,000 share gives you 2 shares at ₹500 each. Done to improve affordability and liquidity.</p>
+  <p><strong>Rights Issue:</strong> A company offers additional shares to existing shareholders at a discounted price, before offering to the public. Shareholders have the "right" to buy more.</p>
+  <p><strong>Buyback:</strong> A company buys back its own shares from the market, reducing total shares outstanding. This increases EPS and signals that management thinks the stock is undervalued.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is a stock split? Why would a company do it?</div>
+    <div class="iq-answer">A stock split divides existing shares into multiple shares. For example, in a 10:1 split, each ₹1,000 share becomes 10 shares of ₹100 each. The company's total market cap remains the same, but the price per share drops. Companies do splits primarily to improve the stock's liquidity — a lower price makes the stock accessible to more retail investors, increasing trading volume. MRF, priced above ₹1 lakh per share, is a famous example of a company that has never split its shares.</div>
+  </div>
+</div>
+
+<!-- ==============================
+     SECTION 2: SENSEX & NIFTY
+     ============================== -->
+<div id="s2" class="section-header">
+  <div class="section-number">Section 02</div>
+  <h2>Sensex &amp; Nifty</h2>
+</div>
+
+<div class="topic">
+  <h3>What is Sensex?</h3>
+  <p>Sensex stands for <strong>Sensitive Index</strong>. It is the benchmark index of the <strong>Bombay Stock Exchange (BSE)</strong>, comprising the <strong>30 largest and most actively traded stocks</strong> on the BSE.</p>
+  <p><strong>History:</strong> Sensex was launched on January 1, 1986, with a base value of 100. The base year was 1978-79. It crossed 1,000 for the first time in 1990, 10,000 in 2006, and 80,000 in 2024.</p>
+  <div class="callout gold">
+    <strong>Key Formula:</strong> Sensex is calculated using the Free-Float Market Capitalisation method. The index value = (Current Free-Float Market Cap of 30 stocks / Base Market Cap) × Base Index Value (100)
+  </div>
+  <div class="interview-qa">
+    <div class="iq-question">What is Sensex?</div>
+    <div class="iq-answer">Sensex, short for Sensitive Index, is the benchmark stock index of the Bombay Stock Exchange. It tracks the performance of 30 financially strong and well-established companies across various sectors of the Indian economy. Launched in 1986 with a base of 100, it is calculated using the free-float market capitalisation method. When Sensex rises, it generally means the overall market is performing well. It serves as a barometer of India's economic health.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>What is Nifty 50?</h3>
+  <p>Nifty 50 is the benchmark index of the <strong>National Stock Exchange (NSE)</strong>, comprising the <strong>50 largest and most liquid stocks</strong> listed on the NSE.</p>
+  <p><strong>History:</strong> Nifty was launched on April 22, 1996, with a base of 1,000 (base year: November 3, 1995). "Nifty" = NSE + Fifty. It crossed 10,000 in 2017, 20,000 in 2023, and 26,000 in 2024.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is Nifty 50?</div>
+    <div class="iq-answer">Nifty 50 is the flagship benchmark index of the National Stock Exchange of India. It represents the weighted average of 50 of India's largest and most liquid companies across 13 sectors. Managed by NSE Indices Limited, it serves as the standard for tracking Indian equity market performance. The name "Nifty" combines "NSE" and "Fifty." Financial products like index mutual funds, ETFs, and F&O contracts are built around Nifty.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Sensex vs Nifty: Key Differences</h3>
+  <table>
+    <tr><th>Feature</th><th>Sensex</th><th>Nifty 50</th></tr>
+    <tr><td>Exchange</td><td>BSE (Bombay Stock Exchange)</td><td>NSE (National Stock Exchange)</td></tr>
+    <tr><td>Number of stocks</td><td>30</td><td>50</td></tr>
+    <tr><td>Launched</td><td>1986 (base year: 1978-79)</td><td>1996 (base year: 1995)</td></tr>
+    <tr><td>Base value</td><td>100</td><td>1,000</td></tr>
+    <tr><td>Methodology</td><td>Free-float market cap</td><td>Free-float market cap</td></tr>
+    <tr><td>Managed by</td><td>BSE</td><td>NSE Indices Limited</td></tr>
+    <tr><td>F&O contracts</td><td>Less popular</td><td>Most F&O contracts based on Nifty</td></tr>
+  </table>
+</div>
+
+<div class="topic">
+  <h3>Free-Float Market Capitalisation</h3>
+  <p>Not all shares of a company are available for public trading. Promoters (founders), government, and strategic investors hold shares they rarely sell. <strong>Free-float</strong> refers to shares actually available to the general public for trading.</p>
+  <div class="formula">Free-Float Market Cap = Share Price × Number of Freely Tradeable Shares</div>
+  <div class="example-box">
+    <div class="ex-label">Example</div>
+    Suppose a company has 100 crore shares. The promoter holds 60 crore shares (not traded). Only 40 crore shares float freely in the market. If price = ₹500:<br>
+    Total Market Cap = 100 crore × ₹500 = ₹50,000 crore<br>
+    Free-Float Market Cap = 40 crore × ₹500 = ₹20,000 crore
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Why Reliance, HDFC Bank, Infosys, TCS Dominate Indices</h3>
+  <p>Indices are weighted by free-float market capitalisation. These companies have enormous market caps and good free-float percentages, so their weight in the index is high. If Reliance has a 12% weight in Nifty, a 5% rise in Reliance alone will push Nifty up by 0.6%. This is why market watchers track these "heavyweight" stocks closely.</p>
+  <p><strong>Top Nifty Weightages (approximate):</strong> Reliance Industries (~12%), HDFC Bank (~12%), ICICI Bank (~8%), Infosys (~7%), TCS (~6%), Bajaj Finance (~5%). Together, just these 5-6 companies can move the index significantly.</p>
+</div>
+
+<!-- ==============================
+     SECTION 3: STOCK EXCHANGES
+     ============================== -->
+<div id="s3" class="section-header">
+  <div class="section-number">Section 03</div>
+  <h2>Stock Exchanges</h2>
+</div>
+
+<div class="topic">
+  <h3>BSE — Bombay Stock Exchange</h3>
+  <p>Founded in <strong>1875</strong>, BSE is Asia's oldest stock exchange, located on Dalal Street, Mumbai. Originally called the "Native Share & Stock Brokers Association." It has over 5,000 listed companies — more than any exchange in the world by number of listings.</p>
+  <p>BSE's market index is Sensex. BSE trading was initially physical (open outcry), transitioning to electronic trading in 1995.</p>
+</div>
+
+<div class="topic">
+  <h3>NSE — National Stock Exchange</h3>
+  <p>Founded in <strong>1992</strong>, the NSE was created by the Government of India to introduce fully electronic trading and increase transparency. Before NSE, stock trading was manual, opaque, and prone to manipulation.</p>
+  <p>NSE introduced screen-based, order-matching trading — removing the need for physical presence on a trading floor. By 2000, NSE became the world's largest stock exchange by number of trades. Today, NSE handles ~90% of India's equity trading volume. Index: Nifty 50.</p>
+  <div class="interview-qa">
+    <div class="iq-question">Why was NSE created? Why is it more popular than BSE in trading volume?</div>
+    <div class="iq-answer">NSE was established in 1992 by the Government of India to reform the stock market — introducing transparency, electronic trading, and standardised settlement. BSE was manual, dominated by brokers, and prone to manipulation. NSE's fully computerised order-matching system gave every investor, regardless of location, equal access. Today, NSE handles around 90% of India's equity trading volume because of its superior technology, tighter spreads, and being the primary venue for F&O trading (futures and options on Nifty).</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Role of SEBI</h3>
+  <p>SEBI (Securities and Exchange Board of India) is the <strong>regulator</strong> of capital markets, established in 1988 and given statutory powers in 1992 via the SEBI Act.</p>
+  <p><strong>SEBI's key functions:</strong></p>
+  <ul style="padding-left:1.5rem; margin: 0.5rem 0; font-size:0.92rem;">
+    <li>Protects investor interests</li>
+    <li>Regulates and develops the securities market</li>
+    <li>Prevents insider trading, price manipulation, and fraud</li>
+    <li>Registers and regulates stockbrokers, mutual funds, FIIs</li>
+    <li>Approves IPOs (companies must file offer documents with SEBI)</li>
+    <li>Imposes penalties on rule violators</li>
+  </ul>
+  <div class="analogy">SEBI is to the stock market what the RBI is to banks — it makes the rules, supervises players, and punishes cheaters.</div>
+  <div class="interview-qa">
+    <div class="iq-question">What is SEBI? Why is it important?</div>
+    <div class="iq-answer">SEBI stands for Securities and Exchange Board of India, established under the SEBI Act of 1992. It is the apex regulator for India's capital markets. SEBI protects investors from fraud, ensures transparent and fair markets, regulates market intermediaries like brokers and mutual funds, and approves IPO applications. For example, before Zomato could list on NSE, it had to file a DRHP (Draft Red Herring Prospectus) with SEBI. SEBI has the power to investigate and impose fines — it has penalised companies for insider trading and market manipulation.</div>
+  </div>
+</div>
+
+<!-- ==============================
+     SECTION 4: MARKET PARTICIPANTS
+     ============================== -->
+<div id="s4" class="section-header">
+  <div class="section-number">Section 04</div>
+  <h2>Market Participants</h2>
+</div>
+
+<div class="topic">
+  <h3>Key Market Participants</h3>
+  <p><strong>Retail Investors:</strong> Individuals investing their own savings. They form the largest group by number but not by value.</p>
+  <p><strong>Institutional Investors:</strong> Large organisations investing on behalf of others — mutual funds, insurance companies, pension funds.</p>
+  <p><strong>FIIs (Foreign Institutional Investors) / FPIs (Foreign Portfolio Investors):</strong> Foreign entities investing in Indian markets — JPMorgan, BlackRock, Goldman Sachs. When FIIs buy, markets tend to rise. When they sell ("FII outflow"), markets fall.</p>
+  <p><strong>DIIs (Domestic Institutional Investors):</strong> Indian institutions — LIC, SBI Mutual Fund, HDFC Mutual Fund. Often they buy when FIIs sell, providing market stability.</p>
+  <p><strong>Mutual Funds:</strong> Pool money from thousands of investors and deploy it professionally across stocks and bonds. SIP inflows have made Indian mutual funds powerful market participants.</p>
+  <p><strong>Market Makers:</strong> Entities that always quote a buy and sell price for a security, ensuring liquidity even when trading is thin.</p>
+  <p><strong>Brokers:</strong> Intermediaries who execute buy/sell orders on behalf of investors. Zerodha, Groww, Upstox, HDFC Securities are popular Indian brokers.</p>
+  <p><strong>Depository Participants (DPs):</strong> Agents of NSDL or CDSL who maintain your demat account. Banks like SBI, HDFC, ICICI and brokers like Zerodha act as DPs.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What are FIIs and DIIs? How do they affect the market?</div>
+    <div class="iq-answer">FIIs (Foreign Institutional Investors) or FPIs (Foreign Portfolio Investors) are foreign entities — like global funds, insurance companies, and hedge funds — that invest in Indian securities. When FIIs bring in dollars to buy Indian stocks, demand rises and markets go up. When they withdraw (FII outflow), markets fall and the rupee also weakens. DIIs (Domestic Institutional Investors) are Indian institutions like LIC, mutual funds, and pension funds. They often counterbalance FII selling by buying during dips, providing market stability. This FII-DII dynamic is closely watched by market analysts daily.</div>
+  </div>
+</div>
+
+<!-- ==============================
+     SECTION 5: DEMAT & TRADING
+     ============================== -->
+<div id="s5" class="section-header">
+  <div class="section-number">Section 05</div>
+  <h2>Demat &amp; Trading</h2>
+</div>
+
+<div class="topic">
+  <h3>What is a Demat Account?</h3>
+  <p>Demat stands for <strong>Dematerialised</strong>. Before demat, shares existed as physical paper certificates — which could be forged, lost, or stolen. Today, all shares are held electronically in a demat account, like how money is stored digitally in a bank account.</p>
+  <div class="analogy">A demat account is like a bank account for shares. Just as a bank account holds your money electronically, a demat account holds your stocks, bonds, and mutual fund units electronically.</div>
+  <p><strong>Demat vs Trading Account:</strong> A <em>demat account</em> stores your securities. A <em>trading account</em> is used to place buy/sell orders. You need both — the trading account is the door, the demat account is the storage room.</p>
+  <div class="interview-qa">
+    <div class="iq-question">Why do we need a demat account? Why can't stocks simply be stored like cash?</div>
+    <div class="iq-answer">Before demat accounts existed, shares were physical paper certificates — cumbersome to transfer, prone to forgery, loss, and theft. The 1992 Harshad Mehta scam partly exploited this paper-based system. SEBI mandated dematerialisation in 1996. Now, shares are held electronically in demat accounts maintained by depositories (NSDL/CDSL). Cash can be stored physically because it's a fungible commodity, but shares are specific ownership records that must be precisely tracked and transferred — making electronic storage essential for accuracy, speed, and security.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>NSDL and CDSL</h3>
+  <p><strong>NSDL (National Securities Depository Limited):</strong> Established in 1996, promoted by NSE. India's first depository. Holds the majority of demat accounts by value.<br>
+  <strong>CDSL (Central Depository Services Limited):</strong> Established in 1999, promoted by BSE. More demat accounts by number. CDSL is a publicly listed company on BSE.</p>
+  <p><strong>Settlement Cycle:</strong> After you buy shares, you receive them in your demat account in T+1 days (T = trade day). India moved from T+2 to T+1 settlement in 2023, becoming one of the fastest in the world.</p>
+</div>
+
+<!-- ==============================
+     SECTION 6: BONDS & FIXED INCOME
+     ============================== -->
+<div id="s6" class="section-header">
+  <div class="section-number">Section 06</div>
+  <h2>Bonds &amp; Fixed Income</h2>
+</div>
+
+<div class="topic">
+  <h3>What is a Bond?</h3>
+  <p>A bond is a <strong>debt instrument</strong> — when you buy a bond, you are <em>lending money</em> to the issuer (government or company) who promises to pay you regular interest (called coupon) and return your principal at maturity.</p>
+  <div class="analogy">A bond is like giving your friend a formal loan. "I'll give you ₹1,000 today. You pay me ₹80 every year for 5 years, and return my ₹1,000 at the end." This ₹80 is the coupon, ₹1,000 is the face value (principal), and 5 years is the maturity period.</div>
+  <p><strong>Stocks vs Bonds:</strong> Stocks give ownership; bonds give creditor status. Stockholders are owners; bondholders are lenders. In case of bankruptcy, bondholders are paid before stockholders.</p>
+  <div class="interview-qa">
+    <div class="iq-question">Why would anyone buy a bond instead of a stock?</div>
+    <div class="iq-answer">Bonds offer predictable, fixed income — ideal for risk-averse investors like retirees or institutions. While stocks can give higher returns, they are volatile and don't guarantee income. Government bonds (G-Secs) are essentially risk-free since the government can always print money to repay. Bonds also provide portfolio diversification — when stocks fall during recessions, bonds often rise (investors flee to safety). Insurance companies and pension funds are legally required to hold large proportions of bonds.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Types of Bonds</h3>
+  <p><strong>Government Securities (G-Secs):</strong> Bonds issued by the Government of India. Completely safe — the government can always print money. Used by RBI for monetary policy (Open Market Operations).</p>
+  <p><strong>Treasury Bills (T-Bills):</strong> Short-term government debt (91 days, 182 days, 364 days). Issued at a discount and redeemed at face value. No coupon — the profit is the difference between issue price and face value.</p>
+  <p><strong>Corporate Bonds:</strong> Issued by companies. Higher coupon than government bonds (to compensate for higher risk). Rated by agencies like CRISIL, CARE, ICRA.</p>
+  <p><strong>Zero Coupon Bonds:</strong> Pay no periodic interest. Sold at a deep discount and redeemed at face value. The return = the difference between purchase price and face value.</p>
+  <div class="example-box">
+    <div class="ex-label">Zero Coupon Bond Numerical</div>
+    A zero coupon bond with face value ₹1,000 is sold for ₹750 today, maturing in 5 years.<br>
+    Your return = ₹1,000 − ₹750 = ₹250 over 5 years (≈ 5.9% per year approximately).
+    No interest is paid during the 5 years — only the ₹1,000 at the end.
+  </div>
+  <div class="interview-qa">
+    <div class="iq-question">What is a zero coupon bond?</div>
+    <div class="iq-answer">A zero coupon bond pays no periodic interest (no coupons). Instead, it is issued at a price significantly below its face value and redeemed at face value on maturity. The investor's return comes entirely from this price appreciation. For example, if a ₹1,000 bond maturing in 10 years is sold for ₹558 today, the investor earns approximately 6% annually even without receiving any cash until maturity. T-Bills are a common example of zero coupon instruments. They appeal to investors who want predictable terminal value without reinvestment risk.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Coupon Rate, Yield, and Yield to Maturity (YTM)</h3>
+  <div class="formula">Coupon Rate = (Annual Coupon Payment / Face Value) × 100</div>
+  <div class="formula">Current Yield = (Annual Coupon / Current Market Price) × 100</div>
+  <p><strong>Yield to Maturity (YTM):</strong> The total return you earn if you hold the bond until maturity, accounting for coupon payments AND the difference between purchase price and face value.</p>
+  <p><strong>Inverse relationship:</strong> When bond prices rise, yields fall. When bond prices fall, yields rise. Why? If a bond pays ₹80/year and you bought it for ₹1,000, yield = 8%. If the market price rises to ₹1,100, yield = 80/1100 = 7.27%. Same coupon, higher price = lower yield.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is the difference between coupon rate and yield?</div>
+    <div class="iq-answer">The coupon rate is fixed — it is the interest rate declared by the issuer, calculated on the face value of the bond. It never changes. Yield, however, changes with the market price of the bond. If a bond with a face value of ₹1,000 and a coupon rate of 8% (paying ₹80/year) is trading at ₹900 in the market, its current yield is 80/900 = 8.89%. Yield reflects the actual return you'll earn given today's market price, not the original face value. Yield to Maturity (YTM) goes further — it includes all coupon payments plus any capital gain/loss at maturity.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Credit Rating</h3>
+  <p>Credit rating agencies assess the creditworthiness of bond issuers. In India: CRISIL, ICRA, CARE. Globally: Moody's, S&amp;P, Fitch.</p>
+  <table>
+    <tr><th>Rating (CRISIL)</th><th>Meaning</th></tr>
+    <tr><td>AAA</td><td>Highest safety — almost no risk of default</td></tr>
+    <tr><td>AA, A</td><td>High to adequate safety</td></tr>
+    <tr><td>BBB</td><td>Moderate safety</td></tr>
+    <tr><td>BB, B</td><td>Inadequate safety — speculative</td></tr>
+    <tr><td>C, D</td><td>High risk / already defaulted</td></tr>
+  </table>
+  <p>Government securities are implicitly AAA. Higher-rated bonds offer lower yields; lower-rated bonds (junk bonds) must offer higher yields to attract investors — this extra yield is called the <em>credit spread</em>.</p>
+</div>
+
+<!-- ==============================
+     SECTION 7: BANKING BASICS
+     ============================== -->
+<div id="s7" class="section-header">
+  <div class="section-number">Section 07</div>
+  <h2>Banking Basics</h2>
+</div>
+
+<div class="topic">
+  <h3>RBI — The Reserve Bank of India</h3>
+  <p>Established: <strong>April 1, 1935</strong> under the RBI Act, 1934. Nationalised in 1949. Headquartered in Mumbai. Current Governor: <strong>Sanjay Malhotra</strong> (as of 2025).</p>
+  <p><strong>Key functions of RBI:</strong> Issues currency notes (except ₹1 coin/note), acts as banker to the government, regulates commercial banks, controls monetary policy, manages foreign exchange reserves, manages public debt.</p>
+  <div class="analogy">RBI is the banker's bank. Just as you keep your money in SBI, SBI keeps its reserve money with RBI. RBI sets the "rules of the game" for all banks in India.</div>
+</div>
+
+<div class="topic">
+  <h3>Key RBI Policy Rates</h3>
+  <table>
+    <tr><th>Tool</th><th>Definition</th><th>Impact</th></tr>
+    <tr><td><strong>Repo Rate</strong></td><td>Rate at which RBI lends money to commercial banks (short-term)</td><td>↑ Repo Rate → loans costlier → people borrow less → demand falls → inflation controlled</td></tr>
+    <tr><td><strong>Reverse Repo Rate</strong></td><td>Rate at which RBI borrows from commercial banks (banks park money with RBI)</td><td>↑ Reverse Repo → banks prefer to park with RBI → less credit in economy</td></tr>
+    <tr><td><strong>CRR</strong> (Cash Reserve Ratio)</td><td>% of deposits that banks must keep with RBI as cash (earns no interest)</td><td>↑ CRR → banks have less money to lend → tightens money supply</td></tr>
+    <tr><td><strong>SLR</strong> (Statutory Liquidity Ratio)</td><td>% of deposits that banks must maintain as liquid assets (gold, G-Secs)</td><td>↑ SLR → banks must buy more G-Secs → less money for other lending</td></tr>
+    <tr><td><strong>Bank Rate</strong></td><td>Rate at which RBI lends to banks for long term</td><td>Affects long-term borrowing costs</td></tr>
+  </table>
+  <div class="example-box">
+    <div class="ex-label">Practical Example — RBI Rate Hike</div>
+    In 2022-23, India's inflation crossed 7%. RBI raised repo rate from 4% to 6.5% (250 basis points). This made home loans, car loans, and business loans costlier. People borrowed less, spent less, reducing demand, which gradually pulled inflation down.
+  </div>
+  <div class="interview-qa">
+    <div class="iq-question">What is the repo rate? Why does RBI increase interest rates?</div>
+    <div class="iq-answer">The repo rate is the rate at which the Reserve Bank of India lends money to commercial banks for short periods (usually overnight). RBI increases the repo rate as a tool to control inflation. When inflation rises — meaning prices are rising too fast — RBI hikes the repo rate. This makes borrowing costlier for banks, who then charge higher rates on loans to customers. Expensive loans mean people borrow and spend less. Lower demand for goods and services puts downward pressure on prices, controlling inflation. RBI's mandate, as of 2016, is flexible inflation targeting — keeping inflation at 4% (±2%).</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Monetary Policy &amp; Inflation Targeting</h3>
+  <p><strong>Monetary Policy Committee (MPC):</strong> A 6-member committee (3 from RBI, 3 external members) that meets every 2 months to decide on interest rates. Chaired by the RBI Governor.</p>
+  <p><strong>Flexible Inflation Targeting:</strong> Since 2016, RBI's mandate is to maintain CPI inflation at <strong>4% (±2%)</strong> — meaning between 2% and 6%. If inflation breaches 6% for 3 consecutive quarters, RBI must explain to the government.</p>
+  <p><strong>CPI vs WPI:</strong> CPI (Consumer Price Index) tracks prices of goods/services paid by urban consumers. WPI (Wholesale Price Index) tracks prices at the wholesale level. India uses CPI as the official inflation benchmark.</p>
+</div>
+
+<!-- ==============================
+     SECTION 8: MUTUAL FUNDS
+     ============================== -->
+<div id="s8" class="section-header">
+  <div class="section-number">Section 08</div>
+  <h2>Mutual Funds</h2>
+</div>
+
+<div class="topic">
+  <h3>What are Mutual Funds?</h3>
+  <p>A mutual fund is a <strong>pool of money collected from many investors</strong>, managed by a professional fund manager, and invested in stocks, bonds, or other securities according to a defined objective.</p>
+  <div class="analogy">Imagine 1,000 people each contribute ₹10,000 to a pool of ₹1 crore. A professional fund manager invests this pool across 50 companies. Each person owns a proportional share of this pool — that's a mutual fund.</div>
+  <p><strong>NAV (Net Asset Value):</strong> The per-unit value of a mutual fund, calculated daily.<br>
+  <span class="formula" style="display:inline-block; margin-top:0.3rem;">NAV = (Total Assets − Total Liabilities) / Number of Units Outstanding</span></p>
+  <p>When you invest, you buy units at NAV. When you redeem, you sell units at prevailing NAV. If NAV rises from ₹100 to ₹150, your investment grew 50%.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is NAV? How is it different from a share price?</div>
+    <div class="iq-answer">NAV (Net Asset Value) is the per-unit value of a mutual fund, calculated as total fund assets minus liabilities divided by the number of units outstanding. It is calculated once per day after market closing. A share price, by contrast, changes second by second based on real-time supply and demand. NAV doesn't indicate cheapness or expensiveness — a fund with NAV of ₹500 is not more expensive than one with NAV of ₹20. What matters is the return (% growth) since you invested, not the absolute NAV level.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Types of Mutual Funds</h3>
+  <table>
+    <tr><th>Type</th><th>Invests in</th><th>Risk</th><th>Suitable for</th></tr>
+    <tr><td>Equity Fund</td><td>Stocks</td><td>High</td><td>Long-term wealth creation (5+ years)</td></tr>
+    <tr><td>Debt Fund</td><td>Bonds, T-Bills, G-Secs</td><td>Low-Medium</td><td>Short-term, income-seeking investors</td></tr>
+    <tr><td>Hybrid Fund</td><td>Mix of equity + debt</td><td>Moderate</td><td>Balanced risk appetite</td></tr>
+    <tr><td>Index Fund</td><td>Mirror an index (Nifty/Sensex)</td><td>Market risk</td><td>Low-cost, passive investing</td></tr>
+    <tr><td>ETF (Exchange Traded Fund)</td><td>Index-mirroring, traded on exchange</td><td>Market risk</td><td>Real-time trading of diversified portfolio</td></tr>
+    <tr><td>ELSS</td><td>Equity (tax-saving)</td><td>High</td><td>Tax savers under Sec 80C</td></tr>
+    <tr><td>Liquid Fund</td><td>Very short-term debt (up to 91 days)</td><td>Very low</td><td>Parking surplus cash</td></tr>
+  </table>
+</div>
+
+<div class="topic">
+  <h3>SIP — Systematic Investment Plan</h3>
+  <p>SIP is a method of investing a <strong>fixed amount at regular intervals</strong> (monthly, weekly) in a mutual fund, regardless of market conditions. It's not a product — it's a way of investing.</p>
+  <p><strong>Benefits:</strong> (1) Rupee cost averaging — you buy more units when prices are low, fewer when high, reducing average cost. (2) Compounding — long-term reinvestment multiplies wealth. (3) Discipline — removes emotion from investing. (4) Small starting amounts (as low as ₹500/month).</p>
+  <div class="interview-qa">
+    <div class="iq-question">SIP vs lump sum investment — which is better?</div>
+    <div class="iq-answer">It depends on market conditions and individual circumstances. SIP is better for most retail investors because it eliminates the need to "time the market" — through rupee cost averaging, you automatically buy more units during market dips. It also instills financial discipline. Lump sum investment is better if you have a large amount available and the market is at a clear low (though this is difficult to predict). Research shows that for most investors over long periods, SIPs produce comparable returns to lump sum while significantly reducing stress and timing risk.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Active vs Passive Funds</h3>
+  <table>
+    <tr><th>Aspect</th><th>Active Fund</th><th>Passive Fund (Index Fund/ETF)</th></tr>
+    <tr><td>Management</td><td>Fund manager actively picks stocks</td><td>Mirrors an index mechanically</td></tr>
+    <tr><td>Expense Ratio</td><td>1–2.5%</td><td>0.05–0.5%</td></tr>
+    <tr><td>Goal</td><td>Beat the benchmark (alpha)</td><td>Match the benchmark</td></tr>
+    <tr><td>Risk</td><td>Manager's judgement risk</td><td>Only market risk</td></tr>
+    <tr><td>Performance</td><td>Majority fail to beat index long-term</td><td>Consistent market returns</td></tr>
+  </table>
+  <p>In India, passive investing (index funds, ETFs) has grown rapidly as evidence shows most active funds fail to consistently beat Nifty after expenses.</p>
+</div>
+
+<!-- ==============================
+     SECTION 9: COMPANY FINANCIALS
+     ============================== -->
+<div id="s9" class="section-header">
+  <div class="section-number">Section 09</div>
+  <h2>Company Financials</h2>
+</div>
+
+<div class="topic">
+  <h3>The Three Financial Statements</h3>
+  <p>Every listed company publishes three core financial statements every quarter:</p>
+  <p><strong>1. Income Statement (P&L):</strong> Shows revenues and expenses over a period — tells you if the company made a profit.<br>
+  <strong>2. Balance Sheet:</strong> Shows assets, liabilities, and equity at a point in time — tells you what the company owns and owes.<br>
+  <strong>3. Cash Flow Statement:</strong> Shows actual cash inflows and outflows — tells you if the company actually has the cash its profits suggest.</p>
+</div>
+
+<div class="topic">
+  <h3>Mini Income Statement — A Worked Example</h3>
+  <p>Let's use a fictional company "Ravi's Apparel Ltd." for FY2024:</p>
+  <div class="financial-statement">
+    <div class="fs-header">RAVI'S APPAREL LTD — Income Statement FY2024 (₹ in Crore)</div>
+    <div class="fs-row"><span>Revenue (Sales)</span><span>1,000</span></div>
+    <div class="fs-row indent"><span>Less: Cost of Goods Sold (COGS)</span><span>(600)</span></div>
+    <div class="fs-row subtotal"><span>Gross Profit</span><span>400</span></div>
+    <div class="fs-row indent"><span>Less: Operating Expenses (Salaries, Rent, Utilities)</span><span>(150)</span></div>
+    <div class="fs-row subtotal"><span>EBITDA (Earnings Before Interest, Tax, Depreciation, Amortisation)</span><span>250</span></div>
+    <div class="fs-row indent"><span>Less: Depreciation &amp; Amortisation</span><span>(50)</span></div>
+    <div class="fs-row subtotal"><span>EBIT (Operating Profit)</span><span>200</span></div>
+    <div class="fs-row indent"><span>Less: Interest on Debt</span><span>(30)</span></div>
+    <div class="fs-row subtotal"><span>EBT (Profit Before Tax)</span><span>170</span></div>
+    <div class="fs-row indent"><span>Less: Corporate Tax (25%)</span><span>(42.5)</span></div>
+    <div class="fs-row total"><span>PAT — Profit After Tax (Net Profit)</span><span>127.5</span></div>
+  </div>
+  <p><strong>Revenue:</strong> Total money earned from selling goods/services. <em>Top line.</em><br>
+  <strong>EBITDA:</strong> Operational profitability before non-cash charges (depreciation) and financing (interest, tax). A popular measure of business health.<br>
+  <strong>PAT (Profit After Tax):</strong> The "bottom line" — actual profit belonging to shareholders after all deductions.</p>
+  <div class="interview-qa">
+    <div class="iq-question">What is the difference between revenue and profit?</div>
+    <div class="iq-answer">Revenue (or turnover) is the total amount a company earns from its core business activities — like total sales. It's called the "top line." Profit is what remains after subtracting all costs, expenses, interest, and taxes from revenue. It's the "bottom line." A company can have high revenue but low or even negative profit if costs are too high. For example, Amazon for years had massive revenue but minimal profit because it reinvested aggressively into growth. Revenue tells you the scale of business; profit tells you whether the business is financially sustainable.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Balance Sheet Basics</h3>
+  <p><strong>Assets:</strong> What the company owns — cash, inventory, buildings, machinery, investments.<br>
+  <span style="color:var(--muted); font-size:0.9rem;">Current Assets (convertible to cash within 1 year): cash, debtors, inventory<br>
+  Non-current Assets (long-term): land, buildings, equipment, goodwill</span></p>
+  <p><strong>Liabilities:</strong> What the company owes — loans, accounts payable, bonds.<br>
+  <span style="color:var(--muted); font-size:0.9rem;">Current Liabilities (due within 1 year): creditors, short-term loans<br>
+  Non-current Liabilities: long-term debt, deferred taxes</span></p>
+  <p><strong>Shareholders' Equity (Net Worth):</strong> What's left for owners = Assets − Liabilities</p>
+  <div class="formula">Assets = Liabilities + Shareholders' Equity (The Fundamental Accounting Equation)</div>
+</div>
+
+<!-- ==============================
+     SECTION 10: KEY RATIOS
+     ============================== -->
+<div id="s10" class="section-header">
+  <div class="section-number">Section 10</div>
+  <h2>Important Financial Ratios</h2>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">EPS — Earnings Per Share</span>
+    <span class="tag">Profitability</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">EPS = Profit After Tax / Total Number of Outstanding Shares</div>
+    <p><strong>Interpretation:</strong> Profit attributable to each share. Higher EPS = more profitable per share.</p>
+    <p><strong>Example:</strong> Ravi's Apparel: PAT = ₹127.5 crore, Shares = 10 crore → EPS = ₹12.75 per share</p>
+    <div class="interview-qa">
+      <div class="iq-question">What is EPS and why does it matter?</div>
+      <div class="iq-answer">EPS (Earnings Per Share) is the net profit divided by the number of outstanding shares. It represents the profit attributable to each share and is a direct measure of a company's profitability per unit of ownership. Investors track EPS growth — rising EPS signals improving profitability. It is also used to calculate the P/E ratio, which is used for stock valuation. Diluted EPS also accounts for potential shares from stock options or convertible bonds, giving a more conservative picture.</div>
+    </div>
+  </div>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">P/E Ratio — Price to Earnings</span>
+    <span class="tag">Valuation</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">P/E = Market Price per Share / EPS</div>
+    <p><strong>Interpretation:</strong> How much investors pay for each rupee of earnings. A P/E of 20 means investors pay ₹20 for every ₹1 of current profit — betting on future growth.</p>
+    <p><strong>Example:</strong> If Ravi's Apparel's share trades at ₹255 and EPS = ₹12.75 → P/E = 20x</p>
+    <p><strong>High P/E:</strong> Market expects high future growth (growth stocks like Nifty IT companies typically have high P/E).<br>
+    <strong>Low P/E:</strong> May indicate undervaluation or poor growth prospects.</p>
+    <div class="interview-qa">
+      <div class="iq-question">A company has a P/E of 80. Is it expensive or cheap?</div>
+      <div class="iq-answer">A P/E of 80 is high by historical standards, but whether it's expensive depends on context. High P/E companies are those with expectations of rapid future earnings growth — technology companies like Infosys or Zomato when it first listed often trade at high P/E because investors expect earnings to grow dramatically. If a company's earnings grow to justify the P/E, it's not expensive. However, if growth disappoints, a high-P/E stock can fall sharply. Always compare P/E to industry peers and the company's own historical P/E before concluding it's cheap or expensive.</div>
+    </div>
+  </div>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">P/B Ratio — Price to Book</span>
+    <span class="tag">Valuation</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">P/B = Market Price per Share / Book Value per Share</div>
+    <p>Book Value = Total Assets − Total Liabilities (Net Worth) / Shares Outstanding</p>
+    <p><strong>Interpretation:</strong> P/B of 1 means the stock trades at exactly its book value. P/B &lt; 1 may indicate undervaluation (or serious problems). P/B &gt; 1 means market values the company above its net assets — justified if the company generates strong returns.</p>
+  </div>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">ROE — Return on Equity</span>
+    <span class="tag">Profitability</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">ROE = (Net Profit / Shareholders' Equity) × 100</div>
+    <p><strong>Interpretation:</strong> How much profit the company generates for each rupee of shareholder money. ROE of 20% means for every ₹100 of equity, the company earns ₹20. Higher ROE = better use of shareholder capital. Sustainable ROE above 15% is considered excellent in India.</p>
+    <div class="interview-qa">
+      <div class="iq-question">What is ROE and how does it differ from ROCE?</div>
+      <div class="iq-answer">ROE (Return on Equity) measures profitability relative to shareholders' equity only — it shows how effectively the company uses shareholder money. ROCE (Return on Capital Employed) measures profitability relative to total capital employed (equity + long-term debt). ROCE is considered more comprehensive because it accounts for both equity and debt capital. A company can artificially inflate ROE by taking on more debt (financial leverage), so ROCE is a better indicator of operational efficiency. Both Reliance and HDFC Bank have consistently high ROCE, which is one reason they command premium valuations.</div>
+    </div>
+  </div>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">Debt-to-Equity Ratio</span>
+    <span class="tag">Leverage</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">D/E Ratio = Total Debt / Shareholders' Equity</div>
+    <p><strong>Interpretation:</strong> How much debt the company has for every rupee of equity. D/E of 2 means for every ₹1 of owner money, there's ₹2 of borrowed money. Higher D/E = higher financial risk (more debt means more interest burden and risk of default). Different industries have different norms — capital-intensive industries (infrastructure, utilities) tolerate higher D/E than tech firms.</p>
+  </div>
+</div>
+
+<div class="ratio-card">
+  <div class="ratio-header">
+    <span class="ratio-name">Current Ratio</span>
+    <span class="tag">Liquidity</span>
+  </div>
+  <div class="ratio-body">
+    <div class="formula">Current Ratio = Current Assets / Current Liabilities</div>
+    <p><strong>Interpretation:</strong> Measures the ability to pay short-term debts with short-term assets. Ratio of 2:1 is generally considered healthy. Ratio below 1 means current liabilities exceed current assets — potential liquidity problem. Ratio too high (above 3–4) may indicate idle cash.</p>
+    <div class="interview-qa">
+      <div class="iq-question">What ratios would you check before investing in a company?</div>
+      <div class="iq-answer">Before investing, I would examine: (1) P/E ratio — to assess if the price is justified by earnings, compared to industry peers; (2) ROE/ROCE — to check if management uses capital efficiently; (3) Debt-to-Equity ratio — high debt increases financial risk, especially in downturns; (4) EPS growth trend — consistent EPS growth signals a healthy business; (5) Current ratio — to check short-term liquidity; and (6) Revenue and profit growth trends over 3–5 years. I'd also consider qualitative factors: quality of management, competitive moat, and industry tailwinds. No single ratio tells the whole story — they must be read together. (Note: This answer was actually drawn from IIM Shillong transcripts — this question appeared in real interviews.)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==============================
+     SECTION 11: MACRO IMPACT
+     ============================== -->
+<div id="s11" class="section-header">
+  <div class="section-number">Section 11</div>
+  <h2>Current Affairs &amp; Macro Impact on Markets</h2>
+</div>
+
+<div class="topic">
+  <h3>What Causes Markets to Rise or Fall?</h3>
+  <table>
+    <tr><th>Factor</th><th>Markets Rise When...</th><th>Markets Fall When...</th></tr>
+    <tr><td>Inflation</td><td>Inflation is low and stable (2–4%)</td><td>Inflation surges — increases costs, hurts margins</td></tr>
+    <tr><td>Interest Rates</td><td>RBI cuts rates — cheaper borrowing, more business activity</td><td>RBI hikes rates — expensive loans, less spending</td></tr>
+    <tr><td>GDP Growth</td><td>Strong GDP growth expected</td><td>GDP growth slows or recession feared</td></tr>
+    <tr><td>Corporate Earnings</td><td>Quarterly results beat expectations</td><td>Earnings disappoint; profits fall</td></tr>
+    <tr><td>FII Flows</td><td>FIIs buy Indian stocks (bring dollars)</td><td>FIIs sell and exit (take dollars out)</td></tr>
+    <tr><td>Crude Oil</td><td>Crude oil prices fall (India imports ~85% of oil)</td><td>Crude oil rises — inflation, trade deficit, weaker rupee</td></tr>
+    <tr><td>Elections</td><td>Stable government formed with reform agenda</td><td>Political uncertainty, hung parliament</td></tr>
+    <tr><td>Global Events</td><td>US market rises, global risk appetite high</td><td>War, pandemic, US recession fears</td></tr>
+  </table>
+</div>
+
+<div class="topic">
+  <h3>Impact of Crude Oil on India</h3>
+  <p>India imports over 85% of its crude oil needs. Crude oil is priced in USD. When oil prices rise:</p>
+  <ul style="padding-left:1.5rem; font-size:0.92rem; margin: 0.5rem 0;">
+    <li>India's import bill rises → trade deficit widens → rupee weakens</li>
+    <li>Fuel prices rise → transportation costs rise → inflation rises</li>
+    <li>Aviation, paint, chemicals, tyre industries face higher input costs → profit margins fall</li>
+    <li>Government may increase taxes or reduce subsidies to manage the burden</li>
+  </ul>
+  <p>For every $10/barrel rise in crude, India's import bill rises by ~$14–15 billion/year. This is why Sensex often falls when global crude prices spike.</p>
+</div>
+
+<div class="topic">
+  <h3>Impact of Interest Rates on Stock Markets</h3>
+  <p>Interest rates and stock markets have an <strong>inverse relationship</strong>. When RBI raises rates:</p>
+  <ul style="padding-left:1.5rem; font-size:0.92rem; margin: 0.5rem 0;">
+    <li>Borrowing costs rise → companies invest less → slower earnings growth</li>
+    <li>Fixed deposits and bonds become more attractive → investors shift from stocks to bonds</li>
+    <li>Valuation multiples (P/E) compress — future earnings are "discounted" at higher rates</li>
+    <li>Stock prices fall, especially growth stocks with distant future earnings</li>
+  </ul>
+  <p>Conversely, when RBI cuts rates (as it did in 2020 during COVID and in 2025), stocks tend to rise as money flows from low-yield deposits into equity markets.</p>
+</div>
+
+<!-- ==============================
+     SECTION 12: 100 IPM QUESTIONS
+     ============================== -->
+<div id="s12" class="section-header">
+  <div class="section-number">Section 12</div>
+  <h2>100 Most Asked IPM Finance Questions</h2>
+</div>
+
+<p style="color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem;">Compiled from IIM Indore, Rohtak, Ranchi, Shillong, Sirmaur, Kozhikode interviews and general IPM interview patterns. Questions are accompanied by model answers optimised for interview settings.</p>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q1</span>What is Sensex? What was it today?</div>
+  <div class="qa-a">Sensex is the benchmark index of BSE comprising 30 large-cap stocks, calculated using free-float market capitalisation. Launched in 1986 with a base of 100. [Always check the current value before your interview — in 2025 it hovers around 78,000–85,000.] Its movement is used as a proxy for India's economic health and investor sentiment.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q2</span>What is Nifty? How is it different from Sensex?</div>
+  <div class="qa-a">Nifty 50 is the benchmark index of NSE, comprising 50 large-cap stocks. Both are free-float market cap weighted, but Nifty has 50 stocks (vs Sensex's 30), a broader sectoral representation, and started at a base of 1,000 in 1995. NSE handles more trading volume, making Nifty more relevant for derivative trading and institutional benchmarking.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q3</span>Why do stock prices move?</div>
+  <div class="qa-a">Stock prices move based on the law of supply and demand for shares. Fundamentally, prices move due to: (1) Changes in company earnings — better than expected results push prices up; (2) Macro factors — interest rate changes, inflation, GDP data; (3) Investor sentiment — fear and greed drive short-term movements; (4) News — management changes, new product launches, regulatory actions; (5) Global events — US Federal Reserve decisions, geopolitical tensions. Long-term, prices track earnings growth; short-term, they track sentiment and news.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q4</span>How are stock prices determined?</div>
+  <div class="qa-a">Stock prices are determined by supply and demand on the stock exchange — buyers bid and sellers ask, and the exchange matches them. At a fundamental level, a stock's "fair value" equals the present value of all future cash flows. If a company is expected to grow profits strongly, investors are willing to pay more today. Market price = what buyers and sellers agree on at any given moment, which may differ from intrinsic value — creating opportunities for value investors.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q5</span>What is market capitalisation?</div>
+  <div class="qa-a">Market capitalisation is the total market value of all outstanding shares = Share Price × Total Shares Outstanding. It measures company size. Reliance Industries, with ~₹19 lakh crore market cap, is India's most valuable company. SEBI classifies top 100 by market cap as large-cap, 101-250 as mid-cap, rest as small-cap.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q6</span>What is an IPO? Why do startups issue shares?</div>
+  <div class="qa-a">An IPO is when a private company first sells shares to the public. Startups issue shares primarily to raise capital for expansion without taking debt. Additionally, IPOs provide early investors and founders an exit opportunity. Shares also give companies a "currency" for acquiring other businesses. However, going public means regulatory compliance, quarterly disclosure requirements, and short-term performance pressure.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q7</span>What is SEBI? What does it do?</div>
+  <div class="qa-a">SEBI (Securities and Exchange Board of India) is established under the SEBI Act, 1992, to regulate and develop securities markets in India. Its functions include protecting investor interests, regulating stock exchanges, brokers, mutual funds, and other intermediaries, approving IPO filings, preventing insider trading and market manipulation, and taking enforcement action against violators. SEBI is to markets what RBI is to banking.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q8</span>What is insider trading?</div>
+  <div class="qa-a">Insider trading is the buying or selling of a company's securities based on material, non-public information (MNPI). For example, if a Tata Motors executive knows the company is about to announce record profits before the public does and buys shares in advance, that's insider trading. It's illegal because it violates the principle of fair markets — not all investors have the same information. SEBI strictly prohibits this and has imposed significant penalties on violators. The Satyam scandal and several corporate insiders have been penalised in India.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q9</span>What is a bond?</div>
+  <div class="qa-a">A bond is a debt instrument where the investor (bondholder) lends money to an issuer (government or company) in exchange for periodic interest payments (coupons) and the return of the principal at maturity. Unlike a stock, a bondholder is a creditor, not an owner. In India, key bond types include G-Secs (government securities), T-Bills, and corporate bonds.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q10</span>What is a mutual fund?</div>
+  <div class="qa-a">A mutual fund pools money from multiple investors and invests it across securities (stocks, bonds, etc.) according to a defined objective, managed by a professional fund manager. Investors receive units proportional to their investment. Benefits include diversification, professional management, and accessibility with small amounts. The price of each unit is the NAV (Net Asset Value), calculated daily.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q11</span>What is a treasury bill?</div>
+  <div class="qa-a">A Treasury Bill (T-Bill) is a short-term government debt instrument issued by the Government of India through the RBI, maturing in 91, 182, or 364 days. T-Bills are zero coupon instruments — they don't pay interest. Instead, they are issued at a discount to face value. For example, a 91-day T-Bill with ₹100 face value may be issued at ₹98.40, and you receive ₹100 at maturity. They are the safest instruments in India since the government guarantees repayment.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q12</span>What is a zero coupon bond?</div>
+  <div class="qa-a">A zero coupon bond makes no periodic interest payments. It is issued at a deep discount to its face value and redeemed at face value on maturity. The difference between issue price and face value is the investor's total return. They are suitable for investors who want a known terminal payout without managing coupon reinvestment. T-Bills and certain infrastructure bonds follow this structure.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q13</span>What is a Demat account?</div>
+  <div class="qa-a">A Demat (dematerialised) account holds financial securities — stocks, bonds, ETFs — in electronic form, replacing physical share certificates. Maintained by depositories NSDL or CDSL through registered depository participants (banks, brokers). When you buy shares, they are credited to your demat account within T+1 days. To open one, you need KYC documents. A separate trading account is used to place buy/sell orders.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q14</span>What is inflation? Types of inflation?</div>
+  <div class="qa-a">Inflation is the general rise in prices over time, resulting in a fall in purchasing power of money. Key types: (1) Demand-pull inflation — too much money chasing too few goods (e.g., post-COVID spending surge); (2) Cost-push inflation — rising input costs push up prices (e.g., oil price rise causing fuel and transportation inflation); (3) Built-in (wage-price spiral) — workers demand higher wages → companies raise prices → workers demand higher wages again. India measures inflation via CPI (Consumer Price Index).</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q15</span>What is the repo rate? What is the current repo rate?</div>
+  <div class="qa-a">The repo rate is the interest rate at which RBI lends to commercial banks for short periods. It is RBI's primary tool for controlling inflation and managing money supply. As of mid-2025, RBI's repo rate is 6.00% (after rate cuts in 2025). When RBI cuts repo rate, banks can borrow cheaper, pass it on as lower loan rates, stimulating economic activity. Always check the current rate before your interview.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q16</span>Why does RBI increase interest rates?</div>
+  <div class="qa-a">RBI increases interest rates (repo rate hike) primarily to control inflation. High rates increase borrowing costs for banks and ultimately for consumers and businesses. Higher loan rates discourage borrowing and spending, reducing demand in the economy. Lower demand means businesses can't raise prices as easily, bringing inflation down. This worked during 2022-23 when RBI raised rates from 4% to 6.5% to combat post-COVID inflation that touched 7%+.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q17</span>What is the difference between BSE and NSE?</div>
+  <div class="qa-a">BSE was founded in 1875 and is Asia's oldest exchange; NSE was founded in 1992. BSE has Sensex (30 stocks); NSE has Nifty 50 (50 stocks). NSE handles ~90% of equity trading volume in India due to its superior technology and dominance in F&O trading. BSE has more listed companies by number. For most practical purposes, listed companies trade on both exchanges with minimal price difference (arbitrage keeps them aligned).</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q18</span>What happens if a company goes bankrupt?</div>
+  <div class="qa-a">Under the Insolvency and Bankruptcy Code (IBC) 2016, a bankrupt company enters a resolution process. The order of payment to creditors is: (1) Resolution costs, (2) Secured creditors (banks with collateral), (3) Unsecured creditors, (4) Government dues, (5) Shareholders (equity holders). Shareholders are last in line — they often lose most or all of their investment. This is why equity investment is riskier than lending (bonds) to the same company.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q19</span>What are government securities (G-Secs)? Why are they important?</div>
+  <div class="qa-a">G-Secs are debt instruments issued by the Government of India (central or state) to borrow from the public to fund its fiscal deficit. They are issued in auctions conducted by the RBI. G-Secs are virtually risk-free (sovereign guarantee), liquid, and widely used by banks to meet SLR requirements. They also serve as benchmarks for pricing all other fixed income securities in India. The yield on 10-year G-Secs is India's benchmark "risk-free rate."</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q20</span>What is the PE ratio? What does a high PE mean?</div>
+  <div class="qa-a">PE ratio (Price-to-Earnings) = Market Price per Share / EPS. A high PE means investors pay a premium for each rupee of current profit — usually because they expect high future growth. Nifty's historical PE averages around 18–22x. During COVID recovery, Nifty PE touched 40x. High PE doesn't automatically mean overvalued — Hindustan Unilever may deserve a high PE due to stable cash flows and brand strength. Always compare PE to the company's historical range and industry peers.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q21</span>What is the difference between investing and trading?</div>
+  <div class="qa-a">Investing is buying securities with a long-term horizon (years to decades), based on fundamental analysis of business quality and growth potential. Warren Buffett, who holds Coca-Cola shares for decades, exemplifies investing. Trading is buying/selling securities for short-term price movements (minutes to months), using technical analysis of price charts and patterns. Traders may execute dozens of trades daily; investors may not sell for years. Long-term, data consistently shows most traders underperform the index after costs and taxes, while patient investors outperform.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q22</span>What is EBITDA?</div>
+  <div class="qa-a">EBITDA stands for Earnings Before Interest, Taxes, Depreciation, and Amortisation. It measures operational profitability — how much cash the core business generates before accounting for capital structure (interest), tax, and non-cash charges (depreciation). It is widely used for comparing companies across different capital structures and tax rates. However, EBITDA can be misleading if a company has high debt (interest is a real cost) or heavy capex needs (depreciation reflects real asset wear). "EBITDA is not cash flow" is a common finance saying.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q23</span>What is the CRR?</div>
+  <div class="qa-a">CRR (Cash Reserve Ratio) is the percentage of a bank's total deposits that it must mandatorily keep with the RBI as cash reserve, earning no interest. If CRR is 4% and a bank has deposits of ₹100 crore, it must keep ₹4 crore with RBI. By raising CRR, RBI reduces money banks can lend — tightening money supply and cooling inflation. By lowering CRR, RBI enables more lending, stimulating the economy. CRR is a powerful monetary policy tool.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q24</span>What is the SLR?</div>
+  <div class="qa-a">SLR (Statutory Liquidity Ratio) is the percentage of deposits that commercial banks must maintain as liquid assets — specifically in cash, gold, or government approved securities. Currently at around 18%. SLR ensures banks always have enough liquid assets to meet sudden withdrawals and also creates a captive market for government securities. Unlike CRR, SLR-maintained assets earn returns (G-Secs pay interest).</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q25</span>What is an index fund? Is it better than an active fund?</div>
+  <div class="qa-a">An index fund passively mirrors a market index (like Nifty 50) by holding the same stocks in the same proportions. It requires no stock-picking research and charges very low expense ratios (0.1–0.3% vs 1.5–2% for active funds). Research globally shows that over 10–15 years, 80–90% of active equity funds underperform their benchmark index after expenses. This makes index funds compelling for long-term investors. However, active funds can outperform in inefficient markets or niche sectors. For most individual investors, index funds are the rational choice.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q26</span>What is the difference between a stock and a bond?</div>
+  <div class="qa-a">A stock represents ownership in a company — stockholders are part-owners who benefit from growth (capital appreciation + dividends) but bear all risks, including losing their entire investment. A bond represents debt — the bondholder is a creditor who receives fixed interest regardless of company performance and gets principal back at maturity. Stocks offer higher potential returns but higher risk; bonds offer lower, predictable returns. In bankruptcy, bondholders are paid before stockholders. Most investment portfolios hold both for balance.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q27</span>What is a dividend?</div>
+  <div class="qa-a">A dividend is a distribution of a company's profits to its shareholders, typically as cash per share. It represents shareholders' share of profits. Example: "Infosys declares ₹22 interim dividend per share." Dividends are paid from PAT. Companies are not obligated to pay dividends — many growth companies (like Amazon historically, or most Indian startups) reinvest all profits. Dividend yield = Annual Dividend per Share / Current Market Price × 100. PSU companies (ONGC, Coal India) are known for high dividend yields in India.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q28</span>What is ROE?</div>
+  <div class="qa-a">Return on Equity = Net Profit / Shareholders' Equity × 100. It measures how efficiently a company generates profits from shareholders' capital. An ROE of 20% means for every ₹100 of equity, the company earns ₹20. Companies like Asian Paints, HDFC Bank, and Nestle India consistently deliver ROE above 20%, which is one reason their stocks command premium valuations. Low ROE suggests either low profitability or inefficient capital deployment.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q29</span>What is cash flow? How is it different from profit?</div>
+  <div class="qa-a">Profit is an accounting figure that can include non-cash items (depreciation, accruals). Cash flow measures actual cash that has moved in and out of the company. A company can show accounting profit while having negative cash flow (e.g., if all sales are on credit and debtors haven't paid). Conversely, a profitable company can go bankrupt if it runs out of cash. The saying "revenue is vanity, profit is sanity, cash is reality" captures this — cash flow is the ultimate test of financial health.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q30</span>What is the difference between a merger and a joint venture?</div>
+  <div class="qa-a">A merger is when two separate companies combine to form one entity — one or both companies may cease to exist as separate entities (e.g., HDFC Ltd merging into HDFC Bank in 2023). A joint venture is when two or more companies create a new, separate entity together for a specific purpose, while both parent companies continue to exist independently (e.g., Maruti Suzuki was a JV between Maruti (GOI) and Suzuki Japan, or SBI-SBI Life). Key difference: in a merger, one/both companies dissolve; in a JV, both parents retain their independent existence. [Note: This question appeared in real IIM Shillong transcripts.]</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q31</span>What is the difference between revenue recognition and cash receipt?</div>
+  <div class="qa-a">Revenue recognition follows the accrual principle — revenue is recorded when it is earned (when goods are delivered or services rendered), not when cash is received. A company may sell goods worth ₹1 crore in March on 30-day credit terms — the ₹1 crore is recognised as revenue in March even though the cash arrives in April. This is why a company can show high revenue but low cash. Cash receipt refers to when actual cash arrives. The difference creates accounts receivable (debtors) on the balance sheet.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q32</span>What are economies of scale?</div>
+  <div class="qa-a">Economies of scale refer to the cost advantages that arise as production volume increases. As a company produces more units, fixed costs (like factory rent, machinery) are spread over more units, reducing cost per unit. For example, a car manufacturer making 10 cars spreads factory costs over 10 cars; making 10,000 cars spreads the same fixed cost over 10,000 — drastically lower cost per car. This is why large companies like Amazon can offer lower prices than small retailers — their scale allows lower per-unit costs. [Note: This appeared in IIM Shillong transcripts.] Beyond a point, diseconomies of scale set in — management becomes unwieldy, coordination costs rise.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q33</span>What is the Gini coefficient?</div>
+  <div class="qa-a">The Gini coefficient (or Gini index) measures income or wealth inequality within a population. It ranges from 0 to 1: 0 means perfect equality (everyone earns the same), and 1 means perfect inequality (one person earns everything). India's Gini coefficient hovers around 0.35–0.38 based on income, but is much higher (above 0.6) when measured by wealth. Countries like Nordic nations have low Gini (around 0.25), while Latin American nations often exceed 0.45. Reducing the Gini coefficient is a key development goal. [This appeared in IIM Shillong transcripts.]</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q34</span>What is a balance sheet? What does it tell you?</div>
+  <div class="qa-a">A balance sheet is a financial statement showing what a company owns (assets), what it owes (liabilities), and the residual value belonging to owners (shareholders' equity) at a specific point in time. The fundamental equation is: Assets = Liabilities + Shareholders' Equity. It tells you: (1) Whether the company has more assets than liabilities (financial solvency), (2) How much debt it carries vs equity, (3) What the company's net worth is, (4) Whether current assets can cover current liabilities (liquidity). Unlike the income statement which covers a period, the balance sheet is a snapshot on a specific date.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q35</span>What is an FD? How does it differ from a mutual fund?</div>
+  <div class="qa-a">A Fixed Deposit (FD) is a banking product where you deposit money for a fixed period at a guaranteed interest rate. It is risk-free (up to ₹5 lakh insured by DICGC), returns are fixed, and maturity value is predetermined. A mutual fund invests pooled money in market securities — returns are market-linked (not guaranteed), can be higher or lower than FD rates, and the investment value fluctuates. FDs are for capital preservation with assured returns; mutual funds are for wealth creation with market-linked returns. Historically, equity mutual funds have returned 12–15% over 10+ years vs FD rates of 6–7%.</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q36</span>What is breakeven?</div>
+  <div class="qa-a">Breakeven is the point where total revenue equals total costs — neither profit nor loss. Formula: Breakeven point (in units) = Fixed Costs / (Selling Price per Unit − Variable Cost per Unit). This is the minimum sales needed to cover all costs. For example, if fixed costs are ₹10 lakh, selling price is ₹500/unit, and variable cost is ₹300/unit: Breakeven = 10,00,000 / (500−300) = 5,000 units. Below 5,000 units = loss; above = profit. Breakeven analysis is crucial for new businesses to assess viability. [Appeared in IIM Sirmaur transcripts.]</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q37</span>What is goodwill in accounting?</div>
+  <div class="qa-a">Goodwill is an intangible asset that arises when one company acquires another for more than the fair market value of its net tangible assets. The excess paid represents the value of brand reputation, customer relationships, and management quality that aren't physically tangible. For example, if Tata acquires a company with net assets worth ₹100 crore but pays ₹150 crore, the ₹50 crore excess is goodwill. Goodwill appears on the balance sheet under intangible assets. If the acquired company underperforms, the goodwill may need to be "impaired" (written down), which reduces profits. [Appeared in IIM Sirmaur transcripts.]</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q38</span>What is the law of demand?</div>
+  <div class="qa-a">The law of demand states that, all else equal, as the price of a good rises, the quantity demanded falls, and vice versa — price and demand have an inverse relationship. This is because higher prices reduce affordability and purchasing power. The demand curve slopes downward from left to right. Exceptions include Giffen goods (inferior goods where price rises actually increase demand, as consumers can't afford alternatives) and Veblen goods (luxury goods where high price increases desirability).</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q39</span>What are Giffen goods?</div>
+  <div class="qa-a">Giffen goods are a special category of inferior goods that violate the law of demand — when their price rises, demand actually increases. This paradox occurs because for very poor consumers, the good is a staple that consumes most of their income. When the price rises, they can no longer afford superior substitutes and must consume even more of the cheaper Giffen good. Classic example: coarse rice or bread for very poor populations. Named after Scottish economist Robert Giffen. [This question appeared in multiple IIM Shillong and Sirmaur transcripts.]</div>
+</div>
+
+<div class="qa-item">
+  <div class="qa-q"><span>Q40</span>What is elasticity of demand?</div>
+  <div class="qa-a">Price elasticity of demand measures how responsive quantity demanded is to a change in price. Formula: PED = % Change in Quantity Demanded / % Change in Price. If PED > 1: elastic (demand very sensitive to price changes — luxury goods, non-necessities). If PED < 1: inelastic (demand not sensitive — petrol, medicines, basic food). If PED = 1: unit elastic. Luxury goods have elastic demand; necessities are inelastic. This determines pricing strategy: companies with inelastic demand can raise prices more freely. [Appeared frequently in IIM Shillong transcripts.]</div>
+</div>
+
+<!-- QUESTIONS 41-100 (condensed format) -->
+<h4 style="margin-top:2rem; color:var(--gold); letter-spacing:0.05em; font-size:0.8rem; text-transform:uppercase;">Questions 41–100 — Quick Reference Format</h4>
+
+<div class="qa-item"><div class="qa-q"><span>Q41</span>What is quantitative easing?</div><div class="qa-a">Quantitative easing (QE) is a monetary policy where a central bank creates new money to buy government bonds and other financial assets from banks, injecting liquidity into the economy when interest rates are already near zero. Used by the US Federal Reserve during 2008 and 2020 COVID crisis. It lowers long-term interest rates and boosts asset prices. India has not implemented traditional QE but uses similar tools like open market operations.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q42</span>What is the difference between economic profit and accounting profit?</div><div class="qa-a">Accounting profit = Revenue − Explicit (paid) Costs. Economic profit = Revenue − Explicit Costs − Implicit (opportunity) Costs. If a business owner pays himself no salary, accounting profit may be ₹5 lakh, but economic profit subtracts the ₹4 lakh he could have earned as a salaried employee. Normal profit is the breakeven point in economic terms — when economic profit = 0. [Appeared in IIM Shillong transcript.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q43</span>What is consumer surplus?</div><div class="qa-a">Consumer surplus is the difference between what a consumer is willing to pay for a good and what they actually pay. If you are willing to pay ₹500 for a shirt but buy it for ₹350, your consumer surplus = ₹150. On a supply-demand diagram, it is the area below the demand curve and above the market price. It measures buyer welfare — higher consumer surplus means buyers are getting more value. [Appeared in multiple IIM transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q44</span>What is producer surplus?</div><div class="qa-a">Producer surplus is the difference between what a producer actually receives for a good and the minimum price they would have accepted. If a farmer would have sold rice at ₹15/kg but receives ₹20/kg, the ₹5 is producer surplus. On a diagram, it is the area above the supply curve and below the market price. Together, consumer surplus + producer surplus = total social welfare from a market transaction. [Appeared in IIM Shillong and Sirmaur transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q45</span>What is the difference between perfect competition and monopoly?</div><div class="qa-a">In perfect competition: many sellers, identical products, no single seller can influence price, free entry/exit, price = marginal cost. In a monopoly: single seller with no close substitutes, sets price above marginal cost, barriers to entry protect the monopolist. Perfect competition examples: agricultural markets. Monopoly examples: government utility companies, Indian Railways. In between lies oligopoly (few large sellers — telecom: Jio, Airtel, Vi) and monopolistic competition (many sellers, differentiated products — restaurants, FMCG brands). [This appeared in IIM transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q46</span>What is GDP? Which method does India use?</div><div class="qa-a">GDP (Gross Domestic Product) is the total monetary value of all final goods and services produced within a country's borders in a year. Three measurement methods: (1) Production/Value-added method — sum of value added at each stage; (2) Income method — sum of all incomes earned; (3) Expenditure method — sum of all spending (C+I+G+NX). India primarily uses the production/value-added approach. India's GDP (nominal) is approximately $3.7 trillion (2024), making it the 5th largest economy. GDP per capita is about $2,600. [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q47</span>What is purchasing power parity (PPP)?</div><div class="qa-a">PPP adjusts for cost of living differences between countries to compare economies more fairly. The Big Mac Index by The Economist is a fun example — a Big Mac costs $5 in the US but equivalent to $2 in India; this suggests the rupee is undervalued by market exchange rates. By PPP, India is actually the 3rd largest economy (after US and China), even though by nominal GDP it's 5th. PPP-adjusted comparisons better reflect actual standards of living. [Appeared in IIM Shillong transcript.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q48</span>What is depreciation? What are the two main methods?</div><div class="qa-a">Depreciation is the allocation of the cost of a tangible asset over its useful life, reflecting wear and tear. Two main methods: (1) Straight Line Method (SLM) — equal depreciation each year. If a machine costs ₹10 lakh and lasts 10 years with zero salvage value, depreciation = ₹1 lakh/year. (2) Written Down Value (WDV) / Declining Balance method — depreciation is a fixed percentage of the book value each year, resulting in higher depreciation in early years, lower later. WDV better reflects actual asset use for many assets. [Both methods appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q49</span>What is black money and how does it affect national income?</div><div class="qa-a">Black money refers to income or wealth on which taxes have not been paid — typically earned through illegal activities or undeclared transactions. It distorts national income calculations because unreported transactions are not captured in GDP. This leads to underestimation of actual economic size. Black money also creates inflation (as underground spending raises demand), diverts resources from productive uses, worsens income inequality, and reduces government tax revenue. Demonetisation in November 2016 targeted black money held as cash. [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q50</span>What is the Hindenburg report and short selling?</div><div class="qa-a">Short selling involves borrowing shares, selling them at a high price, waiting for the price to fall, buying them back cheaper, and returning them — profiting from the decline. A short seller publishes a research report (as Hindenburg Research did with Adani Group in January 2023) to publicly highlight concerns, which may trigger a sell-off. The report alleged accounting fraud and stock manipulation in Adani Group companies. This caused the Adani Group's market cap to fall by nearly $150 billion in days. Short selling provides price discovery but is controversial when used aggressively. [Appeared in IIM Sirmaur transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q51</span>What is inflation's impact on the rich and poor?</div><div class="qa-a">Inflation disproportionately hurts the poor: (1) The poor spend a larger share of income on necessities (food, fuel) which are the most inflation-prone. (2) The rich hold financial assets (stocks, real estate) that tend to appreciate with inflation. (3) Debtors benefit (inflation reduces real debt burden) while creditors/savers lose. (4) Fixed-income workers (daily wage labourers) don't see wage increases as fast as price increases. This is why high inflation typically widens the rich-poor gap and is a serious social justice issue. [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q52</span>What is the principle of accounting revenue recognition?</div><div class="qa-a">The revenue recognition principle states that revenue should be recognised (recorded) when it is earned and realised or realisable — not necessarily when cash is received. Under Ind AS 115 (aligned with IFRS 15), revenue is recognised when: a performance obligation is satisfied (i.e., goods delivered or service rendered). This is part of the accrual concept of accounting. Example: A construction company recognises revenue over the course of a project as milestones are completed, not only at the end. [Appeared in IIM Sirmaur transcript.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q53</span>What are accounting standards? What does India follow?</div><div class="qa-a">Accounting standards are rules that govern how financial transactions must be recorded and reported, ensuring consistency and comparability. India follows Ind AS (Indian Accounting Standards), which are converged with IFRS (International Financial Reporting Standards) — adopted for listed companies and large private companies. Smaller companies use older AS (Accounting Standards) under ICAI. Indian-listed subsidiaries of global companies may need to report under both Ind AS and IFRS. The ICAI (Institute of Chartered Accountants of India) sets accounting standards in India. [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q54</span>What is the Minimum Support Price (MSP)?</div><div class="qa-a">MSP is the price at which the government agrees to buy agricultural produce from farmers if market prices fall below a certain level. It provides a safety net for farmers. The government (through agencies like FCI for wheat and rice) procures crops at MSP. MSP is announced before sowing, so farmers know their minimum guaranteed income. Critics say MSP distorts market signals and primarily benefits large farmers. Supporters argue it protects vulnerable farmers from price crashes. MSP for major crops is recommended by the CACP (Commission for Agricultural Costs and Prices). [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q55</span>What is digital marketing? How has technology changed consumer behaviour?</div><div class="qa-a">Digital marketing is promoting products/services through digital channels — social media, search engines, email, apps. Key channels: SEO, SEM/Google Ads, social media (Instagram, YouTube), influencer marketing, email marketing. Technology has transformed consumer behaviour by enabling: (1) Price comparison in seconds, (2) Peer reviews and user-generated content influencing decisions more than ads, (3) Personalisation — algorithms showing relevant products, (4) Instant purchasing, (5) Subscription economy. The consumer now has more power and information than ever before. [Appeared in IIM Sirmaur and Kozhikode transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q56</span>What are the four Ps of marketing?</div><div class="qa-a">The 4Ps marketing mix, introduced by E. Jerome McCarthy: (1) Product — what you're selling (features, quality, branding); (2) Price — how much you charge (cost-based, value-based, competitive pricing); (3) Place — how you distribute it (retail, online, direct sales); (4) Promotion — how you communicate it (advertising, PR, sales promotion). Modern extensions include 7Ps (adding People, Process, Physical Evidence) for services. Every business decision revolves around optimising this mix. [Appeared in IIM Sirmaur transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q57</span>What is the difference between a customer and a consumer?</div><div class="qa-a">A customer is the person who purchases a product. A consumer is the person who uses/consumes it. They may or may not be the same person. Example: A mother (customer) buys Maggi noodles (product) which her child (consumer) eats. Understanding this distinction matters for marketing — advertising should target the decision-maker (customer) while the product experience must satisfy the end-user (consumer). In B2B markets, the purchasing department (customer) and the end-users (consumers) are different. [Appeared in IIM Sirmaur transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q58</span>What is the difference between revenue and profit? (common trap question)</div><div class="qa-a">Revenue is the total money earned from all sales — it's the "top line." Profit is revenue minus all costs, expenses, interest, and taxes — it's the "bottom line." A company can have high revenue but no profit (e.g., a startup spending heavily on growth). Amazon had $280 billion in revenue for years while barely breaking even. Conversely, a small boutique consultancy can have modest revenue with very high profit margins. Interviewers use this to test whether candidates confuse business size (revenue) with business health (profitability).</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q59</span>What is a startup? When does a startup become a unicorn?</div><div class="qa-a">A startup is a new business venture working to solve a problem with a scalable, often technology-driven model. The key distinction from traditional businesses is the pursuit of rapid growth and scalability. A unicorn is a privately held startup with a valuation of $1 billion or more. The term was coined by venture capitalist Aileen Lee in 2013 to denote rarity. India has 100+ unicorns, including Byju's, Swiggy, Razorpay, Dream11, and CRED. When a unicorn goes public (IPO), it becomes a "decacorn" at $10B+, etc.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q60</span>What is venture capital?</div><div class="qa-a">Venture capital (VC) is a form of private equity where investors provide funding to early-stage startups with high growth potential in exchange for an equity stake. VCs accept high risk because the potential returns (if the startup succeeds) are enormous. Famous Indian VC-backed successes: Flipkart, Zomato, Paytm. The VC model: invest in 10-20 startups, expect most to fail, but one or two will generate returns that cover all losses and deliver massive profits. Sequoia Capital, Accel, and SoftBank are major VC investors in India.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q61</span>What is privatisation? Pros and cons?</div><div class="qa-a">Privatisation is the transfer of ownership of a government enterprise to private hands. India has privatised Air India (to Tata Group, 2022), Hindustan Zinc, and parts of VSNL. Pros: operational efficiency, innovation, reduced fiscal burden on government, better customer service. Cons: natural monopolies (power, water) may exploit consumers if not regulated, job losses, public interest may be sacrificed for profit, strategic sectors (defence, telecom) may face security risks under private ownership. The optimal approach depends on the sector and quality of regulation. [Appeared in IIM Shillong transcripts.]</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q62</span>What is a current account deficit?</div><div class="qa-a">The current account in India's balance of payments records trade in goods (imports-exports), services, remittances, and investment income. A current account deficit (CAD) means India imports more than it exports in goods/services — India pays more to the world than it earns. India typically runs a CAD because it imports large amounts of crude oil, gold, and electronics. In FY2024, India's CAD was about 0.7% of GDP. A high CAD weakens the rupee (more foreign exchange goes out) and increases dependence on foreign capital inflows.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q63</span>What is a fiscal deficit?</div><div class="qa-a">Fiscal deficit is the difference between the government's total expenditure and its total revenue (excluding borrowings). If the government spends ₹45 lakh crore and earns ₹38 lakh crore in taxes/non-tax revenue, the deficit = ₹7 lakh crore, which it must finance through borrowing. India's fiscal deficit target for FY2025 is 4.9% of GDP, on a path to 4.5%. High fiscal deficit increases public debt, crowds out private investment (as government borrowing absorbs capital), and can cause inflation if financed by printing money. The FRBM Act (2003) sets deficit targets.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q64</span>What is the RBI Governor's name?</div><div class="qa-a">As of 2025, the RBI Governor is Sanjay Malhotra, who took charge in December 2024 succeeding Shaktikanta Das. Always check the current name before your interview — it's a basic factual question that catches many candidates off-guard. Also remember: RBI was established on April 1, 1935; the first Indian Governor was C.D. Deshmukh (1943); RBI headquarters is in Mumbai.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q65</span>What is the Nifty value today? How do you interpret it?</div><div class="qa-a">Always check the Nifty 50 value on the morning of your interview. As of 2025, Nifty trades around 24,000–26,000. Interpret it by: (1) Comparing to previous close — is the market up or down and why? (2) Comparing to historical levels — is it near its 52-week high or low? (3) Noting the P/E ratio of the index (historically around 18-22x; high P/E suggests expensive market). Mentioning a specific recent event (budget announcement, RBI policy, global cue) that moved the market today will impress interviewers. Check Moneycontrol or NSE website.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q66</span>What is a Non-Performing Asset (NPA)?</div><div class="qa-a">An NPA (Non-Performing Asset) is a bank loan where the borrower has not made any interest or principal payments for 90 days. NPA represents bad loans on a bank's balance sheet. High NPAs reduce bank profitability, restrict lending capacity, and can threaten financial stability. India faced a serious NPA crisis between 2015-2019, particularly in infrastructure and steel sectors. The Insolvency and Bankruptcy Code (2016) was a key reform to resolve NPAs. Gross NPA ratio for Indian banks has improved from ~11% (2018) to around 3–4% by 2024.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q67</span>What is a budget? What is the Union Budget?</div><div class="qa-a">A budget is an estimate of revenues and expenditures over a future period. The Union Budget is the Government of India's annual financial statement, presented by the Finance Minister in Parliament (typically on February 1). It outlines the government's revenue plan (taxes) and spending plan (welfare, defence, infrastructure, subsidies). It also reveals the fiscal deficit target. The Union Budget is one of the most watched events in India — markets, industries, and businesses align plans around it. Budget statements can move stock markets significantly.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q68</span>What is the difference between direct and indirect tax?</div><div class="qa-a">Direct taxes are paid directly by the person on whom they are levied and cannot be shifted — income tax, corporate tax, capital gains tax. Indirect taxes are collected by an intermediary (business) and ultimately borne by the end consumer through higher prices — GST, customs duty, excise duty. GST (Goods and Services Tax), implemented in July 2017, unified India's complex indirect tax system into one. The Finance Ministry and Income Tax Department manage direct taxes (CBDT); the CBIC manages indirect taxes.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q69</span>What is GST?</div><div class="qa-a">GST (Goods and Services Tax) is a comprehensive, destination-based, multi-stage tax on goods and services, implemented in India on July 1, 2017. It replaced multiple cascading taxes (service tax, VAT, excise duty, etc.). GST has four slabs: 5%, 12%, 18%, and 28%, with essential goods at 0%. It follows the CGST (Central GST) + SGST (State GST) model for intra-state transactions, and IGST for inter-state. The GST Council (chaired by Finance Minister) decides rates. GST simplified tax compliance and reduced the "tax on tax" (cascading effect) problem.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q70</span>What is SWIFT?</div><div class="qa-a">SWIFT (Society for Worldwide Interbank Financial Telecommunication) is a global messaging network used by financial institutions to securely transmit information and instructions for international money transfers. When India's banks send or receive money from abroad, they use SWIFT codes. In 2022, Russia was partly disconnected from SWIFT as a sanction for invading Ukraine — a significant financial weapon. India's SBI has SWIFT code "SBININBB." SWIFT doesn't move money directly; it sends the messages instructing correspondent banks to move money.</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q71-80 (Fast Round)</span></div>
+<div class="qa-a">
+Q71: What is NSDL? — National Securities Depository Limited; India's first depository (1996); holds shares electronically; works with NSE.<br><br>
+Q72: What is CDSL? — Central Depository Services Limited (1999); promoted by BSE; more demat accounts by number; is a listed company.<br><br>
+Q73: What is a rights issue? — Existing shareholders offered new shares at a discount before public. Maintains ownership proportion. Shareholder can accept, sell rights, or ignore.<br><br>
+Q74: What is a bonus share? — Free additional shares given to existing shareholders from company's reserves. 1:1 bonus doubles shares, halves price — no change in total value.<br><br>
+Q75: What is block deal? — When large investors (FIIs, promoters) buy/sell huge quantities of shares in a single transaction outside regular market hours to avoid price impact.<br><br>
+Q76: What is market lot? — Minimum number of shares in one trading unit. In F&O markets, contracts are in lots. Nifty futures have a lot size of 25.<br><br>
+Q77: What is circuit breaker? — A SEBI-mandated automatic halt in trading when index moves 10%, 15%, or 20% in either direction. Prevents panic crashes. Triggered during COVID crash (March 2020).<br><br>
+Q78: What is upper/lower circuit? — Individual stock trading halt when a stock rises/falls by a specified % in a day (5%, 10%, or 20% depending on stock category). Prevents manipulation.<br><br>
+Q79: What is margin trading? — Borrowing money from a broker to buy more securities than your own capital allows. Amplifies both gains and losses. Very risky for novices.<br><br>
+Q80: What is short selling? — Selling borrowed shares expecting the price to fall, then buying back cheaper. Profit = sell price − buy price − borrowing cost. Risky if price rises instead.
+</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q81-90 (Current Affairs Finance)</span></div>
+<div class="qa-a">
+Q81: How will Shubhanshu Shukla's space mission impact India's economy? — Space tourism and exploration attracts global investments in India's space ecosystem, boosts ISRO's commercial prospects, creates high-skill jobs, and enhances India's soft power. Analogous to how Apollo missions spurred US technological innovation. [Appeared in IIM Shillong transcripts.]<br><br>
+Q82: What are US tariffs and how do they affect India? — US President Trump's tariff hikes on imports affect India as Indian exporters face higher costs to access US markets. Sectors like pharmaceuticals, IT services (less affected), textiles, and auto components are most impacted. Positively, India may benefit from trade diversion as companies shift supply chains away from China ("China+1" strategy). [Appeared in IIM Shillong and Sirmaur transcripts.]<br><br>
+Q83: What was the Air India crash's impact on business? — The Air India crash (Ahmedabad, 2025) raised concerns about aviation safety regulations, increased scrutiny on airlines, temporarily affected aviation stocks, led to accelerated inspections, and raised insurance costs for airlines. [Appeared in IIM Sirmaur transcripts.]<br><br>
+Q84: India's luxury goods sector — India's luxury market is growing at 20%+ annually, driven by rising HNI (High Net Worth Individual) population, millennials' aspiration purchasing, and luxury tourism. Key players: LVMH (Louis Vuitton, Dior), Kering, Richemont. India now allows 100% FDI in single-brand retail, benefiting luxury brands. [Appeared in IIM Shillong transcripts.]<br><br>
+Q85: What is India's vision for 2047? — India aims to become a developed nation (Viksit Bharat) by 2047, its centenary of independence. Key targets: $30 trillion GDP (from $3.7T now), eliminating poverty, achieving energy independence, and becoming a global manufacturing hub. Budget 2024 explicitly sets this as a national goal. [Appeared in IIM Shillong transcripts.]<br><br>
+Q86: Impact of EVs and Tesla on India — Tesla began operations in India in 2025. EVs disrupt traditional auto supply chains (fewer parts than combustion engines), threaten oil demand long-term, require massive battery manufacturing investment, and create new jobs in software/electronics while potentially displacing traditional auto jobs. Government's PM E-DRIVE and FAME schemes incentivise EV adoption. [Appeared in IIM Shillong transcripts.]<br><br>
+Q87: What is BRICS and dollar devaluation concerns? — BRICS (Brazil, Russia, India, China, South Africa + new members) has been discussing trade in local currencies to reduce USD dependence. The US dollar's global reserve currency status gives the US enormous economic power. Reducing dollar usage in trade could weaken dollar hegemony but is a very long-term, gradual process given deep dollar entrenchment in global finance. Trump threatened tariffs on BRICS nations pursuing de-dollarisation. [Appeared in IIM Shillong transcripts.]<br><br>
+Q88: What happened at Hindenburg-Adani? — In January 2023, US short-seller Hindenburg Research published a report alleging accounting fraud, stock price manipulation, and undisclosed related-party transactions in Adani Group companies. Adani stocks fell 50-80%, wiping out ~$150 billion in market cap. Adani denied all allegations; SEBI investigated; a Supreme Court committee found no regulatory lapses. Adani stocks largely recovered by 2024.<br><br>
+Q89: What is India's GDP growth rate? — India's GDP growth was approximately 8.2% in FY2024, making it the fastest-growing major economy in the world. IMF forecasts around 6.5-7% growth in FY2025-26. India's growth is driven by domestic consumption, infrastructure investment, and a growing services sector. Always check the current figure before your interview.<br><br>
+Q90: What is devaluation vs depreciation of currency? — Devaluation is when a government/central bank deliberately reduces a currency's value in a fixed exchange rate system. Depreciation is when a currency loses value naturally through market forces in a floating exchange rate system. India follows a managed float — rupee fluctuates based on market but RBI intervenes if needed. A weaker rupee makes exports cheaper (good for IT, textiles) but makes imports costlier (bad for oil, electronics). [Appeared in IIM Shillong transcripts.]
+</div></div>
+
+<div class="qa-item"><div class="qa-q"><span>Q91-100 (Rapid Final Round)</span></div>
+<div class="qa-a">
+Q91: What is a sinking fund? — A fund set aside by a company or government over time to repay a future debt obligation. Like an EMI savings plan for a large loan maturity. [Appeared in IIM Shillong transcripts.]<br><br>
+Q92: What is working capital? — Current Assets − Current Liabilities. It's the capital needed for day-to-day operations — to buy inventory, pay suppliers, cover wages before customers pay. Negative working capital can signal trouble unless you're in retail (like Amazon/Walmart — collect cash before paying suppliers).<br><br>
+Q93: What is the difference between LLP and Pvt Ltd? — LLP (Limited Liability Partnership): partners have limited liability; taxed as partnership; suitable for professional firms. Pvt Ltd: shareholders have limited liability; separate legal entity; can issue shares; must file ROC returns. LLP has simpler compliance; Pvt Ltd offers easier fundraising. [Appeared in IIM Sirmaur transcripts.]<br><br>
+Q94: What are share premium and face value? — Face value (par value) is the original nominal value of a share stated in the company's charter (commonly ₹1, ₹2, or ₹10). Share premium is the amount received above face value in an IPO. If IPO price is ₹100 for a ₹10 face value share, ₹90 goes into the share premium account (Securities Premium Reserve) on the balance sheet.<br><br>
+Q95: What is a hedge fund? — A hedge fund is a private investment fund that uses aggressive strategies — short selling, leverage, derivatives, arbitrage — to generate returns regardless of market direction. Open only to accredited/institutional investors. Unlike mutual funds, hedge funds are lightly regulated. Famous global hedge funds: Bridgewater, Renaissance Technologies. India's SEBI has a framework for Alternative Investment Funds (AIFs) that include hedge fund-like vehicles.<br><br>
+Q96: What is a derivative? — A financial contract whose value is derived from an underlying asset (stocks, bonds, commodities, currencies). Key types: Futures (obligation to buy/sell at a predetermined price on a future date) and Options (right but not obligation to buy/sell). Used for hedging risk or speculation. NSE is among the world's largest derivatives exchanges by contract count.<br><br>
+Q97: What is an indifference curve? — A curve showing all combinations of two goods that give a consumer the same level of utility (satisfaction). The consumer is "indifferent" between any two points on the curve. Properties: downward sloping (more of one means less of the other), convex to origin (diminishing marginal rate of substitution), non-intersecting. The highest attainable indifference curve on a budget constraint is consumer equilibrium. [Appeared extensively in IIM transcripts.]<br><br>
+Q98: What is opportunity cost? — Opportunity cost is the value of the next best alternative foregone when a decision is made. If you spend ₹1 lakh on starting a food truck business instead of investing in Nifty (which would have earned 12%), your opportunity cost is the 12% return. All economic choices involve opportunity costs. Economists argue that no decision is truly "free" — even using free time has opportunity cost (what else could you have done?). [Appeared in IIM Sirmaur transcripts.]<br><br>
+Q99: What is the difference between wealth and income? — Income is a flow — money earned over a period (salary, profits, rent). Wealth is a stock — accumulated assets minus liabilities at a point in time. High-income people may have low wealth if they spend everything; modest-income people can build high wealth through saving and investing over decades. Oxfam reports often highlight wealth inequality rather than income inequality because wealth disparities are even more extreme.<br><br>
+Q100: What is a repo rate cut's impact on home loan EMIs? — When RBI cuts repo rate, banks' cost of borrowing from RBI falls. Banks typically pass this on by reducing their MCLR (Marginal Cost of Funds based Lending Rate) or External Benchmark Rate. Home loans linked to the repo rate (most new home loans post-2019) automatically get cheaper — EMIs fall or tenure shortens. A 50 bps (0.5%) repo rate cut on a ₹50 lakh, 20-year home loan reduces EMI by approximately ₹1,600/month. This stimulates housing demand and construction activity.
+</div></div>
+
+<!-- ==============================
+     SECTION 13: ADVANCED TOPICS
+     ============================== -->
+<div id="s13" class="section-header">
+  <div class="section-number">Section 13</div>
+  <h2>Advanced Topics for Strong Candidates</h2>
+</div>
+
+<div class="topic">
+  <h3>Yield Curve &amp; Inverted Yield Curve</h3>
+  <p>A yield curve plots the yields (interest rates) of bonds with equal credit quality but different maturity dates. Normally, longer-term bonds have higher yields — you demand more compensation for locking money longer.</p>
+  <p><strong>Normal yield curve:</strong> Short-term rates < long-term rates. Signals healthy economy with growth expectations.<br>
+  <strong>Inverted yield curve:</strong> Short-term rates > long-term rates. Historically, one of the most reliable predictors of a recession. When the US 2-year treasury yield exceeds the 10-year yield, recession typically follows in 12-18 months. This happened in 2022-23 in the US, predicting the 2023 slowdown.</p>
+  <div class="analogy">Normally, you'd demand more interest on a 10-year FD than a 1-year FD. If banks suddenly offer more for 1-year FDs, they expect big trouble ahead — they'll rather have your money for 1 year than be locked into lower rates for 10 years. An inverted yield curve is that signal at a national scale.</div>
+</div>
+
+<div class="topic">
+  <h3>Quantitative Easing (QE)</h3>
+  <p>When interest rates are already near zero and the economy still needs stimulus, central banks use QE — creating new money to buy bonds and other assets from banks. This floods banks with cash, lowering long-term interest rates and pushing investors into riskier assets (stocks, real estate).</p>
+  <p>The US Fed's QE programs post-2008 and post-2020 contributed to massive stock market rallies. The risk: too much QE can cause inflation and asset bubbles. When the Fed "tapered" QE in 2013 (the "Taper Tantrum"), global markets including India fell sharply.</p>
+</div>
+
+<div class="topic">
+  <h3>Derivatives: Futures and Options</h3>
+  <p><strong>Futures:</strong> A contract to buy/sell an asset at a predetermined price on a future date. Both buyer and seller are obligated. Used by farmers to lock in crop prices, airlines to lock in fuel prices, and speculators.</p>
+  <p><strong>Options:</strong> Gives the buyer the <em>right but not the obligation</em> to buy (Call option) or sell (Put option) an asset at a specified price (strike price) before expiry. The buyer pays a premium for this right.</p>
+  <div class="example-box">
+    <div class="ex-label">Options Example</div>
+    You buy a Call option on Reliance at a strike price of ₹2,800 for a premium of ₹50. If Reliance goes to ₹3,000, you exercise your option and profit ₹200 − ₹50 premium = ₹150. If Reliance stays at ₹2,600, you let the option expire, losing only the ₹50 premium. Maximum loss for option buyer = premium paid.
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Hedging</h3>
+  <p>Hedging is reducing risk by taking an offsetting position. Like an insurance policy — you pay a small cost (premium) to protect against a large loss.</p>
+  <div class="example-box">
+    <div class="ex-label">Real Hedging Example</div>
+    An airline fuel hedging: IndiGo buys crude oil futures at $70/barrel. If oil rises to $90, IndiGo's higher fuel bill is offset by profits on its futures position. If oil falls to $50, IndiGo pays more on its futures loss but benefits from lower fuel costs. Either way, uncertainty is reduced.
+  </div>
+</div>
+
+<div class="topic">
+  <h3>Credit Default Swaps (CDS)</h3>
+  <p>A CDS is a financial contract where the protection buyer pays periodic premiums to the protection seller. In return, if a specified credit event occurs (like a bond default), the seller compensates the buyer for the loss.</p>
+  <p>It's essentially insurance on a bond. During the 2008 financial crisis, the collapse of the CDS market (where trillions of dollars of protection had been written without sufficient capital) was a key trigger for the global financial crisis.</p>
+</div>
+
+<div class="topic">
+  <h3>Sovereign Bonds</h3>
+  <p>Sovereign bonds are debt instruments issued by national governments. When India issues rupee-denominated bonds to Indian investors, they are domestic sovereign bonds (G-Secs). When governments issue bonds in foreign currencies (USD, EUR) to international investors, they are external sovereign bonds (like Masala Bonds — rupee-denominated bonds issued internationally by India).</p>
+  <p>A government's sovereign bond yield is inversely related to its creditworthiness. India's 10-year G-Sec yield (around 7% in 2024) is used as the risk-free benchmark for all Indian investments.</p>
+</div>
+
+<!-- ==============================
+     SECTION 14: TRANSCRIPT ANALYSIS
+     ============================== -->
+<div id="s14" class="section-header">
+  <div class="section-number">Section 14</div>
+  <h2>Transcript-Based Interview Question Analysis</h2>
+</div>
+
+<p style="color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem;">Finance and economics questions extracted and analysed from real IIM Shillong, IIM Sirmaur, IIM Kozhikode, IIM Ranchi, IIM Amritsar, and IIM Indore interview transcripts (2025 cycle).</p>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong | IIM Sirmaur (Multiple Candidates)</div>
+  <div class="tq-q">What is the stock market? What are the stock exchanges in India?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> A stock market is a marketplace where buyers and sellers trade shares of publicly listed companies. In India, the two main exchanges are BSE (Bombay Stock Exchange, founded 1875, runs Sensex index) and NSE (National Stock Exchange, founded 1992, runs Nifty 50 index). NSE handles approximately 90% of India's equity trading volume. SEBI regulates both exchanges.</p>
+  <div class="tq-why">Why asked: Tests basic financial literacy — the starting point for any business management discussion. Every IPM aspirant is expected to know this.</div>
+  <div class="tq-mistake">⚠ Common Mistake: Confusing Sensex and Nifty — many candidates say "Sensex is on NSE" or "Nifty is on BSE." Get the exchange-index pairing exactly right. Also, don't just name them — briefly distinguish them.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Multiple Panels)</div>
+  <div class="tq-q">What are Sensex and NFTs? (candidate misheard "Nifty" as "NFTs")</div>
+  <p style="font-size:0.9rem;"><strong>Insight:</strong> Be careful about misunderstanding questions in interviews, especially when audio quality is poor (online). If unsure, politely ask the interviewer to repeat. NFTs (Non-Fungible Tokens) and Nifty are completely different — one is a blockchain-based digital ownership certificate, the other is a stock market index.</p>
+  <div class="tq-why">Why asked: Tests awareness of both traditional finance (Nifty/Sensex) and emerging digital assets.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce Stream)</div>
+  <div class="tq-q">What are depreciation methods? Which one is used?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> The two primary depreciation methods are: (1) Straight Line Method (SLM) — equal annual depreciation = (Cost − Salvage Value) / Useful Life. Simple and predictable. (2) Written Down Value (WDV)/Declining Balance — a fixed percentage applied to the reducing book value each year, giving higher early depreciation. Both are permitted under Indian Companies Act. The choice depends on the asset — WDV is preferred for assets that depreciate faster early on (vehicles, computers); SLM suits assets with uniform utility (buildings, furniture). For tax purposes, WDV is mandated by the Income Tax Act in India.</p>
+  <div class="tq-mistake">⚠ Common Mistake: Saying only one method exists. Don't just name them — briefly explain when each is appropriate.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce Stream)</div>
+  <div class="tq-q">What is inflation? What are its types? How does it impact the economic gap between poor and rich?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Inflation is the general, sustained rise in price levels. Types: demand-pull (excess demand), cost-push (rising input costs), built-in (wage-price spiral), hyperinflation (extremely rapid price rise — Weimar Germany, Zimbabwe). Impact on inequality: Inflation hurts the poor more because they spend a larger share of income on necessities (food, fuel), which have higher inflation. The rich hold real assets (property, stocks) that typically appreciate with or ahead of inflation. Fixed income earners and savers (FD holders) lose purchasing power. Thus, inflation typically widens inequality. Controlling inflation is an equity imperative, not just an economic one.</p>
+  <div class="tq-why">Why asked: Tests economics depth, awareness of social implications of monetary policy, and ability to connect macroeconomics to social outcomes.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce Stream, 22 July)</div>
+  <div class="tq-q">How will Shubhanshu Shukla's trip to space impact our economy?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Shubhanshu Shukla's mission (as part of the Axiom Space/NASA mission in 2025) has multiple economic implications: (1) Boosts ISRO's commercial credibility, potentially attracting more international satellite launch contracts; (2) Inspires STEM participation and entrepreneurship in India's space-tech ecosystem (over 100 Indian space startups now); (3) Soft power: demonstrates India's technological capability, strengthening diplomatic and economic partnerships; (4) Catalyses domestic investment in space technology through IN-SPACe (India's private space regulator). Analogous to the Apollo program spurring $7 in economic benefit per $1 invested in the US space program.</p>
+  <div class="tq-why">Why asked: Tests current affairs awareness, ability to connect news to economic analysis, and breadth of thinking.</div>
+  <div class="tq-mistake">⚠ Common Mistake: Not knowing who Shubhanshu Shukla is. IAF Group Captain who became India's first person to the ISS. Essential current affairs in 2025.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce, 22 July)</div>
+  <div class="tq-q">What is Gini coefficient? How is income inequality measured?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> The Gini coefficient measures income or wealth inequality on a scale of 0 to 1. Zero = perfect equality; 1 = perfect inequality. India's income Gini is approximately 0.35, but wealth Gini exceeds 0.60 — indicating extreme wealth concentration (the top 1% hold over 40% of India's wealth per Oxfam data). Other inequality measures: Lorenz Curve (graphical representation, Gini is the area between perfect equality line and actual Lorenz curve), Palma Ratio (top 10% / bottom 40% income share), HDI (Human Development Index). Policy tools: progressive taxation, welfare spending, education investment, minimum wage laws.</p>
+  <div class="tq-why">Why asked: Tests economics knowledge and awareness of India's development challenges.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce, 22 July — Multiple)</div>
+  <div class="tq-q">Journal entry: Company takes a loan. Journal entry: Company invites shares at ₹15 with face value ₹10.</div>
+  <p style="font-size:0.9rem;"><strong>Model Answers:</strong><br>
+  Company takes loan of ₹50,000:<br>
+  Dr. Bank A/c ₹50,000 | Cr. Loan A/c ₹50,000<br><br>
+  Company issues shares at ₹15 (FV ₹10), for 1,000 shares:<br>
+  Dr. Bank A/c ₹15,000 | Cr. Share Capital A/c ₹10,000, Cr. Securities Premium Reserve A/c ₹5,000<br>
+  (The ₹5 excess per share = ₹10 face value to share capital + ₹5 to share premium reserve)</p>
+  <div class="tq-why">Why asked: Tests basic accountancy and whether commerce candidates know fundamental journal entries.</div>
+  <div class="tq-mistake">⚠ Common Mistake: Commerce students who say they forgot journal entries lose credibility. Basic Accounts is non-negotiable for commerce stream candidates.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (22 July)</div>
+  <div class="tq-q">What is economies of scale? What's the reason behind it?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Economies of scale are cost advantages from producing at larger volumes. As output rises, average cost per unit falls. Reasons: (1) Spreading fixed costs over more units — a factory costing ₹100 crore produces 1,000 cars at ₹10 lakh/unit vs 10,000 cars at ₹1 lakh/unit fixed cost component; (2) Operational efficiencies — specialisation, better machinery utilisation; (3) Bulk purchasing — suppliers offer discounts for large orders; (4) Financial — large companies get cheaper credit; (5) Marketing — advertising cost per unit falls with scale. Beyond a point, diseconomies of scale emerge — communication costs, management complexity, bureaucracy.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Multiple Commerce Panels)</div>
+  <div class="tq-q">What are indifference curves? What is their real-life application?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Indifference curves represent all combinations of two goods that give a consumer the same total utility — they are "indifferent" between all points on the curve. Properties: downward sloping (MRS — Marginal Rate of Substitution), convex to origin (diminishing MRS), non-intersecting, higher curves = higher utility. Real-life application: Portfolio allocation — an investor is indifferent between combinations of risk and return along an indifference curve; consumer equilibrium where a budget line is tangent to an indifference curve maximises utility. Marketing: understanding consumer tradeoffs between price and quality.</p>
+  <div class="tq-why">Why asked: This was asked in almost every commerce stream interview at IIM Shillong. It's a core microeconomics concept.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (24 July Commerce)</div>
+  <div class="tq-q">What ratios would you check before investing in a company?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Before investing: (1) P/E ratio — valuation vs earnings, compared to industry peers; (2) Debt/Equity ratio — financial risk assessment; (3) ROE/ROCE — management efficiency; (4) EPS growth trend (3-5 years) — business momentum; (5) Current ratio — short-term liquidity; (6) Revenue and profit CAGR — growth trajectory; (7) Dividend yield — income component; (8) Promoter holding — high promoter stake signals confidence. I'd also read the annual report's risk section and assess qualitative factors like management integrity and competitive positioning.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Kozhikode (Bangalore, Multiple)</div>
+  <div class="tq-q">Why do interest rates differ for housing loans and car loans?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Interest rates differ based on: (1) Collateral quality — a home loan is secured by an immovable property (house) which appreciates over time, creating strong collateral. A car depreciates rapidly — within 5 years a car is worth 40-50% of its original value. Lower collateral quality = higher rate. (2) Loan tenure — home loans are 15-20 years vs 3-7 for cars. Longer tenure = more interest rate risk. (3) Default risk — historically, home loan defaults are lower because people protect their home above other obligations. (4) Policy — government often subsidises home loans (PMAY) to encourage housing. Typical rates: home loans ~8.5-9.5%, car loans ~9.5-11.5%.</p>
+  <div class="tq-why">Why asked: This appeared in multiple Kozhikode transcripts — tests whether the candidate can apply basic finance reasoning to everyday life without needing formal finance education.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Sirmaur (Multiple Panels)</div>
+  <div class="tq-q">What is a stock exchange? What are BSE and NSE? What is stock analysis?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> A stock exchange is a regulated marketplace facilitating buying and selling of listed company shares. BSE (1875, Asia's oldest) lists 5,000+ companies; NSE (1992, electronic trading pioneer) handles ~90% of equity volume. Stock analysis determines a stock's value or price direction using two approaches: (1) Fundamental analysis — evaluating company's financials, business model, competitive position, management quality; uses ratios like P/E, P/B, ROE. (2) Technical analysis — studying historical price charts and patterns to predict future price movements; uses indicators like moving averages, RSI, Bollinger Bands. Long-term investors typically use fundamental analysis; traders use technical analysis.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Sirmaur (15-16 July)</div>
+  <div class="tq-q">What is a balance sheet? What are current and non-current assets? What is liquidity?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> A balance sheet shows assets, liabilities, and equity at a point in time. Assets = Liabilities + Equity. Current assets are convertible to cash within one year — cash, trade receivables, inventory, short-term investments. Non-current assets are long-term — property, plant and equipment, goodwill, intangibles. Liquidity is the ease and speed with which an asset can be converted to cash without significant value loss. Cash is perfectly liquid; real estate is illiquid. Liquidity ratios (Current Ratio, Quick Ratio) measure a company's ability to meet short-term obligations.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Sirmaur (21 July)</div>
+  <div class="tq-q">What is cost accounting and cost sheet?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Cost accounting is the process of recording, classifying, and analysing all costs associated with producing a product or service, used for internal decision-making. A cost sheet is a document that shows all costs incurred to produce a certain number of units over a period, classified into: Prime Cost (direct materials + direct labour), Factory Cost (prime cost + manufacturing overheads), Cost of Production (factory cost + opening WIP − closing WIP), Cost of Goods Sold, and finally Total Cost including selling and distribution expenses. It helps determine selling price, monitor cost efficiency, and identify cost reduction opportunities.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Sirmaur (28 July)</div>
+  <div class="tq-q">What is RBI? When was it formed? What are its functions?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> RBI (Reserve Bank of India) was established on April 1, 1935 under the RBI Act, 1934, and nationalised in 1949. Functions: (1) Currency issuance — sole authority to issue banknotes (except ₹1 coin/note); (2) Banker to government — manages government accounts, public debt; (3) Banker to banks — manages CRR/SLR, provides refinancing; (4) Monetary policy — sets repo rate, manages inflation; (5) Foreign exchange management — manages forex reserves, administers FEMA; (6) Financial supervision — regulates commercial banks, NBFCs, payment systems; (7) Development role — promotes financial inclusion, credit flow to priority sectors.</p>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Kozhikode (July, Multiple)</div>
+  <div class="tq-q">Why does the government change the interest rate? What is the role of RBI?</div>
+  <p style="font-size:0.9rem;"><strong>Clarification + Model Answer:</strong> It is RBI (not the government) that changes interest rates through the Monetary Policy Committee. The government influences through fiscal policy (taxes, spending). RBI changes the repo rate to: (1) Control inflation — hikes to cool rising prices; (2) Stimulate growth — cuts to make credit cheaper when economy slows; (3) Manage currency — rate decisions affect the rupee's value vs USD; (4) Financial stability — ensuring banks remain solvent and credit flows normally. This is why maintaining RBI's independence from government pressure is critical for credible monetary policy.</p>
+  <div class="tq-mistake">⚠ Common Mistake: Saying "the government changes interest rates." It's RBI (through the MPC). Interviewers at IIMK were specifically testing this — one candidate got the answer right by carefully attributing rate-setting authority to RBI, not Finance Ministry.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (25 July Bangalore)</div>
+  <div class="tq-q">What is elasticity of dog food? Is it elastic or inelastic?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer (as given by candidate in transcript):</strong> Dog food demand is elastic because: (1) Multiple competing brands exist (Pedigree, Royal Canin, Whiskas, local brands) — consumers easily switch; (2) Price is a significant factor in purchase decisions for most pet food buyers; (3) Substitutes exist (home-cooked food for pets). However, for premium pet food segments (specialty medical food prescribed by vets), demand is inelastic as pet owners prioritise their pet's health over cost. The overall category is elastic at the mass market level.</p>
+  <div class="tq-why">Why asked: Tests ability to apply economic concepts to unexpected, real-life scenarios — not just textbook examples. This is a favourite IIM technique.</div>
+</div>
+
+<div class="transcript-q">
+  <div class="tq-source">📍 IIM Shillong (Commerce, 24 July)</div>
+  <div class="tq-q">What is accounting for a company taking a loan? What is share capital — where is it shown? Paid-up value or face value?</div>
+  <p style="font-size:0.9rem;"><strong>Model Answer:</strong> Share capital is shown on the Liabilities side of the balance sheet, under "Equity and Liabilities" heading, specifically under "Shareholders' Equity." Share capital is recorded at face value (par value), not market value. Authorised capital is the maximum a company can issue; Issued capital is what it has issued; Subscribed capital is what shareholders have agreed to take; Paid-up capital is what has actually been received from shareholders. Premium over face value is shown separately as Securities Premium Reserve.</p>
+</div>
+
+<!-- ==============================
+     SECTION 15: RAPID REVISION
+     ============================== -->
+<div id="s15" class="section-header">
+  <div class="section-number">Section 15</div>
+  <h2>Rapid Revision Sheets</h2>
+</div>
+
+<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 1.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">100 One-Line Finance Facts</h3>
+
+<div class="revision-grid">
+  <div class="rev-item"><strong>Fact 01</strong>BSE founded 1875; NSE founded 1992.</div>
+  <div class="rev-item"><strong>Fact 02</strong>Sensex = 30 stocks on BSE. Nifty = 50 stocks on NSE.</div>
+  <div class="rev-item"><strong>Fact 03</strong>Sensex base year 1978-79, base value 100.</div>
+  <div class="rev-item"><strong>Fact 04</strong>Nifty base date November 3, 1995, base value 1,000.</div>
+  <div class="rev-item"><strong>Fact 05</strong>SEBI established 1988; given statutory powers in 1992.</div>
+  <div class="rev-item"><strong>Fact 06</strong>RBI established April 1, 1935. Nationalised 1949.</div>
+  <div class="rev-item"><strong>Fact 07</strong>RBI Governor (2025): Sanjay Malhotra.</div>
+  <div class="rev-item"><strong>Fact 08</strong>Repo rate (mid-2025): ~6.00%. Check before interview.</div>
+  <div class="rev-item"><strong>Fact 09</strong>Reverse Repo Rate is always lower than Repo Rate.</div>
+  <div class="rev-item"><strong>Fact 10</strong>CRR: cash kept with RBI — earns NO interest.</div>
+  <div class="rev-item"><strong>Fact 11</strong>SLR: kept in liquid assets (G-Secs, gold) — earns interest.</div>
+  <div class="rev-item"><strong>Fact 12</strong>India's inflation target: 4% ±2% (2–6% band).</div>
+  <div class="rev-item"><strong>Fact 13</strong>MPC has 6 members: 3 RBI + 3 external government nominees.</div>
+  <div class="rev-item"><strong>Fact 14</strong>GST implemented: July 1, 2017.</div>
+  <div class="rev-item"><strong>Fact 15</strong>India's GDP (nominal) ≈ $3.7 trillion — world's 5th largest.</div>
+  <div class="rev-item"><strong>Fact 16</strong>India's GDP growth FY2024: ~8.2% — fastest major economy.</div>
+  <div class="rev-item"><strong>Fact 17</strong>Nifty index managed by NSE Indices Limited.</div>
+  <div class="rev-item"><strong>Fact 18</strong>Free-float market cap = price × shares available for public trading.</div>
+  <div class="rev-item"><strong>Fact 19</strong>NSDL: India's first depository (1996), backed by NSE.</div>
+  <div class="rev-item"><strong>Fact 20</strong>CDSL: second depository (1999), backed by BSE. Is a listed company.</div>
+  <div class="rev-item"><strong>Fact 21</strong>Settlement cycle: T+1 in India since 2023.</div>
+  <div class="rev-item"><strong>Fact 22</strong>Large-cap: Top 100 by market cap. Mid-cap: 101-250. Small-cap: Rest.</div>
+  <div class="rev-item"><strong>Fact 23</strong>Bull market: 20%+ rise. Bear market: 20%+ fall.</div>
+  <div class="rev-item"><strong>Fact 24</strong>IPO = first public sale. FPO = subsequent public issue by listed company.</div>
+  <div class="rev-item"><strong>Fact 25</strong>Dividend yield = Annual Dividend / Share Price × 100.</div>
+  <div class="rev-item"><strong>Fact 26</strong>In a 2:1 bonus, existing shares double; price halves. No change in value.</div>
+  <div class="rev-item"><strong>Fact 27</strong>Stock split improves liquidity; no change in total market cap.</div>
+  <div class="rev-item"><strong>Fact 28</strong>Buyback reduces outstanding shares; increases EPS. </div>
+  <div class="rev-item"><strong>Fact 29</strong>P/E = Market Price per Share / EPS.</div>
+  <div class="rev-item"><strong>Fact 30</strong>ROE = Net Profit / Shareholders' Equity × 100.</div>
+  <div class="rev-item"><strong>Fact 31</strong>Debt/Equity ratio measures financial leverage.</div>
+  <div class="rev-item"><strong>Fact 32</strong>Current Ratio = Current Assets / Current Liabilities. Ideal: ~2:1.</div>
+  <div class="rev-item"><strong>Fact 33</strong>EBITDA = Earnings Before Interest, Tax, Depreciation, Amortisation.</div>
+  <div class="rev-item"><strong>Fact 34</strong>PAT = Profit After Tax = net profit = "bottom line".</div>
+  <div class="rev-item"><strong>Fact 35</strong>Revenue = "top line." PAT = "bottom line."</div>
+  <div class="rev-item"><strong>Fact 36</strong>Bond: issuer is borrower; bondholder is lender/creditor.</div>
+  <div class="rev-item"><strong>Fact 37</strong>Bond price and yield move inversely.</div>
+  <div class="rev-item"><strong>Fact 38</strong>G-Secs are issued by GOI through RBI auctions.</div>
+  <div class="rev-item"><strong>Fact 39</strong>T-Bills: 91, 182, or 364 days. Zero coupon instruments.</div>
+  <div class="rev-item"><strong>Fact 40</strong>Coupon rate = annual interest / face value × 100. Fixed.</div>
+  <div class="rev-item"><strong>Fact 41</strong>YTM accounts for all future cash flows including capital gain/loss.</div>
+  <div class="rev-item"><strong>Fact 42</strong>Inverted yield curve: reliable recession predictor historically.</div>
+  <div class="rev-item"><strong>Fact 43</strong>Mutual fund NAV calculated once daily after market close.</div>
+  <div class="rev-item"><strong>Fact 44</strong>SIP = fixed periodic investment. Benefits from rupee cost averaging.</div>
+  <div class="rev-item"><strong>Fact 45</strong>Index fund expense ratio: 0.05–0.3%. Active fund: 1–2.5%.</div>
+  <div class="rev-item"><strong>Fact 46</strong>ETF trades on exchange like a share; index fund doesn't.</div>
+  <div class="rev-item"><strong>Fact 47</strong>FII selling weakens rupee; FII buying strengthens rupee.</div>
+  <div class="rev-item"><strong>Fact 48</strong>India imports ~85% of crude oil needs. Oil price hike = inflation.</div>
+  <div class="rev-item"><strong>Fact 49</strong>Repo rate hike → expensive loans → less spending → lower inflation.</div>
+  <div class="rev-item"><strong>Fact 50</strong>Rate cut → cheaper loans → more spending → economic growth.</div>
+  <div class="rev-item"><strong>Fact 51</strong>Fiscal deficit = Government Expenditure − Government Revenue (excl. borrowings).</div>
+  <div class="rev-item"><strong>Fact 52</strong>FRBM Act 2003 sets fiscal consolidation targets.</div>
+  <div class="rev-item"><strong>Fact 53</strong>Current account records goods+services trade, remittances, investment income.</div>
+  <div class="rev-item"><strong>Fact 54</strong>India typically runs a current account deficit (imports > exports).</div>
+  <div class="rev-item"><strong>Fact 55</strong>Gini coefficient: 0 = perfect equality; 1 = perfect inequality.</div>
+  <div class="rev-item"><strong>Fact 56</strong>Consumer surplus = willingness to pay − actual price paid.</div>
+  <div class="rev-item"><strong>Fact 57</strong>Giffen goods violate the law of demand — inferior goods with upward sloping demand.</div>
+  <div class="rev-item"><strong>Fact 58</strong>Veblen goods: luxury goods where demand rises with price (status goods).</div>
+  <div class="rev-item"><strong>Fact 59</strong>PED > 1 = elastic; PED < 1 = inelastic; PED = 1 = unit elastic.</div>
+  <div class="rev-item"><strong>Fact 60</strong>Perfect competition: many sellers, identical products, price takers.</div>
+  <div class="rev-item"><strong>Fact 61</strong>Monopoly: single seller, price setter, barriers to entry.</div>
+  <div class="rev-item"><strong>Fact 62</strong>India's GDP (PPP) makes it 3rd largest economy after US and China.</div>
+  <div class="rev-item"><strong>Fact 63</strong>Union Budget presented on February 1 each year.</div>
+  <div class="rev-item"><strong>Fact 64</strong>Finance Minister (2025): Nirmala Sitharaman.</div>
+  <div class="rev-item"><strong>Fact 65</strong>GST Council chaired by Union Finance Minister.</div>
+  <div class="rev-item"><strong>Fact 66</strong>IBC (Insolvency and Bankruptcy Code) enacted 2016.</div>
+  <div class="rev-item"><strong>Fact 67</strong>NPA: loan where no payment made for 90+ days.</div>
+  <div class="rev-item"><strong>Fact 68</strong>India's gross NPA ratio fell from ~11% (2018) to ~3% (2024).</div>
+  <div class="rev-item"><strong>Fact 69</strong>Demonetisation: November 8, 2016. ₹500 and ₹1,000 notes demonetised.</div>
+  <div class="rev-item"><strong>Fact 70</strong>SEBI has 3 tools: quasi-legislative, quasi-judicial, quasi-executive.</div>
+  <div class="rev-item"><strong>Fact 71</strong>Short selling: sell borrowed shares, buy back cheaper = profit.</div>
+  <div class="rev-item"><strong>Fact 72</strong>Hedging = taking an offsetting position to reduce risk.</div>
+  <div class="rev-item"><strong>Fact 73</strong>Derivative: value derived from underlying asset. Key types: futures, options.</div>
+  <div class="rev-item"><strong>Fact 74</strong>Call option: right to buy. Put option: right to sell.</div>
+  <div class="rev-item"><strong>Fact 75</strong>Option buyer: maximum loss = premium. Seller: theoretically unlimited loss.</div>
+  <div class="rev-item"><strong>Fact 76</strong>Harshad Mehta scam (1992): exploited bank receipt system; Sensex crashed.</div>
+  <div class="rev-item"><strong>Fact 77</strong>Satyam scandal (2009): India's "Enron" — accounting fraud by B. Ramalinga Raju.</div>
+  <div class="rev-item"><strong>Fact 78</strong>Zomato IPO: July 2021, at ₹76 per share, raised ₹9,375 crore.</div>
+  <div class="rev-item"><strong>Fact 79</strong>Reliance Industries: India's most valuable company by market cap.</div>
+  <div class="rev-item"><strong>Fact 80</strong>HDFC-HDFC Bank merger completed July 2023 — largest Indian corporate merger.</div>
+  <div class="rev-item"><strong>Fact 81</strong>Air India acquired by Tata Group in January 2022 (privatised).</div>
+  <div class="rev-item"><strong>Fact 82</strong>India became world's 5th largest economy, surpassing UK in 2022.</div>
+  <div class="rev-item"><strong>Fact 83</strong>MSCI Emerging Market Index includes Indian stocks; FII inflows depend on this.</div>
+  <div class="rev-item"><strong>Fact 84</strong>Warren Buffett's principle: "Price is what you pay; value is what you get."</div>
+  <div class="rev-item"><strong>Fact 85</strong>India's forex reserves: approximately $650–670 billion (2025).</div>
+  <div class="rev-item"><strong>Fact 86</strong>Breakeven = Fixed Costs / (Selling Price − Variable Cost per unit).</div>
+  <div class="rev-item"><strong>Fact 87</strong>Working capital = Current Assets − Current Liabilities.</div>
+  <div class="rev-item"><strong>Fact 88</strong>Goodwill = Price paid for acquisition − Fair Market Value of net assets.</div>
+  <div class="rev-item"><strong>Fact 89</strong>Accounting equation: Assets = Liabilities + Equity. Always balances.</div>
+  <div class="rev-item"><strong>Fact 90</strong>SLM depreciation: equal each year. WDV: declining balance.</div>
+  <div class="rev-item"><strong>Fact 91</strong>India uses CPI (not WPI) as the official inflation benchmark.</div>
+  <div class="rev-item"><strong>Fact 92</strong>MSP: government's guaranteed price for agricultural produce.</div>
+  <div class="rev-item"><strong>Fact 93</strong>FEMA 1999 replaced FERA 1973 — more liberal foreign exchange law.</div>
+  <div class="rev-item"><strong>Fact 94</strong>Unicorn = private startup with $1B+ valuation. India has 100+ unicorns.</div>
+  <div class="rev-item"><strong>Fact 95</strong>In-SPACe: India's private sector space regulator (2020).</div>
+  <div class="rev-item"><strong>Fact 96</strong>Opportunity cost is the value of the next best alternative foregone.</div>
+  <div class="rev-item"><strong>Fact 97</strong>Normal profit = Zero economic profit (revenue covers all explicit + implicit costs).</div>
+  <div class="rev-item"><strong>Fact 98</strong>Viksit Bharat 2047: India's goal to become a developed nation by 100th independence.</div>
+  <div class="rev-item"><strong>Fact 99</strong>NSE handles ~90% of India's equity spot and derivatives volumes.</div>
+  <div class="rev-item"><strong>Fact 100</strong>India's Nifty PE (historical average): 18–22x. Check current level before interview.</div>
+</div>
+
+<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Interview Traps &amp; How to Avoid Them</h3>
+
+<div class="trap">
+  <div class="trap-label">Trap 01 — Sensex is on NSE</div>
+  Many candidates confuse the two. Sensex = BSE. Nifty = NSE.
+  <div class="trap-fix">✓ Fix: Always pair them — "Sensex is BSE's index, Nifty 50 is NSE's index."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 02 — "The government sets interest rates"</div>
+  It's RBI (through MPC) that sets monetary policy rates, not the government/Finance Ministry.
+  <div class="trap-fix">✓ Fix: "RBI's Monetary Policy Committee, chaired by the Governor, sets the repo rate."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 03 — "High NAV means expensive mutual fund"</div>
+  NAV of ₹500 is not more expensive than NAV of ₹20. What matters is % growth, not absolute NAV.
+  <div class="trap-fix">✓ Fix: Compare NAV growth % since inception, not absolute NAV level.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 04 — Confusing primary and secondary market</div>
+  "I bought Zomato shares in the IPO from the secondary market." IPO = primary market.
+  <div class="trap-fix">✓ Fix: Primary = company issues new shares. Secondary = investor-to-investor trading on exchange.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 05 — Saying SEBI was established in 1992</div>
+  SEBI was established in 1988 as a non-statutory body; given statutory powers by the SEBI Act in 1992.
+  <div class="trap-fix">✓ Fix: "SEBI was established in 1988 and given statutory authority in 1992."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 06 — Saying RBI was established in 1949</div>
+  RBI was established in 1935 and nationalised in 1949.
+  <div class="trap-fix">✓ Fix: "RBI was founded April 1, 1935. It was nationalised in 1949."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 07 — Confusing coupon rate and yield</div>
+  "The coupon rate changes with the market." No — coupon rate is fixed. Yield changes.
+  <div class="trap-fix">✓ Fix: Coupon rate = fixed, based on face value. Yield = changes with market price.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 08 — Saying Giffen goods are luxury goods</div>
+  Giffen goods are inferior staple goods (rice, bread for poor). Luxury goods where price signals status are called Veblen goods.
+  <div class="trap-fix">✓ Fix: Giffen = inferior, essential goods. Veblen = luxury status goods. Different concepts.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 09 — Saying "profit" when asked about revenue</div>
+  "Reliance's profit last year was ₹10 lakh crore." No — that's revenue. Profit is far lower.
+  <div class="trap-fix">✓ Fix: Always distinguish. Revenue = total sales. Profit = what's left after costs.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 10 — Saying RBI issues ₹1 notes</div>
+  The ₹1 coin and note are issued by the Ministry of Finance/Government, not RBI.
+  <div class="trap-fix">✓ Fix: All notes except ₹1 are issued by RBI. ₹1 is issued by the Government of India.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 11 — Confusing FII and FDI</div>
+  FII/FPI invests in stocks/bonds (portfolio investment, easily reversible). FDI is direct investment in businesses/factories (long-term, harder to reverse).
+  <div class="trap-fix">✓ Fix: FII = portfolio investment in securities. FDI = stake in actual businesses or setting up operations.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 12 — Saying "bear market means stocks go up"</div>
+  Bull = market rises (bull charges UP). Bear = market falls (bear swipes DOWN).
+  <div class="trap-fix">✓ Fix: Bull ↑ (economy is "charging forward"). Bear ↓ (economy is "sliding down").</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 13 — Overstating your investment knowledge</div>
+  If asked "do you invest in stocks?" and you say "yes, I track F&O derivatives daily," be ready for intense grilling.
+  <div class="trap-fix">✓ Fix: Say what you actually know. "I follow markets through newspapers and apps, I haven't invested yet but plan to." Honesty builds credibility.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 14 — Saying "the current account is about current issues"</div>
+  Current account in balance of payments tracks trade in goods, services, remittances — NOT "current events."
+  <div class="trap-fix">✓ Fix: Current account = trade in goods + services + remittances + investment income. Capital account = investments and loans.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 15 — Saying "every company should have a high PE ratio"</div>
+  Interviewers test whether you understand PE contextually. High PE stocks can be overvalued traps.
+  <div class="trap-fix">✓ Fix: High PE is justified for high-growth companies. For mature slow-growth companies, high PE means overvaluation. Always compare to industry average and historical range.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 16 — "Index funds are for beginners only"</div>
+  Warren Buffett has repeatedly said index funds are better than most active funds for most investors, including sophisticated ones.
+  <div class="trap-fix">✓ Fix: Index funds are not beginner products — they are a sophisticated, evidence-based approach. Acknowledge this in your answer.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 17 — Confusing CRR and SLR</div>
+  CRR must be kept as cash with RBI, earns no interest. SLR is kept as liquid assets (gold, G-Secs), which earn interest.
+  <div class="trap-fix">✓ Fix: CRR = pure cash with RBI (sterile). SLR = liquid but earning assets.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 18 — "Mutual funds guarantee returns"</div>
+  Mutual funds investing in equity or debt carry market risk. No mutual fund (except specific guaranteed-return products) promises a fixed return.
+  <div class="trap-fix">✓ Fix: Market-linked mutual funds carry risk. Only specific capital protection funds offer limited guarantees.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 19 — Giving today's exact Sensex/Nifty from days ago</div>
+  Interviewers sometimes ask "what is the Nifty today?" and the interview may be on a different day than you last checked.
+  <div class="trap-fix">✓ Fix: Always check Nifty/Sensex on the morning of your interview. Say "as of this morning, Nifty is approximately X, up/down Y% from yesterday."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 20 — Saying "shareholders get paid before bondholders in bankruptcy"</div>
+  In liquidation, creditors (including bondholders) are paid before equity shareholders. Shareholders are last.
+  <div class="trap-fix">✓ Fix: Priority in bankruptcy: secured creditors → unsecured creditors → preference shareholders → equity shareholders.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 21 — Confusing accounting profit and economic profit</div>
+  Accounting profit ignores opportunity costs (implicit costs). Economic profit includes both explicit and implicit costs.
+  <div class="trap-fix">✓ Fix: Economic profit = Accounting profit − Opportunity cost (implicit costs). Normal profit = when economic profit = 0.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 22 — Saying "a demat account is the same as a trading account"</div>
+  Different accounts, different roles. Both needed to invest in stocks.
+  <div class="trap-fix">✓ Fix: Demat = holds securities electronically. Trading = platform to place buy/sell orders. Trading account is linked to demat account and bank account.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 23 — Not knowing India's current economic figures</div>
+  Being asked GDP growth, inflation, repo rate and not knowing reveals you don't follow current affairs.
+  <div class="trap-fix">✓ Fix: Before every interview, check: Nifty/Sensex level, repo rate, CPI inflation, quarterly GDP growth, rupee vs dollar rate.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 24 — Saying "Nifty represents all Indian stocks"</div>
+  Nifty 50 represents only 50 stocks — though these represent about 65-70% of total NSE market cap.
+  <div class="trap-fix">✓ Fix: "Nifty 50 consists of 50 of India's largest and most liquid companies, representing about 65-70% of NSE's total market capitalisation."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 25 — "Zero coupon bonds pay zero returns"</div>
+  Zero coupon bonds have no periodic COUPON (interest), but generate return through price appreciation (bought at discount, redeemed at face value).
+  <div class="trap-fix">✓ Fix: "Zero coupon" means no coupon payments — but the total return is the difference between discounted issue price and face value at maturity. Often quite attractive.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 26 — Over-claiming knowledge of a company you mentioned</div>
+  If you say "I'm interested in Adani Green Energy" or "I admire Tata Motors," be prepared for deep questions on their business, financial metrics, current news.
+  <div class="trap-fix">✓ Fix: Only mention companies you've genuinely researched. Know their latest quarterly result, key metrics, recent news.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 27 — Confusing BSE's Sensex number with NSE's Nifty number</div>
+  They are different scales. Sensex ~80,000; Nifty ~24,000. Never quote Sensex's number for Nifty or vice versa.
+  <div class="trap-fix">✓ Fix: Note they are different indices on different scales. Check each separately.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 28 — "Banks create money out of thin air"</div>
+  Partially correct but misleading — banks create "credit money" through the money multiplier, but this is constrained by CRR, SLR, and capital adequacy requirements.
+  <div class="trap-fix">✓ Fix: "Banks create credit through the fractional reserve banking system — for every ₹100 deposited and with CRR of 4%, banks can lend ₹96, which when re-deposited allows further lending, multiplying the money supply."</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 29 — Confusing fiscal deficit and trade deficit</div>
+  Fiscal deficit = government spending > revenue. Trade deficit = imports > exports. Both can coexist but are different.
+  <div class="trap-fix">✓ Fix: Fiscal = government budget. Trade = goods/services exports vs imports. Current account includes trade + services + remittances.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 30 — "Lower share price means cheap stock"</div>
+  Price ₹10 stock is not cheaper than ₹1,000 stock. Cheapness is measured by PE ratio, PB ratio, relative to intrinsic value — not absolute price.
+  <div class="trap-fix">✓ Fix: Valuation is relative. A ₹10 stock with PE of 100 is far more "expensive" than a ₹1,000 stock with PE of 10.</div>
+</div>
+
+<div class="trap">
+  <div class="trap-label">Trap 31-50: Quick Fire Traps</div>
+  <div class="trap-fix">
+31: Don't say "inflation is always bad" — mild inflation (2-4%) is good for economic growth.<br>
+32: Don't say "the stock market = the economy" — markets price the future; economy measures the present.<br>
+33: Don't confuse merger (combine) and acquisition (one buys the other).<br>
+34: Don't say "FPO and IPO are the same" — FPO is subsequent issue; IPO is the first.<br>
+35: Don't confuse "interest rate" and "inflation rate" — related but different.<br>
+36: Don't say "SEBI regulates RBI" — both are independent regulators. RBI for banking; SEBI for capital markets.<br>
+37: Don't confuse inelastic with "no demand" — inelastic means demand doesn't change much with price, not that demand disappears.<br>
+38: Don't confuse hedging with speculation — hedging reduces risk; speculation accepts risk for reward.<br>
+39: Don't say "derivatives are always risky" — derivatives are used for risk reduction (hedging) by companies and investors.<br>
+40: Don't say "bonds are risk-free" — government bonds are near risk-free; corporate bonds have credit risk; all bonds have market risk (price changes with interest rates).<br>
+41: Don't confuse consumer surplus and producer surplus — consumer's gain from lower price; producer's gain from higher price.<br>
+42: Don't say "GDP only measures trade" — GDP measures all economic production within a country's border.<br>
+43: Don't say "equity = money invested" — equity = total assets minus total liabilities = owner's stake.<br>
+44: Don't confuse CPI and WPI — CPI = consumer-level prices (India's inflation benchmark); WPI = wholesale-level.<br>
+45: Don't say "NPA means loan is unpaid" — technically, NPA = 90+ days without any payment. Regular delayed payment is "Special Mention Account (SMA)" first.<br>
+46: Don't confuse "rights issue" and "bonus shares" — rights issue = offer to buy more shares (at discount); bonus = free shares from reserves.<br>
+47: Don't confuse "face value" and "book value" — face value = nominal/par value on share certificate; book value = net assets per share from balance sheet.<br>
+48: Don't say "a company's profit = cash in bank" — profit can include non-cash revenues; cash flow statement shows actual cash position.<br>
+49: Don't confuse "repo" and "reverse repo" — repo = RBI lends to banks; reverse repo = RBI borrows from banks.<br>
+50: Never say "I don't follow markets" in a finance interview — always say you follow key indices, read business news, and track macro indicators. Even 15 minutes daily on Moneycontrol or ET is sufficient.
+  </div>
+</div>
+
+<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Finance Terms Every IPM Aspirant Must Know</h3>
+
+<div style="background:white; border:1px solid var(--border); border-radius:6px; padding:1rem 1.5rem; margin:1rem 0;">
+  <div class="glossary-item"><span class="glossary-term">Equity</span><span class="glossary-def">Ownership stake in a company. Represented by shares. Residual claim on assets after debts.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Debt</span><span class="glossary-def">Borrowed money that must be repaid with interest. Bonds, loans, debentures.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Dividend</span><span class="glossary-def">Share of company profit paid to shareholders, typically as cash per share.</span></div>
+  <div class="glossary-item"><span class="glossary-term">IPO</span><span class="glossary-def">Initial Public Offering. First time a company sells shares to the public.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Market Cap</span><span class="glossary-def">Share price × Total shares outstanding. Total market value of company.</span></div>
+  <div class="glossary-item"><span class="glossary-term">PE Ratio</span><span class="glossary-def">Price per share / EPS. How much investors pay per rupee of earnings. Valuation metric.</span></div>
+  <div class="glossary-item"><span class="glossary-term">EPS</span><span class="glossary-def">Earnings Per Share = PAT / Shares outstanding. Profit per share.</span></div>
+  <div class="glossary-item"><span class="glossary-term">ROE</span><span class="glossary-def">Return on Equity = Net Profit / Equity × 100. Management efficiency metric.</span></div>
+  <div class="glossary-item"><span class="glossary-term">EBITDA</span><span class="glossary-def">Earnings Before Interest, Tax, Depreciation, Amortisation. Core operational profit.</span></div>
+  <div class="glossary-item"><span class="glossary-term">PAT</span><span class="glossary-def">Profit After Tax. Net profit. The "bottom line" — what owners actually earn.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Repo Rate</span><span class="glossary-def">Rate at which RBI lends to commercial banks. Key monetary policy tool.</span></div>
+  <div class="glossary-item"><span class="glossary-term">CRR</span><span class="glossary-def">Cash Reserve Ratio. % of deposits kept as cash with RBI. Earns no interest.</span></div>
+  <div class="glossary-item"><span class="glossary-term">SLR</span><span class="glossary-def">Statutory Liquidity Ratio. % of deposits in liquid assets (G-Secs, gold).</span></div>
+  <div class="glossary-item"><span class="glossary-term">NAV</span><span class="glossary-def">Net Asset Value. Per-unit price of a mutual fund. Calculated daily.</span></div>
+  <div class="glossary-item"><span class="glossary-term">SIP</span><span class="glossary-def">Systematic Investment Plan. Fixed periodic investments in mutual funds.</span></div>
+  <div class="glossary-item"><span class="glossary-term">G-Sec</span><span class="glossary-def">Government Security. Bonds issued by Indian government through RBI. Near risk-free.</span></div>
+  <div class="glossary-item"><span class="glossary-term">T-Bill</span><span class="glossary-def">Treasury Bill. Short-term (91/182/364 day) zero-coupon government debt.</span></div>
+  <div class="glossary-item"><span class="glossary-term">FII/FPI</span><span class="glossary-def">Foreign Institutional/Portfolio Investor. Foreign entities investing in Indian markets.</span></div>
+  <div class="glossary-item"><span class="glossary-term">DII</span><span class="glossary-def">Domestic Institutional Investor. Indian institutions like LIC, mutual funds.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Demat Account</span><span class="glossary-def">Dematerialised account holding securities electronically. Like bank account for shares.</span></div>
+  <div class="glossary-item"><span class="glossary-term">NSDL</span><span class="glossary-def">National Securities Depository Limited. India's first depository (1996). Backed by NSE.</span></div>
+  <div class="glossary-item"><span class="glossary-term">CDSL</span><span class="glossary-def">Central Depository Services Limited. Second depository (1999). Backed by BSE.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Bull Market</span><span class="glossary-def">Sustained 20%+ market rise driven by optimism and growth.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Bear Market</span><span class="glossary-def">Sustained 20%+ market decline driven by pessimism and fear.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Yield</span><span class="glossary-def">Return on a bond, changing inversely with price. Not the same as coupon rate.</span></div>
+  <div class="glossary-item"><span class="glossary-term">YTM</span><span class="glossary-def">Yield to Maturity. Total return if bond held to maturity, including capital gain/loss.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Credit Rating</span><span class="glossary-def">Assessment of borrower's ability to repay. AAA = best. CRISIL, ICRA, CARE in India.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Fiscal Deficit</span><span class="glossary-def">Government's total expenditure minus total revenue (excl. borrowings).</span></div>
+  <div class="glossary-item"><span class="glossary-term">Current Account Deficit</span><span class="glossary-def">Imports > Exports in goods, services, remittances. India typically runs a CAD.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Inflation</span><span class="glossary-def">General rise in price levels over time. Reduces purchasing power of money.</span></div>
+  <div class="glossary-item"><span class="glossary-term">GDP</span><span class="glossary-def">Gross Domestic Product. Total value of goods/services produced in a country in a year.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Monetary Policy</span><span class="glossary-def">RBI's use of interest rates, CRR, SLR, OMOs to control inflation and growth.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Free-Float</span><span class="glossary-def">Shares actually available for public trading (excluding promoter holdings).</span></div>
+  <div class="glossary-item"><span class="glossary-term">Circuit Breaker</span><span class="glossary-def">Auto-halt in market trading when index moves 10/15/20% in either direction.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Hedging</span><span class="glossary-def">Reducing risk by taking an offsetting position. Like insurance for investments.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Derivative</span><span class="glossary-def">Financial contract whose value derives from an underlying asset (stock, bond, commodity).</span></div>
+  <div class="glossary-item"><span class="glossary-term">Futures</span><span class="glossary-def">Obligatory contract to buy/sell asset at fixed price on future date. Used by farmers, airlines.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Options</span><span class="glossary-def">Right (not obligation) to buy (Call) or sell (Put) at specified price. Buyer pays premium.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Short Selling</span><span class="glossary-def">Sell borrowed shares, buy back cheaper, profit from decline. Risky if price rises.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Goodwill</span><span class="glossary-def">Intangible asset from acquisition. Price paid minus fair market value of net assets.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Working Capital</span><span class="glossary-def">Current Assets minus Current Liabilities. Measures short-term operational liquidity.</span></div>
+  <div class="glossary-item"><span class="glossary-term">NPA</span><span class="glossary-def">Non-Performing Asset. Bank loan with no payment for 90+ days.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Venture Capital</span><span class="glossary-def">Funding for high-risk early-stage startups in exchange for equity stake.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Unicorn</span><span class="glossary-def">Private startup valued at $1 billion or more. India has 100+.</span></div>
+  <div class="glossary-item"><span class="glossary-term">MSP</span><span class="glossary-def">Minimum Support Price. Government's guaranteed price for agricultural produce.</span></div>
+  <div class="glossary-item"><span class="glossary-term">GST</span><span class="glossary-def">Goods and Services Tax. Unified indirect tax from July 1, 2017. Slabs: 0/5/12/18/28%.</span></div>
+  <div class="glossary-item"><span class="glossary-term">FEMA</span><span class="glossary-def">Foreign Exchange Management Act (1999). Governs foreign currency transactions in India.</span></div>
+  <div class="glossary-item"><span class="glossary-term">IBC</span><span class="glossary-def">Insolvency and Bankruptcy Code (2016). Resolves corporate insolvency in time-bound manner.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Quantitative Easing</span><span class="glossary-def">Central bank creates money to buy bonds when rates near zero. Stimulates economy.</span></div>
+  <div class="glossary-item"><span class="glossary-term">Inverted Yield Curve</span><span class="glossary-def">Short-term bond yields > long-term yields. Historically predicts recession.</span></div>
+</div>
+
+<div class="callout" style="margin-top:2.5rem;">
+  <strong>Final Interview Preparation Checklist</strong><br><br>
+  ✅ Check Nifty/Sensex level on interview morning<br>
+  ✅ Know current repo rate (RBI website)<br>
+  ✅ Know latest CPI inflation figure<br>
+  ✅ Read one business headline on interview day<br>
+  ✅ Know 3-4 major stocks in Nifty 50 and their current prices<br>
+  ✅ Review depreciation methods (commerce stream candidates)<br>
+  ✅ Be ready for indifference curve + demand/supply diagrams<br>
+  ✅ Practice explaining Sensex and Nifty in 60 seconds<br>
+  ✅ Know the RBI Governor's name<br>
+  ✅ Know at least 1-2 current finance news stories (budget, rate decisions, IPOs)<br>
+  ✅ Understand the P&L statement flow (Revenue → EBITDA → PAT)<br>
+  ✅ Be able to explain ratio analysis in context of investing decisions
+</div>
+
+<div style="text-align:center; margin-top:3rem; padding: 2rem; background: var(--ink); border-radius:8px; color: var(--gold-light);">
+  <div style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Finance Bible for IPM Interviews</div>
+  <div style="font-size:0.85rem; color:#a0987a;">Compiled from real interview transcripts: IIM Shillong · IIM Sirmaur · IIM Kozhikode · IIM Ranchi · IIM Amritsar · IIM Indore</div>
+  <div style="margin-top:0.8rem; font-size:0.8rem; color:#666;">Always verify current figures (Nifty, repo rate, inflation) before each interview</div>
+</div>
+
+</main>
+</body>
+</html>

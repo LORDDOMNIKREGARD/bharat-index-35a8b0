@@ -1,0 +1,2228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistics Mastery — IPM Interview Prep</title>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --indigo: #4361EE;
+    --indigo-light: #748FFC;
+    --coral: #F77F00;
+    --white: #FAFBFF;
+    --surface: #F0F2FF;
+    --card: #FFFFFF;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --success: #10B981;
+    --error: #EF4444;
+    --border: #E2E8FF;
+    --formula-bg: #0D1B2A;
+    --formula-text: #A5F3FC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--white); color: var(--text); line-height: 1.7; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  .header-inner {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 60px;
+  }
+  .logo { color: #fff; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.3px; }
+  .logo span { color: var(--indigo-light); }
+  nav { display: flex; gap: 4px; overflow-x: auto; }
+  nav a {
+    color: #aab; font-size: 0.78rem; text-decoration: none;
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2a6c 60%, #23074d 100%);
+    color: white; text-align: center; padding: 64px 24px 56px;
+  }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -1px; line-height: 1.1; }
+  .hero h1 em { color: var(--indigo-light); font-style: normal; }
+  .hero p { color: #9ca9c4; font-size: 1.05rem; margin-top: 14px; max-width: 600px; margin-inline: auto; }
+  .hero-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+  .chip {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #c9d4f0; padding: 5px 14px; border-radius: 100px; font-size: 0.8rem;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1300px; margin: 0 auto; padding: 40px 24px; display: grid; grid-template-columns: 240px 1fr; gap: 32px; }
+  @media (max-width: 900px) { .container { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+  /* ── SIDEBAR ── */
+  .sidebar { position: sticky; top: 72px; height: fit-content; }
+  .sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .sidebar-card h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+  .sidebar-card a { display: block; color: var(--text); text-decoration: none; padding: 6px 10px; border-radius: 8px; font-size: 0.85rem; transition: background 0.12s; }
+  .sidebar-card a:hover { background: var(--surface); color: var(--indigo); }
+  .sidebar-card a.active { background: var(--indigo); color: white; }
+  .progress-bar { background: var(--surface); border-radius: 100px; height: 6px; margin-top: 20px; overflow: hidden; }
+  .progress-fill { background: linear-gradient(90deg, var(--indigo), var(--coral)); height: 100%; border-radius: 100px; transition: width 0.5s; }
+  .progress-label { font-size: 0.72rem; color: var(--muted); margin-top: 6px; }
+
+  /* ── CONTENT ── */
+  .content { display: flex; flex-direction: column; gap: 32px; }
+
+  /* ── SECTION ── */
+  .section { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+  .section-header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3055 100%);
+    color: white; padding: 24px 28px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-icon { font-size: 1.8rem; }
+  .section-header h2 { font-size: 1.3rem; font-weight: 800; }
+  .section-header p { color: #9db4d0; font-size: 0.88rem; margin-top: 2px; }
+  .section-body { padding: 28px; }
+
+  /* ── CONCEPT CARD ── */
+  .concept { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .concept:last-child { margin-bottom: 0; }
+  .concept-title {
+    background: var(--surface); padding: 14px 20px;
+    font-weight: 700; font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    user-select: none; transition: background 0.15s;
+  }
+  .concept-title:hover { background: #e8ebff; }
+  .concept-title .tag {
+    font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+    background: var(--indigo); color: white; padding: 2px 8px; border-radius: 100px;
+  }
+  .concept-body { padding: 20px; display: none; }
+  .concept-body.open { display: block; }
+  .concept-toggle { color: var(--indigo); font-size: 1.2rem; transition: transform 0.2s; }
+  .concept-toggle.open { transform: rotate(45deg); }
+
+  /* ── FORMULA BOX ── */
+  .formula {
+    background: var(--formula-bg); color: var(--formula-text);
+    padding: 14px 18px; border-radius: 10px; margin: 14px 0;
+    font-family: 'Courier New', monospace; font-size: 0.95rem;
+    border-left: 4px solid var(--indigo);
+    overflow-x: auto;
+  }
+  .formula .label { color: #64748b; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  /* ── MINI CARDS ── */
+  .mini-card { background: var(--surface); border-radius: 10px; padding: 16px; }
+  .mini-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--indigo); margin-bottom: 6px; }
+  .mini-card p { font-size: 0.83rem; color: var(--text); line-height: 1.5; }
+
+  /* ── BUSINESS APP BOX ── */
+  .biz-box {
+    background: linear-gradient(135deg, #fff7ed, #fef3c7);
+    border: 1px solid #fde68a; border-radius: 10px; padding: 16px; margin-top: 14px;
+  }
+  .biz-box .biz-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #92400e; margin-bottom: 8px; }
+  .biz-box ul { padding-left: 18px; }
+  .biz-box li { font-size: 0.85rem; margin-bottom: 4px; }
+
+  /* ── QUESTIONS ── */
+  .questions-section { margin-top: 24px; }
+  .questions-section h3 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 14px; font-weight: 700; }
+  .q-list { list-style: none; counter-reset: q-counter; }
+  .q-item {
+    counter-increment: q-counter;
+    border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 10px; overflow: hidden;
+  }
+  .q-top {
+    padding: 12px 16px; display: flex; align-items: flex-start; gap: 12px;
+    cursor: pointer; background: #fff; transition: background 0.12s;
+  }
+  .q-top:hover { background: var(--surface); }
+  .q-num {
+    background: var(--indigo); color: white; border-radius: 6px;
+    width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+  }
+  .q-text { font-size: 0.9rem; flex: 1; font-weight: 500; }
+  .q-badge { font-size: 0.68rem; color: var(--muted); white-space: nowrap; }
+  .q-answer { padding: 12px 16px 14px 54px; background: #f8faff; border-top: 1px solid var(--border); display: none; font-size: 0.88rem; color: #334; line-height: 1.6; }
+  .q-answer.open { display: block; }
+  .q-answer strong { color: var(--indigo); }
+  .ans-label { font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--success); margin-bottom: 6px; }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 14px 0; }
+  th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-size: 0.78rem; }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: var(--surface); }
+
+  /* ── TAG BAND ── */
+  .tag-band { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; }
+  .tag-band span {
+    font-size: 0.72rem; padding: 3px 10px; border-radius: 100px;
+    background: rgba(67, 97, 238, 0.12); color: var(--indigo); font-weight: 600;
+  }
+
+  /* ── ALERT ── */
+  .alert { padding: 12px 16px; border-radius: 10px; margin: 12px 0; font-size: 0.87rem; }
+  .alert.info { background: #eff6ff; border-left: 4px solid #3b82f6; color: #1e40af; }
+  .alert.warn { background: #fff7ed; border-left: 4px solid #f59e0b; color: #92400e; }
+  .alert.tip  { background: #f0fdf4; border-left: 4px solid #10b981; color: #065f46; }
+
+  /* ── QUIZ ── */
+  #quiz-section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; overflow: hidden;
+  }
+  .quiz-header {
+    background: linear-gradient(135deg, #23074d 0%, #cc5333 100%);
+    color: white; padding: 28px; text-align: center;
+  }
+  .quiz-header h2 { font-size: 1.6rem; font-weight: 900; }
+  .quiz-header p { color: rgba(255,255,255,0.7); margin-top: 6px; }
+  .quiz-body { padding: 32px; }
+
+  .quiz-progress { margin-bottom: 28px; }
+  .quiz-track { background: var(--surface); border-radius: 100px; height: 8px; overflow: hidden; }
+  .quiz-fill {
+    background: linear-gradient(90deg, var(--indigo), var(--coral));
+    height: 100%; border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+  .quiz-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+
+  .quiz-card { display: none; }
+  .quiz-card.active { display: block; animation: slideIn 0.3s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+
+  .quiz-q { font-size: 1.05rem; font-weight: 700; margin-bottom: 20px; line-height: 1.5; }
+  .quiz-q .q-cat { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--indigo); margin-bottom: 8px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    background: var(--surface); border: 2px solid transparent;
+    border-radius: 10px; padding: 12px 16px; text-align: left;
+    cursor: pointer; font-size: 0.9rem; font-weight: 500;
+    transition: all 0.15s;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--indigo); background: #eef0ff; }
+  .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+  .option-btn.wrong { background: #fee2e2; border-color: var(--error); color: #991b1b; }
+  .option-btn:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 16px; padding: 12px 16px; border-radius: 10px;
+    font-size: 0.88rem; display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: #d1fae5; color: #065f46; border-left: 4px solid var(--success); }
+  .quiz-feedback.wrong-fb { background: #fee2e2; color: #991b1b; border-left: 4px solid var(--error); }
+
+  .quiz-nav { display: flex; justify-content: flex-end; margin-top: 20px; }
+  .btn {
+    background: var(--indigo); color: white; border: none;
+    padding: 10px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .btn:hover { background: #3451d1; }
+  .btn:disabled { background: #cbd5e1; cursor: default; }
+  .btn.coral { background: var(--coral); }
+  .btn.coral:hover { background: #d96a00; }
+
+  /* Results */
+  #quiz-result { display: none; text-align: center; padding: 40px 20px; }
+  .result-ring {
+    width: 130px; height: 130px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 2.2rem; font-weight: 900; margin: 0 auto 24px;
+    background: conic-gradient(var(--indigo) calc(var(--pct, 0) * 1%), var(--surface) 0);
+    position: relative;
+  }
+  .result-ring::before {
+    content: '';
+    position: absolute; inset: 10px;
+    background: white; border-radius: 50%;
+  }
+  .result-ring span { position: relative; z-index: 1; line-height: 1; }
+  .result-ring small { position: relative; z-index: 1; font-size: 0.65rem; font-weight: 600; color: var(--muted); }
+  #result-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
+  #result-msg { color: var(--muted); margin-bottom: 24px; font-size: 0.95rem; }
+  .result-breakdown { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .rb-item { background: var(--surface); border-radius: 10px; padding: 14px 22px; text-align: center; }
+  .rb-item strong { display: block; font-size: 1.4rem; font-weight: 900; }
+  .rb-item span { font-size: 0.75rem; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); color: #6b7a99;
+    text-align: center; padding: 28px 24px; font-size: 0.82rem; margin-top: 60px;
+  }
+  footer strong { color: var(--indigo-light); }
+
+  /* Sticky CTA */
+  .sticky-quiz {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--coral); color: white; padding: 12px 20px;
+    border-radius: 100px; font-weight: 700; font-size: 0.85rem;
+    cursor: pointer; box-shadow: 0 4px 20px rgba(247,127,0,0.4);
+    text-decoration: none; transition: transform 0.15s;
+    display: flex; align-items: center; gap: 8px;
+    z-index: 99;
+  }
+  .sticky-quiz:hover { transform: scale(1.05); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Stats<span>Master</span> — IPM Prep</div>
+    <nav>
+      <a href="#central-tendency">Central Tendency</a>
+      <a href="#dispersion">Dispersion</a>
+      <a href="#probability">Probability</a>
+      <a href="#distributions">Distributions</a>
+      <a href="#correlation">Correlation</a>
+      <a href="#index-numbers">Index Numbers</a>
+      <a href="#hypothesis">Hypothesis</a>
+      <a href="#quiz-section">🎯 Quiz</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Statistics for <em>IPM Interviews</em><br>A Complete Mastery Guide</h1>
+  <p>Built from real IIM interview transcripts — every concept, formula, and question that actually comes up.</p>
+  <div class="hero-chips">
+    <span class="chip">📊 15 Core Topics</span>
+    <span class="chip">💡 100+ Practice Questions</span>
+    <span class="chip">🏢 Business Applications</span>
+    <span class="chip">🎯 25-Question Quiz</span>
+    <span class="chip">📋 IIM Amritsar · Ranchi · Indore · Kozhikode · Shillong · Sirmaur</span>
+  </div>
+</div>
+
+<div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3>Topics</h3>
+      <a href="#central-tendency">Measures of Central Tendency</a>
+      <a href="#means">AM · GM · HM</a>
+      <a href="#dispersion">Measures of Dispersion</a>
+      <a href="#skewness">Skewness & Kurtosis</a>
+      <a href="#probability">Probability Foundations</a>
+      <a href="#conditional">Conditional & Bayes</a>
+      <a href="#distributions">Probability Distributions</a>
+      <a href="#bernoulli">Bernoulli & Binomial</a>
+      <a href="#poisson">Poisson Distribution</a>
+      <a href="#normal">Normal Distribution</a>
+      <a href="#correlation">Correlation & Regression</a>
+      <a href="#index-numbers">Index Numbers</a>
+      <a href="#hypothesis">Hypothesis Testing</a>
+      <a href="#clt">Central Limit Theorem</a>
+      <a href="#quiz-section">🎯 Take the Quiz</a>
+      <div class="progress-bar"><div class="progress-fill" id="reading-progress" style="width:0%"></div></div>
+      <div class="progress-label" id="progress-label">0% of guide read</div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- ═══════════════════ 1. CENTRAL TENDENCY ═══════════════════ -->
+    <section class="section" id="central-tendency">
+      <div class="section-header">
+        <div class="section-icon">📐</div>
+        <div>
+          <h2>Measures of Central Tendency</h2>
+          <p>Mean · Median · Mode — the three pillars every IIM panel asks about</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <!-- MEAN -->
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Mean (Arithmetic Average) <span class="tag">Core</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>The mean is the sum of all observations divided by the number of observations. It considers every data point and is the most widely used measure of central tendency.</p>
+            <div class="formula">
+              <div class="label">Arithmetic Mean</div>
+              x̄ = (Σxᵢ) / n<br><br>
+              Weighted Mean = Σ(wᵢ × xᵢ) / Σwᵢ
+            </div>
+            <p><strong>When to use:</strong> When data is roughly symmetric and there are no extreme outliers. e.g., average test scores, average revenue.</p>
+            <p><strong>Limitation:</strong> Highly sensitive to outliers. If Mukesh Ambani walks into a room of 100 people, the mean income of the room skyrockets — but no one in the room actually "has" the mean income.</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Average Order Value (AOV) in e-commerce</li>
+                <li>Mean salary in HR compensation benchmarking</li>
+                <li>Average revenue per user (ARPU) for SaaS companies</li>
+                <li>Mean time between failures (MTBF) in quality control</li>
+                <li>Portfolio average return in finance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- MEDIAN -->
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Median <span class="tag">Core</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>The median is the middle value when data is arranged in order. For an even number of observations, it is the average of the two middle values.</p>
+            <div class="formula">
+              <div class="label">Median Position</div>
+              Odd n → [(n+1)/2]th term<br>
+              Even n → Average of (n/2)th and [(n/2)+1]th terms<br><br>
+              Grouped data: M = L + [(n/2 − cf) / f] × h<br>
+              where L=lower class boundary, cf=cumulative freq, f=freq of median class, h=class width
+            </div>
+            <p><strong>Key insight:</strong> The median is resistant to outliers. This is why median household income is a better measure of a typical household's earning than mean income.</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Median salary in job listings (fairer representation than mean)</li>
+                <li>Median house price — unaffected by a few luxury properties</li>
+                <li>IIM placement reports often use median salary to represent typical outcomes</li>
+                <li>Median delivery time in logistics</li>
+              </ul>
+            </div>
+            <div class="alert tip">💡 <strong>Interview Tip:</strong> "Why do IIM placement brochures show median salary and not mean?" — The median is not distorted by a few students who got unusually high packages.</div>
+          </div>
+        </div>
+
+        <!-- MODE -->
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Mode <span class="tag">Core</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>The mode is the value that appears most frequently in a dataset. A dataset can have no mode (all values unique), one mode (unimodal), two modes (bimodal), or more.</p>
+            <div class="formula">
+              <div class="label">Mode for Grouped Data (Czuber's Formula)</div>
+              Mode = L + [f₁ − f₀] / [2f₁ − f₀ − f₂] × h<br><br>
+              where f₁ = highest frequency, f₀ = preceding frequency, f₂ = following frequency
+            </div>
+            <p><strong>When to use:</strong> Categorical data, or when you want the "most popular" option.</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Most popular product size in inventory management (e.g., size M in clothing)</li>
+                <li>Most common purchase time in retail analytics</li>
+                <li>Most frequently cited customer complaint in feedback analysis</li>
+                <li>Modal payment method on a platform (UPI, card, COD)</li>
+              </ul>
+            </div>
+            <div class="formula">
+              <div class="label">Empirical Relationship (Karl Pearson)</div>
+              Mode ≈ 3 × Median − 2 × Mean
+            </div>
+            <div class="alert info">📌 This empirical relation holds for moderately skewed distributions. It lets you estimate one if you know the other two.</div>
+          </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <table>
+          <tr><th>Measure</th><th>Sensitive to Outliers?</th><th>Best Used When</th><th>Real Example</th></tr>
+          <tr><td><strong>Mean</strong></td><td>Yes ✗</td><td>Symmetric data, no outliers</td><td>Average monthly temperature</td></tr>
+          <tr><td><strong>Median</strong></td><td>No ✓</td><td>Skewed data, outliers present</td><td>Median income, median home price</td></tr>
+          <tr><td><strong>Mode</strong></td><td>No ✓</td><td>Categorical/discrete data</td><td>Best-selling shoe size</td></tr>
+        </table>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Central Tendency</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">1</div>
+                <div class="q-text">What is the difference between mean, median, and mode? Why do we need all three?</div>
+                <div class="q-badge">IIM Amritsar · Ranchi</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Mean</strong> is the arithmetic average — sum divided by count. Sensitive to outliers. <strong>Median</strong> is the middle value when sorted — robust to extreme values. <strong>Mode</strong> is the most frequent value — useful for categorical data.<br><br>
+                We need all three because they capture different aspects of the data's centre. In a perfectly symmetric distribution, all three are equal. In a right-skewed distribution (like income), mean > median > mode, meaning mean overstates the "typical" value. The three together give a complete picture.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">2</div>
+                <div class="q-text">Give a business example where median is more useful than mean.</div>
+                <div class="q-badge">IIM Ranchi · Amritsar</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Executive compensation and employee salaries:</strong> If a company has 100 employees earning ₹30,000/month and a CEO earning ₹50,00,000/month, the mean salary would be approximately ₹5.27 lakh — far above what 99% of employees actually earn. The median of ~₹30,000 is far more representative of the typical employee's experience. This is why placement reports and government wage surveys use median figures.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">3</div>
+                <div class="q-text">If mean=50 and median=45, which way is the data skewed?</div>
+                <div class="q-badge">IIM Amritsar</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                When <strong>mean > median</strong>, the data is <strong>right-skewed (positively skewed)</strong>. There are some very high values pulling the mean upward while the median stays near the centre. The tail extends towards the right. Example: income distribution — most people earn moderate incomes, but a few billionaires pull the mean to the right.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">4</div>
+                <div class="q-text">You manage a garment store. How would you use mean, median, and mode for business benefit?</div>
+                <div class="q-badge">IIM Amritsar (actual question)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Mode:</strong> Order the most units of the most sold size (e.g., size M is the mode of sizes sold) — critical for inventory management.<br>
+                <strong>Median:</strong> Find the median purchase value to set discount thresholds — half your customers spend above/below this amount.<br>
+                <strong>Mean:</strong> Calculate average revenue per customer to forecast total revenue and set budgets.<br>
+                <strong>Combined:</strong> If mean sale value >> median sale value, a few high-ticket items are pulling the average up — you should stock more premium items and also ensure mid-range availability for typical customers.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">5</div>
+                <div class="q-text">What does it mean when mean = median = mode?</div>
+                <div class="q-badge">Conceptual</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                When all three measures of central tendency are equal, the distribution is perfectly <strong>symmetrical (bell-shaped or normal distribution)</strong>. The data has no skew. This is the ideal condition assumed by many statistical tests. In real life, it rarely holds exactly but is approximated by things like human heights within a homogeneous population or IQ scores across a large sample.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 2. AM GM HM ═══════════════════ -->
+    <section class="section" id="means">
+      <div class="section-header">
+        <div class="section-icon">⚖️</div>
+        <div>
+          <h2>Types of Means: AM, GM, HM</h2>
+          <p>Three means for three different contexts — and their crucial relationship</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid-3">
+          <div class="mini-card">
+            <h4>Arithmetic Mean (AM)</h4>
+            <p>Sum of values divided by count. Most common. Best for additive data (temperatures, scores).</p>
+            <div class="formula" style="font-size:0.85rem">AM = (a + b) / 2<br>for two values</div>
+          </div>
+          <div class="mini-card">
+            <h4>Geometric Mean (GM)</h4>
+            <p>nth root of the product of n values. Best for multiplicative/proportional data (growth rates, ratios).</p>
+            <div class="formula" style="font-size:0.85rem">GM = ⁿ√(x₁·x₂·...·xₙ)<br>= antilog(Σlog x / n)</div>
+          </div>
+          <div class="mini-card">
+            <h4>Harmonic Mean (HM)</h4>
+            <p>Reciprocal of arithmetic mean of reciprocals. Best for rates (speed, price-earnings ratio).</p>
+            <div class="formula" style="font-size:0.85rem">HM = n / Σ(1/xᵢ)<br>For two: HM = 2ab/(a+b)</div>
+          </div>
+        </div>
+
+        <div class="formula">
+          <div class="label">Golden Inequality (for positive values)</div>
+          HM ≤ GM ≤ AM<br><br>
+          Equality holds only when all values are equal.<br><br>
+          Also: GM² = AM × HM  (for two positive numbers)
+        </div>
+
+        <div class="alert info">📌 <strong>Real Insight:</strong> If you drive from Delhi to Agra at 60 km/h and return at 40 km/h, your average speed is NOT (60+40)/2 = 50 km/h. It's the HM = 2(60×40)/(60+40) = 48 km/h. The AM is wrong here because you spend more time at the slower speed.</div>
+
+        <div class="biz-box">
+          <div class="biz-label">💼 Business Applications</div>
+          <ul>
+            <li><strong>GM:</strong> CAGR (Compound Annual Growth Rate) uses geometric mean — ₹100 growing to ₹200 in 3 years: CAGR = (200/100)^(1/3) − 1 = 26%</li>
+            <li><strong>GM:</strong> Average return on investment across multiple periods (because returns compound)</li>
+            <li><strong>HM:</strong> Average P/E ratio when you have equal rupee investment across stocks</li>
+            <li><strong>HM:</strong> Fleet average fuel efficiency when equal distance is covered by each vehicle</li>
+            <li><strong>AM:</strong> Average sales across regions, average cost per unit</li>
+          </ul>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — AM, GM, HM</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">6</div>
+                <div class="q-text">What is the relationship between AM, GM, and HM?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                For any set of positive numbers: <strong>AM ≥ GM ≥ HM</strong>, with equality holding when all values are equal.<br>
+                For two positive numbers a and b:<br>
+                • AM = (a+b)/2<br>
+                • GM = √(ab)<br>
+                • HM = 2ab/(a+b)<br>
+                • GM² = AM × HM (a very useful identity)<br><br>
+                This relationship is known as the AM-GM-HM inequality and is fundamental in optimization problems.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">7</div>
+                <div class="q-text">Why do we use geometric mean to calculate average investment returns?</div>
+                <div class="q-badge">Finance Application</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Investment returns compound — each period's return builds on the previous. Suppose an investment grows +50% one year and falls −50% the next. AM = 0%, suggesting no loss. But actually: ₹100 → ₹150 → ₹75. The GM = √(1.5 × 0.5) − 1 = √0.75 − 1 ≈ −13.4%, correctly capturing the actual loss. Geometric mean is the only correct measure when values are multiplicative or when dealing with percentage changes over time.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">8</div>
+                <div class="q-text">A person travels equal distances at speeds of 30, 40, and 50 km/h. What is the average speed?</div>
+                <div class="q-badge">Conceptual (HM)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                When <strong>equal distances</strong> are covered at different speeds, use HM:<br>
+                HM = 3 / (1/30 + 1/40 + 1/50)<br>
+                = 3 / (0.0333 + 0.025 + 0.02)<br>
+                = 3 / 0.0783 ≈ <strong>38.3 km/h</strong><br><br>
+                Note: If equal TIME was spent at each speed, you'd use AM = (30+40+50)/3 = 40 km/h. The denominator (distance vs time) determines which mean to use.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 3. DISPERSION ═══════════════════ -->
+    <section class="section" id="dispersion">
+      <div class="section-header">
+        <div class="section-icon">📏</div>
+        <div>
+          <h2>Measures of Dispersion</h2>
+          <p>Range · Variance · Standard Deviation · CV — how spread out is the data?</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Variance and Standard Deviation <span class="tag">Most Asked</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p><strong>Variance (σ²)</strong> measures the average squared deviation from the mean. Squaring ensures all deviations are positive and penalises large deviations more.</p>
+            <p><strong>Standard Deviation (σ)</strong> is the square root of variance — bringing it back to the original unit. It is the most important measure of spread.</p>
+            <div class="formula">
+              <div class="label">Population Variance</div>
+              σ² = Σ(xᵢ − μ)² / N<br><br>
+              σ = √[Σ(xᵢ − μ)² / N]  ← Standard Deviation<br><br>
+              <div class="label">Sample Variance (Bessel's correction)</div>
+              s² = Σ(xᵢ − x̄)² / (n−1)   ← divides by n−1 for unbiased estimate
+            </div>
+            <p><strong>Why square the deviations?</strong> If we just averaged deviations, positive and negative ones would cancel out (the sum of deviations from the mean is always zero). Squaring solves this.</p>
+            <p><strong>Why SD and not variance?</strong> Variance is in squared units (e.g., ₹²). SD is in the original unit (₹), making it interpretable alongside the mean.</p>
+            <div class="alert info">📌 <strong>68-95-99.7 Rule (Normal Distribution):</strong> In a normal distribution — 68% of data lies within ±1σ, 95% within ±2σ, 99.7% within ±3σ.</div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li><strong>Risk in finance:</strong> SD of stock returns = volatility. Higher SD = riskier investment</li>
+                <li><strong>Quality control:</strong> Six Sigma aims to reduce process SD so that defects are 6σ away from mean</li>
+                <li><strong>HR:</strong> SD of employee performance scores to identify outlier performers</li>
+                <li><strong>Marketing:</strong> SD of customer spending to segment audiences</li>
+                <li><strong>Supply chain:</strong> SD of demand variability to set safety stock levels</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Coefficient of Variation (CV) <span class="tag">Relative Measure</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>CV is SD expressed as a percentage of the mean. It allows comparison of variability across datasets with different units or scales — an absolute SD of ₹10 means very different things if the mean is ₹50 vs ₹5,000.</p>
+            <div class="formula">
+              <div class="label">Coefficient of Variation</div>
+              CV = (σ / μ) × 100%<br><br>
+              Lower CV = More consistent/stable<br>
+              Higher CV = More variable/risky
+            </div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Comparing volatility of two stocks (e.g., stock A: mean=₹500, SD=₹50 → CV=10%; Stock B: mean=₹100, SD=₹15 → CV=15%. Stock B is MORE volatile despite lower absolute SD)</li>
+                <li>Comparing consistency of two manufacturing processes</li>
+                <li>Investor choosing between two mutual funds with different NAVs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Range and Mean Deviation
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Range</h4>
+                <p>Range = Maximum − Minimum<br>Simplest measure of spread. Very sensitive to outliers. Useful for quick estimates (e.g., stock price range, temperature range).</p>
+              </div>
+              <div class="mini-card">
+                <h4>Mean Deviation</h4>
+                <p>MD = Σ|xᵢ − A| / n, where A is mean/median.<br>Uses absolute values instead of squares — less popular than SD but intuitive.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Dispersion</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">9</div>
+                <div class="q-text">What is standard deviation and why is it preferred over variance?</div>
+                <div class="q-badge">IIM Amritsar · Ranchi · Shillong (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Standard deviation is the square root of variance — the average squared deviation from the mean. SD is preferred because: (1) It is in the same unit as the original data, making it interpretable alongside the mean. (2) Variance is in squared units (e.g., rupees²), which has no real-world meaning. (3) SD can be directly used to state confidence intervals: "average order value is ₹500 ± ₹80" is meaningful; "variance is ₹6,400 rupees²" is not.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">10</div>
+                <div class="q-text">If mean=10 and SD=2, what does this tell you about the data?</div>
+                <div class="q-badge">IIM Ranchi (actual question)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The data clusters around 10, with most values within 2 units of it. If it's normally distributed:<br>
+                • ~68% of values fall between 8 and 12 (mean ± 1SD)<br>
+                • ~95% fall between 6 and 14 (mean ± 2SD)<br>
+                • ~99.7% fall between 4 and 16 (mean ± 3SD)<br>
+                CV = 2/10 × 100% = 20% — the data is moderately variable. This level of spread is used in quality control: if it were manufacturing tolerances, ±2σ means 5% of products would be outside spec.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">11</div>
+                <div class="q-text">Why do we square deviations when calculating variance? Why not just average the absolute deviations?</div>
+                <div class="q-badge">Conceptual</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Three reasons: (1) <strong>Deviations always sum to zero</strong> — positive and negative deviations from the mean cancel exactly, so averaging them gives 0 regardless of spread. (2) <strong>Squaring penalises large deviations more</strong> — a deviation of 4 contributes 16 to variance, while one of 2 contributes only 4. This makes variance more sensitive to outliers, which is often desirable. (3) <strong>Mathematical tractability</strong> — squaring makes variance differentiable and compatible with optimization and calculus-based techniques. Mean absolute deviation also exists and is used in some fields (like forecasting MAE), but variance and SD dominate statistics because of their mathematical properties.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">12</div>
+                <div class="q-text">Explain standard deviation to a layman without using maths.</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                "Imagine you and your 4 friends take a test. You all score 50 — the average is 50 and standard deviation is 0, meaning everyone performed identically. Now imagine scores of 10, 30, 50, 70, 90 — average is still 50, but standard deviation is high, meaning scores are all over the place. SD tells you how predictable the group is. A low SD means 'everyone performs similarly'; a high SD means 'results vary wildly.' In business, when a factory has high SD in product dimensions, quality is inconsistent — some products are too big, some too small."
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">13</div>
+                <div class="q-text">What is the difference between standard deviation and variance?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Variance = SD². While variance measures average squared deviation, SD is the square root, restoring the original unit. If we're measuring heights in cm, variance would be in cm² (meaningless physically), while SD is in cm (directly comparable to individual heights). Formula: Variance σ² = Σ(xᵢ−μ)²/N; SD σ = √(σ²). Practically, both measure spread — SD is reported; variance is used in calculations (additivity property: variances of independent variables add up, SDs don't).
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 4. SKEWNESS ═══════════════════ -->
+    <section class="section" id="skewness">
+      <div class="section-header">
+        <div class="section-icon">📉</div>
+        <div>
+          <h2>Skewness & Kurtosis</h2>
+          <p>Shape of a distribution — which way does the tail go?</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid-2">
+          <div>
+            <h3 style="font-size:1rem; margin-bottom:10px;">Skewness — Asymmetry</h3>
+            <table>
+              <tr><th>Type</th><th>Relationship</th><th>Tail</th><th>Example</th></tr>
+              <tr><td>Symmetric</td><td>Mean=Median=Mode</td><td>No tail</td><td>IQ scores, height</td></tr>
+              <tr><td>Right Skew (+)</td><td>Mean &gt; Median &gt; Mode</td><td>Right</td><td>Income, wealth</td></tr>
+              <tr><td>Left Skew (−)</td><td>Mean &lt; Median &lt; Mode</td><td>Left</td><td>Age at retirement</td></tr>
+            </table>
+            <div class="formula" style="margin-top:12px">
+              <div class="label">Karl Pearson's Coefficient</div>
+              Sk = (Mean − Mode) / SD<br>
+              or  Sk = 3(Mean − Median) / SD<br><br>
+              |Sk| &lt; 0.5 → Low skew (nearly normal)
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:1rem; margin-bottom:10px;">Kurtosis — Peakedness</h3>
+            <div class="mini-card" style="margin-bottom:10px">
+              <h4>Mesokurtic (Kurtosis = 3)</h4>
+              <p>Normal bell curve. The benchmark. Excess kurtosis = 0.</p>
+            </div>
+            <div class="mini-card" style="margin-bottom:10px">
+              <h4>Leptokurtic (K > 3)</h4>
+              <p>Taller, sharper peak; fatter tails. More extreme values than normal. Stock market returns often exhibit this ("fat tails").</p>
+            </div>
+            <div class="mini-card">
+              <h4>Platykurtic (K < 3)</h4>
+              <p>Flatter peak; thinner tails. Values more uniformly spread. Example: rolling a die.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Skewness</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">14</div>
+                <div class="q-text">What is skewness? Draw the graph of a skewed distribution and show where mean, median and mode lie.</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Skewness measures the asymmetry of a distribution around its mean. In a <strong>right-skewed (positive) distribution</strong>: the tail extends to the right; Mode &lt; Median &lt; Mean — the mean is pulled rightward by high outliers. Example: income distribution.<br><br>
+                In a <strong>left-skewed (negative) distribution</strong>: tail extends left; Mean &lt; Median &lt; Mode. Example: exam scores where most students score high but a few score very low.<br><br>
+                [Describe a bell curve tilted right with the longer tail on the right side, with Mode at the peak, Median slightly to the right, and Mean further right.]
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 5. PROBABILITY ═══════════════════ -->
+    <section class="section" id="probability">
+      <div class="section-header">
+        <div class="section-icon">🎲</div>
+        <div>
+          <h2>Probability Foundations</h2>
+          <p>The language of uncertainty — essential for every IIM interview</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Core Probability Concepts <span class="tag">Must Know</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <div class="formula">
+              <div class="label">Basic Probability</div>
+              P(A) = Favourable outcomes / Total outcomes<br>
+              0 ≤ P(A) ≤ 1;  P(impossible) = 0;  P(certain) = 1<br><br>
+              P(A') = 1 − P(A)  [Complement Rule]<br>
+              P(A ∪ B) = P(A) + P(B) − P(A ∩ B)  [Addition Rule]<br>
+              P(A ∩ B) = P(A) × P(B)  [Multiplication — IF independent]
+            </div>
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Mutually Exclusive Events</h4>
+                <p>Cannot occur simultaneously. P(A ∩ B) = 0<br>P(A ∪ B) = P(A) + P(B)<br><br>Example: Getting Heads AND Tails on one flip.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Independent Events</h4>
+                <p>Occurrence of one does not affect the other. P(A ∩ B) = P(A) × P(B)<br><br>Example: Two consecutive coin flips. Result of first doesn't affect second.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Exhaustive Events</h4>
+                <p>Together they cover all possible outcomes.<br>P(A₁ ∪ A₂ ∪ ... ∪ Aₙ) = 1<br><br>Example: {H, T} for a coin flip.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Equally Likely Events</h4>
+                <p>Each outcome has the same probability.<br>Example: Fair die — each face has P = 1/6.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Classic Probability Questions (from actual IIM interviews)</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">15</div>
+                <div class="q-text">Two dice are thrown. What is the probability that the sum is 9?</div>
+                <div class="q-badge">IIM Shillong · Sirmaur (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Total outcomes = 6 × 6 = 36<br>
+                Favourable (sum = 9): (3,6), (4,5), (5,4), (6,3) = <strong>4 outcomes</strong><br>
+                P(sum = 9) = 4/36 = <strong>1/9 ≈ 0.111</strong>
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">16</div>
+                <div class="q-text">Two dice are thrown. What is the probability of getting a sum of 7?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Favourable outcomes (sum=7): (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = <strong>6 outcomes</strong><br>
+                P(sum = 7) = 6/36 = <strong>1/6</strong><br>
+                Note: 7 is the most probable sum when rolling two dice — this is why 7 is special in casino games like Craps!
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">17</div>
+                <div class="q-text">What is the probability of drawing a face card from a standard deck of 52 cards?</div>
+                <div class="q-badge">IIM Amritsar (actual, multiple panels)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Face cards = Jack, Queen, King (3 per suit × 4 suits = 12 face cards)<br>
+                P(face card) = 12/52 = <strong>3/13 ≈ 0.231</strong><br>
+                Follow-up: P(red king) = 2/52 = 1/26 (2 red kings in deck)
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">18</div>
+                <div class="q-text">What is the probability of getting 53 Sundays in a non-leap year?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                A non-leap year has 365 days = 52 weeks + 1 extra day.<br>
+                The extra day can be any one of: Mon, Tue, Wed, Thu, Fri, Sat, <strong>Sun</strong>.<br>
+                P(53 Sundays) = <strong>1/7</strong><br><br>
+                For a <strong>leap year</strong> (366 days = 52 weeks + 2 extra days):<br>
+                The 2 extra days can be: (Mon,Tue), (Tue,Wed), (Wed,Thu), (Thu,Fri), (Fri,Sat), (Sat,Sun), (Sun,Mon) — 7 possibilities, 2 contain Sunday.<br>
+                P(53 Sundays in leap year) = <strong>2/7</strong>
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">19</div>
+                <div class="q-text">What is the probability of getting exactly 3 heads when 5 fair coins are tossed?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Using Binomial distribution: P(X=3) = C(5,3) × (0.5)³ × (0.5)² <br>
+                = 10 × 0.125 × 0.25 = 10 × 0.03125 = <strong>5/16 = 0.3125</strong><br><br>
+                Alternative (count method): Total = 2⁵ = 32. Favourable = C(5,3) = 10.<br>
+                P = 10/32 = <strong>5/16</strong> ✓
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">20</div>
+                <div class="q-text">What is the probability of NOT winning if P(winning) = 2/5?</div>
+                <div class="q-badge">Conceptual</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                P(not winning) = 1 − P(winning) = 1 − 2/5 = <strong>3/5</strong><br>
+                This uses the Complement Rule: P(A') = 1 − P(A). It's one of the most useful shortcuts in probability — often easier to calculate what you DON'T want and subtract from 1. For example, "probability of at least one success" = 1 − P(no successes).
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 6. CONDITIONAL & BAYES ═══════════════════ -->
+    <section class="section" id="conditional">
+      <div class="section-header">
+        <div class="section-icon">🔀</div>
+        <div>
+          <h2>Conditional Probability & Bayes' Theorem</h2>
+          <p>Updating beliefs with new information — used in AI, medical testing, and business</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="formula">
+          <div class="label">Conditional Probability</div>
+          P(A|B) = P(A ∩ B) / P(B)  [probability of A given B has occurred]<br><br>
+          <div class="label">Bayes' Theorem</div>
+          P(A|B) = P(B|A) × P(A) / P(B)<br><br>
+          P(B) = P(B|A)·P(A) + P(B|A')·P(A')  [Total Probability]<br><br>
+          <div class="label">Intuition</div>
+          Prior belief × Likelihood = Updated belief (posterior)
+        </div>
+
+        <div class="biz-box">
+          <div class="biz-label">💼 Business Applications</div>
+          <ul>
+            <li><strong>Medical testing:</strong> P(disease | positive test) — a positive test does not mean 100% disease probability. Bayes updates this using disease prevalence</li>
+            <li><strong>Spam filtering:</strong> Gmail calculates P(spam | contains "free money") using Bayes</li>
+            <li><strong>Credit risk:</strong> P(default | late payment history)</li>
+            <li><strong>Marketing attribution:</strong> P(customer converted | saw our ad)</li>
+            <li><strong>Machine learning:</strong> Naïve Bayes classifier used for text classification</li>
+          </ul>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Conditional Probability & Bayes</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">21</div>
+                <div class="q-text">What is conditional probability? How is it different from regular probability?</div>
+                <div class="q-badge">IIM Amritsar · Kozhikode (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Regular probability P(A) is calculated in the full sample space. Conditional probability P(A|B) is the probability of A given that B has already occurred — we restrict our sample space to B.<br><br>
+                Example: P(rain today) = 0.3. But P(rain today | there are dark clouds) = 0.7. The knowledge of dark clouds updates our probability. Formula: P(A|B) = P(A∩B)/P(B).<br><br>
+                Business example: P(customer churns) = 20%. But P(customer churns | hasn't logged in for 30 days) = 65%. This conditional probability drives targeted retention campaigns.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">22</div>
+                <div class="q-text">Explain Bayes' theorem with a real-world example.</div>
+                <div class="q-badge">IIM Amritsar · Indore (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Bayes' theorem updates probability when new evidence arrives.<br><br>
+                <strong>Medical example:</strong> A disease affects 1% of the population. A test is 95% accurate (if you have the disease, 95% chance it's positive; if you don't, 2% false positive rate).<br><br>
+                If you test positive, what's P(you have the disease)?<br>
+                P(D) = 0.01, P(+|D) = 0.95, P(+|no D) = 0.02<br>
+                P(+) = 0.95×0.01 + 0.02×0.99 = 0.0095 + 0.0198 = 0.0293<br>
+                P(D|+) = (0.95 × 0.01) / 0.0293 ≈ <strong>32.4%</strong><br><br>
+                Only a 32% chance, even with a positive test! This counterintuitive result is why mass screening for rare diseases can be problematic.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">23</div>
+                <div class="q-text">What are mutually exclusive vs independent events?</div>
+                <div class="q-badge">IIM Amritsar · Ranchi (actual, multiple times)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Mutually Exclusive:</strong> Events that cannot both occur. P(A∩B) = 0. If one occurs, the other definitely doesn't. Example: Getting a 3 or a 5 on a single die roll — you can get one or the other but not both simultaneously.<br><br>
+                <strong>Independent:</strong> Occurrence of one has no effect on probability of the other. P(A|B) = P(A), and P(A∩B) = P(A)×P(B). Example: Flipping two separate coins — first flip result doesn't affect second.<br><br>
+                <strong>Key insight:</strong> Mutually exclusive events (when both P(A)>0 and P(B)>0) are NOT independent — if A occurs, B definitely doesn't, so A definitely affects B's probability!
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 7. DISTRIBUTIONS ═══════════════════ -->
+    <section class="section" id="distributions">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div>
+          <h2>Probability Distributions</h2>
+          <p>The mathematical models of randomness in the real world</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <!-- BERNOULLI -->
+        <div class="concept" id="bernoulli">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Bernoulli Distribution — The Simplest Trial <span class="tag">Foundation</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>A single trial with exactly two outcomes: success (probability p) or failure (probability 1−p). It is the building block of the Binomial distribution.</p>
+            <div class="formula">
+              <div class="label">Bernoulli Distribution</div>
+              P(X = 1) = p  (success)<br>
+              P(X = 0) = 1−p = q  (failure)<br><br>
+              Mean (E[X]) = p<br>
+              Variance = p(1−p) = pq<br>
+              SD = √(pq)
+            </div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Will a customer click on an ad? (Yes/No)</li>
+                <li>Will a loan default? (Default/No Default)</li>
+                <li>Will a customer buy after visiting the landing page? (Conversion rate p)</li>
+                <li>Quality check: Is a product defective? (Pass/Fail)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- BINOMIAL -->
+        <div class="concept" id="binomial-section">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Binomial Distribution — n Independent Trials <span class="tag">Most Asked</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>Number of successes in <em>n</em> independent Bernoulli trials, each with success probability <em>p</em>.</p>
+            <p><strong>Conditions (BINS):</strong> Binary outcomes, Independent trials, fixed Number of trials, Same probability each trial.</p>
+            <div class="formula">
+              <div class="label">Binomial PMF</div>
+              P(X = k) = C(n,k) × pᵏ × (1−p)ⁿ⁻ᵏ<br><br>
+              Mean = np<br>
+              Variance = np(1−p)<br>
+              SD = √(np(1−p))<br><br>
+              Notation: X ~ B(n, p)
+            </div>
+            <div class="alert info">📌 As n→∞ and p→0 with np = λ constant, Binomial → Poisson. As n→∞, Binomial → Normal (CLT).</div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>If 5% of products are defective, what's the probability of 2 defective items in a batch of 20?</li>
+                <li>Email marketing: if open rate is 20%, probability that 8 out of 30 recipients open the email</li>
+                <li>A/B testing: comparing conversion rates between two website versions</li>
+                <li>Insurance: probability that exactly k out of n policyholders file a claim</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- POISSON -->
+        <div class="concept" id="poisson">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Poisson Distribution — Rare Events Over Time/Space <span class="tag">Key Distribution</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>Models the number of events occurring in a fixed interval of time or space, when events occur independently at a constant average rate λ (lambda).</p>
+            <div class="formula">
+              <div class="label">Poisson PMF</div>
+              P(X = k) = (e⁻λ × λᵏ) / k!<br><br>
+              Mean = λ<br>
+              Variance = λ<br>
+              (Mean = Variance — unique property!)<br><br>
+              e ≈ 2.71828 (Euler's number)
+            </div>
+            <p><strong>Key conditions:</strong> Events are rare, occur independently, average rate λ is constant over time/space, two events cannot happen at the exact same instant.</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Number of customer service calls per hour</li>
+                <li>Number of website visits per minute (server capacity planning)</li>
+                <li>Number of accidents per month on a highway</li>
+                <li>Number of defects per square metre of fabric in textile manufacturing</li>
+                <li>Number of emails received per hour in an inbox</li>
+                <li>Bank: number of customers arriving per hour (queuing theory)</li>
+              </ul>
+            </div>
+            <div class="alert tip">💡 Poisson vs Binomial: Use Poisson when n is very large, p is very small, and np = λ is moderate. Rule of thumb: n > 20, p < 0.05.</div>
+          </div>
+        </div>
+
+        <!-- NORMAL -->
+        <div class="concept" id="normal">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Normal Distribution — The Bell Curve <span class="tag">Most Important</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>The most important distribution in statistics. Symmetric, bell-shaped, defined entirely by mean (μ) and standard deviation (σ).</p>
+            <div class="formula">
+              <div class="label">Normal PDF</div>
+              f(x) = [1 / (σ√(2π))] × e^[−(x−μ)²/(2σ²)]<br><br>
+              Notation: X ~ N(μ, σ²)<br><br>
+              <div class="label">Standard Normal (Z)</div>
+              Z = (X − μ) / σ   ← Standardisation formula<br>
+              Z ~ N(0, 1)  [Mean=0, SD=1]<br><br>
+              <div class="label">68-95-99.7 Rule</div>
+              P(μ−σ &lt; X &lt; μ+σ)  = 68.27%<br>
+              P(μ−2σ &lt; X &lt; μ+2σ) = 95.45%<br>
+              P(μ−3σ &lt; X &lt; μ+3σ) = 99.73%
+            </div>
+            <p><strong>Properties:</strong> (1) Symmetric about mean (2) Mean = Median = Mode (3) Total area under curve = 1 (4) Asymptotic — never touches x-axis (5) Defined for all real x</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li><strong>Quality control (Six Sigma):</strong> Defects should be 6σ from mean — implies 3.4 defects per million</li>
+                <li><strong>Finance:</strong> Stock returns approximately normal (though fat tails exist) — used in Black-Scholes options pricing</li>
+                <li><strong>HR:</strong> Employee performance ratings, IQ scores, heights</li>
+                <li><strong>Marketing:</strong> Customer lifetime value distribution</li>
+                <li><strong>Risk management:</strong> Value at Risk (VaR) calculations assume normality</li>
+              </ul>
+            </div>
+            <div class="alert warn">⚠️ <strong>IIM Question:</strong> "What is the area under the standard normal distribution from 0 to infinity?" Answer: 0.5 (since the total area = 1 and the distribution is symmetric about 0).</div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Distributions</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">24</div>
+                <div class="q-text">What is a Poisson distribution and where is it used?</div>
+                <div class="q-badge">IIM Ranchi · Sirmaur (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Poisson distribution models the number of events occurring in a fixed time period when events happen at a constant average rate λ and independently of each other.<br><br>
+                Formula: P(X=k) = e⁻λ × λᵏ / k!<br>
+                Key property: Mean = Variance = λ<br><br>
+                Used when: events are rare, occur over time/area/space at a constant rate.<br>
+                Real examples: customer calls to a call centre per hour (λ=20), website visits per minute, accidents per month.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">25</div>
+                <div class="q-text">Explain Binomial distribution. What are its conditions?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Binomial distribution gives the probability of exactly k successes in n independent trials where each trial has success probability p.<br><br>
+                P(X=k) = C(n,k) pᵏ (1−p)ⁿ⁻ᵏ<br>
+                Mean = np, Variance = np(1−p)<br><br>
+                <strong>4 Conditions (BINS):</strong><br>
+                1. Binary — only two outcomes (success/failure)<br>
+                2. Independent — trials don't affect each other<br>
+                3. Number fixed — n is predetermined<br>
+                4. Same probability — p constant across trials<br><br>
+                Example: Tossing a fair coin 10 times, probability of getting exactly 6 heads = C(10,6) × (0.5)⁶ × (0.5)⁴ ≈ 0.205
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">26</div>
+                <div class="q-text">What is the bell curve / normal distribution? What does symmetry mean in this context?</div>
+                <div class="q-badge">IIM Shillong · Indore (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The normal distribution is a continuous probability distribution that appears as a symmetric, bell-shaped curve. It is defined by two parameters: mean (μ) — the centre of the bell, and standard deviation (σ) — the spread/width.<br><br>
+                <strong>Symmetry</strong> means the curve is a perfect mirror image about the mean. This implies Mean = Median = Mode, and P(X &lt; μ) = P(X &gt; μ) = 0.5.<br><br>
+                The IIM Shillong question linking standard deviation to the bell curve: the SD controls how "fat" or "narrow" the bell is. A small σ gives a tall narrow bell (data tightly clustered around mean); a large σ gives a wide flat bell (data spread out).
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">27</div>
+                <div class="q-text">What is the difference between Binomial and Poisson distribution? When would you use each?</div>
+                <div class="q-badge">Conceptual</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <table>
+                  <tr><th>Feature</th><th>Binomial</th><th>Poisson</th></tr>
+                  <tr><td>Trials</td><td>Fixed n trials</td><td>Unlimited events in interval</td></tr>
+                  <tr><td>Parameter</td><td>n, p</td><td>λ (rate)</td></tr>
+                  <tr><td>Mean</td><td>np</td><td>λ</td></tr>
+                  <tr><td>Variance</td><td>np(1−p)</td><td>λ</td></tr>
+                  <tr><td>Best for</td><td>Counting successes in n trials</td><td>Rare events, large n, small p</td></tr>
+                </table>
+                Poisson is the limit of Binomial as n→∞ and p→0 with np=λ constant.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 8. CORRELATION & REGRESSION ═══════════════════ -->
+    <section class="section" id="correlation">
+      <div class="section-header">
+        <div class="section-icon">📈</div>
+        <div>
+          <h2>Correlation & Regression</h2>
+          <p>Measuring and modelling relationships between variables</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Correlation — Measuring Linear Relationship <span class="tag">Must Know</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>Correlation measures the strength and direction of the linear relationship between two variables. Karl Pearson's correlation coefficient (r) is the most common measure.</p>
+            <div class="formula">
+              <div class="label">Pearson Correlation Coefficient</div>
+              r = Σ[(xᵢ−x̄)(yᵢ−ȳ)] / √[Σ(xᵢ−x̄)² × Σ(yᵢ−ȳ)²]<br><br>
+              Range: −1 ≤ r ≤ +1<br><br>
+              r = +1: Perfect positive linear relationship<br>
+              r = −1: Perfect negative linear relationship<br>
+              r =  0: No linear relationship (may have non-linear!)<br>
+              r = +0.67: Strong positive relationship (ice cream & temperature)
+            </div>
+            <div class="alert warn">⚠️ <strong>CORRELATION ≠ CAUSATION:</strong> Ice cream sales and drowning incidents are highly correlated (both increase in summer) but ice cream doesn't cause drowning. The hidden variable is summer heat. This is a classic example of spurious correlation.</div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li><strong>Marketing:</strong> Correlation between advertising spend and sales revenue</li>
+                <li><strong>Finance:</strong> Portfolio diversification — stocks with low/negative correlation reduce risk</li>
+                <li><strong>HR:</strong> Correlation between training hours and employee performance</li>
+                <li><strong>Supply Chain:</strong> Correlation between temperature and demand for cold beverages</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Regression — Predicting One Variable from Another <span class="tag">Business Critical</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>While correlation measures relationship strength, regression finds the best-fit line to predict Y from X (or multiple Xs in multiple regression).</p>
+            <div class="formula">
+              <div class="label">Simple Linear Regression</div>
+              Y = a + bX + ε<br><br>
+              b (slope/regression coefficient) = r × (σy/σx)<br>
+              a (intercept) = ȳ − b·x̄<br><br>
+              R² (coefficient of determination) = r²<br>
+              R² = % of variation in Y explained by X<br>
+              If R² = 0.85 → X explains 85% of Y's variation
+            </div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Predicting next quarter's sales based on ad spend (linear regression)</li>
+                <li>Real estate: predicting house price from square footage</li>
+                <li>Forecasting demand based on price, season, competition</li>
+                <li>IIM Sirmaur asked: "Use a statistical tool to predict sales for next quarter" — answer is regression</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Correlation & Regression</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">28</div>
+                <div class="q-text">Ice cream sales and drowning incidents are positively correlated. Does eating ice cream cause drowning?</div>
+                <div class="q-badge">IIM Amritsar</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                No — this is a classic example of <strong>spurious correlation</strong>. Both variables share a common cause: hot weather. When it's hot, people eat more ice cream AND swim more (increasing drowning risk). The correlation is real, but the causation is absent. This is called a <strong>confounding variable</strong> (temperature).<br><br>
+                This is a critical lesson in business analytics: a high r-value doesn't mean one variable drives the other. You must use domain knowledge, controlled experiments (A/B tests), and causal inference methods to establish causality.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">29</div>
+                <div class="q-text">What is regression? What is the regression coefficient?</div>
+                <div class="q-badge">IIM Sirmaur · Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Regression is a statistical technique that models the relationship between a dependent variable (Y) and one or more independent variables (X) to make predictions.<br><br>
+                The <strong>regression coefficient (b)</strong> in Y = a + bX is the slope — it tells us: "For every 1-unit increase in X, Y changes by b units." If b = 3 in a sales-ad-spend model, every ₹1 more in advertising generates ₹3 more in sales on average.<br><br>
+                The intercept (a) is the predicted value of Y when X = 0.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">30</div>
+                <div class="q-text">What is the range of correlation coefficient? What does it mean when r = 0?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                r ranges from <strong>−1 to +1</strong>.<br>
+                r = +1: Perfect positive linear correlation (as X increases, Y increases proportionally)<br>
+                r = −1: Perfect negative linear correlation (as X increases, Y decreases)<br>
+                r = 0: <strong>No linear relationship</strong>. However, r=0 does not mean no relationship — there could be a strong non-linear (e.g., quadratic) relationship. For example, Y = X² has r ≈ 0 when X ranges from −3 to +3, but clearly the variables are related.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 9. INDEX NUMBERS ═══════════════════ -->
+    <section class="section" id="index-numbers">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div>
+          <h2>Index Numbers</h2>
+          <p>Measuring relative changes over time — prices, quantities, economy</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <p>An index number is a ratio that measures the relative change in a variable (or group of variables) with respect to a base period. The base period index = 100.</p>
+
+        <div class="grid-2">
+          <div class="mini-card">
+            <h4>Simple (Unweighted) Index</h4>
+            <p>Price Relative = (Pₙ / P₀) × 100<br>where Pₙ = current price, P₀ = base price</p>
+          </div>
+          <div class="mini-card">
+            <h4>Laspeyres Index (Base-weighted)</h4>
+            <p>Uses base period quantities as weights.<br>Pₗ = Σ(Pₙ·Q₀) / Σ(P₀·Q₀) × 100<br>Tends to overestimate inflation.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Paasche Index (Current-weighted)</h4>
+            <p>Uses current period quantities as weights.<br>Pₚ = Σ(Pₙ·Qₙ) / Σ(P₀·Qₙ) × 100<br>Tends to underestimate inflation.</p>
+          </div>
+          <div class="mini-card">
+            <h4>Fisher's Ideal Index</h4>
+            <p>Geometric mean of Laspeyres and Paasche.<br>F = √(Laspeyres × Paasche)<br>Called "ideal" as it satisfies Time Reversal & Factor Reversal tests.</p>
+          </div>
+        </div>
+
+        <div class="formula">
+          <div class="label">Important Index Numbers in India</div>
+          WPI — Wholesale Price Index (measures inflation at wholesale level)<br>
+          CPI — Consumer Price Index (measures retail inflation; RBI targets ~4%)<br>
+          IIP — Index of Industrial Production<br>
+          Sensex — Tracks 30 largest BSE-listed companies (base year 1978-79 = 100)<br>
+          Nifty 50 — Tracks 50 largest NSE-listed companies (base 1995 = 1000)
+        </div>
+
+        <div class="biz-box">
+          <div class="biz-label">💼 Business Applications</div>
+          <ul>
+            <li>CPI is used by RBI to set repo rate (inflation targeting)</li>
+            <li>WPI used for business-to-business contract indexation</li>
+            <li>Sensex/Nifty measure overall stock market performance</li>
+            <li>Cost of Living Adjustment (COLA) in salary negotiations uses CPI</li>
+            <li>GDP deflator converts nominal GDP to real GDP</li>
+          </ul>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Index Numbers</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">31</div>
+                <div class="q-text">What is the difference between CPI and WPI? Which one does the RBI use to measure inflation?</div>
+                <div class="q-badge">Current Affairs + Stats</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>CPI (Consumer Price Index)</strong> measures the change in the price of a basket of goods and services consumed by a typical household. It reflects retail-level prices faced by end consumers. Managed by Ministry of Statistics.<br><br>
+                <strong>WPI (Wholesale Price Index)</strong> measures price changes at the wholesale/producer level, before goods reach consumers. Reflects factory-gate and bulk pricing.<br><br>
+                <strong>RBI uses CPI</strong> (specifically CPI-Combined) as its headline inflation measure for monetary policy, targeting ~4% with a ±2% band. CPI is more relevant to the common person's cost of living.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">32</div>
+                <div class="q-text">What are Sensex and Nifty? How many companies are in each?</div>
+                <div class="q-badge">IIM Shillong · Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Sensex</strong> (Sensitive Index): BSE's benchmark index tracking 30 of the largest, most liquid, and fundamentally strong companies listed on the Bombay Stock Exchange. Base year: 1978-79 = 100.<br><br>
+                <strong>Nifty 50</strong> (National Fifty): NSE's benchmark index tracking 50 large-cap Indian companies across 13 sectors. Base: November 1995 = 1000.<br><br>
+                Both are market-cap weighted indices. A rise in either indicates that overall large-cap stocks have gained in value — seen as a proxy for the health of the Indian economy.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">33</div>
+                <div class="q-text">How is inflation calculated using CPI?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Inflation rate = [(CPI_current − CPI_previous) / CPI_previous] × 100<br><br>
+                Example: If CPI in June 2025 = 185 and June 2024 = 175:<br>
+                Inflation = [(185−175)/175] × 100 = <strong>5.71%</strong><br><br>
+                The CPI basket includes food (45.86% weight), fuel, housing, clothing, miscellaneous. The weights reflect how much a typical urban/rural Indian household spends on each category. Food has the highest weight, so vegetable price spikes strongly impact CPI inflation.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ 10. HYPOTHESIS TESTING ═══════════════════ -->
+    <section class="section" id="hypothesis">
+      <div class="section-header">
+        <div class="section-icon">🔬</div>
+        <div>
+          <h2>Hypothesis Testing & Inferential Statistics</h2>
+          <p>Making decisions from data — the backbone of evidence-based management</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Hypothesis Testing Framework <span class="tag">Advanced</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <div class="formula">
+              <div class="label">The 5-Step Framework</div>
+              1. State H₀ (Null) and H₁ (Alternative) hypothesis<br>
+              2. Choose significance level α (commonly 0.05)<br>
+              3. Calculate test statistic (Z, t, χ², F)<br>
+              4. Find p-value or compare with critical value<br>
+              5. Decision: Reject H₀ if p-value &lt; α
+            </div>
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Null Hypothesis (H₀)</h4>
+                <p>The status quo / no effect. "The new drug has no effect." "Mean = 50." We never "prove" H₀; we either reject it or fail to reject it.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Alternative Hypothesis (H₁)</h4>
+                <p>What we want to prove. "The new drug works." "Mean ≠ 50." Rejecting H₀ provides evidence for H₁.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Type I Error (α)</h4>
+                <p>Rejecting H₀ when it is actually true. "False positive." Significance level α controls this. Convicting an innocent person.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Type II Error (β)</h4>
+                <p>Failing to reject H₀ when it is false. "False negative." Letting a guilty person go free. Power = 1−β.</p>
+              </div>
+            </div>
+            <div class="formula">
+              <div class="label">p-value</div>
+              p-value = P(observing this data | H₀ is true)<br><br>
+              Small p-value → data is unlikely under H₀ → evidence against H₀<br>
+              p &lt; 0.05 → statistically significant at 5% level → reject H₀
+            </div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li><strong>A/B Testing:</strong> "Does the new website design increase conversion rate?" H₀: no difference. If p &lt; 0.05, launch the new design.</li>
+                <li><strong>Quality Control:</strong> Is the mean weight of cereal boxes significantly different from stated 500g?</li>
+                <li><strong>Marketing:</strong> Did the new ad campaign significantly increase sales?</li>
+                <li><strong>HR:</strong> Is there a statistically significant gender pay gap in this company?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept" id="clt">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Central Limit Theorem (CLT) — The Most Important Theorem in Statistics <span class="tag">Fundamental</span>
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <p>The CLT states that the distribution of sample means approaches a normal distribution as sample size n increases, regardless of the shape of the population distribution.</p>
+            <div class="formula">
+              <div class="label">Central Limit Theorem</div>
+              If X₁, X₂,...,Xₙ are i.i.d. with mean μ and variance σ²,<br>
+              then as n → ∞:<br><br>
+              x̄ ~ N(μ, σ²/n)   approximately<br><br>
+              Standard Error of Mean = σ/√n<br><br>
+              Rule of thumb: n ≥ 30 is usually sufficient
+            </div>
+            <p><strong>Why it matters:</strong> Even if individual data points follow a skewed or bizarre distribution, the average of many samples follows a normal distribution. This is why we can apply normal-distribution-based tests to almost any dataset with large enough samples.</p>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>Quality control: sample means of product weights follow normal distribution even if individual weights don't</li>
+                <li>Polling: average opinion across thousands of people follows normal distribution</li>
+                <li>Finance: portfolio returns (average of many stocks) approach normality</li>
+                <li>Risk management: CLT underlies most statistical risk models</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Interview Questions — Hypothesis Testing & CLT</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">34</div>
+                <div class="q-text">What is the null hypothesis? What does "rejecting the null hypothesis" mean?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The null hypothesis (H₀) represents the default assumption — that there is no effect, no difference, or no relationship. It's what we assume is true unless data provides strong evidence against it.<br><br>
+                "Rejecting H₀" means we found statistically significant evidence that H₀ is false. Example: H₀ = "The new drug has no effect." If our clinical trial data yields p = 0.02 (less than α = 0.05), we reject H₀ and conclude the drug does have a significant effect.<br><br>
+                Important: Rejecting H₀ doesn't mean proving H₁ with certainty — it means the probability of seeing this data if H₀ were true is very low (less than 5%).
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">35</div>
+                <div class="q-text">What is p-value? How is it related to alpha (significance level)?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The p-value is the probability of observing results as extreme as (or more extreme than) the sample data, assuming H₀ is true. A small p-value means the data is very unlikely under H₀, providing evidence against it.<br><br>
+                Alpha (α) is the significance level — our predetermined threshold for "small enough." Typically α = 0.05 (5%).<br><br>
+                Decision rule: If p-value &lt; α → reject H₀ (statistically significant result).<br>
+                If p-value ≥ α → fail to reject H₀ (insufficient evidence).<br><br>
+                Business translation: p = 0.03 with α = 0.05 → "We're 97% confident this result isn't due to chance. Launch the new strategy."
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">36</div>
+                <div class="q-text">Explain the Central Limit Theorem. Why is it so important?</div>
+                <div class="q-badge">IIM Kozhikode</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                CLT states: regardless of the population's original distribution, as you take larger and larger samples (n ≥ 30 typically), the distribution of sample means approaches a normal distribution with mean = population mean and SD = population SD / √n.<br><br>
+                This is revolutionary because: (1) We can use normal distribution tools on almost any real-world data if we take large enough samples. (2) It explains why the normal distribution appears everywhere in nature — most natural measurements are averages of many random factors. (3) It's the basis for confidence intervals, hypothesis tests, and much of applied statistics.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">37</div>
+                <div class="q-text">What is descriptive vs inferential statistics?</div>
+                <div class="q-badge">IIM Ranchi (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>Descriptive Statistics</strong> summarises and describes data you already have. Tools: mean, median, mode, SD, charts, histograms. No predictions, no extrapolation. "The average salary in this sample is ₹8 lakh."<br><br>
+                <strong>Inferential Statistics</strong> uses a sample to make inferences about a larger population. Tools: hypothesis testing, confidence intervals, regression. "Based on this sample, we estimate the average salary in India is ₹X lakh ± ₹Y lakh with 95% confidence."<br><br>
+                Management always uses both: descriptive to understand current state, inferential to make decisions and predictions about the future.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ BONUS CONCEPTS ═══════════════════ -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">🌟</div>
+        <div>
+          <h2>Bonus Concepts & Quick Reference</h2>
+          <p>Sampling, law of large numbers, data types, and more often-tested ideas</p>
+        </div>
+      </div>
+      <div class="section-body">
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Law of Large Numbers & Sampling
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <div class="grid-2">
+              <div class="mini-card">
+                <h4>Law of Large Numbers</h4>
+                <p>As the number of trials increases, the sample mean converges to the population mean. Example: toss a fair coin 10 times — you might get 7 heads. Toss 10,000 times — heads will be very close to 5,000. This underpins insurance and casino profitability.</p>
+              </div>
+              <div class="mini-card">
+                <h4>Random vs Stratified Sampling</h4>
+                <p><strong>Random:</strong> Every unit has equal chance of selection. Simple, unbiased.<br><strong>Stratified:</strong> Divide population into strata (groups), sample from each. Better representation. Used in national surveys.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept">
+          <div class="concept-title" onclick="toggleConcept(this)">
+            Quartiles, Percentiles & Box Plot
+            <span class="concept-toggle">+</span>
+          </div>
+          <div class="concept-body">
+            <div class="formula">
+              <div class="label">Quartiles</div>
+              Q1 = 25th percentile (lower quartile)<br>
+              Q2 = 50th percentile = Median<br>
+              Q3 = 75th percentile (upper quartile)<br>
+              IQR = Q3 − Q1 (Interquartile Range)<br><br>
+              Outlier thresholds: Below Q1−1.5×IQR  or  Above Q3+1.5×IQR
+            </div>
+            <div class="biz-box">
+              <div class="biz-label">💼 Business Applications</div>
+              <ul>
+                <li>IIM salary reports: median, P25 (Q1), P75 (Q3) give the full picture</li>
+                <li>Box plots in quality control to visualise data spread and outliers</li>
+                <li>E-commerce: 90th percentile delivery time (P90) used for SLA commitments</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="questions-section">
+          <h3>🗂 Additional Interview Questions (Mixed Topics)</h3>
+          <ul class="q-list">
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">38</div>
+                <div class="q-text">What is the Gini Coefficient? How does it relate to statistics?</div>
+                <div class="q-badge">IIM Shillong (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The Gini Coefficient measures income inequality in an economy. It ranges from 0 (perfect equality — everyone earns the same) to 1 (perfect inequality — one person has everything).<br><br>
+                <strong>Statistical basis:</strong> It is derived from the Lorenz Curve, which plots the cumulative share of income earned by the bottom x% of the population. Gini = Area between the line of perfect equality and the Lorenz Curve / Total area under line of equality.<br><br>
+                India's Gini ≈ 0.35-0.38 (moderate inequality). The US ≈ 0.41. Nordic countries ≈ 0.26-0.28 (more equal).
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">39</div>
+                <div class="q-text">What is a random variable? What is the difference between discrete and continuous random variables?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                A <strong>random variable</strong> assigns a numerical value to each outcome of a random experiment. It "translates" sample space into numbers.<br><br>
+                <strong>Discrete RV:</strong> Takes countable distinct values. Example: number of heads in 10 flips (0,1,2,...,10). Uses Probability Mass Function (PMF). Distributions: Binomial, Poisson, Geometric.<br><br>
+                <strong>Continuous RV:</strong> Takes any value in a range (uncountably infinite). Example: height, temperature, stock price. Uses Probability Density Function (PDF). P(X = exact value) = 0. We calculate P(a &lt; X &lt; b) using area under curve. Distributions: Normal, Uniform, Exponential.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">40</div>
+                <div class="q-text">What is normal distribution? What is standard normal distribution?</div>
+                <div class="q-badge">IIM Shillong (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Normal distribution: symmetric bell-shaped curve defined by mean μ and variance σ². Denoted N(μ, σ²).<br><br>
+                Standard Normal Distribution: special case where μ=0 and σ=1. Denoted Z ~ N(0,1). Any normal distribution can be converted to standard normal using z-score: Z = (X−μ)/σ.<br><br>
+                Standard normal has z-tables that give P(Z &lt; z) for any z value. Properties: total area = 1, symmetric about 0, P(Z &lt; 0) = 0.5, P(−1 &lt; Z &lt; 1) ≈ 0.68.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">41</div>
+                <div class="q-text">What is the difference between parameter and statistic?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                A <strong>parameter</strong> is a numerical characteristic of the entire population. It is fixed (though usually unknown). Denoted by Greek letters: μ (mean), σ (SD), ρ (correlation).<br><br>
+                A <strong>statistic</strong> is a numerical characteristic calculated from a sample. It varies from sample to sample (sampling variability). Denoted by Roman letters: x̄ (sample mean), s (sample SD), r (sample correlation).<br><br>
+                We use statistics to estimate parameters. The sample mean x̄ is our best estimate of population mean μ.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">42</div>
+                <div class="q-text">What is t-value/t-test? When do you use it?</div>
+                <div class="q-badge">IIM Indore (actual, inferential statistics)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                The t-test is used to determine if the means of two groups are statistically significantly different, or if a sample mean differs significantly from a known value. We use it when: (1) sample size is small (n &lt; 30), (2) population standard deviation is unknown (we use sample SD instead).<br><br>
+                t = (x̄ − μ₀) / (s/√n)<br><br>
+                The t-distribution has heavier tails than the normal distribution, accounting for extra uncertainty from using sample SD. As n → ∞, t-distribution → normal distribution. Business use: testing if the average customer satisfaction score changed after a service redesign.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">43</div>
+                <div class="q-text">Why is SD squared when calculating variance? Why not just take the absolute value of deviations?</div>
+                <div class="q-badge">IIM Amritsar · Ranchi</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Mean Absolute Deviation (MAD) does exist and uses absolute values. We prefer squaring because: (1) <strong>Mathematical properties:</strong> Squared functions are differentiable everywhere; absolute value is not differentiable at 0, making optimisation harder. (2) <strong>Additivity:</strong> Variances of independent variables add up (Var(X+Y) = Var(X)+Var(Y) if independent). This doesn't hold for MAD. (3) <strong>Penalising outliers:</strong> Squaring penalises large deviations more than proportionally — a deviation of 4 contributes 16, while deviation of 2 contributes 4 (4× the contribution for 2× the deviation). This is often desirable in risk management.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">44</div>
+                <div class="q-text">What is normalisation in statistics?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Normalisation (or standardisation) is transforming data to a common scale without distorting differences in ranges. Two common methods:<br><br>
+                1. <strong>Z-score standardisation:</strong> Z = (X−μ)/σ → transforms to mean=0, SD=1. Used in hypothesis testing, machine learning.<br>
+                2. <strong>Min-Max normalisation:</strong> X' = (X−Xmin)/(Xmax−Xmin) → scales to [0,1] range.<br><br>
+                Used in: comparing datasets with different units (e.g., comparing income in ₹ with age in years for regression), machine learning feature scaling, creating composite indices.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">45</div>
+                <div class="q-text">If I toss a coin 10 times and get heads all 10 times, what is the probability of getting a head on the 11th toss?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                <strong>1/2</strong> — assuming the coin is fair. Coin tosses are independent events. The coin has no memory. Past results do not affect future probabilities. This is called the <strong>Gambler's Fallacy</strong> — the mistaken belief that after a run of heads, tails is "due."<br><br>
+                However, if we use Bayesian thinking: 10 heads in a row makes us question whether the coin IS fair (posterior probability of p=0.5 decreases, probability of biased coin increases). This Bayesian update would change our estimate of the 11th toss probability.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">46</div>
+                <div class="q-text">What does R² (R-squared) mean in regression?</div>
+                <div class="q-badge">Business Statistics</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                R² (coefficient of determination) measures how much of the variation in the dependent variable (Y) is explained by the independent variable(s) (X).<br><br>
+                R² = 0.85 means: 85% of the variation in Y is explained by X. The remaining 15% is due to other factors not in the model.<br><br>
+                Range: 0 to 1. Higher is better (but not always — overfitting).<br>
+                R² = r² (square of correlation coefficient) in simple linear regression.<br><br>
+                Business use: "Our advertising spend regression model has R² = 0.82. This means 82% of the variability in monthly sales can be explained by advertising expenditure."
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">47</div>
+                <div class="q-text">How would you use probability as a tool in business?</div>
+                <div class="q-badge">IIM Shillong (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Probability is everywhere in business decision-making:<br><br>
+                • <strong>Risk assessment:</strong> P(project succeeds) based on historical data → investment decisions<br>
+                • <strong>Pricing:</strong> Insurance companies price premiums based on P(claim) × expected claim amount<br>
+                • <strong>Inventory:</strong> Probabilistic demand forecasting → safety stock decisions<br>
+                • <strong>Marketing:</strong> P(customer converts | saw our ad) → attribution modelling<br>
+                • <strong>Operations:</strong> Queuing theory uses Poisson distribution to model arrivals and optimise service staff<br>
+                • <strong>Finance:</strong> Option pricing (Black-Scholes) explicitly uses probability distributions<br>
+                • <strong>Fraud detection:</strong> Bayesian probability updated on transaction patterns to flag anomalies
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">48</div>
+                <div class="q-text">What is a histogram? How is it different from a bar chart?</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                A <strong>histogram</strong> displays the distribution of continuous data by grouping values into intervals (bins) and showing the frequency of each bin as a bar. Bars touch each other (no gaps) because the data is continuous.<br><br>
+                A <strong>bar chart</strong> displays categorical (discrete) data. Bars are separated by gaps. The x-axis has categories, not a continuous scale.<br><br>
+                Key differences: Histogram = continuous data, no gaps, shows distribution shape. Bar chart = categorical data, gaps between bars, compares quantities across categories. Histograms let you see if data is normally distributed, skewed, bimodal, etc.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">49</div>
+                <div class="q-text">What is the weighted average? Give a business example.</div>
+                <div class="q-badge">IIM Amritsar (actual)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Weighted average = Σ(value × weight) / Σ(weights), where weights reflect importance or proportion.<br><br>
+                <strong>Example — CGPA:</strong> If a subject worth 4 credits gets a grade of 8, and another worth 2 credits gets 6: Weighted GPA = (4×8 + 2×6)/(4+2) = (32+12)/6 = 44/6 = 7.33. A simple average of (8+6)/2 = 7 would ignore the credit weightage.<br><br>
+                <strong>Business:</strong> Weighted Average Cost of Capital (WACC) weights cost of equity and cost of debt by their proportions in total capital. Portfolio return = weighted average of individual stock returns weighted by portfolio allocation.
+              </div>
+            </li>
+            <li class="q-item">
+              <div class="q-top" onclick="toggleAnswer(this)">
+                <div class="q-num">50</div>
+                <div class="q-text">Complete the series: 2, 6, 12, 20, ___</div>
+                <div class="q-badge">IIM Amritsar (actual, multiple panels)</div>
+              </div>
+              <div class="q-answer">
+                <div class="ans-label">✅ Model Answer</div>
+                Pattern: 2=1×2, 6=2×3, 12=3×4, 20=4×5, next = <strong>5×6 = 30</strong><br><br>
+                Alternative pattern: Differences are 4, 6, 8 → next difference is 10 → 20+10 = <strong>30</strong> ✓<br><br>
+                Formula: aₙ = n(n+1). For n=1: 2, n=2: 6, n=3: 12, n=4: 20, n=5: <strong>30</strong>.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ QUIZ ═══════════════════ -->
+    <section id="quiz-section">
+      <div class="quiz-header">
+        <h2>🎯 Statistics Knowledge Quiz</h2>
+        <p>25 questions · Based on real IIM interview questions · See your score at the end</p>
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-progress">
+          <div class="quiz-track"><div class="quiz-fill" id="quiz-fill" style="width:4%"></div></div>
+          <div class="quiz-meta">
+            <span id="q-counter-label">Question 1 of 25</span>
+            <span id="score-live">Score: 0</span>
+          </div>
+        </div>
+
+        <div id="quiz-questions">
+          <!-- Questions injected by JS -->
+        </div>
+
+        <div class="quiz-nav">
+          <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Next Question →</button>
+        </div>
+
+        <div id="quiz-result">
+          <div class="result-ring" id="result-ring">
+            <span id="result-pct">0%</span>
+            <small>Score</small>
+          </div>
+          <div id="result-title"></div>
+          <div id="result-msg"></div>
+          <div class="result-breakdown">
+            <div class="rb-item"><strong id="rb-correct">0</strong><span>Correct</span></div>
+            <div class="rb-item"><strong id="rb-wrong">0</strong><span>Wrong</span></div>
+            <div class="rb-item"><strong id="rb-pct">0%</strong><span>Accuracy</span></div>
+          </div>
+          <button class="btn coral" onclick="restartQuiz()">🔄 Retake Quiz</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p>Built for <strong>IPM aspirants</strong> from real IIM interview transcripts (Amritsar · Ranchi · Indore · Kozhikode · Shillong · Sirmaur) · 2025 batch</p>
+  <p style="margin-top:6px">Concepts, questions, and business applications curated for <strong>interview success</strong></p>
+</footer>
+
+<a href="#quiz-section" class="sticky-quiz">🎯 Take the Quiz</a>
+
+<script>
+// ── TOGGLE CONCEPT ──
+function toggleConcept(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.concept-toggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+// ── TOGGLE ANSWER ──
+function toggleAnswer(top) {
+  const answer = top.nextElementSibling;
+  answer.classList.toggle('open');
+}
+
+// ── READING PROGRESS ──
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+  const pct = Math.round(scrolled * 100);
+  document.getElementById('reading-progress').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = pct + '% of guide read';
+});
+
+// ══════════════════════════════════════════════
+// QUIZ ENGINE
+// ══════════════════════════════════════════════
+const quizData = [
+  {
+    cat: "Central Tendency",
+    q: "A dataset has values: 3, 7, 7, 10, 13. What is the mode?",
+    opts: ["7", "8", "10", "3"],
+    ans: 0,
+    exp: "Mode is the most frequently occurring value. 7 appears twice, all others appear once. Mode = 7."
+  },
+  {
+    cat: "Central Tendency",
+    q: "Which measure of central tendency is LEAST affected by extreme outliers?",
+    opts: ["Mean", "Weighted Mean", "Median", "Geometric Mean"],
+    ans: 2,
+    exp: "Median is resistant to outliers because it only depends on the middle value(s), not the magnitude of extreme values."
+  },
+  {
+    cat: "Central Tendency",
+    q: "Karl Pearson's empirical relationship between Mean, Median, and Mode is:",
+    opts: ["Mode = 3 Median − 2 Mean", "Mean = 2 Mode − 3 Median", "Median = 3 Mode − 2 Mean", "Mode = 2 Mean − 3 Median"],
+    ans: 0,
+    exp: "Karl Pearson's empirical formula: Mode ≈ 3 × Median − 2 × Mean. Useful for estimating one measure when the other two are known."
+  },
+  {
+    cat: "AM · GM · HM",
+    q: "For two positive numbers a and b, which inequality always holds?",
+    opts: ["AM ≥ GM ≥ HM", "GM ≥ AM ≥ HM", "HM ≥ AM ≥ GM", "AM ≤ GM ≤ HM"],
+    ans: 0,
+    exp: "For any set of positive numbers: AM ≥ GM ≥ HM, with equality only when all values are equal."
+  },
+  {
+    cat: "AM · GM · HM",
+    q: "An investment grows +100% in year 1 and falls −50% in year 2. What is the correct average annual return?",
+    opts: ["+25% (AM)", "0% (GM)", "+50% (AM)", "−10% (GM)"],
+    ans: 1,
+    exp: "₹100 → ₹200 (+100%) → ₹100 (−50%). Final value = starting value. GM = √(2.0 × 0.5) − 1 = √1 − 1 = 0%. The AM of +100% and −50% = +25%, which is misleading. GM is correct for multiplicative returns."
+  },
+  {
+    cat: "Dispersion",
+    q: "Standard deviation is always equal to:",
+    opts: ["Variance", "√Variance", "Variance²", "Mean − Median"],
+    ans: 1,
+    exp: "SD = √Variance. Variance = SD². They measure the same spread but in different units — variance in squared units, SD in original units."
+  },
+  {
+    cat: "Dispersion",
+    q: "Which measure allows comparison of variability between datasets with different units or scales?",
+    opts: ["Standard Deviation", "Variance", "Coefficient of Variation", "Range"],
+    ans: 2,
+    exp: "Coefficient of Variation = (SD/Mean) × 100% is unit-free, allowing comparisons across different datasets. SD in absolute terms is not comparable when units or scales differ."
+  },
+  {
+    cat: "Dispersion",
+    q: "In a normal distribution, approximately what % of data lies within 2 standard deviations of the mean?",
+    opts: ["68%", "75%", "95%", "99.7%"],
+    ans: 2,
+    exp: "The 68-95-99.7 rule: ±1σ = 68%, ±2σ = 95%, ±3σ = 99.7%. This is fundamental for understanding how data spreads in a normal distribution."
+  },
+  {
+    cat: "Probability",
+    q: "Two fair dice are rolled. What is the probability that the sum equals 7?",
+    opts: ["1/9", "1/6", "5/36", "7/36"],
+    ans: 1,
+    exp: "Favourable outcomes: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 outcomes. P = 6/36 = 1/6. Seven is the most probable sum with two dice."
+  },
+  {
+    cat: "Probability",
+    q: "P(A) = 0.4, P(B) = 0.3. If A and B are independent, what is P(A ∩ B)?",
+    opts: ["0.12", "0.7", "0.1", "0.58"],
+    ans: 0,
+    exp: "For independent events: P(A ∩ B) = P(A) × P(B) = 0.4 × 0.3 = 0.12."
+  },
+  {
+    cat: "Probability",
+    q: "A card is drawn from a 52-card deck. What is the probability it is a face card?",
+    opts: ["1/13", "3/13", "4/13", "1/4"],
+    ans: 1,
+    exp: "Face cards = Jack, Queen, King = 3 per suit × 4 suits = 12 face cards. P = 12/52 = 3/13."
+  },
+  {
+    cat: "Probability",
+    q: "What is the probability of 53 Sundays in a NON-leap year?",
+    opts: ["1/7", "2/7", "1/52", "1/365"],
+    ans: 0,
+    exp: "365 days = 52 weeks + 1 extra day. That extra day could be any of 7 weekdays. P(that extra day is Sunday) = 1/7."
+  },
+  {
+    cat: "Conditional Probability",
+    q: "P(A|B) is defined as:",
+    opts: ["P(A) × P(B)", "P(A ∩ B) / P(B)", "P(A ∪ B) / P(B)", "P(B) / P(A ∩ B)"],
+    ans: 1,
+    exp: "Conditional probability P(A|B) = P(A∩B)/P(B). It is the probability of A given that B has already occurred, restricting the sample space to B."
+  },
+  {
+    cat: "Conditional Probability",
+    q: "If two events are mutually exclusive (and both have P > 0), are they independent?",
+    opts: ["Yes, always", "No, never", "Only if P(A) = P(B)", "It depends on the context"],
+    ans: 1,
+    exp: "Mutually exclusive events (P(A∩B)=0) CANNOT be independent (unless one has probability 0). If A occurs, B definitely can't occur — so A's occurrence changes P(B). Therefore they are dependent."
+  },
+  {
+    cat: "Distributions",
+    q: "Which distribution is used to model the number of SUCCESSES in n independent trials with probability p of success?",
+    opts: ["Poisson", "Normal", "Binomial", "Uniform"],
+    ans: 2,
+    exp: "Binomial distribution: X~B(n,p). P(X=k) = C(n,k)pᵏ(1-p)ⁿ⁻ᵏ. Mean=np, Variance=np(1-p)."
+  },
+  {
+    cat: "Distributions",
+    q: "The Poisson distribution has the unique property that:",
+    opts: ["Mean = Variance", "Mean = SD", "Mean > Variance always", "Variance = 0"],
+    ans: 0,
+    exp: "For Poisson distribution: Mean = Variance = λ. This unique property helps identify if a process follows a Poisson distribution."
+  },
+  {
+    cat: "Distributions",
+    q: "In a normal distribution, which of the following is TRUE?",
+    opts: ["Mean > Median always", "Mean = Median = Mode", "Mode > Mean always", "Median ≠ Mode always"],
+    ans: 1,
+    exp: "Normal distribution is perfectly symmetric, so Mean = Median = Mode. All three coincide at the peak of the bell curve."
+  },
+  {
+    cat: "Distributions",
+    q: "As sample size n increases in Binomial(n,p) where np = λ remains constant and p→0, the distribution approaches:",
+    opts: ["Normal", "Poisson", "Uniform", "Exponential"],
+    ans: 1,
+    exp: "When n is large and p is small with np = λ constant, Binomial → Poisson. This is the Poisson approximation to the Binomial."
+  },
+  {
+    cat: "Correlation",
+    q: "A correlation coefficient of −0.85 indicates:",
+    opts: ["Weak negative relationship", "Strong positive relationship", "Strong negative relationship", "No relationship"],
+    ans: 2,
+    exp: "|r| = 0.85 indicates a strong relationship. Negative sign means as one variable increases, the other decreases. Strong negative relationship."
+  },
+  {
+    cat: "Correlation",
+    q: "Ice cream sales and drowning incidents are correlated. This best illustrates:",
+    opts: ["Causation (ice cream causes drowning)", "Spurious correlation due to a confounding variable (summer heat)", "Negative correlation", "Bayes theorem in action"],
+    ans: 1,
+    exp: "This is a classic spurious correlation. Both increase in summer (the confounding variable). Ice cream does not cause drowning. Correlation ≠ Causation."
+  },
+  {
+    cat: "Regression",
+    q: "In Y = 10 + 3X, the regression coefficient is 3. This means:",
+    opts: ["Y is always 3", "For every 1-unit increase in X, Y increases by 3", "X is 3 times Y", "The correlation is 3"],
+    ans: 1,
+    exp: "The regression coefficient (slope) = 3 means: for each 1-unit increase in X, Y increases by 3 units on average. The intercept 10 is Y's value when X = 0."
+  },
+  {
+    cat: "Index Numbers",
+    q: "Fisher's Ideal Index is the geometric mean of:",
+    opts: ["Mean and Median index", "Laspeyres and Paasche index", "CPI and WPI", "Sensex and Nifty"],
+    ans: 1,
+    exp: "Fisher's Ideal Index = √(Laspeyres × Paasche). Called 'ideal' because it satisfies both the Time Reversal Test and Factor Reversal Test."
+  },
+  {
+    cat: "Index Numbers",
+    q: "Which index does the RBI use as its primary inflation target?",
+    opts: ["WPI", "CPI-Industrial Workers", "CPI-Combined", "GDP Deflator"],
+    ans: 2,
+    exp: "RBI uses CPI-Combined (Consumer Price Index for all India) as its headline inflation measure, targeting 4% with a ±2% tolerance band."
+  },
+  {
+    cat: "Hypothesis Testing",
+    q: "In hypothesis testing, if p-value < α, we should:",
+    opts: ["Fail to reject H₀", "Reject H₀", "Increase sample size", "Accept H₀ as proven"],
+    ans: 1,
+    exp: "If p-value < α (significance level), we reject the null hypothesis H₀. This means the data is statistically significant — unlikely to occur by chance if H₀ were true. Note: we never 'accept' H₀; we either reject it or 'fail to reject' it."
+  },
+  {
+    cat: "CLT & Sampling",
+    q: "The Central Limit Theorem states that the distribution of sample means approaches normal distribution as:",
+    opts: ["Population grows larger", "Sample size (n) increases", "Variance decreases", "Mean approaches 0"],
+    ans: 1,
+    exp: "CLT: As sample size n increases (typically n ≥ 30), the sampling distribution of x̄ approaches Normal(μ, σ²/n) regardless of the population's shape. The standard error = σ/√n decreases as n increases."
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+let answered = false;
+let wrongCount = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  quizData.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-card' + (i === 0 ? ' active' : '');
+    div.id = 'qcard-' + i;
+    div.innerHTML = `
+      <div class="quiz-q">
+        <div class="q-cat">${q.cat}</div>
+        Q${i+1}. ${q.q}
+      </div>
+      <div class="options" id="opts-${i}">
+        ${q.opts.map((o,j) => `<button class="option-btn" onclick="selectAnswer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+  updateProgress();
+}
+
+function selectAnswer(qIdx, optIdx) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[qIdx];
+  const btns = document.querySelectorAll(`#opts-${qIdx} .option-btn`);
+  const fb = document.getElementById(`fb-${qIdx}`);
+  btns.forEach((b, j) => {
+    b.disabled = true;
+    if (j === q.ans) b.classList.add('correct');
+    if (j === optIdx && j !== q.ans) b.classList.add('wrong');
+  });
+  if (optIdx === q.ans) {
+    score++;
+    fb.className = 'quiz-feedback show correct-fb';
+    fb.innerHTML = '✅ Correct! ' + q.exp;
+  } else {
+    wrongCount++;
+    fb.className = 'quiz-feedback show wrong-fb';
+    fb.innerHTML = '❌ Not quite. Correct answer: <strong>' + String.fromCharCode(65+q.ans) + '. ' + q.opts[q.ans] + '</strong><br>' + q.exp;
+  }
+  document.getElementById('score-live').textContent = 'Score: ' + score;
+  document.getElementById('next-btn').disabled = false;
+}
+
+function nextQuestion() {
+  if (currentQ >= quizData.length - 1) {
+    showResult();
+    return;
+  }
+  document.getElementById('qcard-' + currentQ).classList.remove('active');
+  currentQ++;
+  document.getElementById('qcard-' + currentQ).classList.add('active');
+  answered = false;
+  document.getElementById('next-btn').disabled = true;
+  if (currentQ === quizData.length - 1) {
+    document.getElementById('next-btn').textContent = 'Submit Quiz ✓';
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = ((currentQ + 1) / quizData.length) * 100;
+  document.getElementById('quiz-fill').style.width = pct + '%';
+  document.getElementById('q-counter-label').textContent = `Question ${currentQ+1} of ${quizData.length}`;
+}
+
+function showResult() {
+  document.getElementById('quiz-questions').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
+  document.querySelector('.quiz-progress').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.style.display = 'block';
+  const pct = Math.round((score / quizData.length) * 100);
+  document.getElementById('result-ring').style.setProperty('--pct', pct);
+  document.getElementById('result-pct').textContent = pct + '%';
+  document.getElementById('rb-correct').textContent = score;
+  document.getElementById('rb-wrong').textContent = wrongCount;
+  document.getElementById('rb-pct').textContent = pct + '%';
+  let title, msg;
+  if (pct >= 88) { title = '🏆 Excellent! IIM-Ready!'; msg = 'Outstanding performance. You have a strong command of statistics. Walk into that interview room with confidence!'; }
+  else if (pct >= 68) { title = '📚 Good — Review & Retry'; msg = 'Solid foundation. Revisit the sections where you made mistakes, and you will be interview-ready in no time.'; }
+  else if (pct >= 48) { title = '💪 Keep Practising!'; msg = 'You are on the right track. Go back through the guide, especially Distributions and Hypothesis Testing, and retake the quiz.'; }
+  else { title = '📖 Start from the Basics'; msg = 'Statistics takes practice. Revisit the core sections — Central Tendency, Dispersion, and Probability — before retaking the quiz.'; }
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+}
+
+function restartQuiz() {
+  currentQ = 0; score = 0; wrongCount = 0; answered = false;
+  document.getElementById('quiz-questions').style.display = 'block';
+  document.getElementById('next-btn').style.display = 'block';
+  document.getElementById('next-btn').textContent = 'Next Question →';
+  document.getElementById('next-btn').disabled = true;
+  document.querySelector('.quiz-progress').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('score-live').textContent = 'Score: 0';
+  buildQuiz();
+}
+
+// Build quiz on load
+buildQuiz();
+</script>
+</body>
+</html>
