@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCM Interview Questions & Answers</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --border: #252b38;
+    --accent-p: #7c6af7;
+    --accent-c: #f76a6a;
+    --accent-m: #6af7c8;
+    --text: #e2e8f0;
+    --muted: #6b7280;
+    --tag-p: rgba(124,106,247,0.15);
+    --tag-c: rgba(247,106,106,0.15);
+    --tag-m: rgba(106,247,200,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 60px 40px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .hero h1 span.p { color: var(--accent-p); }
+  .hero h1 span.c { color: var(--accent-c); }
+  .hero h1 span.m { color: var(--accent-m); }
+  .hero-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+  .badge-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+  .badge.p { background: var(--tag-p); color: var(--accent-p); border: 1px solid rgba(124,106,247,0.3); }
+  .badge.c { background: var(--tag-c); color: var(--accent-c); border: 1px solid rgba(247,106,106,0.3); }
+  .badge.m { background: var(--tag-m); color: var(--accent-m); border: 1px solid rgba(106,247,200,0.3); }
+
+  /* CONTROLS */
+  .controls {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 6px 16px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--text); color: var(--text); }
+  .filter-btn.active.all { border-color: var(--text); color: var(--text); background: rgba(255,255,255,0.05); }
+  .filter-btn.active.p { border-color: var(--accent-p); color: var(--accent-p); background: var(--tag-p); }
+  .filter-btn.active.c { border-color: var(--accent-c); color: var(--accent-c); background: var(--tag-c); }
+  .filter-btn.active.m { border-color: var(--accent-m); color: var(--accent-m); background: var(--tag-m); }
+  .search-input {
+    margin-left: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 14px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    border-radius: 2px;
+    outline: none;
+    width: 220px;
+  }
+  .search-input:focus { border-color: var(--accent-p); }
+  .count-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 6px 0;
+  }
+
+  /* GRID */
+  .grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 40px 60px;
+    display: grid;
+    gap: 12px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #353d50; }
+  .card.hidden { display: none; }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+  .q-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    min-width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .card.p .q-tag { background: var(--tag-p); color: var(--accent-p); }
+  .card.c .q-tag { background: var(--tag-c); color: var(--accent-c); }
+  .card.m .q-tag { background: var(--tag-m); color: var(--accent-m); }
+
+  .q-text {
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+    color: var(--text);
+  }
+  .toggle-icon {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .card.open .toggle-icon { transform: rotate(45deg); }
+
+  .card-body {
+    display: none;
+    padding: 0 20px 20px 62px;
+    font-size: 13.5px;
+    color: #a0aab8;
+    line-height: 1.8;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .card.open .card-body { display: block; }
+
+  .card-body strong { color: var(--text); font-weight: 600; }
+  .card-body ul { margin: 8px 0 8px 18px; }
+  .card-body li { margin-bottom: 4px; }
+  .card-body .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 2px;
+    font-size: 13px;
+    margin: 10px 0;
+    color: #c9d1df;
+    display: block;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 30px 40px 10px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 640px) {
+    .hero, .controls, .grid, .section-label { padding-left: 16px; padding-right: 16px; }
+    .card-body { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">Interview Preparation — Science & Engineering</p>
+  <h1><span class="p">Physics</span> · <span class="c">Chemistry</span> · <span class="m">Mathematics</span></h1>
+  <p class="hero-sub">150 frequently asked interview questions with structured answers for JEE, GATE, B.Sc., and engineering interviews.</p>
+  <div class="badge-row">
+    <span class="badge p">50 Physics</span>
+    <span class="badge c">50 Chemistry</span>
+    <span class="badge m">50 Mathematics</span>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="filter-btn active all" onclick="filter('all', this)">All 150</button>
+  <button class="filter-btn p" onclick="filter('p', this)">Physics</button>
+  <button class="filter-btn c" onclick="filter('c', this)">Chemistry</button>
+  <button class="filter-btn m" onclick="filter('m', this)">Mathematics</button>
+  <span class="count-label" id="countLabel">Showing 150 questions</span>
+  <input class="search-input" type="text" placeholder="Search questions…" oninput="search(this.value)">
+</div>
+
+<div class="grid" id="grid">
+
+<!-- ═══════════════════════════════ PHYSICS ═══════════════════════════════ -->
+
+<div class="section-label" id="sec-p" style="max-width:100%;padding:30px 0 10px;">— Physics</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">01</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Newton's Second Law of Motion? Give its mathematical form.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Answer:</strong> Newton's Second Law states that the rate of change of momentum of an object is directly proportional to the net force applied on it and takes place in the direction of the force.
+    <span class="formula">F = ma &nbsp;(Net Force = mass × acceleration)</span>
+    In terms of momentum: <strong>F = dp/dt</strong>. This law forms the foundation of classical mechanics — it tells us how velocity changes when a force acts on a body.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">02</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain the concept of work-energy theorem.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Answer:</strong> The work-energy theorem states that the net work done on a body equals the change in its kinetic energy.
+    <span class="formula">W_net = ΔKE = ½mv² − ½mu²</span>
+    This is derived directly from Newton's Second Law. It elegantly connects the scalar concepts of work and kinetic energy, avoiding vector analysis.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">03</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between elastic and inelastic collisions?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Elastic Collision:</strong> Both momentum AND kinetic energy are conserved. Example: collision between billiard balls.<br><br>
+    <strong>Inelastic Collision:</strong> Momentum is conserved but kinetic energy is NOT. Some energy is lost as heat/sound/deformation.<br><br>
+    <strong>Perfectly Inelastic:</strong> Bodies stick together after collision — maximum KE loss while momentum is still conserved.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">04</span><span class="q-tag">PHY</span>
+    <span class="q-text">State and explain Gauss's Law in electrostatics.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Statement:</strong> The total electric flux through any closed surface is equal to the total charge enclosed divided by ε₀.
+    <span class="formula">∮ E⃗ · dA⃗ = Q_enc / ε₀</span>
+    It is one of Maxwell's four equations. It simplifies calculation of electric fields for symmetric charge distributions (spherical, cylindrical, planar).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">05</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the photoelectric effect? Who explained it and how?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Phenomenon:</strong> When light of sufficient frequency falls on a metal surface, electrons are emitted.<br><br>
+    <strong>Einstein's Explanation (1905):</strong> Light consists of quanta (photons) each carrying energy E = hf. If hf > work function (φ), an electron is emitted with KE = hf − φ.<br><br>
+    This proved the quantum nature of light and earned Einstein the Nobel Prize in 1921.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">06</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain Ohm's Law and its limitations.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Ohm's Law:</strong> At constant temperature, the current through a conductor is directly proportional to the voltage across it.
+    <span class="formula">V = IR</span>
+    <strong>Limitations:</strong>
+    <ul>
+      <li>Not valid for semiconductors, diodes, thyristors</li>
+      <li>Does not hold at very high currents or temperatures</li>
+      <li>Non-linear devices like bulbs (as temperature changes resistance) don't obey it strictly</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">07</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Simple Harmonic Motion (SHM)?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> SHM is a type of periodic motion where the restoring force is directly proportional to displacement and directed towards the mean position.
+    <span class="formula">F = −kx &nbsp;⟹&nbsp; a = −ω²x</span>
+    Examples: spring-mass system, simple pendulum (small angles). Displacement: x = A sin(ωt + φ). Key parameters: amplitude A, angular frequency ω = √(k/m), time period T = 2π/ω.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">08</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Doppler Effect? Give a real-life example.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> The apparent change in frequency of a wave when the source and observer are in relative motion.<br><br>
+    <span class="formula">f' = f × (v ± v_o) / (v ∓ v_s)</span>
+    <strong>Example:</strong> An ambulance siren sounds higher-pitched as it approaches and lower-pitched as it moves away. Used in radar guns, medical ultrasound, and astronomy (redshift).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">09</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain Heisenberg's Uncertainty Principle.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Statement:</strong> It is impossible to simultaneously determine both the exact position and exact momentum of a particle with perfect precision.
+    <span class="formula">Δx · Δp ≥ ℏ/2 &nbsp;(where ℏ = h/2π)</span>
+    This is not a technological limitation — it is a fundamental property of quantum systems. It arises due to wave-particle duality. Implication: electrons cannot have defined orbits.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">10</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Bernoulli's Principle? Where is it applied?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Principle:</strong> For an ideal fluid in steady flow, an increase in speed occurs simultaneously with a decrease in pressure or potential energy.
+    <span class="formula">P + ½ρv² + ρgh = constant</span>
+    <strong>Applications:</strong> Aircraft wing lift, Venturi meter, carburetor, spray guns, blood flow in arteries.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">11</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between scalar and vector quantities?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Scalar:</strong> Quantities with only magnitude. Examples: mass, temperature, speed, energy, time.<br><br>
+    <strong>Vector:</strong> Quantities with both magnitude and direction. Examples: velocity, force, acceleration, displacement, momentum.<br><br>
+    Vectors obey the triangle law of addition; scalars follow ordinary algebra.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">12</span><span class="q-tag">PHY</span>
+    <span class="q-text">State Faraday's Laws of Electromagnetic Induction.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>First Law:</strong> An EMF is induced in a conductor whenever the magnetic flux linked with it changes.<br><br>
+    <strong>Second Law:</strong> The magnitude of the induced EMF is directly proportional to the rate of change of magnetic flux.
+    <span class="formula">ε = −dΦ/dt</span>
+    The negative sign (Lenz's Law) indicates that the induced EMF opposes the cause that produces it — conservation of energy.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">13</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is nuclear fission? How is it used in a nuclear reactor?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Fission:</strong> A heavy nucleus (like U-235) splits into two lighter nuclei when struck by a neutron, releasing energy and more neutrons.
+    <span class="formula">²³⁵U + n → ⁹²Kr + ¹⁴¹Ba + 3n + energy</span>
+    <strong>In a reactor:</strong> The chain reaction is controlled using control rods (Boron/Cadmium) that absorb neutrons. The heat produced converts water to steam → drives a turbine → generates electricity. Moderators (heavy water, graphite) slow neutrons.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">14</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is polarization of light? Name its types.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> The phenomenon by which the vibrations of a transverse wave are restricted to a single plane.<br><br>
+    <strong>Types:</strong>
+    <ul>
+      <li><strong>Linear:</strong> Vibrations in one plane</li>
+      <li><strong>Circular:</strong> Electric field vector rotates in a circle</li>
+      <li><strong>Elliptical:</strong> General case combining both</li>
+    </ul>
+    Polarization proves the transverse nature of light. Application: polaroid glasses, LCD screens, 3D movies.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">15</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain the concept of entropy in thermodynamics.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Entropy (S):</strong> A thermodynamic property that measures the degree of disorder or randomness in a system.
+    <span class="formula">dS = dQ_reversible / T</span>
+    <strong>Second Law of Thermodynamics:</strong> The total entropy of an isolated system can never decrease over time — it always increases or stays constant. This is why heat flows from hot to cold, not vice versa.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">16</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between AC and DC current?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>DC (Direct Current):</strong> Current flows in one direction only. Example: batteries, solar cells.<br><br>
+    <strong>AC (Alternating Current):</strong> Current reverses direction periodically (50 Hz in India). Example: household supply.<br><br>
+    AC is preferred for power transmission because its voltage can be stepped up/down using transformers, reducing energy loss (P = I²R).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">17</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is a black body? What is black body radiation?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Black Body:</strong> An ideal body that absorbs all incident radiation (no reflection or transmission). Also the best emitter.<br><br>
+    <strong>Black Body Radiation:</strong> The electromagnetic radiation emitted by a black body at a given temperature. The spectrum depends only on temperature.<br><br>
+    Planck's law explained the spectrum, resolving the "ultraviolet catastrophe." Wien's displacement law: λ_max · T = 2.898 × 10⁻³ m·K.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">18</span><span class="q-tag">PHY</span>
+    <span class="q-text">Define moment of inertia and state the parallel axis theorem.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Moment of Inertia (I):</strong> The rotational analog of mass. It represents resistance to angular acceleration.
+    <span class="formula">I = Σmᵢrᵢ² &nbsp;(discrete) &nbsp;or&nbsp; I = ∫r² dm &nbsp;(continuous)</span>
+    <strong>Parallel Axis Theorem:</strong> I = I_cm + Md², where I_cm is MI about the centre of mass, M is total mass, and d is the distance between the two parallel axes.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">19</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the principle of superposition of waves?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Principle:</strong> When two or more waves travel through the same medium simultaneously, the resultant displacement at any point is the algebraic sum of the individual displacements.
+    <span class="formula">y = y₁ + y₂ + … + yₙ</span>
+    This gives rise to constructive interference (waves in phase) and destructive interference (waves out of phase). Basis for standing waves, beats, and diffraction patterns.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">20</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Bohr model of the hydrogen atom?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Postulates:</strong>
+    <ul>
+      <li>Electrons revolve in fixed orbits without radiating energy</li>
+      <li>Only orbits where angular momentum = nℏ are allowed</li>
+      <li>Energy is emitted/absorbed when electrons jump between orbits</li>
+    </ul>
+    <span class="formula">Eₙ = −13.6/n² eV</span>
+    Successfully explained the hydrogen spectrum (Lyman, Balmer series) but fails for multi-electron atoms.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">21</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain the concept of capacitance. What factors affect it?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Capacitance:</strong> The ability of a conductor to store electric charge per unit potential difference. C = Q/V. Unit: Farad (F).<br><br>
+    For a parallel-plate capacitor:
+    <span class="formula">C = ε₀ε_r A / d</span>
+    <strong>Factors:</strong> Area of plates (↑A → ↑C), separation (↑d → ↓C), dielectric material (↑ε_r → ↑C).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">22</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Archimedes' Principle?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Statement:</strong> A body partially or fully submerged in a fluid experiences an upward buoyant force equal to the weight of the fluid displaced by it.
+    <span class="formula">F_buoyancy = ρ_fluid × V_submerged × g</span>
+    This explains why ships float, submarines dive, and hot air balloons rise. A body floats when buoyant force ≥ its weight.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">23</span><span class="q-tag">PHY</span>
+    <span class="q-text">Define escape velocity. Derive its expression.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> The minimum speed needed for an object to escape a planet's gravitational pull without further propulsion.<br><br>
+    Derivation: Set KE = gravitational PE at surface:
+    <span class="formula">½mv² = GMm/R  ⟹  v_e = √(2GM/R) = √(2gR)</span>
+    For Earth: v_e ≈ 11.2 km/s. Note: it is independent of the mass of the escaping object.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">24</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is total internal reflection? What conditions are required?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> When light travelling from a denser to rarer medium hits the interface at an angle greater than the critical angle, it is completely reflected back.<br><br>
+    <strong>Conditions:</strong>
+    <ul>
+      <li>Light must travel from denser → rarer medium</li>
+      <li>Angle of incidence must exceed the critical angle</li>
+    </ul>
+    Applications: optical fibers, diamonds, periscopes, endoscopes.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">25</span><span class="q-tag">PHY</span>
+    <span class="q-text">What are Maxwell's equations in brief?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    The four Maxwell's equations unify electricity, magnetism, and optics:
+    <ul>
+      <li><strong>Gauss (Electric):</strong> ∇·E = ρ/ε₀ — electric field lines originate from charges</li>
+      <li><strong>Gauss (Magnetic):</strong> ∇·B = 0 — no magnetic monopoles</li>
+      <li><strong>Faraday:</strong> ∇×E = −∂B/∂t — changing B creates E</li>
+      <li><strong>Ampere-Maxwell:</strong> ∇×B = μ₀J + μ₀ε₀∂E/∂t — currents + changing E create B</li>
+    </ul>
+    Together they predict electromagnetic waves at speed c = 1/√(μ₀ε₀) ≈ 3×10⁸ m/s.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">26</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between nuclear fission and fusion?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Fission:</strong> A heavy nucleus (e.g., U-235) splits into lighter nuclei. Used in nuclear reactors and atomic bombs. Requires less energy to initiate.<br><br>
+    <strong>Fusion:</strong> Two light nuclei (e.g., H isotopes) merge to form a heavier nucleus. Releases far more energy per kg. Occurs in stars (Sun). Used in hydrogen bombs. Requires extremely high temperature (~10⁷ K).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">27</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is surface tension? Why does a needle float on water?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Surface Tension:</strong> The property of a liquid surface to behave like a stretched elastic membrane due to cohesive forces between surface molecules. Measured in N/m.<br><br>
+    <strong>Needle on water:</strong> The needle's weight is distributed across the surface. The surface tension force acts upward around the needle's perimeter, balancing gravity — the needle doesn't penetrate because it doesn't break the surface film.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">28</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Hall effect? How is it used?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Hall Effect:</strong> When a current-carrying conductor is placed in a perpendicular magnetic field, a voltage (Hall voltage) develops perpendicular to both current and magnetic field.
+    <span class="formula">V_H = IB / (nqt)</span>
+    <strong>Uses:</strong> Determining type of semiconductor (n or p-type), measuring magnetic fields (Hall sensors), current sensors in electrical systems, wheel speed sensors in cars.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">29</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain the working principle of a transformer.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Principle:</strong> Mutual electromagnetic induction. An AC in the primary coil creates a changing magnetic flux through the iron core, which induces an EMF in the secondary coil.
+    <span class="formula">V_s/V_p = N_s/N_p = I_p/I_s</span>
+    Step-up: N_s > N_p (voltage increases, current decreases). Step-down: N_s < N_p. Ideal transformer: power input = power output (P = VI).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">30</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the de Broglie hypothesis?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Hypothesis:</strong> Every moving particle has an associated wavelength (wave nature), just as light has particle nature (photons). This is wave-particle duality applied to matter.
+    <span class="formula">λ = h / p = h / (mv)</span>
+    For macroscopic objects, λ is negligibly small. For electrons, it is measurable — confirmed by Davisson-Germer experiment (electron diffraction). Basis for electron microscopy.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">31</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between heat and temperature?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Temperature:</strong> A measure of the average kinetic energy of molecules in a substance. Measured in °C or K. It is an intensive property.<br><br>
+    <strong>Heat:</strong> Energy transferred between systems due to a temperature difference. Measured in joules. It is an extensive property. Heat flows from high to low temperature. You can add heat without changing temperature (phase changes).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">32</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is resonance? Give an example from daily life.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Resonance:</strong> When a system is driven at its natural frequency by an external periodic force, it oscillates with maximum amplitude.<br><br>
+    <strong>Examples:</strong> Pushing a swing at its natural frequency; microwave ovens (water molecules at ~2.45 GHz); Tacoma Narrows Bridge collapse (wind resonance); tuning a radio circuit. In RLC circuits: resonance when ω = 1/√(LC).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">33</span><span class="q-tag">PHY</span>
+    <span class="q-text">Define angular momentum. State its conservation law.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Angular Momentum (L):</strong> The rotational analog of linear momentum. L = Iω = r × p.
+    <span class="formula">L = Iω &nbsp;(for rigid body)</span>
+    <strong>Conservation Law:</strong> If the net external torque on a system is zero, its angular momentum remains constant. Example: a skater spinning faster by pulling in arms (I decreases → ω increases).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">34</span><span class="q-tag">PHY</span>
+    <span class="q-text">What are p-type and n-type semiconductors?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>n-type:</strong> Silicon doped with a pentavalent impurity (P, As). Extra electron → electrons are majority carriers. Fermi level shifts toward conduction band.<br><br>
+    <strong>p-type:</strong> Silicon doped with a trivalent impurity (B, Al). Missing electron creates a hole → holes are majority carriers. Fermi level shifts toward valence band.<br><br>
+    Combining them creates a p-n junction diode.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">35</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Snell's Law of Refraction?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Snell's Law:</strong> When light passes from one medium to another, the ratio of the sine of the angle of incidence to the sine of angle of refraction is a constant (refractive index).
+    <span class="formula">n₁ sin θ₁ = n₂ sin θ₂</span>
+    Light bends toward the normal when entering a denser medium (v decreases, λ decreases, n increases). Frequency does not change upon refraction.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">36</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is specific heat capacity?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> The amount of heat energy required to raise the temperature of 1 kg of a substance by 1 K (or 1°C).
+    <span class="formula">Q = mcΔT</span>
+    Water has one of the highest specific heats (~4186 J/kg·K), which is why it is used in cooling systems and why coastal climates are moderate. Metals have low specific heat — they heat and cool quickly.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">37</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Carnot theorem and Carnot efficiency?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Carnot Theorem:</strong> No heat engine operating between two temperatures can be more efficient than a Carnot engine operating between the same temperatures.<br><br>
+    <span class="formula">η_Carnot = 1 − T_cold/T_hot</span>
+    The Carnot engine is ideal (reversible). Real engines are less efficient due to friction, heat losses. Efficiency → 100% only if T_cold → 0 K (impossible practically).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">38</span><span class="q-tag">PHY</span>
+    <span class="q-text">What are gravitational waves?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> Ripples in the fabric of spacetime caused by accelerating massive objects (e.g., merging black holes, neutron stars). Predicted by Einstein in 1916 (General Relativity).<br><br>
+    They travel at the speed of light. Detected by LIGO in 2015 for the first time (Nobel Prize 2017). The waves stretch and compress space perpendicular to their direction of travel.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">39</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Pauli Exclusion Principle?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Principle:</strong> No two electrons in an atom can have the same set of four quantum numbers (n, l, m_l, m_s).<br><br>
+    This means each orbital can hold at most 2 electrons (with opposite spins). It explains the electronic structure of atoms, the periodic table, and why matter is stable and solid — electrons cannot all collapse into the lowest energy state.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">40</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between static and kinetic friction?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Static Friction (f_s):</strong> The force that prevents relative motion between surfaces. It adjusts up to a maximum value: f_s ≤ μ_s N.<br><br>
+    <strong>Kinetic Friction (f_k):</strong> The constant friction force acting when surfaces are already sliding. f_k = μ_k N.<br><br>
+    Always: μ_s > μ_k — it's harder to start motion than to maintain it. That's why it's harder to push a stationary car than a rolling one.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">41</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the electromagnetic spectrum?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    The EM spectrum is the range of all electromagnetic radiation, ordered by frequency/wavelength:
+    <ul>
+      <li>Radio waves (longest λ) → Microwaves → Infrared → Visible light → UV → X-rays → Gamma rays (shortest λ, highest energy)</li>
+    </ul>
+    All travel at c = 3×10⁸ m/s in vacuum. Only visible light (400–700 nm) is detectable by human eyes.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">42</span><span class="q-tag">PHY</span>
+    <span class="q-text">Explain the photoelectric effect threshold frequency.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Threshold Frequency (f₀):</strong> The minimum frequency of light required to eject an electron from a metal surface. Below f₀, no electrons are emitted regardless of intensity.
+    <span class="formula">φ = hf₀ &nbsp;(Work function)</span>
+    If f > f₀: KE_max = h(f − f₀). Increasing intensity increases the number of electrons emitted but not their energy. This refuted the classical wave theory of light.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">43</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Fleming's left-hand rule?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Rule:</strong> If the left hand's forefinger, middle finger, and thumb are held mutually perpendicular:
+    <ul>
+      <li>Forefinger → direction of magnetic field (B)</li>
+      <li>Middle finger → direction of current (I)</li>
+      <li>Thumb → direction of force/motion (F) on the conductor</li>
+    </ul>
+    Used for motors. The right-hand rule (or generator rule) applies to generators (Fleming's right-hand rule).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">44</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is meant by half-life of a radioactive substance?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Half-life (T½):</strong> The time required for half the atoms of a radioactive substance to decay.
+    <span class="formula">N(t) = N₀ (½)^(t/T½) = N₀ e^(−λt)</span>
+    T½ = ln2/λ. After n half-lives: N = N₀/2ⁿ. Application: radiocarbon dating (C-14, T½ ≈ 5730 years), nuclear medicine (Tc-99m, T½ ≈ 6 hours).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">45</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Kirchhoff's Voltage Law (KVL)?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>KVL:</strong> The algebraic sum of all voltages around any closed loop in a circuit is zero.
+    <span class="formula">ΣV = 0 &nbsp;(around a closed loop)</span>
+    Based on conservation of energy — a charge returning to the same point must have gained and lost equal energy. Used alongside KCL (sum of currents at a node = 0) to solve complex circuits.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">46</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Coriolis effect?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Coriolis Effect:</strong> An apparent deflection of moving objects (air, water, projectiles) when viewed from a rotating reference frame (like Earth).<br><br>
+    In the Northern Hemisphere, deflection is to the right; in Southern, to the left. Responsible for: cyclone/anticyclone rotation directions, trade winds, ocean gyre circulation, and long-range artillery corrections.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">47</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the Compton effect?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Definition:</strong> When X-rays are scattered by electrons, the scattered X-rays have a longer wavelength than the incident ones. This shows photons carry momentum.
+    <span class="formula">Δλ = (h / m_e c)(1 − cosθ)</span>
+    Compton wavelength: h/m_e c ≈ 2.43 pm. The Compton effect confirmed the particle nature of electromagnetic radiation and momentum of photons.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">48</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is viscosity? How does it differ in liquids and gases with temperature?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Viscosity:</strong> The internal friction of a fluid — its resistance to flow. η = (shear stress)/(velocity gradient). Unit: Pa·s.<br><br>
+    <strong>Liquids:</strong> Viscosity decreases with temperature (intermolecular forces weaken). Honey is less viscous when warm.<br><br>
+    <strong>Gases:</strong> Viscosity increases with temperature (faster molecules collide more, transferring momentum).
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">49</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is the difference between a real and virtual image?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Real Image:</strong> Formed by actual convergence of light rays. Can be projected on a screen. Always inverted. Formed by concave mirrors and convex lenses.<br><br>
+    <strong>Virtual Image:</strong> Formed by apparent divergence of light rays (rays don't actually meet). Cannot be projected. Always erect. Formed by plane mirrors, convex mirrors, concave lens, and magnifying glasses.
+  </div>
+</div>
+
+<div class="card p" data-subject="p">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">50</span><span class="q-tag">PHY</span>
+    <span class="q-text">What is Einstein's mass-energy equivalence?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>E = mc²</strong> — mass and energy are interchangeable. A small mass can convert to enormous energy due to c² ≈ 9×10¹⁶ m²/s².
+    <span class="formula">E = mc²</span>
+    This explains nuclear energy: 1 kg matter → ~9×10¹⁶ J. The Sun loses ~4 million tonnes of mass per second via fusion. Also explains mass defect in nuclei (binding energy).
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ CHEMISTRY ═══════════════════════════════ -->
+
+<div class="section-label" id="sec-c" style="max-width:100%;padding:30px 0 10px;">— Chemistry</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">51</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Avogadro's number and what does it signify?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Avogadro's Number (Nₐ):</strong> 6.022 × 10²³ — the number of atoms, molecules, or ions in one mole of a substance.
+    <span class="formula">1 mole = 6.022 × 10²³ particles</span>
+    It bridges the atomic scale and macroscopic scale. 1 mole of any gas at STP occupies 22.4 litres. It allows chemists to "count" atoms by weighing.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">52</span><span class="q-tag">CHM</span>
+    <span class="q-text">Explain Hund's Rule of Maximum Multiplicity.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Hund's Rule:</strong> When electrons are filling degenerate orbitals (same energy, e.g., 2p_x, 2p_y, 2p_z), each orbital gets one electron before any orbital gets a second. The unpaired electrons all have the same spin (maximizes multiplicity).<br><br>
+    This minimizes electron-electron repulsion. Explains paramagnetism of carbon, nitrogen, and oxygen atoms.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">53</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between covalent and ionic bonds?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Ionic Bond:</strong> Transfer of electrons between a metal and non-metal. Electrostatic attraction. High MP/BP, conducts electricity when dissolved. Example: NaCl.<br><br>
+    <strong>Covalent Bond:</strong> Sharing of electrons between non-metals. Lower MP/BP, poor conductors. Can be polar (H₂O) or non-polar (CH₄). Example: H₂, CO₂.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">54</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Le Chatelier's Principle?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Principle:</strong> If a system at equilibrium is disturbed by changing concentration, pressure, or temperature, the equilibrium shifts in the direction that counteracts the disturbance.<br><br>
+    <strong>Example (Haber Process):</strong> N₂ + 3H₂ ⇌ 2NH₃ + heat. Increasing pressure favors the forward reaction (fewer moles of gas). Removing NH₃ shifts equilibrium forward.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">55</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is oxidation and reduction? Define in terms of electron transfer.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Oxidation:</strong> Loss of electrons (OIL — Oxidation Is Loss). Oxidation state increases.<br><br>
+    <strong>Reduction:</strong> Gain of electrons (RIG — Reduction Is Gain). Oxidation state decreases.<br><br>
+    They always occur together — hence "redox reactions." The substance that gets oxidized is the reducing agent; the one that gets reduced is the oxidizing agent. Example: Zn + CuSO₄ → ZnSO₄ + Cu.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">56</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is hybridization? Explain sp, sp², sp³ with examples.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Hybridization:</strong> Mixing of atomic orbitals to form new hybrid orbitals of equal energy and shape.<br><br>
+    <ul>
+      <li><strong>sp:</strong> 1s + 1p → 2 linear orbitals, 180°. Example: BeCl₂, acetylene (C₂H₂)</li>
+      <li><strong>sp²:</strong> 1s + 2p → 3 planar orbitals, 120°. Example: BF₃, ethylene</li>
+      <li><strong>sp³:</strong> 1s + 3p → 4 tetrahedral orbitals, 109.5°. Example: CH₄, NH₃, H₂O</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">57</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between strong and weak acids?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Strong Acid:</strong> Completely dissociates in water. High [H⁺], low pH. Examples: HCl, H₂SO₄, HNO₃.<br><br>
+    <strong>Weak Acid:</strong> Partially dissociates — exists in equilibrium. Lower [H⁺] for same concentration. Examples: CH₃COOH, H₂CO₃, HF.<br><br>
+    Strength ≠ concentration. A dilute strong acid and a concentrated weak acid can have the same pH.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">58</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the VSEPR theory? Predict the shape of water.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>VSEPR:</strong> Valence Shell Electron Pair Repulsion. Electron pairs (bonding + lone) around a central atom arrange themselves to minimize repulsion.<br><br>
+    <strong>Water (H₂O):</strong> O has 2 bonding pairs + 2 lone pairs → based on tetrahedral arrangement, but shape is bent/angular with bond angle ~104.5° (lone pairs repel more than bonding pairs).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">59</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Periodic Law? How is the modern periodic table organized?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Modern Periodic Law:</strong> Properties of elements are a periodic function of their atomic number.<br><br>
+    <strong>Organization:</strong> 118 elements in 18 groups and 7 periods. Groups = same valence electrons (same chemical behavior). Periods = same number of electron shells. Blocks: s (groups 1-2), p (13-18), d (3-12 transition metals), f (lanthanides, actinides).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span name="60" class="q-num">60</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is a buffer solution? How does it resist pH change?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Buffer:</strong> A solution that resists changes in pH upon addition of small amounts of acid or base.<br><br>
+    <strong>Composition:</strong> Weak acid + its conjugate base (or weak base + conjugate acid). Example: CH₃COOH + CH₃COONa.<br><br>
+    Adding H⁺: conjugate base reacts with it (CH₃COO⁻ + H⁺ → CH₃COOH). Adding OH⁻: weak acid neutralizes it. Henderson-Hasselbalch equation: pH = pKa + log([A⁻]/[HA]).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">61</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Faraday's First Law of Electrolysis?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Statement:</strong> The mass of substance deposited or liberated at an electrode during electrolysis is directly proportional to the quantity of electricity passed.
+    <span class="formula">m = ZQ = Z·I·t</span>
+    Z = electrochemical equivalent (mass per coulomb). Faraday's constant F = 96485 C/mol. Applications: electroplating, refining metals, manufacturing chemicals.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">62</span><span class="q-tag">CHM</span>
+    <span class="q-text">What are isomers? Explain structural and stereoisomers.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Isomers:</strong> Compounds with the same molecular formula but different arrangements of atoms.<br><br>
+    <strong>Structural isomers:</strong> Different connectivity. Example: n-butane vs isobutane (C₄H₁₀).<br><br>
+    <strong>Stereoisomers:</strong> Same connectivity, different spatial arrangement. Types: geometrical (cis-trans) and optical (enantiomers, diastereomers). Example: cis/trans-2-butene.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">63</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Raoult's Law?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Raoult's Law:</strong> The partial vapour pressure of a component in an ideal solution is equal to the mole fraction of that component multiplied by its pure vapour pressure.
+    <span class="formula">Pₐ = xₐ × P°ₐ</span>
+    Total pressure: P = xₐP°ₐ + x_bP°_b. Positive deviation (Raoult): attractions weaker than pure components (e.g., ethanol + water). Negative deviation: stronger attractions.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">64</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between physisorption and chemisorption?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Physisorption:</strong> Physical adsorption via van der Waals forces. Low enthalpy (~20 kJ/mol), reversible, multi-layer possible, occurs at low temperature.<br><br>
+    <strong>Chemisorption:</strong> Chemical bond formation between adsorbate and adsorbent. Higher enthalpy (~40-400 kJ/mol), irreversible, monolayer, specific, increases with temperature. Langmuir isotherm applies.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">65</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Arrhenius equation? What does it tell us?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Arrhenius Equation:</strong>
+    <span class="formula">k = A · e^(−Eₐ/RT)</span>
+    k = rate constant, A = frequency factor, Eₐ = activation energy, R = gas constant, T = temperature (K).<br><br>
+    It explains why reaction rates increase exponentially with temperature. A plot of ln k vs 1/T gives a straight line with slope = −Eₐ/R. Higher Eₐ → slower reaction.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">66</span><span class="q-tag">CHM</span>
+    <span class="q-text">What are colligative properties? List them.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Colligative Properties:</strong> Properties that depend only on the number of solute particles, not their nature.<br><br>
+    The four colligative properties are:
+    <ul>
+      <li>Relative lowering of vapour pressure (ΔP/P° = x_solute)</li>
+      <li>Elevation of boiling point (ΔTb = Kb·m)</li>
+      <li>Depression of freezing point (ΔTf = Kf·m)</li>
+      <li>Osmotic pressure (π = MRT)</li>
+    </ul>
+    Used to determine molecular mass of solutes.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">67</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the role of a catalyst? Does it affect equilibrium?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Catalyst:</strong> A substance that increases reaction rate by providing an alternate pathway with lower activation energy. It is not consumed in the reaction.<br><br>
+    <strong>Effect on Equilibrium:</strong> A catalyst speeds up both forward and reverse reactions equally — it does NOT shift equilibrium position. It helps reach equilibrium faster, but Keq remains unchanged.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">68</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between sigma (σ) and pi (π) bonds?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Sigma (σ) bond:</strong> Head-on overlap of orbitals along the internuclear axis. Stronger, free rotation possible. Present in every single bond and as one component of double/triple bonds.<br><br>
+    <strong>Pi (π) bond:</strong> Lateral (side-by-side) overlap of p-orbitals above and below the internuclear axis. Weaker, restricts rotation (explains cis-trans isomerism). Always accompanies a σ bond.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">69</span><span class="q-tag">CHM</span>
+    <span class="q-text">Explain the Born-Haber cycle for an ionic compound.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Born-Haber Cycle:</strong> A thermochemical cycle applying Hess's Law to determine lattice enthalpy of ionic compounds indirectly.<br><br>
+    Steps for NaCl:
+    <ul>
+      <li>Atomisation of Na(s) and Cl₂(g)</li>
+      <li>Ionisation energy of Na</li>
+      <li>Electron affinity of Cl</li>
+      <li>Lattice enthalpy (unknown) </li>
+    </ul>
+    ΔH_formation = sum of all steps. Large lattice enthalpy → stable ionic compound.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">70</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Markovnikov's rule in organic chemistry?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Rule:</strong> In the addition of HX to an unsymmetrical alkene, the hydrogen attaches to the carbon that already has more hydrogen atoms (the "richer gets richer").<br><br>
+    <strong>Example:</strong> CH₃-CH=CH₂ + HBr → CH₃-CHBr-CH₃ (not CH₃-CH₂-CH₂Br).<br><br>
+    <strong>Explanation:</strong> The more substituted carbocation intermediate (formed on the central carbon) is more stable (hyperconjugation).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">71</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is van der Waals' equation? Why do real gases deviate from ideal behaviour?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <span class="formula">(P + a/V²)(V − b) = nRT</span>
+    'a' corrects for intermolecular attractions (reduces measured pressure); 'b' corrects for finite molecular volume.<br><br>
+    <strong>Ideal gas assumes:</strong> point particles with no volume, no intermolecular forces. At high pressure (molecules close → volume matters) and low temperature (slow molecules → attraction matters), deviations are significant.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">72</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is an SN1 vs SN2 reaction?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>SN2 (Bimolecular):</strong> One-step, concerted backside attack. Rate = k[substrate][nucleophile]. Inversion of configuration. Favored by primary alkyl halides, strong nucleophiles, polar aprotic solvents.<br><br>
+    <strong>SN1 (Unimolecular):</strong> Two steps: carbocation intermediate then nucleophile attack. Rate = k[substrate] only. Racemization. Favored by tertiary substrates, polar protic solvents, weak nucleophiles.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">73</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Nernst equation?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Nernst Equation:</strong> Relates the EMF of an electrochemical cell to standard EMF and concentration of reactants/products.
+    <span class="formula">E = E° − (RT/nF) ln Q</span>
+    At 25°C: E = E° − (0.0592/n) log Q.<br><br>
+    When Q = Keq, E = 0 (equilibrium). Used in pH measurement (glass electrode), concentration cells, battery analysis.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">74</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is aromaticity? State Hückel's rule.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Aromaticity:</strong> Extra stability due to cyclic delocalization of π electrons. More stable than expected from resonance alone.<br><br>
+    <strong>Hückel's Rule:</strong> A planar, cyclic, fully conjugated compound is aromatic if it contains (4n + 2) π electrons, where n = 0, 1, 2…<br><br>
+    Examples: Benzene (6 π e⁻, n=1), Naphthalene (10 π e⁻, n=2), Pyridine, Furan. Anti-aromatic: 4n π electrons (cyclobutadiene).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">75</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Henry's Law?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Henry's Law:</strong> At constant temperature, the solubility of a gas in a liquid is directly proportional to the partial pressure of the gas above the liquid.
+    <span class="formula">p = K_H · x</span>
+    p = partial pressure, K_H = Henry's constant, x = mole fraction of dissolved gas.<br><br>
+    Applications: carbonated beverages (CO₂), scuba diving (nitrogen narcosis, decompression sickness), dissolved oxygen in water.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">76</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is a coordination compound? Define ligand.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Coordination Compound:</strong> A compound in which a central metal atom/ion is bonded to a fixed number of ligands via coordinate bonds. Example: [Cu(NH₃)₄]²⁺.<br><br>
+    <strong>Ligand:</strong> Molecule or ion that donates a lone pair of electrons to the metal. Types: monodentate (NH₃, Cl⁻), bidentate (ethylenediamine), polydentate (EDTA). Chelates form more stable complexes (chelate effect).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">77</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Gibb's free energy? What does ΔG tell us?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <span class="formula">ΔG = ΔH − TΔS</span>
+    <ul>
+      <li>ΔG < 0: Spontaneous (thermodynamically favorable)</li>
+      <li>ΔG = 0: System at equilibrium</li>
+      <li>ΔG > 0: Non-spontaneous (reverse reaction is spontaneous)</li>
+    </ul>
+    Also: ΔG° = −RT ln Keq = −nFE°. A reaction can be endothermic (ΔH > 0) yet spontaneous if TΔS is large enough.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">78</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is osmosis? How is it different from diffusion?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Osmosis:</strong> Movement of solvent (water) through a semi-permeable membrane from a region of lower solute concentration to higher solute concentration.<br><br>
+    <strong>Diffusion:</strong> Movement of any substance from high to low concentration. No membrane required.<br><br>
+    Osmotic pressure π = MRT. Reverse osmosis: applying pressure to force water through a membrane (water purification, desalination).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">79</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is chromatography? Name its types.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Chromatography:</strong> A technique to separate components of a mixture based on differential distribution between a stationary phase and a mobile phase.<br><br>
+    <strong>Types:</strong>
+    <ul>
+      <li>Thin Layer Chromatography (TLC)</li>
+      <li>Column Chromatography</li>
+      <li>Paper Chromatography</li>
+      <li>Gas Chromatography (GC)</li>
+      <li>High Performance Liquid Chromatography (HPLC)</li>
+    </ul>
+    Used in forensics, pharma, food analysis.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">80</span><span class="q-tag">CHM</span>
+    <span class="q-text">What are the d-block elements and their key properties?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>d-block (Transition metals, Groups 3-12):</strong> Elements with partially filled d-subshells in some oxidation state.<br><br>
+    <strong>Key Properties:</strong>
+    <ul>
+      <li>Variable oxidation states (due to similar energies of 3d and 4s)</li>
+      <li>Form colored ions (d-d electronic transitions)</li>
+      <li>Catalytic activity (Fe, Ni, Pt, V)</li>
+      <li>Form complex/coordination compounds</li>
+      <li>Paramagnetic behavior</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">81</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is electrophilic aromatic substitution (EAS)?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>EAS:</strong> A substitution reaction where an electrophile replaces a hydrogen on an aromatic ring. The aromaticity is preserved.<br><br>
+    Steps:
+    <ul>
+      <li>1. Electrophile attacks → forms arenium ion (Wheland intermediate)</li>
+      <li>2. Loss of H⁺ → restores aromaticity</li>
+    </ul>
+    Examples: nitration (HNO₃/H₂SO₄), halogenation (Cl₂/FeCl₃), sulfonation, Friedel-Crafts alkylation/acylation.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">82</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between enthalpy and internal energy?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Internal Energy (U):</strong> Total energy (KE + PE) of all molecules in a system. State function.<br><br>
+    <strong>Enthalpy (H):</strong> H = U + PV. The heat content at constant pressure.
+    <span class="formula">ΔH = ΔU + ΔnRT &nbsp;(for gases)</span>
+    In lab reactions at constant atmospheric pressure, we measure ΔH. ΔU = q_v (heat at constant volume, measured in bomb calorimeter). ΔH = q_p (heat at constant pressure).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">83</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between homolytic and heterolytic fission?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Homolytic Fission:</strong> Bond breaks equally — each atom gets one electron. Produces free radicals (neutral, highly reactive). Example: Cl₂ → 2Cl·. Occurs in non-polar bonds, UV light-triggered.<br><br>
+    <strong>Heterolytic Fission:</strong> Bond breaks unequally — one atom gets both electrons. Produces ions (cation + anion). Example: HCl → H⁺ + Cl⁻. Common in polar reactions (ionic, nucleophilic, electrophilic).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">84</span><span class="q-tag">CHM</span>
+    <span class="q-text">What are amino acids? What is a peptide bond?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Amino Acids:</strong> Organic molecules with both an amino group (−NH₂) and a carboxyl group (−COOH). They are the building blocks of proteins. 20 standard amino acids, 9 essential (must be obtained from diet).<br><br>
+    <strong>Peptide Bond:</strong> A covalent amide bond formed between the carboxyl group of one amino acid and the amino group of another, releasing water (condensation reaction).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">85</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the common ion effect?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Common Ion Effect:</strong> When a common ion is added to a solution of a weak electrolyte, the degree of ionization of the weak electrolyte is suppressed (equilibrium shifts left).<br><br>
+    <strong>Example:</strong> Adding NaCl to a CH₃COOH solution increases [CH₃COO⁻] (or adding NaF to HF solution). Application: solubility of slightly soluble salts — adding common ions decreases solubility (used in gravimetric analysis). Also the basis for buffer action.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">86</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between a nucleophile and an electrophile?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Nucleophile ("nucleus-lover"):</strong> Electron-rich species that donates a pair of electrons to form a bond. Examples: OH⁻, NH₃, CN⁻, H₂O, Cl⁻. Attacks electron-deficient centers.<br><br>
+    <strong>Electrophile ("electron-lover"):</strong> Electron-deficient species that accepts an electron pair. Examples: H⁺, NO₂⁺, BF₃, carbocations. Attacks electron-rich centers.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">87</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Hardy-Schulze rule in colloid chemistry?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Hardy-Schulze Rule:</strong> The coagulating power of an electrolyte on a colloidal solution depends on the charge of the coagulating ion — specifically, the higher the valence (charge) of the ion of opposite sign, the greater its coagulating power.<br><br>
+    Example: For a negative sol (e.g., As₂S₃): Al³⁺ > Ca²⁺ > Na⁺. The highly charged ion neutralizes the surface charge of colloidal particles, causing them to aggregate.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">88</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is radioactivity? Distinguish between α, β, and γ radiation.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Radioactivity:</strong> Spontaneous emission of radiation from unstable nuclei.<br><br>
+    <ul>
+      <li><strong>α (alpha):</strong> ⁴He nucleus (2p+2n). Low penetration, stopped by paper. Charge: +2.</li>
+      <li><strong>β (beta):</strong> Electron (β⁻) or positron (β⁺). Stopped by aluminium. Charge: ±1.</li>
+      <li><strong>γ (gamma):</strong> High-energy photon. No charge, no mass. Needs thick lead/concrete to stop. Most penetrating.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">89</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Haber process for making ammonia?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <span class="formula">N₂(g) + 3H₂(g) ⇌ 2NH₃(g) + heat</span>
+    <strong>Conditions:</strong> Temperature ~450–500°C, pressure ~150–300 atm, iron catalyst (with K₂O and Al₂O₃ as promoters).<br><br>
+    High pressure favors NH₃ (fewer moles). Moderate temperature balances rate vs yield. NH₃ is crucial for fertilizers (about 1.8% of global energy use). Industrial significance is enormous.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">90</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is a polymer? Distinguish between addition and condensation polymerization.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Polymer:</strong> A large molecule made of repeating structural units (monomers) linked by covalent bonds.<br><br>
+    <strong>Addition Polymerization:</strong> Monomers with double bonds add together with no byproduct. Example: polyethylene (from ethylene CH₂=CH₂).<br><br>
+    <strong>Condensation Polymerization:</strong> Monomers with two functional groups react, releasing a small molecule (H₂O, HCl). Example: Nylon-6,6 (from hexamethylenediamine + adipic acid).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">91</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is ionization energy? How does it vary across a period and down a group?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Ionization Energy:</strong> Energy required to remove an electron from a gaseous atom in its ground state.<br><br>
+    <strong>Across a period (→):</strong> Increases (more protons, greater nuclear attraction, smaller atomic radius).<br><br>
+    <strong>Down a group (↓):</strong> Decreases (more shells, greater shielding, valence electrons farther from nucleus, easier to remove).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">92</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the Contact process for sulfuric acid production?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    Steps:
+    <ul>
+      <li>1. Burn sulfur: S + O₂ → SO₂</li>
+      <li>2. Oxidize: 2SO₂ + O₂ ⇌ 2SO₃ (V₂O₅ catalyst, 450°C, 1-2 atm)</li>
+      <li>3. Absorb: SO₃ + H₂SO₄ → H₂S₂O₇ (oleum)</li>
+      <li>4. Dilute: H₂S₂O₇ + H₂O → 2H₂SO₄</li>
+    </ul>
+    H₂SO₄ is the most industrially produced chemical. Used in fertilizers, batteries, dyes, explosives.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">93</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between sp² and sp³ carbon in terms of reactivity?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>sp² Carbon</strong> (e.g., in alkenes, benzene, carbonyl groups): Has one unhybridized p-orbital forming π bonds. Flat geometry, 120° angles. More electronegative than sp³ carbon (holds electron density closer). Prone to nucleophilic/electrophilic additions and EAS.<br><br>
+    <strong>sp³ Carbon</strong> (alkanes, aliphatic): Tetrahedral, 109.5°. Less reactive. Undergoes free-radical halogenation.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">94</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Hardy-Weinberg equilibrium in context of genetic chemistry?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <em>Note: While primarily biology/genetics, this concept appears in bio-chemistry and interdisciplinary interviews.</em><br><br>
+    <strong>Hardy-Weinberg Principle:</strong> Allele and genotype frequencies in a population remain constant if no evolutionary forces are acting. Conditions: random mating, no mutation, no selection, no drift, no migration.
+    <span class="formula">p² + 2pq + q² = 1</span>
+    p = dominant allele frequency, q = recessive allele frequency.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">95</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is nuclear magnetic resonance (NMR) spectroscopy?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>NMR Spectroscopy:</strong> A technique exploiting magnetic properties of atomic nuclei (mainly ¹H, ¹³C) to determine molecular structure.<br><br>
+    Principle: Nuclei with spin absorb specific radio frequencies in a magnetic field. The chemical shift (δ, ppm) reflects the electronic environment. Coupling patterns (splitting) reveal neighboring protons. Gives information on: number of unique protons, their environment, and connectivity. Basis of MRI in medicine.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">96</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Kohlrausch's Law?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Law:</strong> At infinite dilution, the molar conductivity of an electrolyte equals the sum of the individual molar conductivities of its ions.
+    <span class="formula">Λ°_m = ν₊λ°₊ + ν₋λ°₋</span>
+    Useful for finding limiting molar conductivity of weak electrolytes (which cannot be measured directly by extrapolation). Used to determine degree of dissociation: α = Λ_m / Λ°_m.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">97</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is the difference between physical and chemical change?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Physical Change:</strong> No new substance formed. Reversible. Only form, state, or appearance changes. Examples: melting, boiling, cutting, dissolving sugar in water.<br><br>
+    <strong>Chemical Change:</strong> New substances with different properties formed. Usually irreversible. Involves bond breaking/forming. Signs: color change, gas evolution, precipitate, heat/light produced. Examples: burning, rusting, digestion.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">98</span><span class="q-tag">CHM</span>
+    <span class="q-text">What are van der Waals forces? List them in order of strength.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Van der Waals Forces:</strong> Weak, short-range intermolecular forces not involving ionic or covalent bonds.<br><br>
+    In order of strength (strongest to weakest):
+    <ul>
+      <li>Dipole-dipole interactions (polar molecules)</li>
+      <li>Dipole-induced dipole (polar + non-polar)</li>
+      <li>London dispersion forces / instantaneous dipole (all molecules)</li>
+    </ul>
+    Hydrogen bonding (N-H, O-H, F-H) is often classified separately and is stronger than these.
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">99</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is Graham's Law of Effusion?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Graham's Law:</strong> The rate of effusion (or diffusion) of a gas is inversely proportional to the square root of its molar mass.
+    <span class="formula">r₁/r₂ = √(M₂/M₁)</span>
+    Lighter gases effuse faster. Application: separation of isotopes (e.g., U-235 from U-238 via UF₆ gas diffusion), detecting gas leaks (H₂ leaks 4× faster than O₂).
+  </div>
+</div>
+
+<div class="card c" data-subject="c">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">100</span><span class="q-tag">CHM</span>
+    <span class="q-text">What is an indicator in acid-base titration? How does it work?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Indicator:</strong> A weak acid (or base) whose conjugate form has a different color. It changes color at a specific pH range (its transition interval).<br><br>
+    <strong>Mechanism:</strong> HIn ⇌ H⁺ + In⁻. In acidic solution: HIn form dominates (one color). In basic solution: In⁻ form dominates (different color).<br><br>
+    <strong>Examples:</strong> Phenolphthalein (colorless → pink at pH 8.2–10), Methyl orange (red → yellow at pH 3.1–4.4). Choose based on equivalence point pH.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ MATHEMATICS ═══════════════════════════════ -->
+
+<div class="section-label" id="sec-m" style="max-width:100%;padding:30px 0 10px;">— Mathematics</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">101</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between permutation and combination?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Permutation:</strong> Arrangement where order matters. ⁿPᵣ = n! / (n−r)!. Example: Arranging 3 people in a queue from 5.<br><br>
+    <strong>Combination:</strong> Selection where order does NOT matter. ⁿCᵣ = n! / [r!(n−r)!]. Example: Choosing 3 people from 5 for a committee.<br><br>
+    Relationship: ⁿPᵣ = r! × ⁿCᵣ.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">102</span><span class="q-tag">MTH</span>
+    <span class="q-text">State the Fundamental Theorem of Calculus.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    The FTC connects differentiation and integration — they are inverse operations.<br><br>
+    <strong>Part 1:</strong> If F(x) = ∫_a^x f(t) dt, then F'(x) = f(x).<br><br>
+    <strong>Part 2:</strong> ∫_a^b f(x) dx = F(b) − F(a), where F is any antiderivative of f.
+    <span class="formula">∫_a^b f(x) dx = F(b) − F(a)</span>
+    This allows definite integrals to be computed using antiderivatives.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">103</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a matrix? Define determinant and its properties.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Matrix:</strong> A rectangular array of numbers arranged in rows and columns.<br><br>
+    <strong>Determinant:</strong> A scalar value computed from a square matrix. For 2×2: det(A) = ad − bc.<br><br>
+    <strong>Key Properties:</strong>
+    <ul>
+      <li>det(AB) = det(A)·det(B)</li>
+      <li>det(Aᵀ) = det(A)</li>
+      <li>If a row is multiplied by k, det is multiplied by k</li>
+      <li>det(A) = 0 iff A is singular (non-invertible)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">104</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a limit? Define continuity using limits.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Limit:</strong> lim_{x→a} f(x) = L means f(x) can be made arbitrarily close to L by taking x sufficiently close to a (but not equal to a).<br><br>
+    <strong>Continuity:</strong> A function f is continuous at x = a if:
+    <ul>
+      <li>f(a) is defined</li>
+      <li>lim_{x→a} f(x) exists</li>
+      <li>lim_{x→a} f(x) = f(a)</li>
+    </ul>
+    Differentiability implies continuity, but not vice versa (e.g., |x| at x=0).
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">105</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the Binomial Theorem? State it.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Binomial Theorem:</strong>
+    <span class="formula">(a + b)ⁿ = Σ ⁿCᵣ · aⁿ⁻ʳ · bʳ &nbsp;(r = 0 to n)</span>
+    General term: T_{r+1} = ⁿCᵣ · aⁿ⁻ʳ · bʳ.<br><br>
+    Number of terms = n+1. Middle term: T_{(n/2)+1} for even n. Sum of coefficients = 2ⁿ (put a=b=1). Used in approximations: (1+x)ⁿ ≈ 1 + nx for |x| << 1.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">106</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between definite and indefinite integrals?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Indefinite Integral:</strong> ∫f(x)dx = F(x) + C. Represents a family of antiderivatives. No limits, result is a function.<br><br>
+    <strong>Definite Integral:</strong> ∫_a^b f(x)dx = F(b) − F(a). Has limits a and b. Result is a number. Geometrically: net area under the curve from a to b. The +C cancels out.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">107</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is Bayes' Theorem? Give an example.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Bayes' Theorem:</strong>
+    <span class="formula">P(A|B) = P(B|A)·P(A) / P(B)</span>
+    Updates probability of hypothesis A given new evidence B.<br><br>
+    <strong>Example:</strong> A disease affects 1% of population. Test is 99% accurate. If you test positive, P(disease|positive) = (0.99×0.01)/[(0.99×0.01)+(0.01×0.99)] ≈ 50%. Counterintuitive but important in medical diagnosis.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">108</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are eigenvalues and eigenvectors?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    For a square matrix A, if Av = λv, then λ is an <strong>eigenvalue</strong> and v is the corresponding <strong>eigenvector</strong> — a non-zero vector that only scales (not rotates) under A.<br><br>
+    Found by: det(A − λI) = 0 (characteristic equation).<br><br>
+    Applications: PCA (dimensionality reduction), vibration analysis, quantum mechanics (energy levels = eigenvalues), Google PageRank, image compression.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">109</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between mean, median, and mode?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Mean:</strong> Sum of all values divided by count. Sensitive to outliers. Best for symmetric distributions.<br><br>
+    <strong>Median:</strong> Middle value when sorted. Robust to outliers. Best for skewed distributions (e.g., income).<br><br>
+    <strong>Mode:</strong> Most frequent value. Can be used for categorical data. A distribution can be unimodal, bimodal, or multimodal.<br><br>
+    For a symmetric normal distribution: Mean = Median = Mode.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">110</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is Rolle's Theorem and its geometric interpretation?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Rolle's Theorem:</strong> If f is continuous on [a,b], differentiable on (a,b), and f(a) = f(b), then there exists at least one c ∈ (a,b) such that f'(c) = 0.
+    <span class="formula">∃ c ∈ (a,b) : f'(c) = 0</span>
+    <strong>Geometric Interpretation:</strong> If a smooth curve starts and ends at the same height, there must be at least one horizontal tangent in between. It is a special case of the Mean Value Theorem.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">111</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between vectors in 2D vs 3D?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>2D Vector:</strong> v = (x, y). Cross product not directly defined; dot product: v·u = xu+yv.<br><br>
+    <strong>3D Vector:</strong> v = (x, y, z). Both dot product AND cross product defined. Cross product: v × u = vector perpendicular to both (right-hand rule). |v × u| = |v||u|sinθ = area of parallelogram.<br><br>
+    3D vectors are essential in physics (torque, magnetic force), computer graphics, and engineering.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">112</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is an arithmetic progression (AP)? Find its nth term and sum.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>AP:</strong> A sequence where each term differs from the previous by a constant common difference d.<br><br>
+    <span class="formula">aₙ = a + (n−1)d</span>
+    <span class="formula">Sₙ = n/2 · [2a + (n−1)d] = n/2 · (a + l)</span>
+    where l = last term. Example: 2, 5, 8, 11... (a=2, d=3). S₁₀ = 10/2·[4+27] = 155.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">113</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is differentiation by chain rule?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Chain Rule:</strong> For composite function f(g(x)):
+    <span class="formula">d/dx[f(g(x))] = f'(g(x)) · g'(x)</span>
+    Work from outside in. Example: d/dx[sin(x²)] = cos(x²) · 2x.<br><br>
+    Extended: d/dx[f(g(h(x)))] = f'(g(h(x))) · g'(h(x)) · h'(x). Essential for implicit differentiation and neural network backpropagation.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">114</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a normal distribution? State its key properties.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Normal Distribution:</strong> A symmetric, bell-shaped probability distribution defined by mean (μ) and standard deviation (σ).
+    <span class="formula">f(x) = (1/σ√2π) e^[−(x−μ)²/2σ²]</span>
+    <strong>Properties:</strong>
+    <ul>
+      <li>Symmetric about mean; mean = median = mode</li>
+      <li>68-95-99.7 rule: within 1σ, 2σ, 3σ</li>
+      <li>Total area under curve = 1</li>
+      <li>Completely defined by μ and σ</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">115</span><span class="q-tag">MTH</span>
+    <span class="q-text">State the Mean Value Theorem (MVT).</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>MVT:</strong> If f is continuous on [a,b] and differentiable on (a,b), then there exists at least one c ∈ (a,b) such that:
+    <span class="formula">f'(c) = [f(b) − f(a)] / (b − a)</span>
+    <strong>Geometric meaning:</strong> The instantaneous rate of change at some interior point equals the average rate of change over the interval. The tangent at c is parallel to the secant from a to b. Generalizes Rolle's Theorem.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">116</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a geometric progression (GP)? Find its sum to infinity.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>GP:</strong> A sequence where each term is multiplied by a constant ratio r.
+    <span class="formula">aₙ = ar^(n−1)</span>
+    <span class="formula">Sₙ = a(1 − rⁿ)/(1 − r) &nbsp;for r ≠ 1</span>
+    <strong>Sum to infinity</strong> (when |r| < 1):
+    <span class="formula">S∞ = a / (1 − r)</span>
+    Example: 1 + 1/2 + 1/4 + … = 1/(1−0.5) = 2.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">117</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is integration by parts?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Integration by Parts:</strong>
+    <span class="formula">∫u dv = uv − ∫v du</span>
+    Choose u using ILATE: Inverse trig, Logarithm, Algebraic, Trigonometric, Exponential.<br><br>
+    Example: ∫x eˣ dx: u=x (algebraic), dv=eˣdx → du=dx, v=eˣ → xeˣ − ∫eˣ dx = xeˣ − eˣ + C = eˣ(x−1) + C.<br><br>
+    Used when the integrand is a product of two different function types.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">118</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are complex numbers? Define modulus and argument.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Complex Number:</strong> z = a + bi, where a = real part, b = imaginary part, i = √(−1).<br><br>
+    <span class="formula">|z| = √(a² + b²) &nbsp;(modulus)</span>
+    <span class="formula">arg(z) = θ = arctan(b/a) &nbsp;(argument)</span>
+    Polar form: z = r(cosθ + i sinθ) = r·e^(iθ). Euler's formula: e^(iπ) + 1 = 0 (most beautiful equation in math). Used in AC circuits, signal processing, quantum mechanics.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">119</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the quadratic formula? Derive it.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    For ax² + bx + c = 0, completing the square:
+    <span class="formula">x = [−b ± √(b² − 4ac)] / 2a</span>
+    <strong>Discriminant Δ = b² − 4ac:</strong>
+    <ul>
+      <li>Δ > 0: Two distinct real roots</li>
+      <li>Δ = 0: One repeated real root</li>
+      <li>Δ < 0: Two complex conjugate roots</li>
+    </ul>
+    Sum of roots = −b/a, product of roots = c/a (Vieta's formulas).
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">120</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is L'Hôpital's Rule?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>L'Hôpital's Rule:</strong> If lim_{x→a} f(x)/g(x) gives the indeterminate form 0/0 or ∞/∞, then:
+    <span class="formula">lim_{x→a} f(x)/g(x) = lim_{x→a} f'(x)/g'(x)</span>
+    Can be applied repeatedly if still indeterminate. Example: lim_{x→0} sin(x)/x = lim cos(x)/1 = 1. Also works for ∞/∞ forms like lim_{x→∞} x/eˣ = 0.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">121</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between a relation and a function?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Relation:</strong> Any subset of the Cartesian product A × B. Associates elements of A with elements of B.<br><br>
+    <strong>Function:</strong> A special relation where each element in the domain (A) maps to exactly one element in the codomain (B). Vertical line test: a vertical line must intersect the graph at most once.<br><br>
+    Types of functions: injective (one-to-one), surjective (onto), bijective (both) — bijections have inverses.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">122</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a Taylor series? Write the expansion for eˣ.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Taylor Series:</strong> Represents a function as an infinite sum of terms calculated from its derivatives at a single point a.
+    <span class="formula">f(x) = Σ [f^(n)(a)/n!] · (x−a)ⁿ</span>
+    <strong>Maclaurin Series</strong> (a=0) for eˣ:
+    <span class="formula">eˣ = 1 + x + x²/2! + x³/3! + x⁴/4! + …</span>
+    Also: sinx = x − x³/3! + x⁵/5! − …; cosx = 1 − x²/2! + x⁴/4! − …. Used in approximations and numerical methods.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">123</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a set? Define union, intersection, and complement.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Set:</strong> A well-defined collection of distinct objects.<br><br>
+    <strong>Union (A ∪ B):</strong> All elements in A or B (or both).<br><br>
+    <strong>Intersection (A ∩ B):</strong> Only elements in both A and B.<br><br>
+    <strong>Complement (A'):</strong> All elements in the universal set U but not in A.<br><br>
+    De Morgan's Laws: (A ∪ B)' = A' ∩ B'; (A ∩ B)' = A' ∪ B'.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">124</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the principle of mathematical induction?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Mathematical Induction:</strong> A proof technique for statements about natural numbers.<br><br>
+    Steps:
+    <ul>
+      <li><strong>Base case:</strong> Prove P(1) (or P(0)) is true</li>
+      <li><strong>Inductive step:</strong> Assume P(k) is true; prove P(k+1) is true</li>
+    </ul>
+    Like dominoes — if the first falls and each knocks over the next, all fall. Example: Prove 1+2+…+n = n(n+1)/2.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">125</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the equation of a circle? Write in standard and general form.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Standard Form:</strong>
+    <span class="formula">(x − h)² + (y − k)² = r²</span>
+    Centre (h, k), radius r.<br><br>
+    <strong>General Form:</strong> x² + y² + 2gx + 2fy + c = 0. Centre = (−g, −f), radius = √(g² + f² − c).<br><br>
+    For a valid circle: g² + f² − c > 0. Tangent at point (x₁, y₁): xx₁ + yy₁ + g(x+x₁) + f(y+y₁) + c = 0.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">126</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the dot product and what does it measure geometrically?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Dot Product:</strong> a⃗ · b⃗ = |a⃗||b⃗|cosθ = a₁b₁ + a₂b₂ + a₃b₃.
+    <span class="formula">a⃗ · b⃗ = Σ aᵢbᵢ</span>
+    <strong>Geometric meaning:</strong> Measures how much of one vector projects onto another. If dot product = 0, vectors are perpendicular. If positive: angle < 90°; if negative: angle > 90°.<br><br>
+    Used in: work (W = F⃗·d⃗), finding angles between vectors, projections.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">127</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are the basic trigonometric identities?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Pythagorean identities:</strong>
+    <span class="formula">sin²θ + cos²θ = 1 &nbsp;;&nbsp; 1 + tan²θ = sec²θ &nbsp;;&nbsp; 1 + cot²θ = csc²θ</span>
+    <strong>Double angle:</strong> sin2θ = 2sinθcosθ; cos2θ = cos²θ − sin²θ = 2cos²θ − 1 = 1 − 2sin²θ.<br><br>
+    <strong>Sum formulae:</strong> sin(A±B) = sinAcosB ± cosAsinB; cos(A±B) = cosAcosB ∓ sinAsinB.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">128</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is partial differentiation? When is it used?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Partial Differentiation:</strong> Differentiation of a multivariable function with respect to one variable, treating all others as constants.
+    <span class="formula">∂f/∂x &nbsp;— derivative w.r.t. x, y held constant</span>
+    Used in: optimization (finding maxima/minima of functions of multiple variables), thermodynamics (∂U/∂T, ∂P/∂V), machine learning (gradient descent with ∂Loss/∂wᵢ), fluid mechanics.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">129</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are conic sections? Name and describe each.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    Conic sections are curves formed by the intersection of a plane with a double cone:
+    <ul>
+      <li><strong>Circle:</strong> x² + y² = r² (eccentricity e = 0)</li>
+      <li><strong>Ellipse:</strong> x²/a² + y²/b² = 1 (e < 1)</li>
+      <li><strong>Parabola:</strong> y² = 4ax (e = 1)</li>
+      <li><strong>Hyperbola:</strong> x²/a² − y²/b² = 1 (e > 1)</li>
+    </ul>
+    Applications: planetary orbits (ellipses), satellite dishes (parabolas), comet paths (hyperbolas).
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">130</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the Cauchy-Schwarz inequality?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Cauchy-Schwarz Inequality:</strong> For any two vectors a⃗ and b⃗:
+    <span class="formula">|a⃗ · b⃗| ≤ |a⃗| · |b⃗|</span>
+    Equivalently: (Σaᵢbᵢ)² ≤ (Σaᵢ²)(Σbᵢ²).<br><br>
+    Equality holds when vectors are proportional (parallel). Used extensively in analysis, probability (Var(X)Var(Y) ≥ Cov(X,Y)²), machine learning (cosine similarity), and quantum mechanics.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">131</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the rank of a matrix?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Rank:</strong> The maximum number of linearly independent rows (or equivalently columns) in a matrix. Equals the number of non-zero rows in row-echelon form.<br><br>
+    <strong>Key facts:</strong>
+    <ul>
+      <li>rank(A) = rank(Aᵀ)</li>
+      <li>For an n×n matrix: full rank = n → invertible</li>
+      <li>rank(A) ≤ min(m, n)</li>
+      <li>Rank-nullity theorem: rank + nullity = n (number of columns)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">132</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the Central Limit Theorem (CLT)?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>CLT:</strong> As sample size n → ∞, the distribution of sample means approaches a normal distribution, regardless of the population's original distribution.
+    <span class="formula">X̄ ~ N(μ, σ²/n) &nbsp;for large n</span>
+    Why it matters: It justifies using normal distribution for inference about means. Underpins most statistical tests. "Large enough" is typically n ≥ 30 (rule of thumb). The standard error = σ/√n decreases with sample size.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">133</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between scalars, vectors, and tensors?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Scalar (rank 0 tensor):</strong> A single number. No direction. Example: mass, temperature.<br><br>
+    <strong>Vector (rank 1 tensor):</strong> An ordered list of numbers; has magnitude and direction. Example: force, velocity.<br><br>
+    <strong>Tensor (rank ≥ 2):</strong> A multi-dimensional array that transforms in specific ways. Rank 2 = matrix. Example: stress tensor, inertia tensor, metric tensor in relativity. Tensors generalize vectors to higher dimensions.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">134</span><span class="q-tag">MTH</span>
+    <span class="q-text">State Pythagoras' Theorem and its converse.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Pythagoras' Theorem:</strong> In a right-angled triangle, the square of the hypotenuse equals the sum of squares of the other two sides.
+    <span class="formula">a² + b² = c² &nbsp;(c = hypotenuse)</span>
+    <strong>Converse:</strong> If a² + b² = c² for sides of a triangle, then it is a right-angled triangle.<br><br>
+    Extends to 3D: d = √(x² + y² + z²). Generalized by the law of cosines: c² = a² + b² − 2ab cosC.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">135</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between a local maximum and a global maximum?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Local (Relative) Maximum:</strong> A point where f(x) is greater than all nearby points, but not necessarily the highest overall.<br><br>
+    <strong>Global (Absolute) Maximum:</strong> The highest value of f(x) over the entire domain.<br><br>
+    Finding local extrema: Set f'(x) = 0 (critical points) then use second derivative test: f''(c) < 0 → local max; f''(c) > 0 → local min. Check endpoints for global extrema on closed intervals.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">136</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is logarithm? State key properties.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Logarithm:</strong> log_b(x) = y means b^y = x. It is the inverse of exponentiation.<br><br>
+    <strong>Key Properties:</strong>
+    <span class="formula">log(mn) = log m + log n</span>
+    <span class="formula">log(m/n) = log m − log n</span>
+    <span class="formula">log(mⁿ) = n log m</span>
+    Change of base: log_b(a) = log(a)/log(b). Natural log ln = log_e (e ≈ 2.718). Application: pH = −log[H⁺], decibels, Richter scale, complexity analysis.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">137</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a differential equation? Classify by order and degree.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Differential Equation:</strong> An equation involving a function and one or more of its derivatives.<br><br>
+    <strong>Order:</strong> The highest derivative present. dy/dx = f(x) → order 1; d²y/dx² → order 2.<br><br>
+    <strong>Degree:</strong> The power of the highest-order derivative (after clearing fractions).<br><br>
+    Linear: each derivative appears to power 1 only. Nonlinear: otherwise. Example: dy/dx + 2y = eˣ (first order, first degree, linear).
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">138</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the AM-GM inequality?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>AM-GM Inequality:</strong> For non-negative numbers, the Arithmetic Mean is always ≥ the Geometric Mean.
+    <span class="formula">(a₁ + a₂ + … + aₙ)/n ≥ (a₁·a₂·…·aₙ)^(1/n)</span>
+    Equality holds iff all numbers are equal.<br><br>
+    Example: For two numbers: (a+b)/2 ≥ √(ab). Application: minimizing/maximizing expressions with a fixed sum or product, optimization problems, proving other inequalities.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">139</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the area under a curve and how is it computed?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    The area between a curve y = f(x) and the x-axis from x = a to x = b is computed using the definite integral:
+    <span class="formula">A = ∫_a^b |f(x)| dx</span>
+    The absolute value accounts for areas below the x-axis (which integration would give as negative). For area between two curves f(x) and g(x): A = ∫_a^b |f(x) − g(x)| dx. Used in physics, economics (consumer surplus), probability density functions.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">140</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are the properties of a straight line? Write its equations.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Slope-intercept form:</strong> y = mx + c (m = slope, c = y-intercept).<br><br>
+    <strong>Point-slope form:</strong> y − y₁ = m(x − x₁).<br><br>
+    <strong>General form:</strong> ax + by + c = 0.<br><br>
+    <strong>Intercept form:</strong> x/a + y/b = 1.<br><br>
+    Distance from point (x₁,y₁) to line ax+by+c=0:
+    <span class="formula">d = |ax₁ + by₁ + c| / √(a² + b²)</span>
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">141</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is graph theory? Define degree of a vertex.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Graph Theory:</strong> The study of graphs — mathematical structures consisting of vertices (nodes) and edges (connections).<br><br>
+    <strong>Degree of a vertex:</strong> The number of edges incident to that vertex. Sum of all degrees = 2 × number of edges (handshake lemma).<br><br>
+    Applications: social networks, routing algorithms, circuit design, scheduling, Google Maps, Facebook friend recommendations.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">142</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the inverse of a matrix? When does it exist?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Inverse:</strong> For a square matrix A, A⁻¹ satisfies A·A⁻¹ = A⁻¹·A = I (identity matrix).<br><br>
+    <strong>Exists iff:</strong> det(A) ≠ 0 (matrix is non-singular/invertible).<br><br>
+    <span class="formula">A⁻¹ = adj(A) / det(A)</span>
+    For 2×2: if A = [[a,b],[c,d]], then A⁻¹ = (1/(ad−bc)) [[d,−b],[−c,a]]. Used to solve Ax = b → x = A⁻¹b.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">143</span><span class="q-tag">MTH</span>
+    <span class="q-text">What are the different types of discontinuities?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Types:</strong>
+    <ul>
+      <li><strong>Removable:</strong> Limit exists but ≠ f(a) or f(a) undefined. "Hole" in graph. Can be fixed by redefining f(a).</li>
+      <li><strong>Jump:</strong> Left and right limits exist but are unequal. Step functions.</li>
+      <li><strong>Infinite:</strong> Limit is ±∞. Vertical asymptote. Example: 1/x at x=0.</li>
+      <li><strong>Oscillating:</strong> Limit doesn't exist due to wild oscillations. Example: sin(1/x) at x=0.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">144</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is variance and standard deviation?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Variance (σ²):</strong> The average of squared deviations from the mean. Measures spread.
+    <span class="formula">σ² = (1/n) Σ(xᵢ − x̄)²</span>
+    <strong>Standard Deviation (σ):</strong> Square root of variance. Same units as data.
+    <span class="formula">σ = √σ²</span>
+    Low σ → data tightly clustered around mean. High σ → widely spread. Sample variance uses (n−1) denominator (Bessel's correction) for unbiased estimation.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">145</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is modular arithmetic? Give an example.</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Modular Arithmetic:</strong> A system where numbers wrap around after reaching a modulus m. "a ≡ b (mod m)" means m divides (a−b).<br><br>
+    <strong>Example:</strong> 17 ≡ 2 (mod 5), because 17 = 3×5 + 2. Clocks use mod 12.<br><br>
+    Applications: cryptography (RSA encryption), checksums, hash functions, calendar calculations, computer memory addressing.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">146</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is Euler's formula for polyhedra?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Euler's Formula:</strong> For any convex polyhedron:
+    <span class="formula">V − E + F = 2</span>
+    V = vertices, E = edges, F = faces.<br><br>
+    <strong>Example:</strong> Cube: V=8, E=12, F=6 → 8−12+6=2 ✓. Tetrahedron: V=4, E=6, F=4 → 4−6+4=2 ✓.<br><br>
+    This is a topological invariant — it holds for any surface homeomorphic to a sphere. Related to the Euler characteristic in topology: χ = V−E+F.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">147</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the difference between correlation and causation?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Correlation:</strong> A statistical relationship between two variables (one changes as the other changes). Measured by r ∈ [−1, 1]. Does not imply a cause-and-effect link.<br><br>
+    <strong>Causation:</strong> One variable directly causes the other to change. Requires controlled experiments (randomized trials) to establish, not just data.<br><br>
+    Classic example: Ice cream sales and drowning both increase in summer — correlated due to a third variable (heat), not causally related.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">148</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is a Fourier transform and why is it useful?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Fourier Transform:</strong> Decomposes a function (signal) into its constituent frequencies. Converts time-domain signal to frequency-domain.
+    <span class="formula">F(ω) = ∫_{−∞}^{∞} f(t) e^(−iωt) dt</span>
+    The inverse transform reconstructs f(t). Applications: signal processing, audio compression (MP3), image compression (JPEG), solving PDEs, MRI, noise filtering, communication systems.
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">149</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the Fundamental Theorem of Algebra?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Theorem:</strong> Every non-constant polynomial with complex coefficients has at least one complex root. Equivalently, a polynomial of degree n has exactly n roots (counting multiplicity) in the complex numbers.
+    <span class="formula">p(z) = aₙzⁿ + … + a₀ = aₙ(z − z₁)(z − z₂)…(z − zₙ)</span>
+    Example: x² + 1 = 0 has no real roots, but has roots ±i in ℂ. This is why complex numbers are "algebraically closed."
+  </div>
+</div>
+
+<div class="card m" data-subject="m">
+  <div class="card-header" onclick="toggle(this)">
+    <span class="q-num">150</span><span class="q-tag">MTH</span>
+    <span class="q-text">What is the Pigeonhole Principle?</span>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="card-body">
+    <strong>Pigeonhole Principle:</strong> If n+1 objects are placed into n containers, at least one container must hold at least 2 objects.<br><br>
+    <strong>Generalized:</strong> If kn+1 objects are placed into n containers, at least one container has at least k+1 objects.<br><br>
+    <strong>Examples:</strong> In any group of 13 people, at least 2 share a birth month. In any set of 5 integers, at least 2 share the same remainder when divided by 4. Powerful in combinatorics and algorithm analysis.
+  </div>
+</div>
+
+</div><!-- end grid -->
+
+<script>
+  function toggle(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  let activeFilter = 'all';
+  let searchTerm = '';
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.card[data-subject]');
+    let count = 0;
+    cards.forEach(card => {
+      const subject = card.dataset.subject;
+      const text = card.querySelector('.q-text').textContent.toLowerCase();
+      const bodyText = card.querySelector('.card-body').textContent.toLowerCase();
+      const matchFilter = activeFilter === 'all' || subject === activeFilter;
+      const matchSearch = searchTerm === '' || text.includes(searchTerm) || bodyText.includes(searchTerm);
+      if (matchFilter && matchSearch) {
+        card.classList.remove('hidden');
+        count++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    document.getElementById('countLabel').textContent = `Showing ${count} question${count !== 1 ? 's' : ''}`;
+
+    // Update section labels visibility
+    ['p','c','m'].forEach(s => {
+      const sectionCards = document.querySelectorAll(`.card.${s}:not(.hidden)`);
+      const label = document.getElementById(`sec-${s}`);
+      if(label) label.style.display = sectionCards.length ? '' : 'none';
+    });
+  }
+
+  function filter(type, btn) {
+    activeFilter = type;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'all', 'p', 'c', 'm'));
+    btn.classList.add('active', type);
+    applyFilters();
+  }
+
+  function search(val) {
+    searchTerm = val.toLowerCase().trim();
+    applyFilters();
+  }
+
+  // Move section labels into the grid
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('grid');
+    ['p','c','m'].forEach(s => {
+      const label = document.getElementById(`sec-${s}`);
+      const firstCard = grid.querySelector(`.card.${s}`);
+      if(label && firstCard) {
+        label.style.padding = '20px 0 8px';
+        label.style.maxWidth = '100%';
+        grid.insertBefore(label, firstCard);
+      }
+    });
+  });
+</script>
+</body>
+</html>

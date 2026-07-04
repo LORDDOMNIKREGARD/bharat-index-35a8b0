@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geography & Geopolitics — IPM Interview Prep</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-mid: #3d3d5c;
+    --ink-light: #7070a0;
+    --paper: #f8f7f2;
+    --paper-warm: #f0ede4;
+    --accent: #c84b31;
+    --accent-light: #f0e8e5;
+    --teal: #1a7a7a;
+    --teal-light: #e0f0ef;
+    --gold: #b87a00;
+    --gold-light: #fdf3de;
+    --rule: #ddd8cc;
+    --tag-bg: #e8e4f8;
+    --tag-text: #3a2e80;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--teal) 50%, var(--gold) 100%);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .header-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 0.6rem;
+  }
+  .header-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 0.8rem;
+  }
+  .header-title em { color: var(--accent); font-style: italic; }
+  .header-sub {
+    font-size: 14px;
+    color: #bbb;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-bar {
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    padding: 0.85rem 1.2rem;
+    white-space: nowrap;
+    border-bottom: 2.5px solid transparent;
+    transition: color 0.18s, border-color 0.18s;
+  }
+  .nav-link:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* ── MAIN LAYOUT ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+  }
+
+  /* ── QUESTION CARDS ── */
+  .q-block {
+    background: white;
+    border: 1px solid var(--rule);
+    border-left: 3.5px solid var(--teal);
+    border-radius: 3px;
+    margin-bottom: 1.4rem;
+    overflow: hidden;
+  }
+  .q-block.accent-red  { border-left-color: var(--accent); }
+  .q-block.accent-gold { border-left-color: var(--gold); }
+
+  .q-head {
+    padding: 1rem 1.2rem 0.7rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    user-select: none;
+  }
+  .q-head:hover { background: #fafaf8; }
+
+  .q-text {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--ink);
+    flex: 1;
+  }
+  .q-meta {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .tag.red   { background: var(--accent-light); color: #8a2615; }
+  .tag.teal  { background: var(--teal-light); color: #0d4f4f; }
+  .tag.gold  { background: var(--gold-light); color: #7a5200; }
+
+  .toggle-icon {
+    font-size: 18px;
+    color: var(--ink-light);
+    transition: transform 0.22s;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-block.open .toggle-icon { transform: rotate(180deg); }
+
+  .q-body {
+    display: none;
+    padding: 0 1.2rem 1.2rem;
+  }
+  .q-block.open .q-body { display: block; }
+
+  .ans-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+  .ans-text {
+    color: var(--ink-mid);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .ans-text p { margin-bottom: 0.7rem; }
+  .ans-text p:last-child { margin-bottom: 0; }
+  .ans-text strong { color: var(--ink); }
+
+  /* India application box */
+  .india-box {
+    background: #fff8ee;
+    border: 1px solid #e8d5a3;
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+  }
+  .india-box-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .india-box p {
+    font-size: 13.5px;
+    color: #4a3800;
+    margin-bottom: 0;
+  }
+
+  /* Interview tip */
+  .tip-box {
+    background: var(--teal-light);
+    border: 1px solid #a8d8d8;
+    border-left: 3px solid var(--teal);
+    border-radius: 2px;
+    padding: 0.7rem 1rem;
+    margin-top: 1rem;
+    font-size: 13px;
+    color: #0d4a4a;
+  }
+  .tip-box strong { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 0.25rem; }
+
+  /* ── CAPITALS TABLE SECTION ── */
+  .caps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .cap-card {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 0.8rem 1rem;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .cap-country { font-weight: 600; font-size: 14px; }
+  .cap-detail {
+    text-align: right;
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+  .cap-capital { font-style: italic; color: var(--ink-mid); }
+  .cap-currency {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    display: block;
+  }
+
+  /* ── SECTION SPACER ── */
+  section { margin-bottom: 3.5rem; }
+
+  /* ── QUICK FIRE TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-bottom: 1rem;
+  }
+  th {
+    background: var(--ink);
+    color: white;
+    text-align: left;
+    padding: 0.6rem 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #fafafa; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 600; color: var(--ink); width: 42%; }
+  td:last-child { color: var(--ink-mid); }
+
+  /* ── OPEN ALL BUTTON ── */
+  .control-bar {
+    display: flex;
+    gap: 0.7rem;
+    margin-bottom: 1.4rem;
+  }
+  .ctrl-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule);
+    background: white;
+    color: var(--ink-light);
+    padding: 0.45rem 1rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+  .ctrl-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── PROGRESS BADGE ── */
+  .progress-strip {
+    background: var(--ink);
+    color: white;
+    padding: 1rem 1.2rem;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 13px;
+  }
+  .progress-num {
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .progress-text { color: #ccc; }
+  .progress-text strong { color: white; display: block; font-size: 14px; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">IPM Interview Preparation · Geography &amp; Geopolitics</div>
+    <h1 class="header-title">Where is the world,<br>and <em>why does India care?</em></h1>
+    <p class="header-sub">Drawn from hundreds of actual IIM Amritsar, Ranchi, Indore, Kozhikode, Sirmaur &amp; Shillong transcripts. Every question carries a structured answer and an India-relevance note.</p>
+  </div>
+</header>
+
+<!-- ── NAV ── -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="#capitals">Capitals &amp; Currencies</a>
+    <a class="nav-link" href="#india-borders">India's Borders</a>
+    <a class="nav-link" href="#middle-east">Middle East</a>
+    <a class="nav-link" href="#global-orgs">Global Orgs</a>
+    <a class="nav-link" href="#rivers-mountains">Rivers &amp; Mountains</a>
+    <a class="nav-link" href="#trade">Trade &amp; Geo-economics</a>
+    <a class="nav-link" href="#conflicts">Conflicts &amp; Flashpoints</a>
+    <a class="nav-link" href="#seven-sisters">Northeast &amp; 7 Sisters</a>
+    <a class="nav-link" href="#quickfire">Quick-fire GK</a>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <div class="progress-strip">
+    <span class="progress-num">80+</span>
+    <span class="progress-text">
+      <strong>Questions sourced from actual interview transcripts</strong>
+      Click any question to reveal the full structured answer and India application.
+    </span>
+  </div>
+
+  <!-- ════════════════════════════════
+       1. CAPITALS & CURRENCIES
+  ════════════════════════════════ -->
+  <section id="capitals">
+    <div class="section-head">
+      <span class="section-num">01 —</span>
+      <h2 class="section-title">Major Capitals &amp; Currencies</h2>
+    </div>
+    <p style="font-size:13.5px;color:var(--ink-light);margin-bottom:1.2rem;">Asked repeatedly across all IIMs — know at least the G20 + India's neighbours cold.</p>
+
+    <div class="caps-grid">
+      <div class="cap-card"><span class="cap-country">🇨🇳 China</span><span class="cap-detail"><span class="cap-capital">Beijing</span><span class="cap-currency">CNY (Renminbi / Yuan)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇷🇺 Russia</span><span class="cap-detail"><span class="cap-capital">Moscow</span><span class="cap-currency">RUB (Ruble)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇺🇸 USA</span><span class="cap-detail"><span class="cap-capital">Washington D.C.</span><span class="cap-currency">USD (Dollar)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇬🇧 United Kingdom</span><span class="cap-detail"><span class="cap-capital">London</span><span class="cap-currency">GBP (Pound Sterling)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇩🇪 Germany</span><span class="cap-detail"><span class="cap-capital">Berlin</span><span class="cap-currency">EUR (Euro)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇫🇷 France</span><span class="cap-detail"><span class="cap-capital">Paris</span><span class="cap-currency">EUR (Euro)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇯🇵 Japan</span><span class="cap-detail"><span class="cap-capital">Tokyo</span><span class="cap-currency">JPY (Yen)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇦🇺 Australia</span><span class="cap-detail"><span class="cap-capital">Canberra</span><span class="cap-currency">AUD (Dollar)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇧🇷 Brazil</span><span class="cap-detail"><span class="cap-capital">Brasília</span><span class="cap-currency">BRL (Real)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇸🇦 Saudi Arabia</span><span class="cap-detail"><span class="cap-capital">Riyadh</span><span class="cap-currency">SAR (Riyal)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇮🇷 Iran</span><span class="cap-detail"><span class="cap-capital">Tehran</span><span class="cap-currency">IRR (Rial)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇮🇱 Israel</span><span class="cap-detail"><span class="cap-capital">Jerusalem (disputed)</span><span class="cap-currency">ILS (Shekel)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇵🇰 Pakistan</span><span class="cap-detail"><span class="cap-capital">Islamabad</span><span class="cap-currency">PKR (Rupee)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇧🇩 Bangladesh</span><span class="cap-detail"><span class="cap-capital">Dhaka</span><span class="cap-currency">BDT (Taka)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇱🇰 Sri Lanka</span><span class="cap-detail"><span class="cap-capital">Sri Jayawardenepura Kotte</span><span class="cap-currency">LKR (Rupee)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇳🇵 Nepal</span><span class="cap-detail"><span class="cap-capital">Kathmandu</span><span class="cap-currency">NPR (Rupee)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇲🇻 Maldives</span><span class="cap-detail"><span class="cap-capital">Malé</span><span class="cap-currency">MVR (Rufiyaa)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇧🇹 Bhutan</span><span class="cap-detail"><span class="cap-capital">Thimphu</span><span class="cap-currency">BTN (Ngultrum)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇦🇫 Afghanistan</span><span class="cap-detail"><span class="cap-capital">Kabul</span><span class="cap-currency">AFN (Afghani)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇺🇦 Ukraine</span><span class="cap-detail"><span class="cap-capital">Kyiv</span><span class="cap-currency">UAH (Hryvnia)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇱🇧 Lebanon</span><span class="cap-detail"><span class="cap-capital">Beirut</span><span class="cap-currency">LBP (Pound)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇰🇷 South Korea</span><span class="cap-detail"><span class="cap-capital">Seoul</span><span class="cap-currency">KRW (Won)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇹🇷 Turkey</span><span class="cap-detail"><span class="cap-capital">Ankara</span><span class="cap-currency">TRY (Lira)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇧🇭 Bahrain</span><span class="cap-detail"><span class="cap-capital">Manama</span><span class="cap-currency">BHD (Dinar)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇴🇲 Oman</span><span class="cap-detail"><span class="cap-capital">Muscat</span><span class="cap-currency">OMR (Rial)</span></span></div>
+      <div class="cap-card"><span class="cap-country">🇰🇪 Kenya</span><span class="cap-detail"><span class="cap-capital">Nairobi</span><span class="cap-currency">KES (Shilling)</span></span></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       2. INDIA'S BORDERS
+  ════════════════════════════════ -->
+  <section id="india-borders">
+    <div class="section-head">
+      <span class="section-num">02 —</span>
+      <h2 class="section-title">India's Borders, Neighbours &amp; Seas</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('india-borders', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('india-borders', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block accent-red" data-section="india-borders">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Name all countries that share a land border with India.</span>
+        <div class="q-meta"><span class="tag red">Frequently Asked</span><span class="tag">Borders</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>India shares land borders with <strong>7 countries</strong>: Pakistan (northwest), China (north and northeast), Nepal (north), Bhutan (northeast), Bangladesh (east), Myanmar (east), and Afghanistan (a small stretch through Pakistan-occupied Kashmir, which India claims).</p>
+          <p><strong>Water borders:</strong> India has a maritime boundary with Sri Lanka (Palk Strait) and Maldives (Indian Ocean). The Andaman &amp; Nicobar Islands sit close to Indonesia, Thailand, and Myanmar across the sea.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>Each border relationship has strategic weight — China and Pakistan are adversarial; Nepal and Bhutan are buffer states; Bangladesh is a key trade partner; Myanmar is the gateway to Southeast Asia. For management: the China border affects supply chains (electronics, APIs), while Pakistan relations impact trade routes to Central Asia.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="india-borders">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Which northeastern states of India border which countries?</span>
+        <div class="q-meta"><span class="tag teal">NE India</span><span class="tag red">Hot Topic</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>Arunachal Pradesh</strong> — China (disputed McMahon Line) and Bhutan and Myanmar. <strong>Sikkim</strong> — China (Tibet) and Nepal and Bhutan. <strong>Assam</strong> — Bhutan (north). <strong>Meghalaya</strong> — Bangladesh. <strong>Mizoram</strong> — Bangladesh and Myanmar. <strong>Manipur &amp; Nagaland</strong> — Myanmar. <strong>Tripura</strong> — Bangladesh (on three sides).</p>
+          <p>Meghalaya borders <strong>only Bangladesh</strong> — a commonly asked IIM question (from an IIM Shillong transcript).</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>The Look East / Act East policy makes NE India critical for connectivity to ASEAN. The Kaladan Multimodal Project (India–Myanmar) and India–Bangladesh trade corridors pass through these states, making them economically strategic beyond their border roles.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="india-borders">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Which water bodies surround India? What is a peninsula?</span>
+        <div class="q-meta"><span class="tag">Basic Geography</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>India is surrounded by the <strong>Arabian Sea</strong> (west), the <strong>Bay of Bengal</strong> (east), and the <strong>Indian Ocean</strong> (south). A <strong>peninsula</strong> is a landmass that is surrounded by water on three sides but connected to a larger landmass on one side — India's southern half (Deccan Peninsula) fits this definition perfectly.</p>
+          <p>The Lakshadweep islands lie in the Arabian Sea; Andaman &amp; Nicobar Islands lie in the Bay of Bengal near the Andaman Sea.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>India's peninsular geography gives it a massive 7,500 km coastline with 12 major ports (Mumbai, JNPT, Chennai, Visakhapatnam, Kochi, etc.). This drives maritime trade — about 70% of India's trade by value moves by sea. The Indian Ocean is India's strategic backyard in great-power competition with China's "String of Pearls" strategy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="india-borders">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Does Afghanistan border India? Explain.</span>
+        <div class="q-meta"><span class="tag red">Trick Question</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>Yes — technically. The <strong>Wakhan Corridor</strong>, a narrow strip of Afghan territory, meets the Indian-claimed region of Jammu &amp; Kashmir. However, this area is currently part of Pakistan-Occupied Kashmir (PoK). India claims the entire state of J&amp;K, so by India's constitutional claim, Afghanistan does border India. Pakistan controls the physical land separating the two countries currently.</p>
+          <p>A safe, nuanced answer: "Sir, Afghanistan borders the region that India constitutionally claims as its own — the area currently under Pakistani control. So yes, if India's claim is accepted, they share a very short border through the Wakhan Corridor."</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>If India ever had land access to Afghanistan through a peaceful PoK, it would open a direct overland route to Central Asia — transforming India's trade with Iran, the 'Stans, and Russia without dependence on Pakistan. The Chabahar Port in Iran is partly India's workaround for this blockage.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       3. MIDDLE EAST
+  ════════════════════════════════ -->
+  <section id="middle-east">
+    <div class="section-head">
+      <span class="section-num">03 —</span>
+      <h2 class="section-title">Where is Egypt? Significance of the Middle East</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('middle-east', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('middle-east', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block accent-red" data-section="middle-east">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Where is Egypt? Why is it geopolitically significant?</span>
+        <div class="q-meta"><span class="tag red">Key Country</span><span class="tag">Africa + ME</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>Egypt is located in <strong>northeast Africa</strong>, bordering the Mediterranean Sea (north), Red Sea (east), Libya (west), Sudan (south), and Israel/Gaza (northeast). The <strong>Sinai Peninsula</strong> makes Egypt a transcontinental nation — it bridges Africa and Asia.</p>
+          <p>Geopolitical significance: <strong>(1) Suez Canal</strong> — Egypt controls the Suez Canal, through which roughly 12–15% of global trade passes; closure would force ships around Africa (adding 10–14 days). <strong>(2) Arab World</strong> — Largest Arab nation by population (~105 million); its political direction shapes Arab sentiment. <strong>(3) Israel–Palestine</strong> — Egypt is a key mediator and controls the Rafah crossing into Gaza. <strong>(4) BRICS / G20 membership</strong> — Egypt joined BRICS in 2024.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>Any disruption in the Suez Canal directly raises India's shipping costs. During the 2021 Ever Given blockage, India's trade was impacted. Houthi attacks on Red Sea shipping in 2024 forced Indian exporters to reroute around Africa, increasing freight costs by 30–40%. Egypt is also a rising market for Indian pharmaceuticals, IT services, and machinery exports. India–Egypt bilateral trade crossed $7 billion in FY24.</p>
+        </div>
+        <div class="tip-box"><strong>Interview Tip</strong> When asked about Egypt, lead with Suez Canal. That's the hook interviewers usually want you to reach for.</div>
+      </div>
+    </div>
+
+    <div class="q-block accent-red" data-section="middle-east">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the significance of the Middle East for the world and for India?</span>
+        <div class="q-meta"><span class="tag red">Frequently Asked</span><span class="tag">Energy</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The Middle East (loosely: Arabian Peninsula + Levant + Iran + Iraq + Egypt) matters for five reasons:</p>
+          <p><strong>1. Energy:</strong> Houses roughly 48% of the world's proven oil reserves and 40% of natural gas. OPEC+ decisions here set global energy prices.</p>
+          <p><strong>2. Trade chokepoints:</strong> The Strait of Hormuz (between Iran and Oman) carries ~20% of global oil; the Suez Canal (Egypt) carries ~12% of global trade; the Bab-el-Mandeb Strait (Yemen/Djibouti) is another crucial link.</p>
+          <p><strong>3. Three world religions</strong> — Islam, Christianity, Judaism — have holy sites in the region, giving it permanent civilisational significance.</p>
+          <p><strong>4. Great-power competition</strong> — The US, Russia, China, and regional powers (Saudi Arabia, Iran, Turkey, Israel) all have deep stakes here.</p>
+          <p><strong>5. Diaspora remittances</strong> — Millions of workers from South/Southeast Asia work in Gulf states and send money home.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p><strong>Energy dependency:</strong> India imports about 80% of its crude oil; the Gulf supplies ~60% of that. A $10 rise in Brent crude costs India roughly $15 billion more per year. <strong>Diaspora:</strong> ~8.9 million Indians live in the Gulf (UAE, Saudi Arabia, Kuwait, Qatar, Oman, Bahrain). They remitted ~$40 billion to India in 2023, making this the largest single remittance corridor. <strong>Diplomatic balancing:</strong> India maintains strong ties with both Arab Gulf states AND Israel, while also preserving relations with Iran (Chabahar Port). This "strategic autonomy" approach is a key pillar of Indian foreign policy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="middle-east">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the Strait of Hormuz? Why does India care about it?</span>
+        <div class="q-meta"><span class="tag teal">Chokepoint</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The Strait of Hormuz is a narrow sea passage (~33 km wide at its narrowest) between <strong>Iran</strong> and the <strong>Sultanate of Oman</strong>. It connects the Persian Gulf to the Gulf of Oman and then to the Arabian Sea. About <strong>20% of global oil trade</strong> (roughly 20 million barrels per day) passes through it — making it the world's most important oil chokepoint.</p>
+          <p>If Iran closes the Strait (a threat it has made during US sanctions), it would cause an immediate global oil supply shock, spiking prices and triggering economic turmoil.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>A closure of Hormuz would cut off India from its primary oil suppliers (Saudi Arabia, UAE, Iraq, Kuwait). India's strategic oil reserves (stored in underground caverns in Vishakhapatnam, Mangalore, and Padur) cover only about 9–10 days of consumption — meaning even a brief closure would have severe consequences. This is why India invests in energy diversification (Russia, Africa, USA) and in domestic renewable energy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="middle-east">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Explain the Israel–Iran/Gaza conflict and India's position.</span>
+        <div class="q-meta"><span class="tag red">Hot Topic</span><span class="tag">Asked in IIM Ranchi, Amritsar, Indore</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>Background:</strong> The Israel–Palestine conflict traces back to 1947–48 with the creation of Israel and displacement of Palestinian Arabs. Gaza is a Palestinian territory governed by Hamas (designated a terrorist organisation by the US, EU, Israel). The West Bank is governed by the Palestinian Authority.</p>
+          <p><strong>October 7, 2023 escalation:</strong> Hamas launched a mass surprise attack on southern Israel, killing ~1,200 Israelis. Israel responded with a large-scale military offensive in Gaza, causing massive civilian casualties. The conflict drew in Iran (via Hezbollah in Lebanon, Houthis in Yemen) and triggered US military involvement in the Red Sea.</p>
+          <p><strong>Iran angle:</strong> Iran views Israel's existence as illegitimate; it funds and arms Hamas and Hezbollah. Israel and Iran exchanged direct strikes for the first time in April–May 2024, significantly escalating tensions.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India's Position &amp; Application</div>
+          <p><strong>Diplomatically:</strong> India has historically supported Palestinian statehood (consistent with NAM principles) while simultaneously building a strong strategic partnership with Israel (defence, technology, agriculture). In the UNGA vote in October 2023, India abstained on a ceasefire resolution — threading the needle between both relationships. <strong>Economically:</strong> The conflict disrupted Red Sea shipping (Houthi attacks), inflating India's import costs. India-Middle East-Europe Economic Corridor (IMEC) — announced at G20 New Delhi — has been stalled by the conflict. Also, Israel is India's 3rd largest defence supplier.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="middle-east">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Who are the heads of state/government of Iran and Israel?</span>
+        <div class="q-meta"><span class="tag red">Direct GK — Asked Verbatim</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>Iran:</strong> Supreme Leader — Ayatollah Ali <strong>Khamenei</strong> (holds ultimate power since 1989). President — Masoud <strong>Pezeshkian</strong> (elected July 2024 after Ebrahim Raisi died in a helicopter crash in May 2024). Iran's system: a theocratic republic where the Supreme Leader supersedes the President.</p>
+          <p><strong>Israel:</strong> Prime Minister — Benjamin <strong>Netanyahu</strong> (head of government). President — Isaac <strong>Herzog</strong> (head of state, ceremonial). Israel is a parliamentary democracy.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">Interview Note</div>
+          <p>In transcripts, candidates were specifically asked: "Who is the President of Iran?" Know the distinction between Supreme Leader (Khamenei) and President. The Supreme Leader is the real power; confusing the two is a common mistake under pressure.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       4. GLOBAL ORGANISATIONS
+  ════════════════════════════════ -->
+  <section id="global-orgs">
+    <div class="section-head">
+      <span class="section-num">04 —</span>
+      <h2 class="section-title">Global Organisations &amp; India's Role</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('global-orgs', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('global-orgs', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block" data-section="global-orgs">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is BRICS? Who are its members and what does India gain from it?</span>
+        <div class="q-meta"><span class="tag red">Frequently Asked</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>BRICS</strong> originally stood for Brazil, Russia, India, China, South Africa — a grouping of major emerging economies coined by Goldman Sachs economist Jim O'Neill in 2001. In 2024, BRICS expanded (BRICS+) to include <strong>Egypt, Ethiopia, Iran, UAE</strong>. Saudi Arabia was invited but hasn't formally joined.</p>
+          <p>Key features: collective GDP represents ~26% of global output (PPP terms), ~40% of world population. The grouping advocates for a multipolar world order and reform of international financial institutions (IMF, World Bank). The New Development Bank (NDB), headquartered in Shanghai, is BRICS's multilateral development bank.</p>
+          <p>Recent agenda: <strong>de-dollarisation</strong> — reducing dependence on the US dollar in international trade. India has been cautious here, balancing its relationship with the US.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>India uses BRICS as a platform to advocate for greater voice in global governance (UNSC permanent seat). The NDB has funded several Indian infrastructure projects. However, India faces a fundamental tension within BRICS: China is both its largest trading partner and its primary strategic adversary. Post-Galwan (2020 border clash), India's BRICS participation has been measured. India also doesn't fully back de-dollarisation, fearing it could destabilise its own dollar-denominated reserves and trade.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="global-orgs">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is SAARC? Why is it ineffective?</span>
+        <div class="q-meta"><span class="tag">South Asia</span><span class="tag">IIM Amritsar, Indore</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>SAARC</strong> (South Asian Association for Regional Cooperation) was founded in 1985 and has 8 members: India, Pakistan, Bangladesh, Sri Lanka, Nepal, Bhutan, Afghanistan, and Maldives. Secretariat is in Kathmandu.</p>
+          <p>SAARC meetings require consensus — Pakistan's obstruction (especially after India's Uri/Pulwama attacks) has paralysed the forum. The last SAARC Summit was held in 2014 (in Kathmandu). India has not attended a summit since 2016. As a result, SAARC is largely defunct in practice.</p>
+          <p><strong>India's workaround:</strong> BIMSTEC (Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation) — includes India, Bangladesh, Myanmar, Sri Lanka, Thailand, Nepal, Bhutan. No Pakistan, so it functions better.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>South Asia is the least economically integrated region in the world — intra-regional trade is only ~5% of total trade (compare to ASEAN at ~25%). This is almost entirely due to India–Pakistan tensions. If normalised, the India–Pakistan trade relationship alone could be worth $37 billion annually (currently ~$2 billion via third countries). For India, a functional SAARC would mean regional supply chains, shared infrastructure, and reduced costs — a $5 trillion economy aspiration depends partly on regional integration.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="global-orgs">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the SCO (Shanghai Cooperation Organisation)?</span>
+        <div class="q-meta"><span class="tag">Geopolitics</span><span class="tag">IIM Indore transcript</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The SCO is a Eurasian political, economic, and security organisation founded in 2001 in Shanghai. Members: China, Russia, Kazakhstan, Kyrgyzstan, Tajikistan, Uzbekistan, India (joined 2017), Pakistan (joined 2017), Iran (joined 2023), Belarus (joined 2024). Secretariat in Beijing.</p>
+          <p>Focus areas: counter-terrorism, border security, economic cooperation. It is often described as a China-Russia led counterweight to Western-dominated institutions (NATO, G7).</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>India's SCO membership gives it a seat at the table with Central Asian states — crucial for energy access and the International North-South Transport Corridor (INSTC). However, India has boycotted some SCO meetings hosted by Pakistan. In June 2023, India hosted the SCO summit virtually (as chair). The awkward reality: India shares the SCO with both Pakistan and China, its two main security concerns.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="global-orgs">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Difference between G7 and G20. Is India in G7?</span>
+        <div class="q-meta"><span class="tag red">Direct GK</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>G7</strong> (Group of Seven): USA, UK, Canada, France, Germany, Italy, Japan — plus the European Union as a non-enumerated member. These are the world's 7 largest advanced (Western/democratic) economies. <strong>India is NOT in G7.</strong></p>
+          <p><strong>G20</strong> (Group of Twenty): G7 + 13 more — Argentina, Australia, Brazil, China, India, Indonesia, Japan, Mexico, Russia, Saudi Arabia, South Africa, South Korea, Turkey + EU. India IS a founding G20 member. India hosted the G20 in New Delhi in September 2023 — a landmark event where the African Union was admitted as a permanent member.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>India's G20 presidency (Dec 2022 – Nov 2023) was significant: India pushed for the Global South's voice, secured debt relief frameworks for developing nations, and had the African Union admitted. Prime Minister Modi coined the theme "Vasudhaiva Kutumbakam" (One Earth, One Family, One Future). This marked India's arrival as a major shaper of the global order — not just a participant.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       5. RIVERS & MOUNTAINS
+  ════════════════════════════════ -->
+  <section id="rivers-mountains">
+    <div class="section-head">
+      <span class="section-num">05 —</span>
+      <h2 class="section-title">Rivers, Mountains &amp; Physical Geography</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('rivers-mountains', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('rivers-mountains', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block" data-section="rivers-mountains">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the longest river of India? Name major rivers and their origins.</span>
+        <div class="q-meta"><span class="tag red">Asked in IIM Sirmaur transcript</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The <strong>Ganga</strong> is India's longest river entirely within India (~2,525 km). The <strong>Indus</strong> is longer overall (~3,200 km) but most of it flows through Pakistan. The <strong>Godavari</strong> is the longest Peninsular river (~1,465 km), originating in Nashik, Maharashtra, flowing east to the Bay of Bengal.</p>
+          <p><strong>Key rivers and origins:</strong> Ganga — Gangotri Glacier (Uttarakhand). Brahmaputra — Angsi Glacier (Tibet, enters India through Arunachal Pradesh). Yamuna — Yamunotri Glacier (Uttarakhand). Narmada — Amarkantak Plateau (MP), flows WEST into Arabian Sea. Tapti — Betul (MP), flows west. Krishna — Western Ghats (Maharashtra), flows east. Kaveri — Kodagu (Karnataka), flows east. Mahanadi — Chhattisgarh, flows east.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>Rivers shape India's agriculture (Gangetic plain feeds 400 million+), power (hydroelectric), and trade (inland waterways). Water-sharing treaties with Pakistan (Indus Waters Treaty, 1960) and Bangladesh (Teesta River sharing dispute) are geopolitical issues. India threatened to renegotiate the Indus Waters Treaty after the Pahalgam attack in 2025, signalling water as a foreign policy tool.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="rivers-mountains">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Which mountain range divides northern and southern India?</span>
+        <div class="q-meta"><span class="tag">Asked in IIM Ranchi transcript</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The <strong>Vindhya Range</strong> (and associated Satpura range) broadly divides the Indo-Gangetic Plain (north) from the Deccan Plateau (south). The Vindhyas run east-west through Madhya Pradesh. The Satpura Range runs parallel to the south. Together they form the watershed between rivers flowing north (Ganga basin) and south/west (Narmada, Tapti).</p>
+          <p>Note: The <strong>Western Ghats</strong> and <strong>Eastern Ghats</strong> run north-south along India's two coasts and divide coastal areas from the Deccan interior.</p>
+          <p><strong>Highest peak in India:</strong> Kangchenjunga (8,586 m, Sikkim). K2 (8,611 m, PoK) is higher but India claims it — a nuanced answer earns respect in interviews.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>The Vindhya-Satpura belt is rich in mineral resources (coal, iron ore, manganese). The Western Ghats are a UNESCO World Heritage Site — a biodiversity hotspot. Destruction of these ranges for mining has been a key environmental debate in India, making it relevant to business sustainability discussions.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       6. TRADE & GEO-ECONOMICS
+  ════════════════════════════════ -->
+  <section id="trade">
+    <div class="section-head">
+      <span class="section-num">06 —</span>
+      <h2 class="section-title">Trade, Tariffs &amp; Geo-economics</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('trade', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('trade', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block accent-gold" data-section="trade">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What are tariffs? Why is the US imposing tariffs (Trump's policy)? How does it affect India?</span>
+        <div class="q-meta"><span class="tag gold">Highly Recurrent</span><span class="tag red">Asked in 15+ transcripts</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>Tariffs</strong> are taxes levied by a government on imported goods. They make foreign products more expensive, incentivising domestic buying. Types: ad valorem (% of value), specific (fixed amount per unit), compound, retaliatory.</p>
+          <p><strong>Trump's tariff policy (2025):</strong> In his second term, Trump imposed sweeping tariffs — including a <strong>26% tariff on Indian exports</strong> to the US under "reciprocal tariffs," justified by arguing that India's own tariffs on US goods are high. Trump also imposed a 145% tariff on China. The stated goal: "Make America Great Again" — bring manufacturing back to the US, reduce trade deficits, protect American workers. The "One Big Beautiful Bill" (domestic companion legislation) extended tax cuts and spending priorities.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p><strong>Direct impact:</strong> India exports ~$80 billion to the US annually (IT services, pharmaceuticals, gems/jewellery, textiles). A 26% tariff makes these more expensive for American buyers. IT services (India's top export) are largely exempt (services vs goods), but goods exporters are hit. <strong>Indirect opportunity:</strong> With China tariffed at 145%, some manufacturing orders may shift from China to India (textiles, electronics, chemicals). India is in active trade negotiations with the US to reduce tariffs. The outcome shapes India's export-led growth ambitions.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="trade">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is India's geopolitical stance? What is strategic autonomy?</span>
+        <div class="q-meta"><span class="tag">Asked in IIM Sirmaur transcript</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>India's foreign policy is guided by <strong>strategic autonomy</strong> — the principle of not permanently aligning with any single power bloc, making independent decisions based on national interest. Rooted in Nehru's Non-Aligned Movement (NAM), it has evolved under Modi into what is sometimes called "multi-alignment" — building partnerships with the US, Russia, EU, China, and the Gulf simultaneously.</p>
+          <p><strong>Examples:</strong> India buys Russian oil while also being a QUAD member with the US, Japan, and Australia. India abstains on Russia-Ukraine UNGA votes. India is in the SCO (with China and Pakistan) while also participating in the Indo-Pacific strategy countering China.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>Strategic autonomy is both a strength and a source of friction with allies. Post-Ukraine, the West pressured India to cut Russian oil imports; India refused, buying discounted Russian crude that reduced its import bill by ~$12 billion and used the savings to fund domestic development. For business: this means India is a complex market where political risk has multiple dimensions — not simply "US-allied" or "China-aligned."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="trade">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the Chabahar Port and why is it strategically important for India?</span>
+        <div class="q-meta"><span class="tag teal">Trade Route</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p><strong>Chabahar Port</strong> is a deep-water port located in <strong>Sistan-Baluchestan province of Iran</strong>, on the Gulf of Oman (not the Persian Gulf). India has invested in and is developing the Shahid Beheshti terminal at Chabahar.</p>
+          <p>It is located just outside the Strait of Hormuz, giving it strategic maritime value. A road/rail network from Chabahar through Iran connects to Afghanistan and onwards to Central Asia.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p><strong>Bypass Pakistan:</strong> India has no overland access to Afghanistan or Central Asia because Pakistan doesn't allow Indian transit. Chabahar provides an alternative — goods can go from India by ship to Chabahar, then by road through Iran to Kabul, bypassing Pakistan entirely. <strong>Counter China:</strong> China is building the Gwadar Port in Pakistan (60 km from Chabahar) as part of CPEC. Chabahar is India's counterplay. <strong>Central Asia trade:</strong> India aims to access the $500 billion Central Asian market. In 2024, India signed a 10-year agreement to operate Chabahar, despite US sanction risks on Iran.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       7. CONFLICTS & FLASHPOINTS
+  ════════════════════════════════ -->
+  <section id="conflicts">
+    <div class="section-head">
+      <span class="section-num">07 —</span>
+      <h2 class="section-title">Active Conflicts &amp; Flashpoints</h2>
+    </div>
+
+    <div class="control-bar">
+      <button class="ctrl-btn" onclick="toggleSection('conflicts', true)">Expand all</button>
+      <button class="ctrl-btn" onclick="toggleSection('conflicts', false)">Collapse all</button>
+    </div>
+
+    <div class="q-block accent-red" data-section="conflicts">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">Explain the Russia–Ukraine war. India's position?</span>
+        <div class="q-meta"><span class="tag red">Major Conflict</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>Russia launched a full-scale invasion of Ukraine on February 24, 2022, following years of tensions over NATO expansion and the status of eastern Ukrainian regions (Donbas). Russia annexed Crimea in 2014 and recognised the breakaway Donetsk and Luhansk republics in 2022 before invading.</p>
+          <p>As of 2025, the war is ongoing. Ukraine has received massive Western military and financial support. Russia faces Western sanctions. Both sides have suffered significant casualties. Peace negotiations have been periodically discussed but without conclusion.</p>
+          <p>Key implication: Global food prices rose sharply (Ukraine and Russia together supply ~30% of world's wheat); energy prices surged in Europe; global supply chains were disrupted.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>India has maintained a position of "dialogue and diplomacy." It has not condemned Russia at the UNSC or UNGA, abstaining on most votes — protecting its access to discounted Russian oil (~$35–40/barrel vs market price ~$80+) and Russian defence equipment (~60% of India's military hardware is Russian-origin). India is also mediating — PM Modi visited both Kyiv (August 2024) and Moscow (July 2024), positioning India as a potential peacemaker. For business: Russia–Ukraine disrupted fertiliser supply (Russia is a major urea exporter), affecting Indian farmers; defence imports became critical policy focus.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="conflicts">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What happened in Pahalgam (2025)? What is Operation Sindoor?</span>
+        <div class="q-meta"><span class="tag red">2025 News — Hot</span><span class="tag">Asked in IIM Ranchi transcripts</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>In April 2025, a <strong>terrorist attack in Pahalgam (Baisaran Valley), Jammu &amp; Kashmir</strong> killed 26 tourists, making it one of the deadliest attacks on civilians in J&amp;K in years. Terrorists targeted tourists in a meadow area. The attack was attributed to Pakistan-based groups by Indian intelligence.</p>
+          <p><strong>Operation Sindoor</strong> (May 7, 2025): India launched precision military strikes on terrorist infrastructure in Pakistan and Pakistan-occupied Kashmir, targeting 9 sites associated with groups like Lashkar-e-Taiba and Jaish-e-Mohammed. India described it as a "measured, non-escalatory" response targeting only terrorists, not Pakistani military assets. Pakistan responded with limited counter-fire. A ceasefire was announced on May 10, 2025, following international mediation.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>Operation Sindoor marked a significant shift in India's deterrence doctrine — demonstrating willingness to conduct cross-border strikes in response to terrorism. Economic implications: India suspended the Indus Waters Treaty after the attack, escalating water as a diplomatic weapon. Trade through Wagah border was halted. Insurance premiums on Pakistan-adjacent regions rose. The operation strengthened domestic political consensus but added risk premia to India–Pakistan economic relations. Markets initially dipped but recovered quickly, showing investor confidence in India's stability.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       8. NORTHEAST & 7 SISTERS
+  ════════════════════════════════ -->
+  <section id="seven-sisters">
+    <div class="section-head">
+      <span class="section-num">08 —</span>
+      <h2 class="section-title">Northeast India — The 7 Sisters</h2>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-light);margin-bottom:1.2rem;">Especially important for IIM Shillong &amp; Ranchi interviews — asked in nearly every transcript.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Capital</th>
+          <th>Key Facts &amp; Borders</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Arunachal Pradesh</td>
+          <td>Itanagar</td>
+          <td>Borders China (disputed), Bhutan, Myanmar. Called "Land of the Rising Sun." China claims most of it.</td>
+        </tr>
+        <tr>
+          <td>Assam</td>
+          <td>Dispur</td>
+          <td>Borders Bhutan and Bangladesh; hub state linking all NE states. Tea, oil. Brahmaputra river.</td>
+        </tr>
+        <tr>
+          <td>Meghalaya</td>
+          <td>Shillong</td>
+          <td>Borders Bangladesh only (IIM Shillong is here). Wettest place on earth (Mawsynram/Cherrapunji). Matrilineal tribes.</td>
+        </tr>
+        <tr>
+          <td>Manipur</td>
+          <td>Imphal</td>
+          <td>Borders Myanmar. Ethnic conflict (Meitei–Kuki clashes 2023–). Gateway to Southeast Asia via Moreh border.</td>
+        </tr>
+        <tr>
+          <td>Mizoram</td>
+          <td>Aizawl</td>
+          <td>Borders Myanmar and Bangladesh. High literacy. Free Movement Regime with Myanmar (modified post-2024).</td>
+        </tr>
+        <tr>
+          <td>Nagaland</td>
+          <td>Kohima</td>
+          <td>Borders Myanmar. Site of Battle of Kohima (WW2, halted Japanese advance into India). Hornbill Festival.</td>
+        </tr>
+        <tr>
+          <td>Tripura</td>
+          <td>Agartala</td>
+          <td>Surrounded by Bangladesh on 3 sides. Strong cultural links with Bengal. India–Bangladesh rail connectivity.</td>
+        </tr>
+        <tr>
+          <td>Sikkim (not a "sister" but NE)</td>
+          <td>Gangtok</td>
+          <td>Borders China, Nepal, Bhutan. Youngest Indian state (joined 1975). Himalayan biodiversity. No land border with rest of NE India.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="q-block" data-section="seven-sisters">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What do you know about the Northeast and its culture?</span>
+        <div class="q-meta"><span class="tag teal">IIM Shillong</span><span class="tag red">Very Frequently Asked</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The Northeast is home to over 200 tribal communities speaking hundreds of dialects. Key cultural highlights: <strong>Bihu</strong> (Assam's harvest festival), <strong>Hornbill Festival</strong> (Nagaland — a showcase of all Naga tribes), <strong>Sangai Festival</strong> (Manipur). Meghalaya is home to the Khasi and Garo tribes with matrilineal societies (property passes through women). Mizoram has over 90% literacy, one of India's highest.</p>
+          <p>The region is connected to the rest of India through a narrow land corridor in West Bengal known as the <strong>"Chicken's Neck" or Siliguri Corridor</strong> — a 22 km wide strip. It is India's most strategically vulnerable geographic point.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>The Northeast is India's gateway to ASEAN (the Act East Policy). Yet it remains underdeveloped — per capita income in most NE states is below the national average. Development challenges: insurgencies (gradually declining), poor connectivity, limited industry. India has invested heavily in road and rail connectivity (including the Bogibeel Bridge — India's longest rail-road bridge, in Assam). For IIM Shillong students: the institute itself is located in one of the 7 Sisters and serves as a management hub for the region.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-block" data-section="seven-sisters">
+      <div class="q-head" onclick="toggle(this)">
+        <span class="q-text">What is the Chicken's Neck? Why is it strategically critical?</span>
+        <div class="q-meta"><span class="tag teal">Strategic Geography</span></div>
+        <span class="toggle-icon">▾</span>
+      </div>
+      <div class="q-body">
+        <div class="ans-label">Answer</div>
+        <div class="ans-text">
+          <p>The <strong>Siliguri Corridor</strong> (Chicken's Neck) is a narrow strip of land (~22–40 km wide) in West Bengal that connects mainland India to the 7 northeastern states. It is flanked by Nepal (north), Bangladesh (south), and Bhutan (northeast).</p>
+          <p>If this corridor were cut off — in a military conflict with China/Nepal, or through political instability — the entire Northeast would be isolated from India. China's presence in Chumbi Valley (Tibet) puts Chinese forces within striking distance of the corridor. This is why India has heavily invested in the Bogibeel Bridge, Dhola-Sadiya Bridge, and multiple rail links to provide redundant connectivity.</p>
+        </div>
+        <div class="india-box">
+          <div class="india-box-label">India Application</div>
+          <p>The Chicken's Neck vulnerability is the primary reason India resists any Sino–Nepalese or Sino–Bhutanese territorial moves. It also explains why India maintains deep engagement with Bangladesh (ensuring political stability there prevents the southern flank of the corridor from becoming hostile). For business: this vulnerability means insurers and logistics firms charge higher risk premiums for NE India operations, limiting investment inflows.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ════════════════════════════════
+       9. QUICK-FIRE GK TABLE
+  ════════════════════════════════ -->
+  <section id="quickfire">
+    <div class="section-head">
+      <span class="section-num">09 —</span>
+      <h2 class="section-title">Quick-Fire GK — Geography &amp; Geo-politics</h2>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--ink-light);margin-bottom:1.2rem;">Directly pulled from interview transcripts across all IIMs.</p>
+
+    <table>
+      <thead>
+        <tr><th>Question</th><th>Answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Capital of Ukraine</td><td>Kyiv (previously spelled "Kiev")</td></tr>
+        <tr><td>Capital of Israel (disputed)</td><td>Jerusalem — claimed by Israel, most countries' embassies in Tel Aviv; US recognised Jerusalem in 2017</td></tr>
+        <tr><td>Who rules Afghanistan now?</td><td>Taliban — took power in August 2021 after US withdrawal; internationally unrecognised</td></tr>
+        <tr><td>What is the Wakhan Corridor?</td><td>A narrow strip of Afghan territory reaching China's Xinjiang; separates Tajikistan from Pakistan</td></tr>
+        <tr><td>Countries bordering Israel</td><td>Lebanon (north), Syria (northeast), Jordan (east), Egypt (southwest), and Palestine (West Bank/Gaza)</td></tr>
+        <tr><td>Countries surrounding Bangladesh</td><td>India on three sides (north, east, west) and Myanmar (southeast); Bay of Bengal (south)</td></tr>
+        <tr><td>Longest river in the world</td><td>Nile (Africa) ~6,650 km; Amazon (South America) ~6,400 km (some measures put Amazon first)</td></tr>
+        <tr><td>Largest country by area</td><td>Russia — ~17.1 million sq km</td></tr>
+        <tr><td>Most populous countries</td><td>India (~1.44 bn), China (~1.41 bn), USA (~340 mn) — India surpassed China in 2023</td></tr>
+        <tr><td>Tallest mountain in the world</td><td>Mount Everest (8,849 m), Nepal/Tibet border (Sagarmatha in Nepali)</td></tr>
+        <tr><td>What is the International Date Line?</td><td>An imaginary line at roughly 180° longitude; crossing east-to-west adds a day, west-to-east subtracts a day</td></tr>
+        <tr><td>What is the Bab-el-Mandeb Strait?</td><td>Connects Red Sea to Gulf of Aden; between Yemen and Djibouti/Eritrea; Houthi attacks disrupted shipping here in 2024</td></tr>
+        <tr><td>Where is Goa? Who ruled it?</td><td>Western India (Konkan Coast). Ruled by <strong>Portugal</strong> until 1961 when India annexed it ("Operation Vijay"). Became a full state in 1987.</td></tr>
+        <tr><td>Old name of Mumbai</td><td>Bombay — renamed 1995. Maharashtra and Gujarat separated from Bombay Presidency on May 1, 1960.</td></tr>
+        <tr><td>Old name of Iran</td><td>Persia — renamed Iran in 1935 by Reza Shah Pahlavi</td></tr>
+        <tr><td>Where is Mundra Port?</td><td>Gujarat, near Kutch district. India's largest commercial port by capacity. Operated by Adani Ports.</td></tr>
+        <tr><td>What are ASEAN countries?</td><td>Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam (10 members)</td></tr>
+        <tr><td>India–Israel relationship</td><td>Full diplomatic relations established 1992. Israel is India's 3rd largest defence supplier. Strong technology (drip irrigation, cybersecurity) cooperation.</td></tr>
+        <tr><td>India's relations with Bangladesh (current)</td><td>Bangladesh saw a political transition in 2024 — PM Sheikh Hasina fled to India; Muhammad Yunus leads interim govt. India–Bangladesh relations are strained but economically intertwined ($14 bn trade).</td></tr>
+        <tr><td>Who leads Bangladesh now?</td><td>Muhammad Yunus — Nobel laureate, leading interim government since August 2024</td></tr>
+        <tr><td>What are the 5 permanent members of UNSC?</td><td>USA, UK, France, Russia, China — each has veto power. India seeks a permanent seat.</td></tr>
+        <tr><td>What is IMEC?</td><td>India–Middle East–Europe Economic Corridor — announced at G20 New Delhi 2023; rail and shipping corridor connecting India to Europe via UAE, Saudi Arabia, Jordan, Israel; stalled by Gaza conflict</td></tr>
+        <tr><td>What is CPEC?</td><td>China–Pakistan Economic Corridor — $62 billion infrastructure investment from Kashgar (China) to Gwadar Port (Pakistan); India objects as it passes through PoK</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<script>
+  function toggle(headEl) {
+    const block = headEl.closest('.q-block');
+    block.classList.toggle('open');
+  }
+
+  function toggleSection(sectionId, open) {
+    const blocks = document.querySelectorAll(`#${sectionId} .q-block`);
+    blocks.forEach(b => {
+      if (open) b.classList.add('open');
+      else b.classList.remove('open');
+    });
+  }
+</script>
+</body>
+</html>

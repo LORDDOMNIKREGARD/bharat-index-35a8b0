@@ -1,0 +1,1280 @@
+{
+  "source": {
+    "chief_ministers": "https://en.wikipedia.org/wiki/List_of_current_Indian_chief_ministers",
+    "governors": "https://en.wikipedia.org/wiki/List_of_current_Indian_governors",
+    "lok_sabha": "https://en.wikipedia.org/wiki/List_of_constituencies_of_the_Lok_Sabha",
+    "rajya_sabha": "https://en.wikipedia.org/wiki/Rajya_Sabha",
+    "gsdp": "https://en.wikipedia.org/wiki/List_of_Indian_states_and_union_territories_by_GDP",
+    "cpi": "https://www.mospi.gov.in/uploads/latestReleases/latest_release_1770891893893_6b458c0a-c327-4fef-a554-41131ea67273_Press_Relase_of_CPI_for_Jan26.pdf",
+    "sex_ratio": "https://en.wikipedia.org/wiki/List_of_states_and_union_territories_of_India_by_sex_ratio"
+  },
+  "last_updated": "2026-06-06T13:49:08Z",
+  "total_states_and_uts": 36,
+  "states": [
+    {
+      "state": "Andhra Pradesh",
+      "chief_minister": "Nara Chandrababu Naidu",
+      "governor": "Syed Abdul Nazeer",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 25,
+        "rajya_sabha_seats": 11
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1641000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.23,
+        "inflation_yoy_percent": 2.83,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 934,
+        "male_to_female_ratio": 1.071,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Krishna River",
+        "Godavari River",
+        "Tungabhadra River",
+        "Penna River",
+        "River delta",
+        "List of rivers in Andhra Pradesh"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "chief_minister": "Pema Khandu",
+      "governor": "Kaiwalya Trivikram Parnaik",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 47800,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 102.73,
+        "inflation_yoy_percent": 1.29,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 979,
+        "male_to_female_ratio": 1.021,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Brahmaputra River",
+        "Kameng River",
+        "Subansiri River",
+        "Dibang River",
+        "Lohit River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Assam",
+      "chief_minister": "Himanta Biswa Sarma",
+      "governor": "Lakshman Acharya",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 14,
+        "rajya_sabha_seats": 7
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 643100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 102.95,
+        "inflation_yoy_percent": 0.78,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 964,
+        "male_to_female_ratio": 1.037,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Brahmaputra River",
+        "Barak River",
+        "Karatoya River",
+        "Dihing River",
+        "Dikhow River",
+        "Barnadi River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Bihar",
+      "chief_minister": "Samrat Choudhary",
+      "governor": "Syed Ata Hasnain",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 40,
+        "rajya_sabha_seats": 16
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 976000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.09,
+        "inflation_yoy_percent": 2.48,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 908,
+        "male_to_female_ratio": 1.101,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Ganges",
+        "Ganga River",
+        "Gandaki River",
+        "Koshi River",
+        "South Asian river dolphin",
+        "Karmanasa River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Chhattisgarh",
+      "chief_minister": "Vishnu Deo Sai",
+      "governor": "Ramen Deka",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 11,
+        "rajya_sabha_seats": 5
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 561700,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 102.89,
+        "inflation_yoy_percent": 1.67,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 960,
+        "male_to_female_ratio": 1.042,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Rihand River",
+        "Ganges River",
+        "Mahanadi River",
+        "Shivnath River",
+        "Narmada River",
+        "Godavari River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Goa",
+      "chief_minister": "Pramod Pandurang Sawant",
+      "governor": "Ashok Gajapati Raju",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 121300,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 103.53,
+        "inflation_yoy_percent": 1.92,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 838,
+        "male_to_female_ratio": 1.193,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Kushavathi Reservoir",
+        "Terekhol River",
+        "Chapora River",
+        "Sal River (India)",
+        "Zuari River",
+        "Mandovi River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Gujarat",
+      "chief_minister": "Bhupendrabhai Rajnikant Patel",
+      "governor": "Acharya Devvrat",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 26,
+        "rajya_sabha_seats": 11
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 2790000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 103.29,
+        "inflation_yoy_percent": 2.23,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 955,
+        "male_to_female_ratio": 1.047,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Sabarmati Riverfront",
+        "List of rivers of Gujarat",
+        "Narmada River",
+        "Tapti River",
+        "Sabarmati River",
+        "Mahi River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Haryana",
+      "chief_minister": "Nayab Singh Saini",
+      "governor": "Ashim Kumar Ghosh",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 10,
+        "rajya_sabha_seats": 5
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1216000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.4,
+        "inflation_yoy_percent": 2.55,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 893,
+        "male_to_female_ratio": 1.12,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Yamuna River",
+        "Ghaggar River",
+        "Drishadvati river",
+        "Saraswati River",
+        "Sarasvati river",
+        "Tangri river"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Himachal Pradesh",
+      "chief_minister": "Sukhvinder Singh Sukhu",
+      "governor": "Kavinder Gupta",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 4,
+        "rajya_sabha_seats": 3
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 227100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.77,
+        "inflation_yoy_percent": 2.92,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 875,
+        "male_to_female_ratio": 1.143,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Beas River",
+        "River systems",
+        "Chenab River",
+        "Ravi River",
+        "Pabbar River",
+        "Rivers in Himachal Pradesh"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Jharkhand",
+      "chief_minister": "Hemant Soren",
+      "governor": "Santosh Kumar Gangwar",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 14,
+        "rajya_sabha_seats": 6
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 470100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 103.81,
+        "inflation_yoy_percent": 2.02,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 899,
+        "male_to_female_ratio": 1.112,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Son River",
+        "North Koel River",
+        "Damodar River",
+        "South Koel River",
+        "Sankh River",
+        "Subarnarekha River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Karnataka",
+      "chief_minister": "Doddalahalli Kempegowda Shivakumar",
+      "governor": "Thawar Chand Gehlot",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 28,
+        "rajya_sabha_seats": 12
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 2809100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 105.09,
+        "inflation_yoy_percent": 2.99,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 978,
+        "male_to_female_ratio": 1.022,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Krishna River",
+        "Tungabhadra River",
+        "Bhima River",
+        "Ghataprabha River",
+        "Vedavathi River",
+        "Malaprabha River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Kerala",
+      "chief_minister": "Vadasseri Damodara Menon Satheesan",
+      "governor": "Rajendra Arlekar",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 20,
+        "rajya_sabha_seats": 9
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1311400,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 105.68,
+        "inflation_yoy_percent": 3.67,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 951,
+        "male_to_female_ratio": 1.052,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Chalakudy River",
+        "List of rivers in Kerala",
+        "Periyar River",
+        "Pamba River",
+        "Chaliyar River",
+        "Kadalundipuzha River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Madhya Pradesh",
+      "chief_minister": "Mohan Yadav",
+      "governor": "Mangubhai C. Patel",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 29,
+        "rajya_sabha_seats": 11
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1522100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.15,
+        "inflation_yoy_percent": 2.72,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 956,
+        "male_to_female_ratio": 1.046,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Narmada River",
+        "Betwa River",
+        "Chambal River",
+        "River dolphin",
+        "Tawa River",
+        "Shakkar River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Maharashtra",
+      "chief_minister": "Devendra Gangadharrao Fadnavis",
+      "governor": "Jishnu Dev Varma",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 48,
+        "rajya_sabha_seats": 19
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 4267800,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.27,
+        "inflation_yoy_percent": 2.6,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 913,
+        "male_to_female_ratio": 1.095,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Godavari River",
+        "Krishna River",
+        "Bhima River",
+        "Manjira River",
+        "Wardha River",
+        "Wainganga River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Manipur",
+      "chief_minister": "Yumnam Khemchand Singh",
+      "governor": "Ajay Kumar Bhalla",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 49900,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 102.3,
+        "inflation_yoy_percent": 0.12,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 967,
+        "male_to_female_ratio": 1.034,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Barak River",
+        "Manipur River",
+        "Kabaw Valley",
+        "Tuivai River",
+        "Imphal River",
+        "Iril River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Meghalaya",
+      "chief_minister": "Conrad Kongkal Sangma",
+      "governor": "C. H. Vijayashankar",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 53000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.23,
+        "inflation_yoy_percent": 1.66,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 989,
+        "male_to_female_ratio": 1.011,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Umngot River",
+        "Brahmaputra River",
+        "Simsang River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Mizoram",
+      "chief_minister": "Lalduhoma",
+      "governor": "V. K. Singh",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 36000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 102.52,
+        "inflation_yoy_percent": 0.25,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 969,
+        "male_to_female_ratio": 1.032,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Yalong River",
+        "Chindwin River",
+        "Irrawaddy River",
+        "Tyao River",
+        "Tut River",
+        "Tuirial River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Nagaland",
+      "chief_minister": "Neiphiu Rio",
+      "governor": "Nand Kishore Yadav",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 47400,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.65,
+        "inflation_yoy_percent": 2.36,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 945,
+        "male_to_female_ratio": 1.058,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Dhansiri",
+        "Doyang River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Odisha",
+      "chief_minister": "Mohan Charan Majhi",
+      "governor": "Kambhampati Hari Babu",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 21,
+        "rajya_sabha_seats": 10
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 926000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 103.58,
+        "inflation_yoy_percent": 1.87,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 894,
+        "male_to_female_ratio": 1.119,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Subarnarekha River",
+        "Subarnarekha river",
+        "Brahmani River",
+        "River delta",
+        "Devi river",
+        "Pitt Rivers Museum"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Punjab",
+      "chief_minister": "Bhagwant Singh Mann",
+      "governor": "Gulab Chand Kataria",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 13,
+        "rajya_sabha_seats": 7
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 802700,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.55,
+        "inflation_yoy_percent": 2.71,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 904,
+        "male_to_female_ratio": 1.106,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Indus River",
+        "Jhelum River",
+        "Chenab River",
+        "Ravi River",
+        "Beas River",
+        "Kabul river"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Rajasthan",
+      "chief_minister": "Bhajan Lal Sharma",
+      "governor": "Haribhau Bagade",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 25,
+        "rajya_sabha_seats": 10
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1781100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.84,
+        "inflation_yoy_percent": 3.17,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 891,
+        "male_to_female_ratio": 1.122,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Luni River",
+        "Sahibi River",
+        "Saraswati River",
+        "West Banas River",
+        "Chambal River",
+        "Banas River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Sikkim",
+      "chief_minister": "Prem Singh Tamang",
+      "governor": "Om Prakash Mathur",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 52600,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 105.38,
+        "inflation_yoy_percent": 3.04,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 969,
+        "male_to_female_ratio": 1.032,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Teesta River",
+        "Jaldhaka River",
+        "Lachen River",
+        "Lachung River",
+        "Lhonak River",
+        "Rangeet River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Tamil Nadu",
+      "chief_minister": "Chandrasekaran Joseph Vijay",
+      "governor": "Rajendra Arlekar",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 39,
+        "rajya_sabha_seats": 18
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 3155100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 105.58,
+        "inflation_yoy_percent": 3.36,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 878,
+        "male_to_female_ratio": 1.139,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Kaveri river",
+        "Vellar River",
+        "Bhavani River",
+        "Kaveri River water dispute",
+        "List of rivers of Tamil Nadu"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Telangana",
+      "chief_minister": "Anumula Revanth Reddy",
+      "governor": "Shiv Pratap Shukla",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 17,
+        "rajya_sabha_seats": 7
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1649000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 106.59,
+        "inflation_yoy_percent": 4.92,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 894,
+        "male_to_female_ratio": 1.119,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Godavari River",
+        "Krishna River",
+        "Bhima River",
+        "Maner River",
+        "Manjira River",
+        "Musi River (India)"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Tripura",
+      "chief_minister": "Manik Saha",
+      "governor": "N. Indrasena Reddy",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 100800,
+        "gsdp_fiscal_year": "2025-26",
+        "consumer_price_index": 102.03,
+        "inflation_yoy_percent": 1.29,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 1028,
+        "male_to_female_ratio": 0.973,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Gumti River (transboundary river)",
+        "Haora River",
+        "Khowai River",
+        "Dhalai River",
+        "Manu River, Tripura",
+        "Juri River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Uttar Pradesh",
+      "chief_minister": "Yogi Adityanath",
+      "governor": "Anandiben Patel",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 80,
+        "rajya_sabha_seats": 31
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 2699100,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.54,
+        "inflation_yoy_percent": 2.67,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 941,
+        "male_to_female_ratio": 1.063,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Ganges",
+        "Gomti River",
+        "Narmada River",
+        "Saraswati river",
+        "South Asian river dolphin",
+        "Ghaghara River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Uttarakhand",
+      "chief_minister": "Pushkar Singh Dhami",
+      "governor": "Gurmit Singh",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 5,
+        "rajya_sabha_seats": 3
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 394700,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.49,
+        "inflation_yoy_percent": 2.15,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 984,
+        "male_to_female_ratio": 1.016,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Sharda River",
+        "Alaknanda River",
+        "Brahminy river turtle"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "West Bengal",
+      "chief_minister": "Suvendu Adhikari",
+      "governor": "R. N. Ravi",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 42,
+        "rajya_sabha_seats": 16
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1880000,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 104.0,
+        "inflation_yoy_percent": 2.79,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 973,
+        "male_to_female_ratio": 1.028,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Padma River",
+        "Bhagirathi River",
+        "Hooghly River",
+        "Teesta River",
+        "Torsa River",
+        "Jaldhaka River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Andaman and Nicobar Islands",
+      "chief_minister": null,
+      "governor": "Devendra Kumar Joshi",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 0
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 11700,
+        "gsdp_fiscal_year": "2022-23",
+        "consumer_price_index": 106.88,
+        "inflation_yoy_percent": 4.27,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 914,
+        "male_to_female_ratio": 1.094,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Hooghly River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Chandigarh",
+      "chief_minister": null,
+      "governor": "Gulab Chand Kataria",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 0
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 55000,
+        "gsdp_fiscal_year": "2022-23",
+        "consumer_price_index": 103.7,
+        "inflation_yoy_percent": 2.33,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "urban"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 838,
+        "male_to_female_ratio": 1.193,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "River fork",
+        "Ghaggar-Hakra River",
+        "Markanda River (Haryana)",
+        "Sahibi River",
+        "Sarasvati River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Dadra and Nagar Haveli and Daman and Diu",
+      "chief_minister": null,
+      "governor": "Praful Khoda Patel",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 2,
+        "rajya_sabha_seats": 0
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": null,
+        "gsdp_fiscal_year": null,
+        "consumer_price_index": 103.96,
+        "inflation_yoy_percent": 2.58,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 817,
+        "male_to_female_ratio": 1.224,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth; averaged for merged UT)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [],
+      "tourist_spots": []
+    },
+    {
+      "state": "Delhi",
+      "chief_minister": "Rekha Gupta",
+      "governor": "Taranjit Singh Sandhu",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 7,
+        "rajya_sabha_seats": 3
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 1327000,
+        "gsdp_fiscal_year": "2025-26",
+        "consumer_price_index": 103.01,
+        "inflation_yoy_percent": 2.15,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 923,
+        "male_to_female_ratio": 1.083,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Narmada River",
+        "Yamuna River",
+        "Hindon River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Jammu and Kashmir",
+      "chief_minister": "Omar Abdullah",
+      "governor": "Manoj Sinha",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 5,
+        "rajya_sabha_seats": 4
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 288400,
+        "gsdp_fiscal_year": "2025-26",
+        "consumer_price_index": 104.21,
+        "inflation_yoy_percent": 1.34,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 976,
+        "male_to_female_ratio": 1.025,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [],
+      "tourist_spots": []
+    },
+    {
+      "state": "Ladakh",
+      "chief_minister": null,
+      "governor": "Vinai Kumar Saxena",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 0
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 8304,
+        "gsdp_fiscal_year": "2023-24",
+        "consumer_price_index": 105.1,
+        "inflation_yoy_percent": 1.76,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 1125,
+        "male_to_female_ratio": 0.889,
+        "sex_ratio_source": "NFHS-5 (total population sex ratio)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [
+        "Indus River",
+        "Shyok River",
+        "Nubra River",
+        "Suru River (Indus)",
+        "Dras River",
+        "Zanskar River"
+      ],
+      "tourist_spots": []
+    },
+    {
+      "state": "Lakshadweep",
+      "chief_minister": null,
+      "governor": "Praful Khoda Patel",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 0
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 324,
+        "gsdp_fiscal_year": "2023",
+        "consumer_price_index": 105.04,
+        "inflation_yoy_percent": 3.02,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 1051,
+        "male_to_female_ratio": 0.951,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [],
+      "tourist_spots": []
+    },
+    {
+      "state": "Puducherry",
+      "chief_minister": "Natesan Krishnasamy Gounder Rangaswamy",
+      "governor": "Kuniyil Kailashnathan",
+      "parliamentary_metrics": {
+        "lok_sabha_seats": 1,
+        "rajya_sabha_seats": 1
+      },
+      "economic_metrics": {
+        "gsdp_crore_inr": 52700,
+        "gsdp_fiscal_year": "2024-25",
+        "consumer_price_index": 105.28,
+        "inflation_yoy_percent": 3.39,
+        "cpi_reference_month": "2026-01",
+        "cpi_sector": "combined"
+      },
+      "demographics": {
+        "sex_ratio_females_per_1000_males": 959,
+        "male_to_female_ratio": 1.043,
+        "sex_ratio_source": "NFHS-5 (sex ratio at birth)",
+        "reference_period": "2019-21"
+      },
+      "gi_tags": [],
+      "rivers": [],
+      "tourist_spots": []
+    }
+  ],
+  "cabinet": [
+    {
+      "portfolio": "Prime Minister Minister of Personnel, Public Grievances and Pensions Department of Atomic Energy Department of Space All important policy issues; and All other portfolios not allocated to any Minister.",
+      "name": "Narendra Modi"
+    },
+    {
+      "portfolio": "Minister of Defence",
+      "name": "Rajnath Singh"
+    },
+    {
+      "portfolio": "Minister of Home Affairs Minister of Co-operation",
+      "name": "Amit Shah"
+    },
+    {
+      "portfolio": "Minister of Road Transport and Highways",
+      "name": "Nitin Gadkari"
+    },
+    {
+      "portfolio": "Minister of Health and Family Welfare Minister of Chemicals and Fertilizers",
+      "name": "Jagat Prakash Nadda"
+    },
+    {
+      "portfolio": "Minister of Agriculture and Farmers Welfare Minister of Rural Development",
+      "name": "Shivraj Singh Chouhan"
+    },
+    {
+      "portfolio": "Minister of Finance Minister of Corporate Affairs",
+      "name": "Nirmala Sitharaman"
+    },
+    {
+      "portfolio": "Minister of External Affairs",
+      "name": "S. Jaishankar"
+    },
+    {
+      "portfolio": "Minister of Power Minister of Housing and Urban Affairs",
+      "name": "Manohar Lal Khattar"
+    },
+    {
+      "portfolio": "Minister of Heavy Industries Minister of Steel",
+      "name": "H. D. Kumaraswamy"
+    },
+    {
+      "portfolio": "Minister of Commerce and Industry",
+      "name": "Piyush Goyal"
+    },
+    {
+      "portfolio": "Minister of Education",
+      "name": "Dharmendra Pradhan"
+    },
+    {
+      "portfolio": "Minister of Micro, Small and Medium Enterprises",
+      "name": "Jitan Ram Manjhi"
+    },
+    {
+      "portfolio": "Minister of Panchayati Raj",
+      "name": "Lalan Singh"
+    },
+    {
+      "portfolio": "Minister of Ports, Shipping and Waterways",
+      "name": "Sarbananda Sonowal"
+    },
+    {
+      "portfolio": "Minister of Social Justice and Empowerment",
+      "name": "Virendra Kumar Khatik"
+    },
+    {
+      "portfolio": "Minister of Civil Aviation",
+      "name": "Kinjarapu Ram Mohan Naidu"
+    },
+    {
+      "portfolio": "Minister of Consumer Affairs, Food and Public Distribution Minister of New and Renewable Energy",
+      "name": "Prahlad Joshi"
+    },
+    {
+      "portfolio": "Minister of Tribal Affairs",
+      "name": "Jual Oram"
+    },
+    {
+      "portfolio": "Minister of Textiles",
+      "name": "Giriraj Singh"
+    },
+    {
+      "portfolio": "Minister of Information and Broadcasting Minister of Railways Minister of Electronics and Information Technology",
+      "name": "Ashwini Vaishnaw"
+    },
+    {
+      "portfolio": "Minister of Development of North Eastern Region Minister of Communications",
+      "name": "Jyotiraditya Scindia"
+    },
+    {
+      "portfolio": "Minister of Environment, Forest and Climate Change",
+      "name": "Bhupender Yadav"
+    },
+    {
+      "portfolio": "Minister of Culture Minister of Tourism",
+      "name": "Gajendra Singh Shekhawat"
+    },
+    {
+      "portfolio": "Minister of Women and Child Development",
+      "name": "Annpurna Devi"
+    },
+    {
+      "portfolio": "Minister of Parliamentary Affairs Minister of Minority Affairs",
+      "name": "Kiren Rijiju"
+    },
+    {
+      "portfolio": "Minister of Petroleum and Natural Gas",
+      "name": "Hardeep Singh Puri"
+    },
+    {
+      "portfolio": "Minister of Labour and Employment Minister of Youth Affairs and Sports",
+      "name": "Mansukh L. Mandaviya"
+    },
+    {
+      "portfolio": "Minister of Coal Minister of Mines",
+      "name": "G. Kishan Reddy"
+    },
+    {
+      "portfolio": "Minister of Food Processing Industries",
+      "name": "Chirag Paswan"
+    },
+    {
+      "portfolio": "Minister of Jal Shakti",
+      "name": "C. R. Patil"
+    }
+  ]
+}
