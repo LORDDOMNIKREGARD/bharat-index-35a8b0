@@ -16,6 +16,7 @@ export function useStateFilter(states: State[]) {
   const dir = (params.get('dir') === 'asc' || params.get('dir') === 'desc' ? params.get('dir') : defaultDir) as SortDir
   const view: 'table' | 'map' = params.get('view') === 'map' ? 'map' : 'table'
   const metric: MetricKey = sort === 'name' || sort === 'cm' ? 'gsdp' : sort
+  const focus = params.get('focus')
 
   const set = (patch: Record<string, string | null>) =>
     setParams(
@@ -52,9 +53,11 @@ export function useStateFilter(states: State[]) {
     dir,
     view,
     metric,
+    focus,
+    setFocus: (slug: string | null) => set({ focus: slug }),
     setQ: (v: string) => set({ q: v }),
     setKind: (v: Kind) => set({ type: v === 'all' ? null : v }),
-    setView: (v: 'table' | 'map') => set({ view: v === 'table' ? null : v }),
+    setView: (v: 'table' | 'map') => set({ view: v === 'table' ? null : v, focus: null }),
     /** Same key flips direction; a new key starts from its natural direction. */
     toggleSort: (key: SortKey) => {
       if (key === sort) set({ dir: dir === 'asc' ? 'desc' : 'asc' })

@@ -16,18 +16,6 @@ const ISO: Record<string, string> = {
   Tripura: 'TR', 'Uttar Pradesh': 'UP', Uttarakhand: 'UK', 'West Bengal': 'WB',
 }
 
-// Tile-map position [column, row], roughly geographic. 8 x 8 grid.
-export const TILE: Record<string, [number, number]> = {
-  JK: [3, 1], LA: [4, 1],
-  PB: [2, 2], CH: [3, 2], HP: [4, 2],
-  HR: [3, 3], DL: [4, 3], UK: [5, 3], SK: [6, 3], AR: [8, 3],
-  RJ: [3, 4], UP: [4, 4], BR: [5, 4], WB: [6, 4], AS: [7, 4], NL: [8, 4],
-  GJ: [2, 5], MP: [3, 5], CG: [4, 5], JH: [5, 5], ML: [7, 5], MN: [8, 5],
-  DH: [2, 6], MH: [3, 6], TG: [4, 6], OD: [5, 6], TR: [7, 6], MZ: [8, 6],
-  GA: [2, 7], KA: [3, 7], AP: [4, 7],
-  LD: [1, 8], KL: [3, 8], TN: [4, 8], PY: [5, 8], AN: [7, 8],
-}
-
 // The scraped river lists pick up article links that are not rivers, and a few rivers
 // that do not flow through that state. Drop both; never add names here.
 const NOT_A_RIVER = /^list of|rivers? (of|in)\b|river delta|river systems|dolphin|turtle|museum|reservoir|riverfront|river fork|dispute|valley|sa?raswati|sarasvati|drishadvati/i
@@ -103,6 +91,7 @@ function build(records: StateRecord[]): State[] {
 
 export const STATES = build(raw.states as StateRecord[])
 export const BY_SLUG = new Map(STATES.map((s) => [s.slug, s]))
+export const BY_ISO = new Map(STATES.map((s) => [s.iso, s]))
 export const MAX_GSDP = Math.max(...STATES.map((s) => s.gsdp ?? 0))
 
 /** How many entries have a value for this metric (GSDP is missing for one UT). */

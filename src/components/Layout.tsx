@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router'
-import { BookOpenText, House, MagnifyingGlass, MapTrifold } from '@phosphor-icons/react'
+import { Suspense, lazy, useEffect, useState } from 'react'
+import { Link, NavLink, useLocation, useOutlet } from 'react-router'
+import { AnimatePresence, MotionConfig, motion } from 'motion/react'
+import { BookOpenText, House, MagnifyingGlass, MapTrifold, Target } from '@phosphor-icons/react'
 import { DATA_DATE } from '../data'
 import { fmtDate, store } from '../utils'
-import { Search } from './Search'
+// Loaded on first open; cmdk is not needed for the first paint.
+const Search = lazy(() => import('./Search'))
 
 export interface LayoutContext {
   openSearch: () => void
@@ -11,6 +13,7 @@ export interface LayoutContext {
 
 const NAV = [
   { to: '/states', label: 'States' },
+  { to: '/practice', label: 'Practice' },
   { to: '/guides', label: 'Guides' },
   { to: '/who', label: "Who's who" },
 ]
@@ -33,13 +36,14 @@ function useTheme() {
   return [theme, setTheme] as const
 }
 
-const navCls = 'no-underline text-ink-2 hover:text-ink aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-accent aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[6px]'
+const navCls = 'no-underline text-ink-2 transition-colors hover:text-ink aria-[current=page]:text-ink'
 const tabCls = 'flex flex-col items-center justify-center gap-0.5 text-[12px] no-underline text-ink-2 aria-[current=page]:text-accent'
 
 export default function Layout() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [theme, setTheme] = useTheme()
   const { pathname } = useLocation()
+  const outlet = useOutlet({ openSearch: () => setSearchOpen(true) } satisfies LayoutContext)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -60,7 +64,7 @@ export default function Layout() {
   const openSearch = () => setSearchOpen(true)
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <a
         href="#main"
         className="sr-only z-50 bg-surface px-3 py-2 focus:not-sr-only focus:fixed focus:left-2 focus:top-2"
@@ -76,7 +80,18 @@ export default function Layout() {
           <nav aria-label="Main" className="hidden gap-6 text-[15px] sm:flex">
             {NAV.map((n) => (
               <NavLink key={n.to} to={n.to} className={navCls}>
-                {n.label}
+                {({ isActive }) => (
+                  <span className="relative inline-block py-1">
+                    {n.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-underline"
+                        className="absolute inset-x-0 -bottom-[3px] h-[2px] bg-accent"
+                        transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                      />
+                    )}
+                  </span>
+                )}
               </NavLink>
             ))}
           </nav>
@@ -93,7 +108,17 @@ export default function Layout() {
       </header>
 
       <main id="main" className="mx-auto max-w-[1100px] px-4 pb-16">
-        <Outlet context={{ openSearch } satisfies LayoutContext} />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={pathname}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Suspense fallback={<div className="min-h-[60vh]" />}>{outlet}</Suspense>
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <footer className="no-print border-t border-rule">
@@ -119,7 +144,7 @@ export default function Layout() {
 
       <nav
         aria-label="Main"
-        className="no-print fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-rule bg-surface pb-[env(safe-area-inset-bottom)] sm:hidden"
+        className="no-print fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-rule bg-surface pb-[env(safe-area-inset-bottom)] sm:hidden"
       >
         <NavLink to="/" end className={`${tabCls} h-14`}>
           <House size={22} aria-hidden />
@@ -128,6 +153,10 @@ export default function Layout() {
         <NavLink to="/states" className={`${tabCls} h-14`}>
           <MapTrifold size={22} aria-hidden />
           States
+        </NavLink>
+        <NavLink to="/practice" className={`${tabCls} h-14`}>
+          <Target size={22} aria-hidden />
+          Practice
         </NavLink>
         <NavLink to="/guides" className={`${tabCls} h-14`}>
           <BookOpenText size={22} aria-hidden />
@@ -139,7 +168,11 @@ export default function Layout() {
         </button>
       </nav>
 
-      <Search open={searchOpen} onOpenChange={setSearchOpen} />
-    </>
+      {searchOpen && (
+        <Suspense fallback={null}>
+          <Search open={searchOpen} onOpenChange={setSearchOpen} />
+        </Suspense>
+      )}
+    </MotionConfig>
   )
 }

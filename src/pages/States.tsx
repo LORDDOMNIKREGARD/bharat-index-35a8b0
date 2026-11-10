@@ -4,7 +4,8 @@ import { ArrowDown, ArrowUp, CaretDown, CaretUp } from '@phosphor-icons/react'
 import { MAX_GSDP, METRICS, STATES, cmText, rankText } from '../data'
 import { useStateFilter } from '../hooks/useStateFilter'
 import { Bar } from '../components/Facts'
-import { TileMap } from '../components/TileMap'
+import { MapExplorer } from '../components/MapExplorer'
+import { Segmented } from '../components/Segmented'
 import { fmtGsdp } from '../utils'
 import type { Kind, MetricKey, SortKey } from '../types'
 
@@ -23,29 +24,6 @@ const COLS: { key: SortKey; label: string; num?: boolean }[] = [
   { key: 'rs', label: 'Rajya Sabha', num: true },
   { key: 'sexRatio', label: 'Sex ratio at birth', num: true },
 ]
-
-function Segmented<T extends string>({ value, options, onChange, label }: {
-  value: T
-  options: { v: T; label: string }[]
-  onChange: (v: T) => void
-  label: string
-}) {
-  return (
-    <div role="group" aria-label={label} className="flex rounded-ctl border border-rule bg-surface p-0.5">
-      {options.map((o) => (
-        <button
-          key={o.v}
-          type="button"
-          aria-pressed={value === o.v}
-          onClick={() => onChange(o.v)}
-          className="rounded-ctl px-3 py-1.5 text-[15px] text-ink-2 aria-pressed:bg-ink aria-pressed:text-paper"
-        >
-          {o.label}
-        </button>
-      ))}
-    </div>
-  )
-}
 
 export default function States() {
   const f = useStateFilter(STATES)
@@ -114,10 +92,7 @@ export default function States() {
               ))}
             </select>
           </label>
-          <TileMap metric={f.metric} highlight={shown} label={`Tile map of India shaded by ${METRICS[f.metric].label}`} />
-          <p className="mt-2 max-w-[60ch] text-[14px] text-ink-2">
-            Each square is one state or UT, placed roughly where it sits on the map. Not to scale.
-          </p>
+          <MapExplorer metric={f.metric} focus={f.focus} setFocus={f.setFocus} highlight={shown} />
         </div>
       ) : (
         <>

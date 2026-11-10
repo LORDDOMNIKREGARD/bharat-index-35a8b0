@@ -22,6 +22,28 @@
   --font-read: var(--bi-font-read);
   --font-mono: var(--bi-font-mono);
   --radius-ctl: 2px;
+
+  /* shadcn/ui names, pointed at the same palette */
+  --color-background: var(--bi-paper);
+  --color-foreground: var(--bi-ink);
+  --color-card: var(--bi-surface);
+  --color-card-foreground: var(--bi-ink);
+  --color-popover: var(--bi-surface);
+  --color-popover-foreground: var(--bi-ink);
+  --color-primary: var(--bi-ink);
+  --color-primary-foreground: var(--bi-paper);
+  --color-secondary: var(--bi-tint);
+  --color-secondary-foreground: var(--bi-ink);
+  --color-muted: var(--bi-tint);
+  --color-muted-foreground: var(--bi-ink-2);
+  --color-destructive: var(--bi-accent);
+  --color-border: var(--bi-rule);
+  --color-input: var(--bi-rule);
+  --color-ring: var(--bi-accent);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 10px;
 }
 
 @layer base {

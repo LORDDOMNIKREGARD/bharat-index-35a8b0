@@ -1,13 +1,14 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import States from './pages/States'
-import StatePage from './pages/StatePage'
-import Guides from './pages/Guides'
-import Who from './pages/Who'
-import NotFound from './pages/NotFound'
+const States = lazy(() => import('./pages/States'))
+const StatePage = lazy(() => import('./pages/StatePage'))
+const Guides = lazy(() => import('./pages/Guides'))
+const Who = lazy(() => import('./pages/Who'))
+const Practice = lazy(() => import('./pages/Practice'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -18,6 +19,7 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<Home />} />
           <Route path="states" element={<States />} />
           <Route path="states/:slug" element={<StatePage />} />
+          <Route path="practice" element={<Practice />} />
           <Route path="guides" element={<Guides />} />
           <Route path="who" element={<Who />} />
           <Route path="*" element={<NotFound />} />

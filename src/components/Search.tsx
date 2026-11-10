@@ -5,11 +5,12 @@ import { CABINET, GUIDES, STATES } from '../data'
 const PAGES = [
   { to: '/', label: 'Home' },
   { to: '/states', label: 'All states and UTs' },
+  { to: '/practice', label: 'Practice the map' },
   { to: '/guides', label: 'Study guides' },
   { to: '/who', label: "Who's who and Union Cabinet" },
 ]
 
-export function Search({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
+export default function Search({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
   const navigate = useNavigate()
   const go = (to: string) => {
     onOpenChange(false)

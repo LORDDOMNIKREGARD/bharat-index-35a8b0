@@ -1,15 +1,18 @@
 // Run: npm test
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { BY_SLUG, STATES, TILE, cleanRivers, sortStates } from './index.ts'
+import fs from 'node:fs'
+import { BY_SLUG, STATES, cleanRivers, sortStates } from './index.ts'
 import { fmtGsdp, ordinal } from '../utils/index.ts'
 
-test('36 entries, unique slugs, ISO codes and tiles', () => {
+test('36 entries, unique slugs and ISO codes, all on the map', () => {
   assert.equal(STATES.length, 36)
   assert.equal(new Set(STATES.map((s) => s.slug)).size, 36)
   assert.equal(new Set(STATES.map((s) => s.iso)).size, 36)
-  for (const s of STATES) assert.ok(TILE[s.iso], `no tile for ${s.name} (${s.iso})`)
-  assert.equal(new Set(Object.values(TILE).map(String)).size, 36, 'two tiles share a cell')
+  const map = JSON.parse(fs.readFileSync(new URL('../../public/data/india-map.json', import.meta.url), 'utf8'))
+  for (const s of STATES) assert.ok(map.states[s.iso], `no outline for ${s.name} (${s.iso})`)
+  assert.equal(map.seats.length, 543)
+  for (const s of STATES) assert.equal(map.seats.filter((x: { s: string }) => x.s === s.iso).length, s.ls, `seat dots for ${s.name}`)
   assert.equal(STATES.filter((s) => s.isUT).length, 8)
 })
 
