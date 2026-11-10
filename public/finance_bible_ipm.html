@@ -4,24 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finance Bible for IPM Interviews</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a2e;
-    --paper: #faf8f3;
-    --gold: #c8951a;
-    --gold-light: #f0c84a;
-    --red: #c0392b;
-    --green: #1a7a4a;
-    --blue: #1a3a6b;
-    --accent: #e8d5a3;
-    --muted: #6b6b5a;
-    --border: #d4c9a8;
-    --highlight: #fff9e6;
-    --code-bg: #1a1a2e;
-    --tag-bg: #1a3a6b;
+    --ink: var(--bi-ink);
+    --paper: var(--bi-paper);
+    --gold: var(--bi-accent);
+    --gold-light: var(--bi-tint);
+    --red: var(--bi-accent);
+    --green: var(--bi-good);
+    --blue: var(--bi-data-4);
+    --accent: var(--bi-tint);
+    --muted: var(--bi-ink-2);
+    --border: var(--bi-rule);
+    --highlight: var(--bi-tint);
+    --code-bg: var(--bi-ink);
+    --tag-bg: var(--bi-data-4);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +26,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: var(--bi-font-read);
     background: var(--paper);
     color: var(--ink);
     font-size: 16px;
@@ -68,7 +65,7 @@
   }
 
   .cover h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 900;
     color: var(--gold-light);
@@ -158,7 +155,7 @@
   .nav-inner::-webkit-scrollbar { display: none; }
 
   .nav-brand {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     color: var(--gold-light);
     font-weight: 700;
     font-size: 0.9rem;
@@ -196,7 +193,7 @@
   }
 
   .section-number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.75rem;
     color: var(--gold);
     letter-spacing: 0.1em;
@@ -205,7 +202,7 @@
   }
 
   .section-header h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 700;
     color: var(--ink);
@@ -219,7 +216,7 @@
   }
 
   .topic h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--blue);
@@ -278,7 +275,7 @@
   .iq-question::before {
     content: 'Q: ';
     color: var(--gold-light);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.8rem;
   }
 
@@ -299,7 +296,7 @@
   .formula {
     background: var(--code-bg);
     color: var(--gold-light);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     padding: 0.8rem 1.2rem;
     border-radius: 4px;
     margin: 0.8rem 0;
@@ -326,7 +323,7 @@
   }
 
   .ratio-name {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: 1.1rem;
     font-weight: 700;
   }
@@ -350,7 +347,7 @@
   .key-fact:last-child { border-bottom: none; }
 
   .fact-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.75rem;
     color: var(--gold);
     font-weight: 600;
@@ -525,7 +522,7 @@
   }
 
   .toc h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: 1.3rem;
     color: var(--ink);
     margin-bottom: 1rem;
@@ -553,7 +550,7 @@
   .toc-item a:hover { color: var(--gold); }
 
   .toc-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.72rem;
     color: var(--gold);
     font-weight: 600;
@@ -569,7 +566,7 @@
     padding: 0.15rem 0.5rem;
     border-radius: 2px;
     margin: 0.1rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     letter-spacing: 0.04em;
   }
 
@@ -589,7 +586,7 @@
   }
 
   .qa-q span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.72rem;
     color: var(--gold);
     margin-right: 0.5rem;
@@ -628,7 +625,7 @@
 
   /* === MINI INCOME STATEMENT === */
   .financial-statement {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.85rem;
     background: white;
     border: 1px solid var(--border);
@@ -681,6 +678,9 @@
     main { max-width: 100%; padding: 1rem; }
   }
 </style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 
@@ -1906,7 +1906,7 @@ Q100: What is a repo rate cut's impact on home loan EMIs? — When RBI cuts repo
   <h2>Rapid Revision Sheets</h2>
 </div>
 
-<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 1.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">100 One-Line Finance Facts</h3>
+<h3 style="font-family:var(--bi-font-ui); font-size:1.4rem; color:var(--blue); margin: 1.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">100 One-Line Finance Facts</h3>
 
 <div class="revision-grid">
   <div class="rev-item"><strong>Fact 01</strong>BSE founded 1875; NSE founded 1992.</div>
@@ -2011,7 +2011,7 @@ Q100: What is a repo rate cut's impact on home loan EMIs? — When RBI cuts repo
   <div class="rev-item"><strong>Fact 100</strong>India's Nifty PE (historical average): 18–22x. Check current level before interview.</div>
 </div>
 
-<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Interview Traps &amp; How to Avoid Them</h3>
+<h3 style="font-family:var(--bi-font-ui); font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Interview Traps &amp; How to Avoid Them</h3>
 
 <div class="trap">
   <div class="trap-label">Trap 01 — Sensex is on NSE</div>
@@ -2219,7 +2219,7 @@ Q100: What is a repo rate cut's impact on home loan EMIs? — When RBI cuts repo
   </div>
 </div>
 
-<h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Finance Terms Every IPM Aspirant Must Know</h3>
+<h3 style="font-family:var(--bi-font-ui); font-size:1.4rem; color:var(--blue); margin: 2.5rem 0 1rem; padding-left:0.8rem; border-left:4px solid var(--gold);">50 Finance Terms Every IPM Aspirant Must Know</h3>
 
 <div style="background:white; border:1px solid var(--border); border-radius:6px; padding:1rem 1.5rem; margin:1rem 0;">
   <div class="glossary-item"><span class="glossary-term">Equity</span><span class="glossary-def">Ownership stake in a company. Represented by shares. Residual claim on assets after debts.</span></div>
@@ -2291,7 +2291,7 @@ Q100: What is a repo rate cut's impact on home loan EMIs? — When RBI cuts repo
 </div>
 
 <div style="text-align:center; margin-top:3rem; padding: 2rem; background: var(--ink); border-radius:8px; color: var(--gold-light);">
-  <div style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Finance Bible for IPM Interviews</div>
+  <div style="font-family:var(--bi-font-ui); font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Finance Bible for IPM Interviews</div>
   <div style="font-size:0.85rem; color:#a0987a;">Compiled from real interview transcripts: IIM Shillong · IIM Sirmaur · IIM Kozhikode · IIM Ranchi · IIM Amritsar · IIM Indore</div>
   <div style="margin-top:0.8rem; font-size:0.8rem; color:#666;">Always verify current figures (Nifty, repo rate, inflation) before each interview</div>
 </div>

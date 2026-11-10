@@ -5,20 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PCM Interview Questions & Answers</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap');
-
   :root {
-    --bg: #0d0f14;
-    --surface: #151820;
-    --border: #252b38;
-    --accent-p: #7c6af7;
-    --accent-c: #f76a6a;
-    --accent-m: #6af7c8;
-    --text: #e2e8f0;
-    --muted: #6b7280;
-    --tag-p: rgba(124,106,247,0.15);
-    --tag-c: rgba(247,106,106,0.15);
-    --tag-m: rgba(106,247,200,0.15);
+    --bg: var(--bi-paper);
+    --surface: var(--bi-surface);
+    --border: var(--bi-rule);
+    --accent-p: var(--bi-accent);
+    --accent-c: var(--bi-data-4);
+    --accent-m: var(--bi-good);
+    --text: var(--bi-ink);
+    --muted: var(--bi-ink-2);
+    --tag-p: var(--bi-tint);
+    --tag-c: var(--bi-tint);
+    --tag-m: var(--bi-tint);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,7 +24,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--bi-font-read);
     font-size: 15px;
     line-height: 1.7;
     min-height: 100vh;
@@ -40,7 +38,7 @@
     border-bottom: 1px solid var(--border);
   }
   .hero-eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -64,7 +62,7 @@
   }
   .badge-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .badge {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     padding: 4px 12px;
     border-radius: 2px;
@@ -86,7 +84,7 @@
     border-bottom: 1px solid var(--border);
   }
   .filter-btn {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.08em;
     padding: 6px 16px;
@@ -108,7 +106,7 @@
     border: 1px solid var(--border);
     color: var(--text);
     padding: 6px 14px;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--bi-font-read);
     font-size: 13px;
     border-radius: 2px;
     outline: none;
@@ -116,7 +114,7 @@
   }
   .search-input:focus { border-color: var(--accent-p); }
   .count-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     color: var(--muted);
     padding: 6px 0;
@@ -151,14 +149,14 @@
     user-select: none;
   }
   .q-num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     color: var(--muted);
     min-width: 28px;
     padding-top: 2px;
   }
   .q-tag {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 10px;
     padding: 2px 8px;
     border-radius: 2px;
@@ -202,7 +200,7 @@
   .card-body ul { margin: 8px 0 8px 18px; }
   .card-body li { margin-bottom: 4px; }
   .card-body .formula {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--border);
     padding: 8px 14px;
@@ -214,7 +212,7 @@
   }
 
   .section-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -229,6 +227,9 @@
     .card-body { padding-left: 16px; }
   }
 </style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 

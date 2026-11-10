@@ -6,23 +6,23 @@
 <title>Statistics Mastery — IPM Interview Prep</title>
 <style>
   :root {
-    --navy: #0D1B2A;
-    --indigo: #4361EE;
-    --indigo-light: #748FFC;
-    --coral: #F77F00;
-    --white: #FAFBFF;
-    --surface: #F0F2FF;
-    --card: #FFFFFF;
-    --text: #1A1A2E;
-    --muted: #6B7280;
-    --success: #10B981;
-    --error: #EF4444;
-    --border: #E2E8FF;
-    --formula-bg: #0D1B2A;
-    --formula-text: #A5F3FC;
+    --navy: var(--bi-ink);
+    --indigo: var(--bi-data-4);
+    --indigo-light: var(--bi-data-3);
+    --coral: var(--bi-accent);
+    --white: var(--bi-paper);
+    --surface: var(--bi-tint);
+    --card: var(--bi-surface);
+    --text: var(--bi-ink);
+    --muted: var(--bi-ink-2);
+    --success: var(--bi-good);
+    --error: var(--bi-accent);
+    --border: var(--bi-rule);
+    --formula-bg: var(--bi-tint);
+    --formula-text: var(--bi-ink);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--white); color: var(--text); line-height: 1.7; }
+  body { font-family: var(--bi-font-read); background: var(--white); color: var(--text); line-height: 1.7; }
 
   /* ── HEADER ── */
   header {
@@ -113,7 +113,7 @@
   .formula {
     background: var(--formula-bg); color: var(--formula-text);
     padding: 14px 18px; border-radius: 10px; margin: 14px 0;
-    font-family: 'Courier New', monospace; font-size: 0.95rem;
+    font-family: var(--bi-font-mono); font-size: 0.95rem;
     border-left: 4px solid var(--indigo);
     overflow-x: auto;
   }
@@ -284,6 +284,22 @@
   }
   .sticky-quiz:hover { transform: scale(1.05); }
 </style>
+<style>/* bi-overrides: hard-coded dark bands from the original theme */
+header { background: var(--bi-surface); box-shadow: none; border-bottom: 1px solid var(--bi-rule); }
+.logo { color: var(--bi-ink); }
+.hero, .section-header, .quiz-header { background: var(--bi-tint); color: var(--bi-ink); }
+.hero p, .section-header p, .quiz-header p { color: var(--bi-ink-2); }
+.chip { background: var(--bi-surface); border-color: var(--bi-rule); color: var(--bi-ink); }
+.progress-fill, .quiz-fill { background: var(--bi-accent); }
+th { background: var(--bi-tint); color: var(--bi-ink); }
+footer { background: var(--bi-tint); color: var(--bi-ink-2); }
+footer strong { color: var(--bi-ink); }
+header nav a { color: var(--bi-ink-2); }
+header nav a:hover { background: var(--bi-tint); color: var(--bi-ink); }
+</style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 

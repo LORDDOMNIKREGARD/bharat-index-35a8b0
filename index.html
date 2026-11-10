@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bharat Index — India State Intelligence Dashboard 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@500;600;700&family=Inter:wght@400;500;600;700;900&display=swap"
-      rel="stylesheet"
-    />
+    <title>Bharat Index — state facts and study guides for IPM interviews</title>
+    <meta name="description" content="Chief Ministers, Governors, GSDP, Lok Sabha seats and more for all 36 states and union territories, with sources, plus ten study guides for IPM interview prep." />
+    <meta property="og:title" content="Bharat Index" />
+    <meta property="og:description" content="State facts and study guides for IPM interview prep." />
+    <meta name="theme-color" content="#f7f4ec" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/tokens.css" />
+    <script>
+      // Set the theme before first paint so there is no flash.
+      ;(function () {
+        var t = 'system'
+        try { t = localStorage.getItem('theme') || 'system' } catch (e) {}
+        if (t === 'system') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.dataset.theme = t
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

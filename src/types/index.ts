@@ -1,31 +1,22 @@
-export interface ParliamentaryMetrics {
-  lok_sabha_seats: number
-  rajya_sabha_seats: number
-}
-
-export interface EconomicMetrics {
-  gsdp_crore_inr: number | null
-  gsdp_fiscal_year?: string | null
-  consumer_price_index: number
-  inflation_yoy_percent: number
-  cpi_reference_month?: string
-  cpi_sector?: string
-}
-
-export interface Demographics {
-  sex_ratio_females_per_1000_males: number
-  male_to_female_ratio?: number
-  sex_ratio_source?: string
-  reference_period?: string
-}
-
+// Shape of state_data.json (written by scraper.py).
 export interface StateRecord {
   state: string
   chief_minister: string | null
   governor: string
-  parliamentary_metrics: ParliamentaryMetrics
-  economic_metrics: EconomicMetrics
-  demographics: Demographics
+  parliamentary_metrics: { lok_sabha_seats: number; rajya_sabha_seats: number }
+  economic_metrics: {
+    gsdp_crore_inr: number | null
+    gsdp_fiscal_year?: string | null
+    consumer_price_index: number
+    inflation_yoy_percent: number
+    cpi_reference_month?: string
+    cpi_sector?: string
+  }
+  demographics: {
+    sex_ratio_females_per_1000_males: number
+    sex_ratio_source?: string
+    reference_period?: string
+  }
   gi_tags: string[]
   rivers: string[]
   tourist_spots: string[]
@@ -36,53 +27,39 @@ export interface CabinetMember {
   portfolio: string
 }
 
-export interface StateDataFile {
-  source: Record<string, string>
-  last_updated: string
-  total_states_and_uts: number
-  states: StateRecord[]
-  cabinet: CabinetMember[]
+export type MetricKey = 'gsdp' | 'inflation' | 'cpi' | 'ls' | 'rs' | 'sexRatio'
+export type SortKey = 'name' | 'cm' | MetricKey
+export type SortDir = 'asc' | 'desc'
+export type Kind = 'all' | 'state' | 'ut'
+
+export interface State {
+  name: string
+  slug: string
+  iso: string
+  isUT: boolean
+  cm: string | null
+  governor: string
+  ls: number
+  rs: number
+  gsdp: number | null
+  gsdpFy: string | null
+  cpi: number
+  cpiMonth: string | null
+  cpiSector: string | null
+  inflation: number
+  sexRatio: number
+  sexRatioSource: string | null
+  sexRatioPeriod: string | null
+  rivers: string[]
+  rank: Record<MetricKey, number | null>
 }
 
-export interface RiverDetail {
-  n: string
-  d: string
+export interface Headline {
+  topic: string
+  title: string
+  source: string
+  link: string
+  date: Date | null
+  score: number
+  isNoise: boolean
 }
-
-export interface GiTag {
-  n: string
-  t: 'food' | 'craft'
-}
-
-export interface TourismSpot {
-  icon: string
-  n: string
-  d: string
-}
-
-export interface StateDetail {
-  rivers: RiverDetail[]
-  gi: GiTag[]
-  tourism: TourismSpot[]
-}
-
-export interface TickerItem {
-  tag: string
-  cls: string
-  text: string
-  score?: number
-  isNoise?: boolean
-}
-
-export type SortKey =
-  | 'state'
-  | 'cm'
-  | 'gov'
-  | 'ls'
-  | 'rs'
-  | 'gsdp'
-  | 'cpi'
-  | 'inflation'
-  | 'sex_ratio'
-
-export type FilterMode = 'all' | 'state' | 'ut'

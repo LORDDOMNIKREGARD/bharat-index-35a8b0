@@ -5,23 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Geography & Geopolitics — IPM Interview Prep</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
   :root {
-    --ink: #1a1a2e;
-    --ink-mid: #3d3d5c;
-    --ink-light: #7070a0;
-    --paper: #f8f7f2;
-    --paper-warm: #f0ede4;
-    --accent: #c84b31;
-    --accent-light: #f0e8e5;
-    --teal: #1a7a7a;
-    --teal-light: #e0f0ef;
-    --gold: #b87a00;
-    --gold-light: #fdf3de;
-    --rule: #ddd8cc;
-    --tag-bg: #e8e4f8;
-    --tag-text: #3a2e80;
+    --ink: var(--bi-ink);
+    --ink-mid: var(--bi-ink-2);
+    --ink-light: var(--bi-ink-2);
+    --paper: var(--bi-paper);
+    --paper-warm: var(--bi-tint);
+    --accent: var(--bi-accent);
+    --accent-light: var(--bi-tint);
+    --teal: var(--bi-data-4);
+    --teal-light: var(--bi-tint);
+    --gold: var(--bi-accent);
+    --gold-light: var(--bi-tint);
+    --rule: var(--bi-rule);
+    --tag-bg: var(--bi-tint);
+    --tag-text: var(--bi-ink);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,7 +29,7 @@
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--bi-font-read);
     font-size: 15px;
     line-height: 1.65;
   }
@@ -53,7 +51,7 @@
   }
   .header-inner { max-width: 900px; margin: 0 auto; }
   .header-eyebrow {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -61,7 +59,7 @@
     margin-bottom: 0.6rem;
   }
   .header-title {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: var(--bi-font-ui);
     font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 600;
     line-height: 1.15;
@@ -94,7 +92,7 @@
   }
   .nav-inner::-webkit-scrollbar { display: none; }
   .nav-link {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -120,7 +118,7 @@
     border-bottom: 1px solid var(--rule);
   }
   .section-num {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.12em;
     color: var(--accent);
@@ -128,7 +126,7 @@
     flex-shrink: 0;
   }
   .section-title {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: var(--bi-font-ui);
     font-size: 1.55rem;
     font-weight: 600;
   }
@@ -157,7 +155,7 @@
   .q-head:hover { background: #fafaf8; }
 
   .q-text {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: var(--bi-font-ui);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.45;
@@ -173,7 +171,7 @@
     margin-top: 0.1rem;
   }
   .tag {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 9.5px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -202,7 +200,7 @@
   .q-block.open .q-body { display: block; }
 
   .ans-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -228,7 +226,7 @@
     margin-top: 1rem;
   }
   .india-box-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -252,7 +250,7 @@
     font-size: 13px;
     color: #0d4a4a;
   }
-  .tip-box strong { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 0.25rem; }
+  .tip-box strong { font-family: var(--bi-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); display: block; margin-bottom: 0.25rem; }
 
   /* ── CAPITALS TABLE SECTION ── */
   .caps-grid {
@@ -279,7 +277,7 @@
   }
   .cap-capital { font-style: italic; color: var(--ink-mid); }
   .cap-currency {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     color: var(--gold);
     display: block;
@@ -300,7 +298,7 @@
     color: white;
     text-align: left;
     padding: 0.6rem 0.9rem;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -322,7 +320,7 @@
     margin-bottom: 1.4rem;
   }
   .ctrl-btn {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -349,7 +347,7 @@
     font-size: 13px;
   }
   .progress-num {
-    font-family: 'IBM Plex Serif', serif;
+    font-family: var(--bi-font-ui);
     font-size: 2.2rem;
     font-weight: 600;
     color: var(--accent);
@@ -359,6 +357,9 @@
   .progress-text { color: #ccc; }
   .progress-text strong { color: white; display: block; font-size: 14px; margin-bottom: 2px; }
 </style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 
