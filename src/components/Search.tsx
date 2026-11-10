@@ -5,7 +5,9 @@ import { CABINET, GUIDES, STATES } from '../data'
 const PAGES = [
   { to: '/', label: 'Home' },
   { to: '/states', label: 'All states and UTs' },
-  { to: '/practice', label: 'Practice the map' },
+  { to: '/practice', label: 'Practice and Daily Yatra' },
+  { to: '/news', label: 'News and bookmarks' },
+  { to: '/help', label: 'How to use this site' },
   { to: '/guides', label: 'Study guides' },
   { to: '/who', label: "Who's who and Union Cabinet" },
 ]

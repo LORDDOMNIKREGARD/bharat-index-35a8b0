@@ -33,3 +33,34 @@ test('questions are answerable', () => {
   }
   assert.equal(buildRound(STATES, {}, 10).length, 10)
 })
+
+import { dailyRound, dayKey, dayNumber, points, shareText, streak } from './practice.ts'
+
+test('daily round is the same for everyone on a date and differs across dates', () => {
+  const a = dailyRound(STATES, '2026-11-11').map((q) => q.kind + q.answer.iso)
+  const b = dailyRound(STATES, '2026-11-11').map((q) => q.kind + q.answer.iso)
+  const c = dailyRound(STATES, '2026-11-12').map((q) => q.kind + q.answer.iso)
+  assert.deepEqual(a, b)
+  assert.notDeepEqual(a, c)
+  assert.equal(a.length, 7)
+  assert.equal(new Set(a.map((x) => x.slice(-2))).size, 7)
+})
+
+test('day key flips at midnight India time', () => {
+  assert.equal(dayKey(new Date('2026-11-11T18:29:00Z')), '2026-11-11')
+  assert.equal(dayKey(new Date('2026-11-11T18:31:00Z')), '2026-11-12')
+  assert.equal(dayNumber('2026-11-11'), 1)
+})
+
+test('scoring, streaks and share text', () => {
+  assert.equal(points(false, 30), 0)
+  assert.equal(points(true, 30), 100)
+  assert.equal(points(true, 0), 50)
+  assert.equal(points(true, 15), 75)
+  const today = '2026-11-14'
+  assert.equal(streak(new Set(['2026-11-12', '2026-11-13', '2026-11-14']), today), 3)
+  assert.equal(streak(new Set(['2026-11-12', '2026-11-13']), today), 2) // not played yet today
+  assert.equal(streak(new Set(['2026-11-11', '2026-11-13']), today), 1)
+  assert.equal(streak(new Set(), today), 0)
+  assert.equal(shareText('2026-11-12', ['fast', 'miss'], 100, 2), 'Bharat Index · Daily Yatra #2\n🟩🟥  100/700\n🔥 2-day streak')
+})

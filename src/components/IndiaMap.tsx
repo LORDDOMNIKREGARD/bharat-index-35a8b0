@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { METRICS, RANKED, STATES, rankText } from '@/data'
-import { useIndiaMap, type Seat } from '@/hooks/useIndiaMap'
+import { useIndiaMap, type IndiaMap as MapData, type Seat } from '@/hooks/useIndiaMap'
 import type { MetricKey, State } from '@/types'
 
 // Fill and label colour per rank level. 0 = no value.
@@ -32,9 +32,13 @@ interface Props {
   /** Shown under the map; receives the hovered state and seat. */
   caption?: (hover: State | null, seat: Seat | null) => ReactNode
   className?: string
+  /** Picture only: no focus, no hover, not in the tab order. */
+  still?: boolean
+  /** Extra SVG drawn above the states, in map coordinates. */
+  overlay?: (map: MapData) => ReactNode
 }
 
-export function IndiaMap({ fill, focus = null, seats = false, highlight, onSelect, label, caption, className }: Props) {
+export function IndiaMap({ fill, focus = null, seats = false, highlight, onSelect, label, caption, className, still = false, overlay }: Props) {
   const { map, error } = useIndiaMap()
   const [hover, setHover] = useState<State | null>(null)
   const [seat, setSeat] = useState<Seat | null>(null)
@@ -74,9 +78,9 @@ export function IndiaMap({ fill, focus = null, seats = false, highlight, onSelec
             animate={{ viewBox: view }}
             transition={{ type: 'spring', stiffness: 90, damping: 20, mass: 0.9 }}
             preserveAspectRatio="xMidYMid meet"
-            role="group"
+            role={still ? 'img' : 'group'}
             aria-label={label}
-            className="block aspect-[1000/1144] w-full touch-manipulation select-none"
+            className={`block aspect-[1000/1144] w-full touch-manipulation select-none ${still ? 'pointer-events-none' : ''}`}
             onMouseLeave={() => setHover(null)}
           >
             {STATES.map((s) => {
@@ -86,8 +90,9 @@ export function IndiaMap({ fill, focus = null, seats = false, highlight, onSelec
               return (
                 <g
                   key={s.slug}
-                  role="button"
-                  tabIndex={0}
+                  role={still ? undefined : 'button'}
+                  tabIndex={still ? undefined : 0}
+                  aria-hidden={still || undefined}
                   aria-label={`${s.name}${typeof fill === 'string' ? `: ${METRICS[fill].short} ${METRICS[fill].fmt(METRICS[fill].get(s))}${rankText(s, fill) ? `, ${rankText(s, fill)}` : ''}` : ''}`}
                   aria-pressed={isFocus}
                   className="cursor-pointer outline-none [&:focus-visible>path]:stroke-accent"
@@ -167,11 +172,11 @@ export function IndiaMap({ fill, focus = null, seats = false, highlight, onSelec
                 </motion.circle>
               ))}
             </AnimatePresence>
+            {overlay?.(map)}
           </motion.svg>
         )}
       </div>
       {caption && <figcaption className="mt-2 min-h-[44px] text-[14px] text-ink-2">{caption(hover, seat)}</figcaption>}
-      {map && <p className="m-0 mt-1 text-[12px] text-ink-3">{map.attribution}. Not to scale.</p>}
     </figure>
   )
 }
@@ -201,3 +206,13 @@ export function SeatLegend() {
   )
 }
 
+
+/** A point inside each state: the average of its constituency points. */
+export function centre(map: MapData, iso: string): [number, number] {
+  const pts = map.seats.filter((x) => x.s === iso)
+  if (!pts.length) {
+    const [x, y, w, h] = map.states[iso].box
+    return [x + w / 2, y + h / 2]
+  }
+  return [pts.reduce((a, p) => a + p.x, 0) / pts.length, pts.reduce((a, p) => a + p.y, 0) / pts.length]
+}
