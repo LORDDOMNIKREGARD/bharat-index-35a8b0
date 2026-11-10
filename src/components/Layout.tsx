@@ -136,9 +136,6 @@ export default function Layout() {
               <option value="dark">Dark</option>
             </select>
           </label>
-          <a className="link sm:ml-auto" href="https://github.com/LORDDOMNIKREGARD/bharat-index-35a8b0">
-            Source code
-          </a>
         </div>
       </footer>
 
