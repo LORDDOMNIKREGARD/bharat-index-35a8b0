@@ -144,7 +144,7 @@ export const WHO = [
 
 export const GUIDES = [
   { file: 'India_GK_IPM_Interview_Prep.html', title: 'India GK reference', subject: 'General knowledge', desc: 'History, polity, symbols and the questions panels ask most' },
-  { file: 'mocktopus_current_affairs.html', title: 'Current affairs', subject: 'Current affairs', desc: 'Recent national and world events, with interview angles' },
+  { file: 'current_affairs.html', title: 'Current affairs', subject: 'Current affairs', desc: 'Recent national and world events, with interview angles' },
   { file: 'india_govt_schemes_statewise.html', title: 'Government schemes, state by state', subject: 'Polity', desc: 'Central and state welfare schemes, 2025–26' },
   { file: 'geography_questions_ipm.html', title: 'Geography and geopolitics', subject: 'Geography', desc: 'Physiography, rivers, map points and neighbours' },
   { file: 'finance_bible_ipm.html', title: 'Finance bible', subject: 'Finance', desc: 'Markets, valuation and banking basics' },
