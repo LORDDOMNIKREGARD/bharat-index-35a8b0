@@ -4,28 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>India GK Master Reference — IPM Interview Prep</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --saffron: #FF6B1A;
-    --green: #138808;
-    --navy: #0A1628;
-    --cream: #FFF8F0;
-    --gold: #D4A017;
-    --teal: #1A7A6E;
-    --red: #C0392B;
-    --light-bg: #F9F5EF;
-    --border: #E0D5C8;
-    --text: #1A1208;
-    --muted: #6B5E4E;
-    --card-bg: #FFFFFF;
-    --highlight: #FFF3E0;
-    --tag-bg: #E8F5E9;
-    --tag-text: #1B5E20;
+    --saffron: var(--bi-accent);
+    --green: var(--bi-good);
+    --navy: var(--bi-ink);
+    --cream: var(--bi-paper);
+    --gold: var(--bi-accent);
+    --teal: var(--bi-data-4);
+    --red: var(--bi-accent);
+    --light-bg: var(--bi-tint);
+    --border: var(--bi-rule);
+    --text: var(--bi-ink);
+    --muted: var(--bi-ink-2);
+    --card-bg: var(--bi-surface);
+    --highlight: var(--bi-tint);
+    --tag-bg: var(--bi-tint);
+    --tag-text: var(--bi-ink);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--bi-font-read);
     background: var(--light-bg);
     color: var(--text);
     font-size: 14px;
@@ -42,7 +41,7 @@
   }
   #top-nav .brand {
     color: var(--saffron);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-weight: 900;
     font-size: 16px;
     margin-right: 12px;
@@ -57,7 +56,7 @@
     font-size: 12px;
     cursor: pointer;
     transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--bi-font-read);
     white-space: nowrap;
   }
   .nav-btn:hover, .nav-btn.active {
@@ -85,7 +84,7 @@
     background: linear-gradient(90deg, transparent, rgba(255,107,26,0.15));
   }
   .page-header h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: 26px; font-weight: 900;
     color: var(--saffron);
     margin-bottom: 6px;
@@ -192,7 +191,7 @@
     font-size: 13px;
   }
   .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--bi-font-ui);
     font-size: 18px;
     font-weight: 700;
     color: var(--navy);
@@ -243,7 +242,7 @@
     border: 2px solid var(--border);
     border-radius: 8px;
     font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--bi-font-read);
     margin-bottom: 16px;
     outline: none;
     transition: border-color 0.2s;
@@ -276,6 +275,20 @@
   ::-webkit-scrollbar-track { background: #f1f1f1; }
   ::-webkit-scrollbar-thumb { background: var(--saffron); border-radius: 3px; }
 </style>
+<style>/* bi-overrides: hard-coded dark bands from the original theme */
+#top-nav { background: var(--bi-surface); border-bottom: 1px solid var(--bi-rule); }
+.nav-btn { background: var(--bi-paper); border-color: var(--bi-rule); color: var(--bi-ink-2); }
+.nav-btn:hover { background: var(--bi-tint); color: var(--bi-ink); }
+.nav-btn.active { background: var(--bi-ink); border-color: var(--bi-ink); color: var(--bi-paper); }
+.page-header { background: var(--bi-tint); color: var(--bi-ink); }
+.page-header::before { display: none; }
+.page-header p { color: var(--bi-ink-2); }
+.card-header, .acc-header, .data-table th { background: var(--bi-tint); color: var(--bi-ink); }
+.pill { background: var(--bi-tint); color: var(--bi-ink); }
+</style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 

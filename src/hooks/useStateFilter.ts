@@ -1,118 +1,66 @@
-import { useMemo, useState } from 'react'
-import type { FilterMode, SortKey, StateRecord } from '../types'
-import { UT_NAMES } from '../utils'
+import { useMemo } from 'react'
+import { useSearchParams } from 'react-router'
+import { METRICS, sortStates } from '../data'
+import type { Kind, MetricKey, SortDir, SortKey, State } from '../types'
 
-export function useStateFilter(states: StateRecord[]) {
-  const [sortKey, setSortKey] = useState<SortKey>('state')
-  const [sortDir, setSortDir] = useState(1)
-  const [filterMode, setFilterMode] = useState<FilterMode>('all')
-  const [searchQ, setSearchQ] = useState('')
-  const [expanded, setExpanded] = useState<string | null>(null)
+const SORT_KEYS: SortKey[] = ['name', 'cm', ...(Object.keys(METRICS) as MetricKey[])]
+
+/** Search, kind filter, sort and view, all kept in the URL so a view can be shared. */
+export function useStateFilter(states: State[]) {
+  const [params, setParams] = useSearchParams()
+
+  const q = params.get('q') ?? ''
+  const kind = (['state', 'ut'].includes(params.get('type') ?? '') ? params.get('type') : 'all') as Kind
+  const sort = (SORT_KEYS.includes(params.get('sort') as SortKey) ? params.get('sort') : 'name') as SortKey
+  const defaultDir: SortDir = sort === 'name' || sort === 'cm' ? 'asc' : 'desc'
+  const dir = (params.get('dir') === 'asc' || params.get('dir') === 'desc' ? params.get('dir') : defaultDir) as SortDir
+  const view: 'table' | 'map' = params.get('view') === 'map' ? 'map' : 'table'
+  const metric: MetricKey = sort === 'name' || sort === 'cm' ? 'gsdp' : sort
+
+  const set = (patch: Record<string, string | null>) =>
+    setParams(
+      (prev) => {
+        const next = new URLSearchParams(prev)
+        for (const [k, v] of Object.entries(patch)) {
+          if (v == null || v === '') next.delete(k)
+          else next.set(k, v)
+        }
+        return next
+      },
+      { replace: true },
+    )
 
   const filtered = useMemo(() => {
-    let data = [...states]
-
-    if (filterMode === 'state') {
-      data = data.filter((s) => !UT_NAMES.has(s.state))
-    } else if (filterMode === 'ut') {
-      data = data.filter((s) => UT_NAMES.has(s.state))
-    }
-
-    if (searchQ) {
-      const q = searchQ.toLowerCase()
-      data = data.filter(
-        (s) =>
-          s.state.toLowerCase().includes(q) ||
-          (s.chief_minister || '').toLowerCase().includes(q) ||
-          s.governor.toLowerCase().includes(q),
-      )
-    }
-
-    data.sort((a, b) => {
-      let av: string | number
-      let bv: string | number
-
-      switch (sortKey) {
-        case 'state':
-          av = a.state
-          bv = b.state
-          break
-        case 'cm':
-          av = a.chief_minister || ''
-          bv = b.chief_minister || ''
-          break
-        case 'gov':
-          av = a.governor
-          bv = b.governor
-          break
-        case 'ls':
-          av = a.parliamentary_metrics.lok_sabha_seats
-          bv = b.parliamentary_metrics.lok_sabha_seats
-          break
-        case 'rs':
-          av = a.parliamentary_metrics.rajya_sabha_seats
-          bv = b.parliamentary_metrics.rajya_sabha_seats
-          break
-        case 'gsdp':
-          av = a.economic_metrics.gsdp_crore_inr || 0
-          bv = b.economic_metrics.gsdp_crore_inr || 0
-          break
-        case 'cpi':
-          av = a.economic_metrics.consumer_price_index
-          bv = b.economic_metrics.consumer_price_index
-          break
-        case 'inflation':
-          av = a.economic_metrics.inflation_yoy_percent
-          bv = b.economic_metrics.inflation_yoy_percent
-          break
-        case 'sex_ratio':
-          av = a.demographics.sex_ratio_females_per_1000_males
-          bv = b.demographics.sex_ratio_females_per_1000_males
-          break
-        default:
-          av = a.state
-          bv = b.state
-      }
-
-      if (typeof av === 'string') {
-        return av.localeCompare(bv as string) * sortDir
-      }
-      return ((av as number) - (bv as number)) * sortDir
-    })
-
-    return data
-  }, [states, filterMode, searchQ, sortKey, sortDir])
-
-  const toggleSort = (key: SortKey) => {
-    if (sortKey === key) {
-      setSortDir((d) => d * -1)
-    } else {
-      setSortKey(key)
-      setSortDir(key === 'state' ? 1 : -1)
-    }
-  }
-
-  const handleSortSelect = (value: string) => {
-    const key = value as SortKey
-    setSortKey(key)
-    setSortDir(key === 'state' ? 1 : -1)
-  }
-
-  const toggleExpand = (stateName: string) => {
-    setExpanded((prev) => (prev === stateName ? null : stateName))
-  }
+    const needle = q.trim().toLowerCase()
+    const list = states.filter(
+      (s) =>
+        (kind === 'all' || (kind === 'ut') === s.isUT) &&
+        (!needle ||
+          s.name.toLowerCase().includes(needle) ||
+          s.iso.toLowerCase() === needle ||
+          (s.cm ?? '').toLowerCase().includes(needle) ||
+          s.governor.toLowerCase().includes(needle)),
+    )
+    return sortStates(list, sort, dir)
+  }, [states, q, kind, sort, dir])
 
   return {
     filtered,
-    sortKey,
-    sortDir,
-    filterMode,
-    setFilterMode,
-    searchQ,
-    setSearchQ,
-    expanded,
-    toggleExpand,
-    toggleSort,
-    handleSortSelect,
+    q,
+    kind,
+    sort,
+    dir,
+    view,
+    metric,
+    setQ: (v: string) => set({ q: v }),
+    setKind: (v: Kind) => set({ type: v === 'all' ? null : v }),
+    setView: (v: 'table' | 'map') => set({ view: v === 'table' ? null : v }),
+    /** Same key flips direction; a new key starts from its natural direction. */
+    toggleSort: (key: SortKey) => {
+      if (key === sort) set({ dir: dir === 'asc' ? 'desc' : 'asc' })
+      else set({ sort: key === 'name' ? null : key, dir: null })
+    },
+    setSort: (key: SortKey) => set({ sort: key === 'name' ? null : key, dir: null }),
+    flipDir: () => set({ dir: dir === 'asc' ? 'desc' : 'asc' }),
   }
 }

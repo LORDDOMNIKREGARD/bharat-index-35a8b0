@@ -1,0 +1,80 @@
+/* Shared by the app (src/index.css) and the static guides (guide.css). */
+
+@font-face {
+  font-family: 'Anek Latin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  src: url(/fonts/anek-latin.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Anek Latin';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  font-stretch: 75% 125%;
+  src: url(/fonts/anek-latin-ext.woff2) format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0, U+2113, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Literata';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url(/fonts/literata.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Literata';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url(/fonts/literata-italic.woff2) format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light;
+  --bi-paper: #f7f4ec;
+  --bi-surface: #fffdf8;
+  --bi-tint: #efe9da;
+  --bi-ink: #1b1a17;
+  --bi-ink-2: #55524a;
+  --bi-ink-3: #8a867b;
+  --bi-rule: #d9d3c3;
+  --bi-accent: #b4321f;
+  --bi-good: #2f6b3a;
+  --bi-data-1: #e6e1d2;
+  --bi-data-2: #bfc8cf;
+  --bi-data-3: #8fa3b5;
+  --bi-data-4: #56718f;
+  --bi-data-5: #1f3a5f;
+  --bi-data-ink-light: #1b1a17; /* text on data-1..3 */
+  --bi-data-ink-dark: #ffffff; /* text on data-4..5 */
+
+  --bi-font-ui: 'Anek Latin', ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --bi-font-read: 'Literata', Georgia, 'Times New Roman', serif;
+  --bi-font-mono: ui-monospace, 'Cascadia Mono', Consolas, Menlo, monospace;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bi-paper: #171613;
+  --bi-surface: #1f1e1a;
+  --bi-tint: #292722;
+  --bi-ink: #ece8dc;
+  --bi-ink-2: #b4afa2;
+  --bi-ink-3: #7d796e;
+  --bi-rule: #34322c;
+  --bi-accent: #e8674f;
+  --bi-good: #7fb08a;
+  --bi-data-1: #2a2925;
+  --bi-data-2: #33404b;
+  --bi-data-3: #4a6582;
+  --bi-data-4: #7f9cb9;
+  --bi-data-5: #c3d3e2;
+  --bi-data-ink-light: #ece8dc; /* text on data-1..3 */
+  --bi-data-ink-dark: #171613; /* text on data-4..5 */
+}

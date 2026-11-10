@@ -4,50 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IPM Interview — Essential Math Graphs</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:#0f0e0d; --cream:#faf6ef; --paper:#f3ede2; --gold:#c9922a; --gold-light:#e8c06a;
-    --teal:#1a6b6b; --rose:#b84444; --sky:#2e6fa0; --graphbg:#fff; --gridline:#e8e2d8;
+    --ink: var(--bi-ink); --cream: var(--bi-paper); --paper: var(--bi-tint); --gold: var(--bi-accent); --gold-light: var(--bi-data-3);
+    --teal: var(--bi-data-4); --rose: var(--bi-accent); --sky: var(--bi-data-4); --graphbg: var(--bi-surface); --gridline: var(--bi-rule);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--cream);color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;line-height:1.6;}
+  body{background:var(--cream);color:var(--ink);font-family:var(--bi-font-read);font-size:15px;line-height:1.6;}
   header{background:var(--ink);color:var(--cream);padding:2.5rem 2rem 2rem;border-bottom:4px solid var(--gold);position:relative;overflow:hidden;}
   header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(201,146,42,.06) 18px,rgba(201,146,42,.06) 19px);}
   .hi{position:relative;max-width:1100px;margin:0 auto;}
-  header h1{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,4vw,2.9rem);letter-spacing:-0.02em;line-height:1.15;}
+  header h1{font-family:var(--bi-font-ui);font-size:clamp(1.9rem,4vw,2.9rem);letter-spacing:-0.02em;line-height:1.15;}
   header h1 em{color:var(--gold-light);font-style:italic;}
   header p{margin-top:.6rem;color:rgba(250,246,239,.65);font-size:.9rem;font-weight:300;}
   .br{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;}
-  .badge{background:rgba(201,146,42,.18);border:1px solid rgba(201,146,42,.35);color:var(--gold-light);font-family:'DM Mono',monospace;font-size:.72rem;padding:.2rem .7rem;border-radius:2px;letter-spacing:.05em;text-transform:uppercase;}
+  .badge{background:rgba(201,146,42,.18);border:1px solid rgba(201,146,42,.35);color:var(--gold-light);font-family:var(--bi-font-mono);font-size:.72rem;padding:.2rem .7rem;border-radius:2px;letter-spacing:.05em;text-transform:uppercase;}
   nav{background:var(--paper);border-bottom:1px solid #ddd5c7;padding:.6rem 2rem;position:sticky;top:0;z-index:100;overflow-x:auto;white-space:nowrap;}
-  nav a{display:inline-block;font-family:'DM Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);text-decoration:none;margin-right:1.4rem;padding:.2rem 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s;}
+  nav a{display:inline-block;font-family:var(--bi-font-mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);text-decoration:none;margin-right:1.4rem;padding:.2rem 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s;}
   nav a:hover{border-bottom-color:var(--teal);color:var(--ink);}
   main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
-  .st{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--ink);letter-spacing:-0.01em;margin:2.8rem 0 1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:.7rem;}
-  .st .ic{background:var(--gold);color:#fff;font-family:'DM Mono',monospace;font-size:.75rem;padding:.2rem .5rem;border-radius:2px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
+  .st{font-family:var(--bi-font-ui);font-size:1.6rem;color:var(--ink);letter-spacing:-0.01em;margin:2.8rem 0 1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:.7rem;}
+  .st .ic{background:var(--gold);color:#fff;font-family:var(--bi-font-mono);font-size:.75rem;padding:.2rem .5rem;border-radius:2px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;}
   .grid2{grid-template-columns:repeat(auto-fill,minmax(330px,1fr));}
   .card{background:var(--graphbg);border:1px solid #ddd5c7;border-radius:4px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:box-shadow .2s,transform .2s;}
   .card:hover{box-shadow:0 6px 20px rgba(0,0,0,.10);transform:translateY(-2px);}
   .ch{background:var(--paper);border-bottom:1px solid #ddd5c7;padding:.7rem 1rem;display:flex;justify-content:space-between;align-items:baseline;}
-  .ct{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);}
-  .ceq{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--teal);font-weight:500;}
+  .ct{font-family:var(--bi-font-mono);font-size:.8rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);}
+  .ceq{font-family:var(--bi-font-mono);font-size:.78rem;color:var(--teal);font-weight:500;}
   .cw{padding:.6rem .6rem .2rem;}
   canvas{display:block;width:100%;height:auto;}
   .ci{padding:.6rem 1rem .8rem;font-size:.83rem;color:#555;line-height:1.55;border-top:1px solid #f0e8da;}
   .ci strong{color:var(--ink);font-weight:600;}
-  .tag{display:inline-block;background:rgba(26,107,107,.1);color:var(--teal);font-family:'DM Mono',monospace;font-size:.68rem;padding:.1rem .4rem;border-radius:2px;margin-top:.3rem;margin-right:.25rem;letter-spacing:.04em;}
+  .tag{display:inline-block;background:rgba(26,107,107,.1);color:var(--teal);font-family:var(--bi-font-mono);font-size:.68rem;padding:.1rem .4rem;border-radius:2px;margin-top:.3rem;margin-right:.25rem;letter-spacing:.04em;}
   .tg{background:rgba(201,146,42,.12);color:var(--gold);}
   .tr{background:rgba(184,68,68,.1);color:var(--rose);}
-  .fb{background:var(--ink);color:var(--gold-light);font-family:'DM Mono',monospace;font-size:.78rem;padding:.5rem 1rem;border-radius:0 0 3px 3px;letter-spacing:.03em;overflow-x:auto;}
+  .fb{background:var(--ink);color:var(--gold-light);font-family:var(--bi-font-mono);font-size:.78rem;padding:.5rem 1rem;border-radius:0 0 3px 3px;letter-spacing:.03em;overflow-x:auto;}
   .tbl{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:.4rem;}
-  .tbl th{background:var(--paper);font-family:'DM Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding:.4rem .6rem;text-align:left;border-bottom:2px solid #ddd5c7;color:var(--ink);}
+  .tbl th{background:var(--paper);font-family:var(--bi-font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;padding:.4rem .6rem;text-align:left;border-bottom:2px solid #ddd5c7;color:var(--ink);}
   .tbl td{padding:.35rem .6rem;border-bottom:1px solid #f0e8da;vertical-align:top;}
   .tbl tr:last-child td{border-bottom:none;}
   .tbl tr:nth-child(even) td{background:rgba(250,246,239,.5);}
-  footer{text-align:center;padding:1.5rem;font-size:.8rem;color:#999;border-top:1px solid #ddd5c7;font-family:'DM Mono',monospace;letter-spacing:.04em;}
+  footer{text-align:center;padding:1.5rem;font-size:.8rem;color:#999;border-top:1px solid #ddd5c7;font-family:var(--bi-font-mono);letter-spacing:.04em;}
 </style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 <header>
@@ -208,7 +210,7 @@ function plot(ctx,fn,px,py,xR,col,lw=2,dash=[]){
 }
 
 function dot(ctx,px,py,x,y,col,r=3.5){ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(x),py(y),r,0,2*Math.PI);ctx.fill();}
-function lbl(ctx,t,x,y,col='#666',sz=9,al='left'){ctx.fillStyle=col;ctx.font=sz+'px DM Mono,monospace';ctx.textAlign=al;ctx.fillText(t,x,y);}
+function lbl(ctx,t,x,y,col='#666',sz=9,al='left'){ctx.fillStyle=col;ctx.font=sz+'px var(--bi-font-mono)';ctx.textAlign=al;ctx.fillText(t,x,y);}
 function eqlbl(ctx,t,w,col){lbl(ctx,t,w-4,13,col,9,'right');}
 
 // ── TRIG ──
@@ -217,7 +219,7 @@ function trigGraph(id,fn,col,xR,yR,eq){
   const ctx=c.getContext('2d'),w=c.width,h=c.height;
   const {px,py}=axes(ctx,w,h,xR,yR);
   const pi=[[-2,'−2π'],[-1,'−π'],[0,'0'],[1,'π'],[2,'2π']];
-  ctx.fillStyle='#bbb';ctx.font='8px DM Mono,monospace';ctx.textAlign='center';
+  ctx.fillStyle='#bbb';ctx.font='8px var(--bi-font-mono)';ctx.textAlign='center';
   pi.forEach(([n,l])=>{const xi=n*Math.PI;if(xi>=xR[0]&&xi<=xR[1])ctx.fillText(l,px(xi),h-5);});
   plot(ctx,fn,px,py,xR,col,2.2);
   eqlbl(ctx,eq,w,col);

@@ -1,0 +1,51 @@
+/* Shared skin for the static guides. Colours and fonts come from /tokens.css. */
+
+h1, h2, h3, h4 {
+  font-family: var(--bi-font-ui);
+  font-stretch: 85%;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--bi-accent);
+  color: var(--bi-surface);
+}
+
+:focus-visible {
+  outline: 2px solid var(--bi-accent);
+  outline-offset: 2px;
+}
+
+.bi-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--bi-surface);
+  border-bottom: 1px solid var(--bi-rule);
+  font: 500 15px/20px var(--bi-font-ui);
+  color: var(--bi-ink);
+}
+
+.bi-bar a {
+  color: var(--bi-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bi-bar a:hover {
+  text-decoration: underline;
+}
+
+.bi-bar span {
+  color: var(--bi-ink-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media print {
+  .bi-bar {
+    display: none;
+  }
+}

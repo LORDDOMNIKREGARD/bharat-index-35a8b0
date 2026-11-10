@@ -6,23 +6,23 @@
 <title>Statistics Master Reference — IPM Interview Prep</title>
 <style>
   :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --card: #1a2236;
-    --border: #1f2d45;
-    --accent: #6366f1;
-    --accent2: #22d3ee;
-    --accent3: #f59e0b;
-    --accent4: #10b981;
-    --accent5: #f43f5e;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --tag-bg: #1e293b;
-    --highlight: #1e2d4a;
-    --formula-bg: #0d1929;
+    --bg: var(--bi-paper);
+    --surface: var(--bi-surface);
+    --card: var(--bi-surface);
+    --border: var(--bi-rule);
+    --accent: var(--bi-accent);
+    --accent2: var(--bi-data-4);
+    --accent3: var(--bi-accent);
+    --accent4: var(--bi-good);
+    --accent5: var(--bi-accent);
+    --text: var(--bi-ink);
+    --muted: var(--bi-ink-2);
+    --tag-bg: var(--bi-tint);
+    --highlight: var(--bi-tint);
+    --formula-bg: var(--bi-tint);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height:1.6; }
+  body { background: var(--bg); color: var(--text); font-family: var(--bi-font-read); line-height:1.6; }
 
   /* NAV */
   #topnav {
@@ -127,7 +127,7 @@
     border-radius: 8px;
     padding: 0.7rem 1rem;
     margin: 0.6rem 0;
-    font-family: 'Courier New', monospace;
+    font-family: var(--bi-font-mono);
     font-size: 0.85rem;
     color: var(--accent2);
     overflow-x: auto;
@@ -252,6 +252,13 @@
   table.mini-table td { padding:6px 10px; border-bottom:1px solid var(--border); color:#b8c8e0; }
   table.mini-table tr:hover td { background:rgba(255,255,255,0.02); }
 </style>
+<style>/* bi-overrides: hard-coded dark bands from the original theme */
+#topnav { background: var(--bi-surface); backdrop-filter: none; }
+#hero { background: var(--bi-paper); }
+</style>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/guide.css">
+<script src="/guide.js" defer></script>
 </head>
 <body>
 
@@ -843,7 +850,7 @@ Example: Sample mean = 50, SD = 10, n = 100
     <div class="callout"><span class="icon">⚡ HOT:</span> IIM Indore asked about "null hypothesis," "p-value," and "Type 1 error" in a single interview!</div>
     <label class="section-label">Hypothesis Testing Framework</label>
     <div class="formula-box">H₀ (Null Hypothesis): Default assumption (e.g., new drug has NO effect)
-H�� (Alternate Hypothesis): What we want to prove (drug HAS effect)
+H�� (Alternate Hypothesis): What we want to prove (drug HAS effect)
 α (Significance Level): Usually 0.05 (5%) — threshold for rejecting H₀
 Reject H₀ if: test statistic > critical value, OR p-value < α</div>
 
