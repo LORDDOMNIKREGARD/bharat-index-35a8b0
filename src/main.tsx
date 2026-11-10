@@ -8,6 +8,8 @@ const StatePage = lazy(() => import('./pages/StatePage'))
 const Guides = lazy(() => import('./pages/Guides'))
 const Who = lazy(() => import('./pages/Who'))
 const Practice = lazy(() => import('./pages/Practice'))
+const News = lazy(() => import('./pages/News'))
+const Help = lazy(() => import('./pages/Help'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 import './index.css'
 
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="states" element={<States />} />
           <Route path="states/:slug" element={<StatePage />} />
           <Route path="practice" element={<Practice />} />
+          <Route path="news" element={<News />} />
+          <Route path="help" element={<Help />} />
           <Route path="guides" element={<Guides />} />
           <Route path="who" element={<Who />} />
           <Route path="*" element={<NotFound />} />

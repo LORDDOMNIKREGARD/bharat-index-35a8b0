@@ -10,6 +10,7 @@ import { Segmented } from '@/components/Segmented'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import CountUp from '@/components/CountUp'
+import { DailyYatra } from '@/components/DailyYatra'
 import type { State } from '@/types'
 
 const ROUND = 10
@@ -209,7 +210,7 @@ function ProgressView({ mastery, reset }: ReturnType<typeof useMastery>) {
 
 export default function Practice() {
   const m = useMastery()
-  const [tab, setTab] = useState<'quiz' | 'progress'>('quiz')
+  const [tab, setTab] = useState<'daily' | 'quiz' | 'progress'>('daily')
 
   useEffect(() => {
     document.title = 'Practice the map — Bharat Index'
@@ -219,9 +220,9 @@ export default function Practice() {
     <>
       <div className="flex flex-wrap items-end justify-between gap-4 pt-8">
         <div>
-          <h1 className="m-0 text-[32px] leading-9">Practice the map</h1>
+          <h1 className="m-0 text-[32px] leading-9">Practice</h1>
           <p className="mb-0 mt-1 max-w-[56ch] text-ink-2">
-            Ten questions a round. Tap the right state on the map. States you miss come back more often.
+            A daily yatra that is the same for everyone, unlimited rounds, and your progress by state.
           </p>
         </div>
         <Segmented
@@ -229,12 +230,15 @@ export default function Practice() {
           value={tab}
           onChange={setTab}
           options={[
-            { v: 'quiz', label: 'Quiz' },
+            { v: 'daily', label: 'Daily' },
+            { v: 'quiz', label: 'Unlimited' },
             { v: 'progress', label: 'Your progress' },
           ]}
         />
       </div>
-      <div className="mt-6">{tab === 'quiz' ? <Quiz {...m} /> : <ProgressView {...m} />}</div>
+      <div className="mt-6">
+        {tab === 'daily' ? <DailyYatra onUnlimited={() => setTab('quiz')} /> : tab === 'quiz' ? <Quiz {...m} /> : <ProgressView {...m} />}
+      </div>
     </>
   )
 }
